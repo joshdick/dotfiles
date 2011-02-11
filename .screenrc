@@ -1,0 +1,11 @@
+# Change the hardstatus settings to give an window list at the bottom of the screen, with the time and date and with the current window highlighted
+hardstatus alwayslastline
+hardstatus string '%{gk}[ %{G}%H %{g}][%= %{wk}%?%-Lw%?%{=b kR}(%{W}%n*%f %t%?(%u)%?%{=b kR})%{= kw}%?%+Lw%?%?%= %{g}][%{Y}%l%{g}]%{W}'
+
+# Autodetach if screen isn't explicitly quit
+autodetach on
+
+# Use the current shell environment inside screen
+shell -$SHELL
+
+shelltitle '$ |bash'

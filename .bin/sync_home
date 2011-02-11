@@ -1,0 +1,29 @@
+#!/bin/sh
+# Usage: sync-home [user@]host ...
+# Copy crucial dotfiles and scripts to one or more remote machines.
+#
+# Copyright (c) 2008 Ryan Tomayko <http://tomayko.com/about>
+# Modified by Josh Dick <http://joshdick.net>
+
+set -e
+
+test -z "$1" || echo "$@" | grep -q -- '--help' && {
+    echo "Usage: $0 [user@]host ..."
+    exit 1
+}
+
+cd ~
+for host in "$@"; do
+    echo "sync: $host"
+    rsync -avz --include-from=- --exclude='*' ./ "${host}:" <<FILES
++ /.zshrc
++ /.vimrc
++ /.tmux.conf
++ /.screenrc
++ /.htoprc
+
++ /.bin
++ /.bin/z/z.sh
++ /.bin/sync_home
+FILES
+done
