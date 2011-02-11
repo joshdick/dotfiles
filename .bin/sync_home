@@ -23,7 +23,7 @@ for host in "$@"; do
 + /.htoprc
 
 + /.bin
-+ /.bin/z/z.sh
 + /.bin/sync_home
++ /.bin/z.sh
 FILES
 done

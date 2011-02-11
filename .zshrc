@@ -95,8 +95,8 @@ PERSONAL_BIN=~/.bin
 if test -r $PERSONAL_BIN; then
   export PATH=$PATH:$PERSONAL_BIN
   # Set up z if it's available <https://github.com/rupa/z>
-  if test -r $PERSONAL_BIN/z/z.sh; then
-    . $PERSONAL_BIN/z/z.sh
+  if test -r $PERSONAL_BIN/z.sh; then
+    . $PERSONAL_BIN/z.sh
     function precmd () {
       z --add "$(pwd -P)"
     }
