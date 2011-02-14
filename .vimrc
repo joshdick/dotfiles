@@ -23,7 +23,7 @@ if has("gui_running")
   endif
 endif
 
-colorscheme koehler
+colorscheme jellybeans
 set number
 set nobackup
 set nowritebackup
