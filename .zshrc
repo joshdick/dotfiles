@@ -109,9 +109,9 @@ test -r ~/.private_sh_env &&
 
 # *** FUNCTIONS ***
 
-c () { tar -pcjv -f ${1%/}.tar.bz2 ${1%/}; } # .tar.bz2 a directory or file, removing a trailing slash from the given argument if one is present
-gz () { gzip -r -c -9 ${1%/} > ${1%/}.gz; } # gzip a file or directory using the best compression, without deleting the originals
-searchin() { find . -type f -exec grep -l "${1%/}" {} \; } # Search for a given string inside every file inside the current directory, recursively.
+# Searches for a given string inside every file inside the current directory, recursively
+searchin() { find . -type f -exec grep -l "${1%/}" {} \; }
+
 # Performs a full system update in Debian-based and Arch Linux systems
 update() {
   if [ -x /usr/bin/apt-get ]; then
@@ -123,6 +123,7 @@ update() {
     echo "Josh's update command only works on an Arch Linux or Debian system. Sorry."
   fi
 }
+
 # Pushes local SSH public key to another box - found at https://github.com/rtomayko/dotfiles/blob/rtomayko/.bashrc
 push_ssh_cert() {
     local _host
@@ -132,4 +133,44 @@ push_ssh_cert() {
         echo $_host
         ssh $_host 'cat >> ~/.ssh/authorized_keys' < ~/.ssh/id_dsa.pub
     done
+}
+
+# Extracts archives - found at http://pastebin.com/CTra4QTF
+function extract() {
+   case $@ in
+       *.tar.bz2) tar -xvjf "$@"  ;;
+       *.tar.gz)  tar -xvzf "$@"  ;;
+       *.bz2)     bunzip2 "$@"  ;;
+       *.rar)     unrar x "$@"  ;;
+       *.gz)      gunzip "$@" ;;
+       *.tar)     tar xf "$@" ;;
+       *.tbz2)    tar -xvjf "$@"  ;;
+       *.tgz)     tar -xvzf "$@"  ;;
+       *.zip)     unzip "$@"    ;;
+       *.xpi)     unzip "$@"    ;;
+       *.Z)       uncompress "$@" ;;
+       *.7z)      7z x "$@" ;;
+       *.ace)     unace e "$@"  ;;
+       *.arj)     arj -y e "$@" ;;
+       *)         echo "'$@' cannot be extracted via $0()" ;;
+   esac
+}
+
+# Packs $2-$n into $1 depending on $1's extension - found at http://pastebin.com/CTra4QTF
+function compress() {
+   if [ $# -lt 2 ] ; then
+      echo -e "\n$0() usage:"
+      echo -e "\t$0 archive_file_name file1 file2 ... fileN"
+      echo -e "\tcreates archive of files 1-N\n"
+   else
+     DEST=$1
+     shift
+
+     case $DEST in
+       *.tar.bz2) tar -cvjf $DEST "$@" ;;
+       *.tar.gz)  tar -cvzf $DEST "$@" ;;
+       *.zip)     zip -r $DEST "$@" ;;
+       *)         echo "Unknown file type - $DEST" ;;
+     esac
+   fi
 }
