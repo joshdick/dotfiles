@@ -19,11 +19,11 @@ if has("gui_running")
   set guifont=Terminus:h13
   set guioptions=egmrt "Hide toolbar by default in MacVim
   if has("transparency") "Background transparency is a MacVim-specific feature, so prevent errors in other vims
-    set transparency=15 "Enable background transparency in MacVim
+    set transparency=5 "Enable background transparency in MacVim
   endif
 endif
 
-colorscheme jellybeans
+colorscheme herald
 set number
 set nobackup
 set nowritebackup
