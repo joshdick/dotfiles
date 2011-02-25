@@ -41,6 +41,7 @@ set enc=utf-8
 set nowrap
 hi LineNr guifg=#333333
 filetype on
+filetype plugin on
 filetype indent on "Enable automatic indentation based on detected filetype
 syntax on
 
