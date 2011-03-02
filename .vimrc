@@ -14,9 +14,14 @@ if has("autocmd")
   autocmd BufWinLeave * call clearmatches()
 endif
 
-if has("gui_running")
+if has("gui") "Instead of gui_running, in cease :gui is run manually on *NIX
   set columns=90 lines=45
-  set guifont=Terminus:h13
+  "Set the font based on OS.
+  if has("unix")
+    set guifont=Terminus:h13
+  else
+    set guifont=Tamsyn7x14
+  endif
   set guioptions=egmrt "Hide toolbar by default in MacVim
   if has("transparency") "Background transparency is a MacVim-specific feature, so prevent errors in other vims
     set transparency=5 "Enable background transparency in MacVim
