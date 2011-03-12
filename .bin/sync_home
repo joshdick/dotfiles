@@ -28,6 +28,8 @@ for host in "$@"; do
 + /.bin
 + /.bin/sync_home
 + /.bin/z
-+ /.bin/z/**
++ /.bin/z/z.sh
++ /.bin/z/README
++ /.bin/z/.1
 FILES
 done
