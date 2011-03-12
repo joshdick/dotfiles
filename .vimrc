@@ -54,6 +54,10 @@ filetype plugin on
 filetype indent on "Enable automatic indentation based on detected filetype
 syntax on
 
+"Statusline
+set statusline=%<%F%h%m%r%h%w%y\ %{&ff}\ %{strftime(\"%c\",getftime(expand(\"%:p\")))}\ %{fugitive#statusline()}%=\ lin:%l\/%L\ col:%c%V\ %P
+set laststatus=2
+
 "Invisible character colors
 highlight NonText guifg=#333333
 highlight SpecialKey guifg=#333333
