@@ -1,3 +1,7 @@
+"Pathogen plugin initialization
+call pathogen#runtime_append_all_bundles()
+call pathogen#helptags()
+
 "Whitespace matching: must appear before the colorscheme is set
 "SUMMARY OF BEHAVIOR:
 " 1) Apply to all buffers.
