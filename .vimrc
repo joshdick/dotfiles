@@ -2,21 +2,25 @@
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
 
+"NOTE: This block was commented out in favor of 'set list'. Uncomment all
+"executable lines in this block to restore tab/whitespace hilighting
+"functionality.
+"
 "Whitespace matching: must appear before the colorscheme is set
 "SUMMARY OF BEHAVIOR:
 " 1) Apply to all buffers.
 " 2) Match all tab characters at all times.
 " 3) Inside insert mode, don't match trailing whitespace on the current line.
 " 4) Outside insert mode, match all trailing whitespace on the current line.
-highlight ExtraWhitespace ctermbg=red guibg=red
-match ExtraWhitespace /\t\|\s\+$/
-if has("autocmd")
-  autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
-  autocmd BufWinEnter * match ExtraWhitespace /\t\|\s\+$/
-  autocmd InsertEnter * match ExtraWhitespace /\t\|\s\+\%#\@<!$/
-  autocmd InsertLeave * match ExtraWhitespace /\t\|\s\+$/
-  autocmd BufWinLeave * call clearmatches()
-endif
+"highlight ExtraWhitespace ctermbg=red guibg=red
+"match ExtraWhitespace /\t\|\s\+$/
+"if has("autocmd")
+"  autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+"  autocmd BufWinEnter * match ExtraWhitespace /\t\|\s\+$/
+"  autocmd InsertEnter * match ExtraWhitespace /\t\|\s\+\%#\@<!$/
+"  autocmd InsertLeave * match ExtraWhitespace /\t\|\s\+$/
+"  autocmd BufWinLeave * call clearmatches()
+"endif
 
 if has("gui") "Instead of gui_running, in cease :gui is run manually on *NIX
   set columns=90 lines=45
@@ -37,6 +41,7 @@ set number
 set nobackup
 set nowritebackup
 set background=dark
+set list "Show invisible characters by default
 
 set softtabstop=2
 set tabstop=2
@@ -58,9 +63,9 @@ syntax on
 set statusline=%<%F%h%m%r%h%w%y\ %{&ff}\ %{strftime(\"%c\",getftime(expand(\"%:p\")))}\ %{fugitive#statusline()}%=\ lin:%l\/%L\ col:%c%V\ %P
 set laststatus=2
 
-"Invisible character colors
-highlight NonText guifg=#333333
-highlight SpecialKey guifg=#333333
+"Invisible (list) character colors
+"highlight NonText guifg=#555555 "EOL
+"highlight SpecialKey guifg=#555555 "Tab
 
 "On Mac, map CMD-[ and CMD-] to indent while preserving any Visual mode selection as appropriate
 nmap <D-[> <<
@@ -94,14 +99,18 @@ nmap <leader>l :set list!<CR>
 "Shortcut to strip trailing whitespace
 nmap <silent> <leader>$ :call Preserve("%s/\\s\\+$//e")<CR>
 
-"Shortcut to autoindent entire file
+"Shortcut to auto-indent entire file
 nmap <silent> <leader>= :call Preserve("normal gg=G")<CR>
 
-"Shortcut to toggle auto-intenting for code paste
+"Shortcut to toggle auto-indenting for code paste
 "Found here: http://vim.wikia.com/wiki/Toggle_auto-indenting_for_code_paste
 nnoremap <F2> :set invpaste paste?<CR>
 set pastetoggle=<F2>
 set showmode
 
 "Shortcut to toggle line number visibility
-nmap <F3> :set number! number?<cr>
+nmap <F3> :set number! number?<CR>
+
+"Shorcut to toggle search hilighting
+"Found here: http://vim.wikia.com/wiki/Highlight_all_search_pattern_matches
+noremap <F4> :set hlsearch! hlsearch?<CR>
