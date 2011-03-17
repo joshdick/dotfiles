@@ -28,7 +28,10 @@ if has("gui") "Instead of gui_running, in cease :gui is run manually on *NIX
   if has("unix")
     set guifont=Terminus:h13
   else
-    set guifont=Tamsyn7x14
+    "set guifont=Tamsyn7x14
+    set guifont=Terminus:h12
+    source $VIMRUNTIME/mswin.vim "Enable expected keyboard shortcuts for Windows - see :help :behave
+    set keymodel-=stopsel "Make Visual mode work as expected when mswin.vim is sourced
   endif
   set guioptions=egmrt "Hide toolbar by default in MacVim
   if has("transparency") "Background transparency is a MacVim-specific feature, so prevent errors in other vims
