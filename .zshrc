@@ -131,7 +131,7 @@ push_ssh_cert() {
     for _host in "$@";
     do
         echo $_host
-        ssh $_host 'cat >> ~/.ssh/authorized_keys' < ~/.ssh/id_dsa.pub
+        ssh $_host 'mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys' < ~/.ssh/id_dsa.pub
     done
 }
 
