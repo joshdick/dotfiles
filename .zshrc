@@ -41,7 +41,7 @@ bindkey "\e[F" end-of-line
 
 # When connecting via ssh, always [re]attach to a terminal manager
 # Found at http://involution.com/2004/11/17/1-32/
-if [ -f /usr/bin/tmux ]; then
+if [ -f /usr/bin/tmux ] && [ -z $TMUX ]; then
   if [ "$SSH_TTY" != "" -a "$TERM" -a "$TERM" != "screen" -a "$TERM" != "dumb" ]; then
     pgrep tmux
     # $? is the exit code of pgrep; 0 means there was a result (tmux is already running)
