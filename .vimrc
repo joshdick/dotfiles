@@ -39,7 +39,7 @@ if has("gui") "Instead of gui_running, in cease :gui is run manually on *NIX
   endif
 endif
 
-colorscheme herald
+colorscheme wombat256
 set number
 set nobackup
 set nowritebackup
