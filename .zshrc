@@ -81,17 +81,23 @@ alias mirror='wget -H -r --level=1 -k -p $1'
 # Editor - See if vim lives around these parts, otherwise fall back to nano
 HAVE_VIM=$(command -v vim)
 if test -n "$HAVE_VIM"; then
-  EDITOR=vim
-  VISUAL=vim
+  export EDITOR=vim
+  export VISUAL=vim
 else
-  EDITOR=nano
-  VISUAL=nano
+  export EDITOR=nano
+  export VISUAL=nano
 fi
-export EDITOR
-export VISUAL
 
+# If we're on Mac OS X and installed Git with git-osx-installer,
+# add it to PATH so that we don't use any older versions of Git
+# that ship with XCode.
+GIT_BIN=/usr/local/git/bin
+if test -r $GIT_BIN; then
+  export PATH=$GIT_BIN:$PATH
+fi
+
+# Add a "personal bin" directory to PATH if it exists
 PERSONAL_BIN=~/.bin
-
 if test -r $PERSONAL_BIN; then
   export PATH=$PATH:$PERSONAL_BIN
   # Set up z if it's available <https://github.com/rupa/z>
