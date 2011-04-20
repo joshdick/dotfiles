@@ -1,12 +1,6 @@
 [submodule ".bin/z"]
 	path = .bin/z
 	url = https://github.com/rupa/z.git
-[submodule ".vim/bundle/command-t"]
-	path = .vim/bundle/command-t
-	url = https://github.com/wincent/Command-T
-[submodule ".vim/bundle/nerdcommenter"]
-	path = .vim/bundle/nerdcommenter
-	url = https://github.com/scrooloose/nerdcommenter.git
-[submodule ".vim/bundle/fugitive"]
-	path = .vim/bundle/fugitive
-	url = https://github.com/tpope/vim-fugitive.git
+[submodule ".vim/vundle.git"]
+	path = .vim/vundle.git
+	url = httpis://github.com/gmarik/vundle.git

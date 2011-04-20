@@ -1,6 +1,11 @@
-"Pathogen plugin initialization
-call pathogen#runtime_append_all_bundles()
-call pathogen#helptags()
+"Vundle plugin and bundle initialization
+set rtp+=~/.vim/vundle.git/
+call vundle#rc()
+"Git URL bundles
+Bundle 'git://git.wincent.com/command-t.git'
+"Github Bundles
+Bundle 'tpope/vim-fugitive'
+Bundle 'scrooloose/nerdcommenter.git'
 
 "NOTE: This block was commented out in favor of 'set list'. Uncomment all
 "executable lines in this block to restore tab/whitespace hilighting
