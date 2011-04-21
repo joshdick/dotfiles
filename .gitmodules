@@ -3,4 +3,4 @@
 	url = https://github.com/rupa/z.git
 [submodule ".vim/vundle.git"]
 	path = .vim/vundle.git
-	url = httpis://github.com/gmarik/vundle.git
+	url = https://github.com/gmarik/vundle.git
