@@ -88,6 +88,10 @@ else
   export VISUAL=nano
 fi
 
+# LSCOLORS - Default except for normal directories (first character) to replace hard-to-read blue.
+# For details, see manpage for ls.
+export LSCOLORS=Gxfxcxdxbxegedabagacad
+
 # If we're on Mac OS X and installed Git with git-osx-installer,
 # add it to PATH so that we don't use any older versions of Git
 # that ship with XCode.
