@@ -119,8 +119,19 @@ test -r ~/.private_sh_env &&
 
 # *** FUNCTIONS ***
 
-# Searches for a given string inside every file inside the current directory, recursively
-searchin() { find . -type f -exec grep -l "${1%/}" {} \; }
+# To search for a given string inside every file with the given filename
+# (wildcards allowed) in the current directory, recursively:
+#   $ searchin filename pattern
+#
+# To search for a given string inside every file inside the current directory, recursively:¬
+#   $ searchin pattern
+searchin() {
+  if [ -n "$2" ]; then
+    find . -name "$1" -type f -exec grep -l "$2" {} \;
+  else
+    find . -type f -exec grep -l "$1" {} \;
+  fi
+}
 
 # Performs a full system update in Debian-based and Arch Linux systems
 update() {
