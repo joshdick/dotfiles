@@ -92,13 +92,17 @@ fi
 # For details, see manpage for ls.
 export LSCOLORS=Gxfxcxdxbxegedabagacad
 
-# If we're on Mac OS X and installed Git with git-osx-installer,
-# add it to PATH so that we don't use any older versions of Git
-# that ship with XCode.
-GIT_BIN=/usr/local/git/bin
-if test -r $GIT_BIN; then
-  export PATH=$GIT_BIN:$PATH
+# If we're on OS X and using Brew package manager, add Brew binary directories to PATH
+BREW_BIN=/usr/local/bin
+BREW_SBIN=/usr/local/sbin
+if test -r $BREW_WIN; then
+  export PATH=$BREW_BIN:$PATH
 fi
+if test -r $BREW_SBIN; then
+  export PATH=$BREW_SBIN:$PATH
+fi
+
+export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 
 # Add a "personal bin" directory to PATH if it exists
 PERSONAL_BIN=~/.bin
