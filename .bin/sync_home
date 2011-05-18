@@ -23,7 +23,10 @@ for host in "$@"; do
 + /.htoprc
 
 + /.vim
-+ /.vim/**
++ /.vim/colors
++ /.vim/colors/**
++ /.vim/vundle.git
++ /.vim/vundle.git/**
 
 + /.bin
 + /.bin/sync_home
