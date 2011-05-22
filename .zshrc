@@ -60,7 +60,7 @@ PS1="%{$reset_color%}%{%(!.%F{red}.%F{green})%}%n@%m%{%F{yellow}%}[%h]%{$bold_co
 
 # *** ALIASES ***
 
-# Awesome platform-indepdent ls formatting
+# Awesome platform-independent ls formatting
 # Originally found at http://www.reddit.com/r/linux/comments/hejra/til_nifty_ls_option_for_displaying_directories/c1utfxb
 alias ls='ls --classify --tabsize=0 --literal --color=auto --show-control-chars --human-readable --group-directories-first'
 ls &> /dev/null
