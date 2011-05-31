@@ -98,14 +98,14 @@ fi
 # For details, see manpage for ls.
 export LSCOLORS=Gxfxcxdxbxegedabagacad
 
-# If we're on OS X and using Brew package manager, add Brew binary directories to PATH
-BREW_BIN=/usr/local/bin
-BREW_SBIN=/usr/local/sbin
-if test -r $BREW_WIN; then
-  export PATH=$BREW_BIN:$PATH
+# If we're on OS X and using Homebrew package manager, add Homebrew binary directories to PATH
+HOMEBREW_BIN=/usr/local/bin
+HOMEBREW_SBIN=/usr/local/sbin
+if test -r $HOMEBREW_WIN; then
+  export PATH=$HOMEBREW_BIN:$PATH
 fi
-if test -r $BREW_SBIN; then
-  export PATH=$BREW_SBIN:$PATH
+if test -r $HOMEBREW_SBIN; then
+  export PATH=$HOMEBREW_SBIN:$PATH
 fi
 
 export PATH=/usr/local/bin:/usr/local/sbin:$PATH
@@ -113,7 +113,9 @@ export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 # Add a "personal bin" directory to PATH if it exists
 PERSONAL_BIN=~/.bin
 if test -r $PERSONAL_BIN; then
+  
   export PATH=$PATH:$PERSONAL_BIN
+
   # Set up z if it's available <https://github.com/rupa/z>
   if test -r $PERSONAL_BIN/z/z.sh; then
     . $PERSONAL_BIN/z/z.sh
@@ -121,6 +123,12 @@ if test -r $PERSONAL_BIN; then
       z --add "$(pwd -P)"
     }
   fi
+
+  # Set up vimpager if it's available <https://github.com/rkitover/vimpager>
+  if test -r $PERSONAL_BIN/vimpager/vimpager; then
+    export PAGER=$PERSONAL_BIN/vimpager/vimpager
+  fi
+
 fi
 
 # Include any machine-specific configuration if it exists
