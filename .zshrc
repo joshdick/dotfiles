@@ -62,12 +62,13 @@ PS1="%{$reset_color%}%{%(!.%F{red}.%F{green})%}%n@%m%{%F{yellow}%}[%h]%{$bold_co
 
 # Awesome platform-independent ls formatting
 # Originally found at http://www.reddit.com/r/linux/comments/hejra/til_nifty_ls_option_for_displaying_directories/c1utfxb
-alias ls='ls --classify --tabsize=0 --literal --color=auto --show-control-chars --human-readable --group-directories-first'
+GLS_ARGS="--classify --tabsize=0 --literal --color=auto --show-control-chars --human-readable --group-directories-first"
+alias ls="ls $GLS_ARGS"
 ls &> /dev/null
 if [ $? -eq 1 ]; then # The environment ls isn't GNU ls; we're not on Linux
   HAVE_GLS=$(command -v gls) # On Mac, use gls if we have it installed via Homebrew
   if test -n "$HAVE_GLS"; then
-    alias ls='gls --classify --tabsize=0 --literal --color=auto --show-control-chars --human-readable --group-directories-first'
+    alias ls="gls $GLS_ARGS"
   else
     alias ls='ls -G' # If not, fall back to BSD ls
   fi
