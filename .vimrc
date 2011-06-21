@@ -6,6 +6,7 @@ Bundle 'git://git.wincent.com/command-t.git'
 "Github Bundles
 Bundle 'tpope/vim-fugitive'
 Bundle 'scrooloose/nerdcommenter.git'
+Bundle 'scrooloose/nerdtree.git'
 
 "NOTE: This block was commented out in favor of 'set list'. Uncomment all
 "executable lines in this block to restore tab/whitespace hilighting
