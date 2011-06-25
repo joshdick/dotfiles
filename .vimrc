@@ -69,11 +69,11 @@ filetype indent on "Enable automatic indentation based on detected filetype
 syntax on
 
 "Statusline
-:if exists("vimpager")
+if exists("vimpager")
   set statusline=%<%F%h%m%r%h%w%y\ %{&ff}\ %{strftime(\"%c\",getftime(expand(\"%:p\")))}\ %=\ lin:%l\/%L\ col:%c%V\ %P
-:else
+else
   set statusline=%<%F%h%m%r%h%w%y\ %{&ff}\ %{strftime(\"%c\",getftime(expand(\"%:p\")))}\ %{fugitive#statusline()}\ %=\ lin:%l\/%L\ col:%c%V\ %P
-:endif
+endif
 set laststatus=2
 
 "Invisible (list) character colors
