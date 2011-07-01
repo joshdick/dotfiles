@@ -7,7 +7,7 @@
 HISTFILE=~/.zsh_history
 HISTSIZE=1000
 SAVEHIST=1000
-setopt autocd beep extendedglob nomatch
+setopt autocd beep extendedglob nomatch prompt_subst
 unsetopt notify
 bindkey -e #-v
 zstyle :compinstall filename '/home/josh/.zshrc'
@@ -55,8 +55,15 @@ fi
 
 # *** PROMPT FORMATTING ***
 
+# bash/generic PS1 fallback.
 # (double quotes matter!)
 PS1="%{$reset_color%}%{%(!.%F{red}.%F{green})%}%n@%m%{%F{yellow}%}[%h]%{$bold_color%F{blue}%} %c %{%F{green}%}\$ %{$reset_color%}"
+
+# Native zsh prompt - based on "juanhurtado" zsh theme from oh-my-zsh
+PROMPT="
+%{$fg_bold[green]%}%n@%m%{$fg[white]%}:%{$fg[yellow]%}%~%u%{$reset_color%}
+%{$fg[blue]%}>%{$reset_color%} "
+RPROMPT="%{$fg_bold[green]%}[%{$fg[yellow]%}%h%{$fg_bold[green]%}] | [%{$fg[yellow]%}%?%{$fg_bold[green]%}]%{$reset_color%}"
 
 # *** ALIASES ***
 
