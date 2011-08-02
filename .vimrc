@@ -32,7 +32,10 @@ if has("gui") "Instead of gui_running, in cease :gui is run manually on *NIX
   set columns=90 lines=45
   "Set the font based on OS.
   if has("unix")
-    set guifont=Terminus:h13
+    "set guifont=Terminus:h13
+    set guifont=Monaco:h10
+    set linespace=-1
+    set noantialias
   else
     "set guifont=Tamsyn7x14
     set guifont=Terminus:h12
