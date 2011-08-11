@@ -7,3 +7,6 @@
 [submodule "/Users/Josh/.bin/vimpager"]
 	path = .bin/vimpager
 	url = https://github.com/rkitover/vimpager
+[submodule ".bin/resty"]
+	path = .bin/resty
+	url = https://github.com/micha/resty

@@ -121,20 +121,25 @@ export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 # Add a "personal bin" directory to PATH if it exists
 PERSONAL_BIN=~/.bin
 if test -r $PERSONAL_BIN; then
-  
+
   export PATH=$PATH:$PERSONAL_BIN
 
   # Set up z if it's available <https://github.com/rupa/z>
   if test -r $PERSONAL_BIN/z/z.sh; then
     . $PERSONAL_BIN/z/z.sh
     function precmd () {
-      z --add "$(pwd -P)"
+      _z --add "$(pwd -P)"
     }
   fi
 
   # Set up vimpager if it's available <https://github.com/rkitover/vimpager>
   if test -r $PERSONAL_BIN/vimpager/vimpager; then
     export PAGER=$PERSONAL_BIN/vimpager/vimpager
+  fi
+
+  # Set up resty if it's available <https://github.com/micha/resty>
+  if test -r $PERSONAL_BIN/resty/resty; then
+    . $PERSONAL_BIN/resty/resty
   fi
 
 fi
@@ -166,8 +171,14 @@ update() {
     sudo apt-get upgrade
   elif [ -x /usr/bin/pacman ]; then
     sudo pacman -Syu
-  else
-    echo "Josh's update command only works on an Arch Linux or Debian system. Sorry."
+  fi
+
+  # If git is available, update all submodules associated with the home directory repository.
+  hash git &> /dev/null
+  if [ $? -eq 0 ]; then
+    cd ~
+    # Found at http://stackoverflow.com/questions/1030169/git-easy-way-pull-latest-of-all-submodules
+    git submodule foreach git pull
   fi
 }
 
