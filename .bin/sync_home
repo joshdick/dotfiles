@@ -32,5 +32,7 @@ for host in "$@"; do
 + /.bin/sync_home
 + /.bin/z
 + /.bin/z/**
++ /.bin/resty
++ /.bin/resty/**
 FILES
 done
