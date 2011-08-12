@@ -84,6 +84,7 @@ fi
 alias lsd='ls -lah | grep "^d"'
 alias grep='grep --color'
 alias hgrep='history 1 | grep $1'
+alias psgrep='ps aux | grep -v grep | grep $1'
 alias search='find . -name'
 alias t='~/.todo/todo.sh'
 alias scpresume='rsync --partial --progress --rsh=ssh'
@@ -102,6 +103,12 @@ else
   export VISUAL=nano
 fi
 
+# Emulate pgrep if we're on OS X
+HAVE_PGREP=$(command -v pgrep)
+if test -z "$HAVE_PGREP"; then
+  alias pgrep=psgrep
+fi
+
 # LSCOLORS - Default except for normal directories (first character) to replace hard-to-read blue.
 # For details, see manpage for ls.
 export LSCOLORS=Gxfxcxdxbxegedabagacad
@@ -109,14 +116,12 @@ export LSCOLORS=Gxfxcxdxbxegedabagacad
 # If we're on OS X and using Homebrew package manager, add Homebrew binary directories to PATH
 HOMEBREW_BIN=/usr/local/bin
 HOMEBREW_SBIN=/usr/local/sbin
-if test -r $HOMEBREW_WIN; then
+if test -r $HOMEBREW_BIN; then
   export PATH=$HOMEBREW_BIN:$PATH
 fi
 if test -r $HOMEBREW_SBIN; then
   export PATH=$HOMEBREW_SBIN:$PATH
 fi
-
-export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 
 # Add a "personal bin" directory to PATH if it exists
 PERSONAL_BIN=~/.bin
