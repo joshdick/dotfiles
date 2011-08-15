@@ -178,13 +178,15 @@ update() {
     sudo pacman -Syu
   fi
 
-  # If git is available, update all submodules associated with the home directory repository.
-  hash git &> /dev/null
+  pushd
+  cd ~
+  # If Git is available and the home directory is a Git repo, update all submodules.
+  git rev-parse &> /dev/null
   if [ $? -eq 0 ]; then
-    cd ~
     # Found at http://stackoverflow.com/questions/1030169/git-easy-way-pull-latest-of-all-submodules
     git submodule foreach git pull
   fi
+  popd
 }
 
 # Pushes local SSH public key to another box - found at https://github.com/rtomayko/dotfiles/blob/rtomayko/.bashrc
