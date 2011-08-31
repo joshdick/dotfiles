@@ -240,5 +240,5 @@ function compress() {
 
 # Poor-man's pgrep, for use OS X where pgrep isn't available.
 function psgrep () {
-  ps ax | awk "/$1/ && \$1 != PROCINFO[\"pid\"] { print \$1 }"
+  ps ax | grep -v "awk" | awk "/$1/ && \$1 != PROCINFO[\"pid\"] { print \$1 }"
 }
