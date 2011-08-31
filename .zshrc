@@ -84,7 +84,6 @@ fi
 alias lsd='ls -lah | grep "^d"'
 alias grep='grep --color'
 alias hgrep='history 1 | grep $1'
-alias psgrep='ps aux | grep -v grep | grep $1'
 alias search='find . -name'
 alias t='~/.todo/todo.sh'
 alias scpresume='rsync --partial --progress --rsh=ssh'
@@ -237,4 +236,9 @@ function compress() {
        *)         echo "Unknown file type - $DEST" ;;
      esac
    fi
+}
+
+# Poor-man's pgrep, for use OS X where pgrep isn't available.
+function psgrep () {
+  ps ax | grep -v \$1 | awk "/$1/ && \$1 != PROCINFO[\"pid\"] { print \$1 }"
 }
