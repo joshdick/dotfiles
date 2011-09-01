@@ -240,10 +240,6 @@ function compress() {
 
 # Poor-man's pgrep, for use on OS X where pgrep isn't available.
 function psgrep() {
-  HAVE_PIDOF=$(command -v pidof)
-  if test -n "$HAVE_PIDOF"; then
-    pidof $1 | tr ' ' '\n' | grep -v '^$'
-  else
-    ps ax | grep $1 | grep 'grep' -v | awk '{print $1}'
-  fi
+  echo "Warning: using poor-man's pgrep. Consider installing the 'proctools' package via Homebrew."
+  ps ax | grep $1 | grep 'grep' -v | awk '{print $1}'
 }
