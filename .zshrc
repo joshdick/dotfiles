@@ -244,6 +244,6 @@ function psgrep() {
   if test -n "$HAVE_PIDOF"; then
     pidof $1 | tr ' ' '\n' | grep -v '^$'
   else
-    echo "ERROR: pidof is not installed."
+    ps ax | grep $1 | grep 'grep' -v | awk '{print $1}'
   fi
 }
