@@ -241,7 +241,5 @@ function compress() {
 # Poor-man's pgrep, for use on OS X where pgrep isn't available.
 function psgrep() {
   echo "Warning: using poor-man's pgrep. Consider installing the 'proctools' package via Homebrew."
-  #ps ax | grep $1 | grep -v 'grep' | awk '{print $1}'
-  local psgrep_search=$1
-  ps ax | grep "[${psgrep_search:0:1}]${psgrep_search:1}" | awk '{print $1}'
+  ps ax | egrep "(^|[^)])$1" | awk '{print $1}'
 }
