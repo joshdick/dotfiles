@@ -238,7 +238,12 @@ function compress() {
    fi
 }
 
-# Poor-man's pgrep, for use OS X where pgrep isn't available.
-function psgrep () {
-  ps ax | grep -v "awk" | awk "/$1/ && \$1 != PROCINFO[\"pid\"] { print \$1 }"
+# Poor-man's pgrep, for use on OS X where pgrep isn't available.
+function psgrep() {
+  HAVE_PIDOF=$(command -v pidof)
+  if test -n "$HAVE_PIDOF"; then
+    pidof $1 | tr ' ' '\n' | grep -v '^$'
+  else
+    echo "ERROR: pidof is not installed."
+  fi
 }
