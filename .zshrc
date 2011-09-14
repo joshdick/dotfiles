@@ -65,6 +65,107 @@ PROMPT="
 %{$fg[blue]%}>%{$reset_color%} "
 RPROMPT="%{$fg_bold[green]%}[%{$fg[yellow]%}%h%{$fg_bold[green]%}] | [%{$fg[yellow]%}%?%{$fg_bold[green]%}]%{$reset_color%}"
 
+# *** FUNCTIONS ***
+
+# Test whether a given command exists
+# Adapted from http://stackoverflow.com/questions/592620/check-if-a-program-exists-from-a-bash-script/3931779#3931779
+command_exists () {
+  hash "$1" &> /dev/null
+}
+
+# To search for a given string inside every file with the given filename
+# (wildcards allowed) in the current directory, recursively:
+#   $ searchin filename pattern
+#
+# To search for a given string inside every file inside the current directory, recursively:¬
+#   $ searchin pattern
+searchin() {
+  if [ -n "$2" ]; then
+    find . -name "$1" -type f -exec grep -l "$2" {} \;
+  else
+    find . -type f -exec grep -l "$1" {} \;
+  fi
+}
+
+# Performs a full system update in Debian-based and Arch Linux systems
+update() {
+  if [ -x /usr/bin/apt-get ]; then
+    sudo apt-get update
+    sudo apt-get upgrade
+  elif [ -x /usr/bin/pacman ]; then
+    sudo pacman -Syu
+  fi
+
+  # If the home directory is a Git repo, assume we have Git installed and update all submodules.
+  if test -r ~/.git; then
+    pushd -q
+    cd ~
+    # Found at http://stackoverflow.com/questions/1030169/git-easy-way-pull-latest-of-all-submodules
+    git submodule foreach git pull
+    popd -q
+  fi
+}
+
+# Pushes local SSH public key to another box
+# Found at https://github.com/rtomayko/dotfiles/blob/rtomayko/.bashrc
+push_ssh_cert() {
+    local _host
+    test -f ~/.ssh/id_dsa.pub || ssh-keygen -t dsa
+    for _host in "$@";
+    do
+        echo $_host
+        ssh $_host 'mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys' < ~/.ssh/id_dsa.pub
+    done
+}
+
+# Extracts archives
+# Found at http://pastebin.com/CTra4QTF
+function extract() {
+   case $@ in
+       *.tar.bz2) tar -xvjf "$@"  ;;
+       *.tar.gz)  tar -xvzf "$@"  ;;
+       *.bz2)     bunzip2 "$@"  ;;
+       *.rar)     unrar x "$@"  ;;
+       *.gz)      gunzip "$@" ;;
+       *.tar)     tar xf "$@" ;;
+       *.tbz2)    tar -xvjf "$@"  ;;
+       *.tgz)     tar -xvzf "$@"  ;;
+       *.zip)     unzip "$@"    ;;
+       *.xpi)     unzip "$@"    ;;
+       *.Z)       uncompress "$@" ;;
+       *.7z)      7z x "$@" ;;
+       *.ace)     unace e "$@"  ;;
+       *.arj)     arj -y e "$@" ;;
+       *)         echo "'$@' cannot be extracted via $0()" ;;
+   esac
+}
+
+# Packs $2-$n into $1 depending on $1's extension
+# Found at http://pastebin.com/CTra4QTF
+function compress() {
+   if [ $# -lt 2 ] ; then
+      echo -e "\n$0() usage:"
+      echo -e "\t$0 archive_file_name file1 file2 ... fileN"
+      echo -e "\tcreates archive of files 1-N\n"
+   else
+     DEST=$1
+     shift
+
+     case $DEST in
+       *.tar.bz2) tar -cvjf $DEST "$@" ;;
+       *.tar.gz)  tar -cvzf $DEST "$@" ;;
+       *.zip)     zip -r $DEST "$@" ;;
+       *)         echo "Unknown file type - $DEST" ;;
+     esac
+   fi
+}
+
+# Poor-man's pgrep, for use on OS X where pgrep isn't available.
+function psgrep() {
+  echo "Warning: using poor-man's pgrep. Consider installing the 'proctools' package via Homebrew."
+  ps ax | awk "/(^|[^)])$1/ { print \$1 }"
+}
+
 # *** ALIASES ***
 
 # Awesome platform-independent ls formatting
@@ -73,8 +174,8 @@ GLS_ARGS="--classify --tabsize=0 --literal --color=auto --show-control-chars --h
 alias ls="ls $GLS_ARGS"
 ls &> /dev/null
 if [ $? -eq 1 ]; then # The environment ls isn't GNU ls; we're not on Linux
-  HAVE_GLS=$(command -v gls) # On Mac, use gls if we have it installed via Homebrew
-  if test -n "$HAVE_GLS"; then
+  # On Mac, use gls if it has been installed via Homebrew
+  if command_exists gls; then
     alias ls="gls $GLS_ARGS"
   else
     alias ls='ls -G' # If not, fall back to BSD ls
@@ -85,7 +186,6 @@ alias lsd='ls -lah | grep "^d"'
 alias grep='grep --color'
 alias hgrep='history 1 | grep $1'
 alias search='find . -name'
-alias t='~/.todo/todo.sh'
 alias scpresume='rsync --partial --progress --rsh=ssh'
 alias servedir='python -m SimpleHTTPServer'
 alias mirror='wget -H -r --level=1 -k -p $1'
@@ -93,8 +193,7 @@ alias mirror='wget -H -r --level=1 -k -p $1'
 # *** ENVIRONMENT ***
 
 # Editor - See if vim lives around these parts, otherwise fall back to nano
-HAVE_VIM=$(command -v vim)
-if test -n "$HAVE_VIM"; then
+if command_exists vim; then
   export EDITOR=vim
   export VISUAL=vim
 else
@@ -103,9 +202,13 @@ else
 fi
 
 # Emulate pgrep if we're on OS X
-HAVE_PGREP=$(command -v pgrep)
-if test -z "$HAVE_PGREP"; then
+if ! command_exists pgrep; then
   alias pgrep=psgrep
+fi
+
+# Use grc (Generic Colouriser) if it's available
+if command_exists grc; then
+  source `brew --prefix`/etc/grc.bashrc
 fi
 
 # LSCOLORS - Default except for normal directories (first character) to replace hard-to-read blue.
@@ -151,95 +254,3 @@ fi
 # Include any machine-specific configuration if it exists
 test -r ~/.private_sh_env &&
 . ~/.private_sh_env
-
-# *** FUNCTIONS ***
-
-# To search for a given string inside every file with the given filename
-# (wildcards allowed) in the current directory, recursively:
-#   $ searchin filename pattern
-#
-# To search for a given string inside every file inside the current directory, recursively:¬
-#   $ searchin pattern
-searchin() {
-  if [ -n "$2" ]; then
-    find . -name "$1" -type f -exec grep -l "$2" {} \;
-  else
-    find . -type f -exec grep -l "$1" {} \;
-  fi
-}
-
-# Performs a full system update in Debian-based and Arch Linux systems
-update() {
-  if [ -x /usr/bin/apt-get ]; then
-    sudo apt-get update
-    sudo apt-get upgrade
-  elif [ -x /usr/bin/pacman ]; then
-    sudo pacman -Syu
-  fi
-
-  # If the home directory is a Git repo, assume we have Git installed and update all submodules.
-  if test -r ~/.git; then
-    pushd -q
-    cd ~
-    # Found at http://stackoverflow.com/questions/1030169/git-easy-way-pull-latest-of-all-submodules
-    git submodule foreach git pull
-    popd -q
-  fi
-}
-
-# Pushes local SSH public key to another box - found at https://github.com/rtomayko/dotfiles/blob/rtomayko/.bashrc
-push_ssh_cert() {
-    local _host
-    test -f ~/.ssh/id_dsa.pub || ssh-keygen -t dsa
-    for _host in "$@";
-    do
-        echo $_host
-        ssh $_host 'mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys' < ~/.ssh/id_dsa.pub
-    done
-}
-
-# Extracts archives - found at http://pastebin.com/CTra4QTF
-function extract() {
-   case $@ in
-       *.tar.bz2) tar -xvjf "$@"  ;;
-       *.tar.gz)  tar -xvzf "$@"  ;;
-       *.bz2)     bunzip2 "$@"  ;;
-       *.rar)     unrar x "$@"  ;;
-       *.gz)      gunzip "$@" ;;
-       *.tar)     tar xf "$@" ;;
-       *.tbz2)    tar -xvjf "$@"  ;;
-       *.tgz)     tar -xvzf "$@"  ;;
-       *.zip)     unzip "$@"    ;;
-       *.xpi)     unzip "$@"    ;;
-       *.Z)       uncompress "$@" ;;
-       *.7z)      7z x "$@" ;;
-       *.ace)     unace e "$@"  ;;
-       *.arj)     arj -y e "$@" ;;
-       *)         echo "'$@' cannot be extracted via $0()" ;;
-   esac
-}
-
-# Packs $2-$n into $1 depending on $1's extension - found at http://pastebin.com/CTra4QTF
-function compress() {
-   if [ $# -lt 2 ] ; then
-      echo -e "\n$0() usage:"
-      echo -e "\t$0 archive_file_name file1 file2 ... fileN"
-      echo -e "\tcreates archive of files 1-N\n"
-   else
-     DEST=$1
-     shift
-
-     case $DEST in
-       *.tar.bz2) tar -cvjf $DEST "$@" ;;
-       *.tar.gz)  tar -cvzf $DEST "$@" ;;
-       *.zip)     zip -r $DEST "$@" ;;
-       *)         echo "Unknown file type - $DEST" ;;
-     esac
-   fi
-}
-
-# Poor-man's pgrep, for use on OS X where pgrep isn't available.
-function psgrep() {
-  echo "Warning: using poor-man's pgrep. Consider installing the 'proctools' package via Homebrew."
-  ps ax | awk "/(^|[^)])$1/ { print \$1 }"
-}
