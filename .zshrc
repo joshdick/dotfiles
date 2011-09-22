@@ -89,20 +89,28 @@ searchin() {
 
 # Performs a full system update in Debian-based and Arch Linux systems
 update() {
-  if [ -x /usr/bin/apt-get ]; then
+  if command_exists apt-get; then
+    echo "Updating packages via apt-get..."
     sudo apt-get update
     sudo apt-get upgrade
-  elif [ -x /usr/bin/pacman ]; then
+  elif command_exists pacman; then
+    echo "Upadting packages via pacman..."
     sudo pacman -Syu
   fi
 
-  # If the home directory is a Git repo, assume we have Git installed and update all submodules.
-  if test -r ~/.git; then
+  # If the home directory is a Git repo, update all submodules.
+  if command_exists git && test -r ~/.git; then
+    echo "Updating git submodules..."
     pushd -q
     cd ~
     # Found at http://stackoverflow.com/questions/1030169/git-easy-way-pull-latest-of-all-submodules
     git submodule foreach git pull
     popd -q
+  fi
+
+  if command_exists brew; then
+    echo "Updating/upgrading/cleaning up Homebrew packages..."
+    brew update && brew upgrade && brew cleanup
   fi
 }
 
