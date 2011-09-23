@@ -262,3 +262,12 @@ fi
 # Include any machine-specific configuration if it exists
 test -r ~/.private_sh_env &&
 . ~/.private_sh_env
+
+# Additional zsh goodies
+if test -r $PERSONAL_BIN/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh; then
+  source $PERSONAL_BIN/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
+
+if test -r $PERSONAL_BIN/zsh-history-substring-search/zsh-substring-search.zsh; then
+  source $PERSONAL_BIN/zsh-history-substring-search/zsh-history-substring-search.zsh
+fi

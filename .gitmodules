@@ -4,9 +4,15 @@
 [submodule ".vim/vundle.git"]
 	path = .vim/vundle.git
 	url = https://github.com/gmarik/vundle.git
-[submodule "/Users/Josh/.bin/vimpager"]
+[submodule ".bin/vimpager"]
 	path = .bin/vimpager
 	url = https://github.com/rkitover/vimpager
 [submodule ".bin/resty"]
 	path = .bin/resty
 	url = https://github.com/micha/resty
+[submodule ".bin/zsh-history-substring-search"]
+	path = .bin/zsh-history-substring-search
+	url = https://github.com/zsh-users/zsh-history-substring-search
+[submodule ".bin/zsh-syntax-highlighting"]
+	path = .bin/zsh-syntax-highlighting
+	url = https://github.com/zsh-users/zsh-syntax-highlighting

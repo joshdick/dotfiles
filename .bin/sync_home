@@ -34,5 +34,9 @@ for host in "$@"; do
 + /.bin/z/**
 + /.bin/resty
 + /.bin/resty/**
++ /.bin/zsh-syntax-highlighting
++ /.bin/zsh-syntax-highlighting/**
++ /.bin/zsh-history-substring-search
++ /.bin/zsh-history-substring-search/**
 FILES
 done
