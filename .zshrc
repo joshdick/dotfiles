@@ -104,7 +104,7 @@ update() {
     pushd -q
     cd ~
     # Found at http://stackoverflow.com/questions/1030169/git-easy-way-pull-latest-of-all-submodules
-    git submodule foreach git checkout master && git pull origin master
+    git submodule foreach git checkout master && git pull
     popd -q
   fi
 
