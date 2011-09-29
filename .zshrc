@@ -77,7 +77,7 @@ command_exists () {
 # (wildcards allowed) in the current directory, recursively:
 #   $ searchin filename pattern
 #
-# To search for a given string inside every file inside the current directory, recursively:¬
+# To search for a given string inside every file inside the current directory, recursively:
 #   $ searchin pattern
 searchin() {
   if [ -n "$2" ]; then
@@ -87,7 +87,7 @@ searchin() {
   fi
 }
 
-# Performs a full system update in Debian-based and Arch Linux systems
+# Performs a system update on Debian-based and Arch Linux systems, updates Homebrew packages on OS X, updates all Git submodules
 update() {
   if command_exists apt-get; then
     echo "Updating packages via apt-get..."
