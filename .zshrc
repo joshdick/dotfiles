@@ -48,7 +48,7 @@ if [ -f /usr/bin/tmux ] && [ -z $TMUX ]; then
     if [ $? -eq 0 ]; then
       tmux attach -d
     else
-      tmux
+      tmux -u
     fi
   fi
 fi
