@@ -46,7 +46,7 @@ if [ -f /usr/bin/tmux ] && [ -z $TMUX ]; then
     pgrep tmux
     # $? is the exit code of pgrep; 0 means there was a result (tmux is already running)
     if [ $? -eq 0 ]; then
-      tmux attach -d
+      tmux -u attach -d
     else
       tmux -u
     fi
