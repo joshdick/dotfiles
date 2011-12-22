@@ -16,3 +16,6 @@
 [submodule ".bin/zsh-syntax-highlighting"]
 	path = .bin/zsh-syntax-highlighting
 	url = https://github.com/zsh-users/zsh-syntax-highlighting
+[submodule ".bin/git-dude"]
+	path = .bin/git-dude
+	url = https://github.com/sickill/git-dude.git

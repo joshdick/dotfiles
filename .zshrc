@@ -257,6 +257,10 @@ if test -r $PERSONAL_BIN; then
     . $PERSONAL_BIN/resty/resty
   fi
 
+  if test -r $PERSONAL_BIN/git-dude/git-dude; then
+    export PATH=$PATH:$PERSONAL_BIN/git-dude
+  fi
+
 fi
 
 # Include any machine-specific configuration if it exists
