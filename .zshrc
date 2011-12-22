@@ -257,6 +257,7 @@ if test -r $PERSONAL_BIN; then
     . $PERSONAL_BIN/resty/resty
   fi
 
+  # Set up git-dude if it's available <https://github.com/sickill/git-dude>
   if test -r $PERSONAL_BIN/git-dude/git-dude; then
     export PATH=$PATH:$PERSONAL_BIN/git-dude
   fi
