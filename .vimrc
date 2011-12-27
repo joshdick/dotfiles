@@ -8,6 +8,8 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'scrooloose/nerdcommenter.git'
 Bundle 'scrooloose/nerdtree.git'
 Bundle 'ervandew/supertab.git'
+Bundle 'corntrace/bufexplorer.git'
+Bundle 'tpope/vim-vividchalk'
 
 "NOTE: This block was commented out in favor of 'set list'. Uncomment all
 "executable lines in this block to restore tab/whitespace hilighting
@@ -49,12 +51,15 @@ if has("gui") "Instead of gui_running, in cease :gui is run manually on *NIX
   endif
 endif
 
+"Disable splash screen/[I]ntro message
+set shortmess+=I
+
 colorscheme wombat256
 set number
 set nobackup
 set nowritebackup
 set background=dark
-set list "Show invisible characters by default
+"set list "Show invisible characters by default
 
 set softtabstop=2
 set tabstop=2
@@ -112,6 +117,9 @@ endfunction
 
 "Shortcut to rapidly toggle 'set list' (Toggles invisible characters. By default, <leader> is backslash.)
 nmap <leader>l :set list!<CR>
+
+"Shortcut to toggle NERDTree
+nmap <leader>e :NERDTreeToggle<CR>
 
 "Shortcut to strip trailing whitespace
 nmap <silent> <leader>$ :call Preserve("%s/\\s\\+$//e")<CR>
