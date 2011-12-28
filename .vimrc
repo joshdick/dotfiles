@@ -4,11 +4,12 @@ call vundle#rc()
 "Git URL bundles
 Bundle 'git://git.wincent.com/command-t.git'
 "Github Bundles
-Bundle 'tpope/vim-fugitive'
+Bundle 'corntrace/bufexplorer.git'
+Bundle 'ervandew/supertab.git'
 Bundle 'scrooloose/nerdcommenter.git'
 Bundle 'scrooloose/nerdtree.git'
-Bundle 'ervandew/supertab.git'
-Bundle 'corntrace/bufexplorer.git'
+Bundle 'sjl/gundo.vim.git'
+Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-vividchalk'
 
 "NOTE: This block was commented out in favor of 'set list'. Uncomment all
@@ -115,27 +116,32 @@ function! Preserve(command)
   call cursor(l, c)
 endfunction
 
-"Shortcut to rapidly toggle 'set list' (Toggles invisible characters. By default, <leader> is backslash.)
-nmap <leader>l :set list!<CR>
+"NOTE - By default, <leader> is backslash.
 
 "Shortcut to toggle NERDTree
 nmap <leader>e :NERDTreeToggle<CR>
+
+"Shorcut to toggle search hilighting
+"Found here: http://vim.wikia.com/wiki/Highlight_all_search_pattern_matches
+noremap <leader>h :set hlsearch! hlsearch?<CR>
+
+"Shortcut to toggle 'set list' (toggles invisible characters)
+nmap <leader>l :set list!<CR>
+
+"Shortcut to toggle line number visibility
+nmap <leader>n :set number! number?<CR>
+
+"Shortcut to toggle auto-indenting for code paste
+"Found here: http://vim.wikia.com/wiki/Toggle_auto-indenting_for_code_paste
+nnoremap <leader>p :set invpaste paste?<CR>
+set pastetoggle=<leader>p
+set showmode
+
+"Shortcut to toggle Gundo
+nmap <leader>u :GundoToggle<CR>
 
 "Shortcut to strip trailing whitespace
 nmap <silent> <leader>$ :call Preserve("%s/\\s\\+$//e")<CR>
 
 "Shortcut to auto-indent entire file
 nmap <silent> <leader>= :call Preserve("normal gg=G")<CR>
-
-"Shortcut to toggle auto-indenting for code paste
-"Found here: http://vim.wikia.com/wiki/Toggle_auto-indenting_for_code_paste
-nnoremap <F2> :set invpaste paste?<CR>
-set pastetoggle=<F2>
-set showmode
-
-"Shortcut to toggle line number visibility
-nmap <F3> :set number! number?<CR>
-
-"Shorcut to toggle search hilighting
-"Found here: http://vim.wikia.com/wiki/Highlight_all_search_pattern_matches
-noremap <F4> :set hlsearch! hlsearch?<CR>
