@@ -195,7 +195,7 @@ alias grep='grep --color'
 alias hgrep='history 1 | grep $1'
 alias search='find . -name'
 alias scpresume='rsync --partial --progress --rsh=ssh'
-alias servedir='python -m SimpleHTTPServer'
+alias servedir='python -m SimpleHTTPServer $1'
 alias mirror='wget -H -r --level=1 -k -p $1'
 
 # *** ENVIRONMENT ***
