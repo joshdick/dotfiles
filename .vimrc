@@ -4,11 +4,11 @@ call vundle#rc()
 "Git URL bundles
 Bundle 'git://git.wincent.com/command-t.git'
 "Github Bundles
-Bundle 'corntrace/bufexplorer.git'
-Bundle 'ervandew/supertab.git'
-Bundle 'scrooloose/nerdcommenter.git'
-Bundle 'scrooloose/nerdtree.git'
-Bundle 'sjl/gundo.vim.git'
+Bundle 'corntrace/bufexplorer'
+Bundle 'ervandew/supertab'
+Bundle 'scrooloose/nerdcommenter'
+Bundle 'scrooloose/nerdtree'
+Bundle 'sjl/gundo.vim'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-vividchalk'
 
