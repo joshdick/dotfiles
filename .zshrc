@@ -10,9 +10,15 @@ SAVEHIST=1000
 setopt autocd beep extendedglob nomatch prompt_subst
 unsetopt notify
 bindkey -e #-v
-zstyle :compinstall filename '/home/josh/.zshrc'
-autoload -Uz compinit && compinit
+zstyle :compinstall filename "$HOME/.zshrc"
+autoload -Uz compinit vcs_info && compinit
 autoload -U colors && colors #Enable colors in prompt
+
+zstyle ':vcs_info:*' stagedstr '%F{28}●'
+zstyle ':vcs_info:*' unstagedstr '%F{11}●'
+zstyle ':vcs_info:*' check-for-changes true
+zstyle ':vcs_info:(sv[nk]|bzr):*' branchformat '%b%F{1}:%F{11}%r'
+zstyle ':vcs_info:*' enable git svn
 
 # Make various standard control keys work properly
 bindkey "\e[1~" beginning-of-line
@@ -36,6 +42,24 @@ bindkey "\eOF" end-of-line
 # For freebsd console
 bindkey "\e[H" beginning-of-line
 bindkey "\e[F" end-of-line
+
+precmd () {
+
+    # Set up RPROMPT to use zsh's built-in vcs_info
+    # Slight hack for detecting git untracked files found at: <http://briancarper.net/blog/570/git-info-in-your-zsh-prompt>
+    if [[ -z $(git ls-files --other --exclude-standard 2> /dev/null) ]] {
+        zstyle ':vcs_info:*' formats '%{$fg_bold[green]%}[%F{yellow}%b%c%u%{$fg_bold[green]%}]'
+    } else {
+        zstyle ':vcs_info:*' formats '%{$fg_bold[green]%}[%F{yellow}%b%c%u%F{red}●%{$fg_bold[green]%}]'
+    }
+    vcs_info
+    RPROMPT="${vcs_info_msg_0_}%{$reset_color%}"
+
+    # If z <https://github.com/rupa/z> is available, make sure it captures the current directory
+    if `type _z &> /dev/null`; then
+      _z --add "$(pwd -P)"
+    fi
+}
 
 # *** MISC ***
 
@@ -61,9 +85,8 @@ PS1="%{$reset_color%}%{%(!.%F{red}.%F{green})%}%n@%m%{%F{yellow}%}[%h]%{$bold_co
 
 # Native zsh prompt - based on "juanhurtado" zsh theme from oh-my-zsh
 PROMPT="
-%{$fg_bold[green]%}%n@%m%{$fg[white]%}:%{$fg[yellow]%}%~%u%{$reset_color%}
+%(!.%{$fg_bold[red]%}.%{$fg_bold[green]%})%n@%m%{$fg[white]%}:%{$fg[yellow]%}%~%u%{$reset_color%}
 %{$fg[blue]%}>%{$reset_color%} "
-RPROMPT="%{$fg_bold[green]%}[%{$fg[yellow]%}%h%{$fg_bold[green]%}] | [%{$fg[yellow]%}%?%{$fg_bold[green]%}]%{$reset_color%}"
 
 # *** FUNCTIONS ***
 
@@ -242,9 +265,6 @@ if test -r $PERSONAL_BIN; then
   # Set up z if it's available <https://github.com/rupa/z>
   if test -r $PERSONAL_BIN/z/z.sh; then
     . $PERSONAL_BIN/z/z.sh
-    function precmd () {
-      _z --add "$(pwd -P)"
-    }
   fi
 
   # Set up vimpager if it's available <https://github.com/rkitover/vimpager>
