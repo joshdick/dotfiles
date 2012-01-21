@@ -133,7 +133,7 @@ update() {
 
   if command_exists brew; then
     echo "Updating/upgrading/cleaning up Homebrew packages..."
-    brew update && brew upgrade && brew cleanup
+    brew update && brew upgrade && brew cleanup && brew linkapps
   fi
 }
 
