@@ -242,6 +242,11 @@ if command_exists grc; then
   source `brew --prefix`/etc/grc.bashrc
 fi
 
+# Use the most pager if it's available <http://www.jedsoft.org/most>
+if command_exists most; then
+  export PAGER=most
+fi
+
 # LSCOLORS - Default except for normal directories (first character) to replace hard-to-read blue.
 # For details, see manpage for ls.
 export LSCOLORS=Gxfxcxdxbxegedabagacad
@@ -265,11 +270,6 @@ if test -r $PERSONAL_BIN; then
   # Set up z if it's available <https://github.com/rupa/z>
   if test -r $PERSONAL_BIN/z/z.sh; then
     . $PERSONAL_BIN/z/z.sh
-  fi
-
-  # Set up vimpager if it's available <https://github.com/rkitover/vimpager>
-  if test -r $PERSONAL_BIN/vimpager/vimpager; then
-    export PAGER=$PERSONAL_BIN/vimpager/vimpager
   fi
 
   # Set up resty if it's available <https://github.com/micha/resty>
