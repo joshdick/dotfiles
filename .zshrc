@@ -282,6 +282,11 @@ if test -r $PERSONAL_BIN; then
     export PATH=$PATH:$PERSONAL_BIN/git-dude
   fi
 
+  # Set up gcr if it's available <https://github.com/joshdick/gcr>
+  if test -r $PERSONAL_BIN/gcr/gcr; then
+    export PATH=$PATH:$PERSONAL_BIN/gcr
+  fi
+
 fi
 
 # Include any machine-specific configuration if it exists

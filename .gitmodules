@@ -16,3 +16,6 @@
 [submodule ".bin/git-dude"]
 	path = .bin/git-dude
 	url = https://github.com/sickill/git-dude.git
+[submodule ".bin/gcr"]
+	path = .bin/gcr
+	url = https://github.com/joshdick/gcr.git
