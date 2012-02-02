@@ -19,3 +19,6 @@
 [submodule ".bin/gcr"]
 	path = .bin/gcr
 	url = https://github.com/joshdick/gcr.git
+[submodule ".bin/todo.txt-cli"]
+	path = .bin/todo.txt-cli
+	url = https://github.com/ginatrapani/todo.txt-cli
