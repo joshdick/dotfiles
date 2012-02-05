@@ -21,6 +21,7 @@ for host in "$@"; do
 + /.tmux.conf
 + /.screenrc
 + /.htoprc
++ /.gitconfg
 
 + /.vim
 + /.vim/colors
@@ -30,10 +31,13 @@ for host in "$@"; do
 
 + /.bin
 + /.bin/sync_home
-+ /.bin/z
-+ /.bin/z/**
++ /.bin/init.zsh
++ /.bin/gcr
++ /.bin/gcr/**
 + /.bin/resty
 + /.bin/resty/**
++ /.bin/z
++ /.bin/z/**
 + /.bin/zsh-syntax-highlighting
 + /.bin/zsh-syntax-highlighting/**
 + /.bin/zsh-history-substring-search

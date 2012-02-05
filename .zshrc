@@ -44,21 +44,20 @@ bindkey "\e[H" beginning-of-line
 bindkey "\e[F" end-of-line
 
 precmd () {
+  # Set up RPROMPT to use zsh's built-in vcs_info
+  # Slight hack for detecting git untracked files found at: <http://briancarper.net/blog/570/git-info-in-your-zsh-prompt>
+  if [[ -z $(git ls-files --other --exclude-standard 2> /dev/null) ]] {
+      zstyle ':vcs_info:*' formats '%{$fg_bold[green]%}[%F{yellow}%b%c%u%{$fg_bold[green]%}]'
+  } else {
+      zstyle ':vcs_info:*' formats '%{$fg_bold[green]%}[%F{yellow}%b%c%u%F{red}●%{$fg_bold[green]%}]'
+  }
+  vcs_info
+  RPROMPT="${vcs_info_msg_0_}%{$reset_color%}"
 
-    # Set up RPROMPT to use zsh's built-in vcs_info
-    # Slight hack for detecting git untracked files found at: <http://briancarper.net/blog/570/git-info-in-your-zsh-prompt>
-    if [[ -z $(git ls-files --other --exclude-standard 2> /dev/null) ]] {
-        zstyle ':vcs_info:*' formats '%{$fg_bold[green]%}[%F{yellow}%b%c%u%{$fg_bold[green]%}]'
-    } else {
-        zstyle ':vcs_info:*' formats '%{$fg_bold[green]%}[%F{yellow}%b%c%u%F{red}●%{$fg_bold[green]%}]'
-    }
-    vcs_info
-    RPROMPT="${vcs_info_msg_0_}%{$reset_color%}"
-
-    # If z <https://github.com/rupa/z> is available, make sure it captures the current directory
-    if `type _z &> /dev/null`; then
-      _z --add "$(pwd -P)"
-    fi
+  # If z <https://github.com/rupa/z> is available, make sure it captures the current directory
+  if `type _z &> /dev/null`; then
+    _z --add "$(pwd -P)"
+  fi
 }
 
 # *** MISC ***
@@ -92,7 +91,7 @@ PROMPT="
 
 # Test whether a given command exists
 # Adapted from http://stackoverflow.com/questions/592620/check-if-a-program-exists-from-a-bash-script/3931779#3931779
-command_exists () {
+command_exists() {
   hash "$1" &> /dev/null
 }
 
@@ -191,10 +190,17 @@ function compress() {
    fi
 }
 
-# Poor-man's pgrep, for use on OS X where pgrep isn't available.
+# Poor-man's pgrep, for use on OS X where pgrep isn't available
 function psgrep() {
   echo "Warning: using poor-man's pgrep. Consider installing the 'proctools' package via Homebrew."
   ps ax | awk "/(^|[^)])$1/ { print \$1 }"
+}
+
+# mkdir and cd into it - supports hierarchies and spaces
+# Found at http://onethingwell.org/post/586977440/mkcd-improved
+function mkcd () {
+  mkdir -p "$*"
+  cd "$*"
 }
 
 # *** ALIASES ***
@@ -205,7 +211,7 @@ GLS_ARGS="--classify --tabsize=0 --literal --color=auto --show-control-chars --h
 alias ls="ls $GLS_ARGS"
 ls &> /dev/null
 if [ $? -eq 1 ]; then # The environment ls isn't GNU ls; we're not on Linux
-  # On Mac, use gls if it has been installed via Homebrew
+  # On OS X, use gls if it has been installed via Homebrew
   if command_exists gls; then
     alias ls="gls $GLS_ARGS"
   else
@@ -220,6 +226,7 @@ alias search='find . -name'
 alias scpresume='rsync --partial --progress --rsh=ssh'
 alias servedir='python -m SimpleHTTPServer $1'
 alias mirror='wget -H -r --level=1 -k -p $1'
+alias g='git'
 
 # *** ENVIRONMENT ***
 
@@ -235,11 +242,6 @@ fi
 # Emulate pgrep if we're on OS X
 if ! command_exists pgrep; then
   alias pgrep=psgrep
-fi
-
-# Use grc (Generic Colouriser) if it's available
-if command_exists grc; then
-  source `brew --prefix`/etc/grc.bashrc
 fi
 
 # Use the most pager if it's available <http://www.jedsoft.org/most>
@@ -261,43 +263,10 @@ if test -r $HOMEBREW_SBIN; then
   export PATH=$HOMEBREW_SBIN:$PATH
 fi
 
-# Add a "personal bin" directory to PATH if it exists
-PERSONAL_BIN=~/.bin
-if test -r $PERSONAL_BIN; then
-
-  export PATH=$PATH:$PERSONAL_BIN
-
-  # Set up z if it's available <https://github.com/rupa/z>
-  if test -r $PERSONAL_BIN/z/z.sh; then
-    . $PERSONAL_BIN/z/z.sh
-  fi
-
-  # Set up resty if it's available <https://github.com/micha/resty>
-  if test -r $PERSONAL_BIN/resty/resty; then
-    . $PERSONAL_BIN/resty/resty
-  fi
-
-  # Set up git-dude if it's available <https://github.com/sickill/git-dude>
-  if test -r $PERSONAL_BIN/git-dude/git-dude; then
-    export PATH=$PATH:$PERSONAL_BIN/git-dude
-  fi
-
-  # Set up gcr if it's available <https://github.com/joshdick/gcr>
-  if test -r $PERSONAL_BIN/gcr/gcr; then
-    export PATH=$PATH:$PERSONAL_BIN/gcr
-  fi
-
-fi
+# Initialize the "personal bin" if it exists
+test -r ~/.bin/init.zsh &&
+. ~/.bin/init.zsh
 
 # Include any machine-specific configuration if it exists
 test -r ~/.private_sh_env &&
 . ~/.private_sh_env
-
-# Additional zsh goodies
-if test -r $PERSONAL_BIN/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh; then
-  source $PERSONAL_BIN/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-fi
-
-if test -r $PERSONAL_BIN/zsh-history-substring-search/zsh-history-substring-search.zsh; then
-  source $PERSONAL_BIN/zsh-history-substring-search/zsh-history-substring-search.zsh
-fi
