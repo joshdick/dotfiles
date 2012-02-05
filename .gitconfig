@@ -1,0 +1,17 @@
+[user]
+	name = Josh Dick
+	email = josh@joshdick.net
+[color]
+	ui = auto
+[merge]
+	tool = kdiff3
+[diff]
+	tool = kdiff3
+[difftool]
+	prompt = false
+[help]
+	format = web
+[push]
+	default = upstream
+[alias]
+	lg = log --graph --pretty=format:'%Cred%h%Creset-%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
