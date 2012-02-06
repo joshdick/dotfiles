@@ -263,10 +263,9 @@ if test -r $HOMEBREW_SBIN; then
   export PATH=$HOMEBREW_SBIN:$PATH
 fi
 
-# Initialize the "personal bin" if it exists
-test -r ~/.bin/init.zsh &&
-. ~/.bin/init.zsh
+# Initialize the "personal bin"
+. ~/.bin/bin_init.zsh
 
 # Include any machine-specific configuration if it exists
-test -r ~/.private_sh_env &&
-. ~/.private_sh_env
+test -r ~/.localrc &&
+. ~/.localrc
