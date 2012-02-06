@@ -15,6 +15,8 @@ There are comments throughout my dotfiles attributing all known original sources
 * `git clone git://github.com/joshdick/dotfiles.git ~/.dotfiles`
 * `cd ~/.dotfiles`
 * `./install.sh`
+* `git submodule init`
+* `git submodule update`
 
 The install script looks for all files and directories in the root of the repository ending in the .symlink extension. It then symlinks those files and directories into your home directory with a dot prepended and the .symlink extension removed.
 
