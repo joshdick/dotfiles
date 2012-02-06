@@ -26,8 +26,8 @@ for host in "$@"; do
 + /.vim
 + /.vim/colors
 + /.vim/colors/**
-+ /.vim/vundle.git
-+ /.vim/vundle.git/**
++ /.vim/vundle
++ /.vim/vundle/**
 
 + /.bin
 + /.bin/bin_init.zsh
