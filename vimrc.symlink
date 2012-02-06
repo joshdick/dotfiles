@@ -1,5 +1,5 @@
 "Vundle plugin and bundle initialization
-set rtp+=~/.vim/vundle.git/
+set rtp+=~/.vim/vundle/
 call vundle#rc()
 "Git URL bundles
 Bundle 'git://git.wincent.com/command-t.git'
