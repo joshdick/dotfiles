@@ -120,11 +120,11 @@ update() {
     sudo pacman -Syu
   fi
 
-  # If the home directory is a Git repo, update all submodules.
-  if command_exists git && test -r ~/.git; then
+  # If th the home directory was symlinked out of a Git repo, update all submodules.
+  if command_exists git && test -r ~/.dotfiles/.git; then
     echo "Updating git submodules..."
     pushd -q
-    cd ~
+    cd ~/.dotfiles
     # Found at http://stackoverflow.com/questions/1030169/git-easy-way-pull-latest-of-all-submodules
     git submodule foreach 'git checkout master &> /dev/null; git checkout . &> /dev/null; git fetch origin && git merge origin/master'
     popd -q
