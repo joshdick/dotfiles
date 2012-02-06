@@ -3,7 +3,7 @@
 # Install script for Josh Dick's dotfiles
 # <https://github.com/joshdick/dotfiles>
 
-SELF_PATH=$(dirname $0) # Path to the directory containing this script
+SELF_PATH="$( cd "$( dirname "$0" )" && pwd )" # Path to the directory containing this script
 
 for file in `find $SELF_PATH -maxdepth 1 -name \*.symlink`; do
   src_file=`basename "$file"`
