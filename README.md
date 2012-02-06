@@ -18,7 +18,7 @@ There are comments throughout my dotfiles attributing all known original sources
 
 The install script looks for all files and directories in the root of the repository ending in the .symlink extension. It then symlinks those files and directories into your home directory with a dot prepended and the .symlink extension removed.
 
-Your existing dotfiles *should* be safe since the script will not symlink over any existing dotfiles with the same name (you should see warnings from `ln`). Seeing warnings from `ln` means that some subset of my dotfiles will have been symlinked in, so [re]move the conflicting files and re-run the script to ensure all dotfiles are symlinked in correctly.
+Your existing dotfiles *should* be safe since the script will not symlink over any existing dotfiles with the same name (you should see warnings from `ln`). Seeing warnings from `ln` means that some subset of the dotfiles will have been symlinked in, so [re]move the conflicting files and re-run the script to ensure all dotfiles are symlinked in correctly.
 
 I take no responsibility for any havoc the install script may wreak on your system...it works for me!
 
