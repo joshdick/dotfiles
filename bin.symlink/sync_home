@@ -15,7 +15,7 @@ test -z "$1" || echo "$@" | grep -q -- '--help' && {
 cd ~
 for host in "$@"; do
     echo "sync: $host"
-    rsync -avz --exclude '.git*' --include-from=- --exclude='*' ./ "${host}:" <<FILES
+    rsync -avzL --exclude '.git*' --include-from=- --exclude='*' ./ "${host}:" <<FILES
 + /.zshrc
 + /.vimrc
 + /.tmux.conf
@@ -30,6 +30,7 @@ for host in "$@"; do
 + /.vim/vundle.git/**
 
 + /.bin
++ /.bin/bin_init.zsh
 + /.bin/sync_home
 + /.bin/init.zsh
 + /.bin/gcr
