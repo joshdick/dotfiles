@@ -13,8 +13,8 @@ export PATH=$PATH:$PERSONAL_BIN
 # Set up git-dude <https://github.com/sickill/git-dude>
 export PATH=$PATH:$PERSONAL_BIN/git-dude
 
-# Set up gcr <https://github.com/joshdick/gcr>
-export PATH=$PATH:$PERSONAL_BIN/gcr
+# Set up git-cr <https://github.com/joshdick/git-cr>
+export PATH=$PATH:$PERSONAL_BIN/git-cr
 
 # Set up zsh-syntax-highlighting <https://github.com/zsh-users/zsh-syntax-highlighting>
 source $PERSONAL_BIN/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
