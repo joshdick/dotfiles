@@ -253,19 +253,18 @@ fi
 # For details, see manpage for ls.
 export LSCOLORS=Gxfxcxdxbxegedabagacad
 
-# If we're on OS X and using Homebrew package manager, add Homebrew binary directories to PATH
-HOMEBREW_BIN=/usr/local/bin
-HOMEBREW_SBIN=/usr/local/sbin
-if test -r $HOMEBREW_BIN; then
-  export PATH=$HOMEBREW_BIN:$PATH
-fi
-if test -r $HOMEBREW_SBIN; then
-  export PATH=$HOMEBREW_SBIN:$PATH
+# If we're on OS X and using Homebrew package manager, add Homebrew binary directory to PATH
+if command_exists brew; then
+  export PATH=`brew --prefix`/bin:`brew --prefix`/sbin:$PATH
+
+  # While we're here, set up completion for Git if it's available via the Homebrew bash-completion package.
+  # ZSH's built-in Git completion doesn't complete filenames for some reason, so use bash's instead.
+  GIT_BASH_COMPLETION=`brew --prefix`/etc/bash_completion.d/git-completion.bash
+  test -r $GIT_BASH_COMPLETEION && . $GIT_BASH_COMPLETION
 fi
 
 # Initialize the "personal bin"
 . ~/.bin/bin_init.zsh
 
 # Include any machine-specific configuration if it exists
-test -r ~/.localrc &&
-. ~/.localrc
+test -r ~/.localrc && . ~/.localrc
