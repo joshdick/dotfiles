@@ -85,7 +85,7 @@ PS1="%{$reset_color%}%{%(!.%F{red}.%F{green})%}%n@%m%{%F{yellow}%}[%h]%{$bold_co
 # Native zsh prompt - based on "juanhurtado" zsh theme from oh-my-zsh
 PROMPT="
 %(!.%{$fg_bold[red]%}.%{$fg_bold[green]%})%n@%m%{$fg[white]%}:%{$fg[yellow]%}%~%u%{$reset_color%}
-%{$fg[blue]%}>%{$reset_color%} "
+%{$fg[blue]%}›%{$reset_color%} "
 
 # *** FUNCTIONS ***
 
