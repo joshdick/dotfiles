@@ -22,3 +22,6 @@
 [submodule "bin.symlink/git-cr"]
 	path = bin.symlink/git-cr
 	url = https://github.com/joshdick/git-cr
+[submodule "bin.symlink/pytograph"]
+	path = bin.symlink/pytograph
+	url = git@github.com:joshdick/pytograph.git
