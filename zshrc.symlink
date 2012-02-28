@@ -1,5 +1,5 @@
 #!/bin/zsh
-# ZSH environment for Josh Dick <http://joshdick.net>
+# zshrc for Josh Dick <http://joshdick.net>
 # As far as I know, pretty much everything besides the stuff in the "ZSH-SPECIFIC SETTINGS" section should work in bash as well.
 
 # *** ZSH-SPECIFIC SETTINGS ***
@@ -12,30 +12,38 @@ unsetopt notify
 bindkey -e #-v
 zstyle :compinstall filename "$HOME/.zshrc"
 autoload -Uz compinit && compinit
-autoload -U colors && colors #Enable colors in prompt
+autoload -U colors && colors # Enable colors in prompt
 
-# Make various standard control keys work properly
-bindkey "\e[1~" beginning-of-line
-bindkey "\e[4~" end-of-line
-bindkey "\e[5~" beginning-of-history
-bindkey "\e[6~" end-of-history
-bindkey "\e[3~" delete-char
-bindkey "\e[2~" quoted-insert
+# Make control keys work properly in various terminal emulators
+# Found at <https://wiki.archlinux.org/index.php/Zsh>
+bindkey "\e[1~" beginning-of-line # Home
+bindkey "\e[4~" end-of-line # End
+bindkey "\e[5~" beginning-of-history # PageUp
+bindkey "\e[6~" end-of-history # PageDown
+bindkey "\e[2~" quoted-insert # Ins
+bindkey "\e[3~" delete-char # Del
 bindkey "\e[5C" forward-word
 bindkey "\eOc" emacs-forward-word
 bindkey "\e[5D" backward-word
 bindkey "\eOd" emacs-backward-word
 bindkey "\e\e[C" forward-word
 bindkey "\e\e[D" backward-word
-# For rxvt
-bindkey "\e[8~" end-of-line
-bindkey "\e[7~" beginning-of-line
-# For non RH/Debian xterm, can't hurt for RH/Debian xterm
+bindkey "\e[Z" reverse-menu-complete # Shift+Tab
+# for rxvt
+bindkey "\e[7~" beginning-of-line # Home
+bindkey "\e[8~" end-of-line # End
+# for non RH/Debian xterm, can't hurt for RH/Debian xterm
 bindkey "\eOH" beginning-of-line
 bindkey "\eOF" end-of-line
-# For freebsd console
+# for freebsd console
 bindkey "\e[H" beginning-of-line
 bindkey "\e[F" end-of-line
+# for guake
+bindkey "\eOF" end-of-line
+bindkey "\eOH" beginning-of-line
+bindkey "^[[1;5D" backward-word
+bindkey "^[[1;5C" forward-word
+bindkey "\e[3~" delete-char # Del
 
 precmd () {
   # If z <https://github.com/rupa/z> is available, make sure it captures the current directory
@@ -82,7 +90,7 @@ parse_git_branch() {
   (git symbolic-ref -q HEAD || git name-rev --name-only --no-undefined --always HEAD) 2> /dev/null
 }
 
-# Show different symbols as appropriate for untracked/stage/merging states
+# Show different symbols as appropriate for various git repository states
 parse_git_state() {
 
   local GIT_STATE=""
@@ -120,7 +128,7 @@ parse_git_state() {
 
 }
 
-# If in a git repo, show its state and branch
+# If inside a git repository, show its state and branch
 git_custom_status() {
   local git_where="$(parse_git_branch)"
   [ -n "$git_where" ] && echo "%{$fg[blue]%}±$(parse_git_state)$GIT_PROMPT_PREFIX%{$fg[yellow]%}${git_where#(refs/heads/|tags/)}$GIT_PROMPT_SUFFIX"
@@ -179,7 +187,7 @@ update() {
 }
 
 # Pushes local SSH public key to another box
-# Found at https://github.com/rtomayko/dotfiles/blob/rtomayko/.bashrc
+# Found at <https://github.com/rtomayko/dotfiles/blob/rtomayko/.bashrc>
 push_ssh_cert() {
     local _host
     test -f ~/.ssh/id_dsa.pub || ssh-keygen -t dsa
@@ -191,7 +199,7 @@ push_ssh_cert() {
 }
 
 # Extracts archives
-# Found at http://pastebin.com/CTra4QTF
+# Found at <http://pastebin.com/CTra4QTF>
 function extract() {
    case $@ in
        *.tar.bz2) tar -xvjf "$@"  ;;
@@ -213,7 +221,7 @@ function extract() {
 }
 
 # Packs $2-$n into $1 depending on $1's extension
-# Found at http://pastebin.com/CTra4QTF
+# Found at <http://pastebin.com/CTra4QTF>
 function compress() {
    if [ $# -lt 2 ] ; then
       echo -e "\n$0() usage:"
@@ -239,7 +247,7 @@ function psgrep() {
 }
 
 # mkdir and cd into it - supports hierarchies and spaces
-# Found at http://onethingwell.org/post/586977440/mkcd-improved
+# Found at <http://onethingwell.org/post/586977440/mkcd-improved>
 function mkcd () {
   mkdir -p "$*"
   cd "$*"
@@ -248,7 +256,7 @@ function mkcd () {
 # *** ALIASES ***
 
 # Awesome platform-independent ls formatting
-# Originally found at http://www.reddit.com/r/linux/comments/hejra/til_nifty_ls_option_for_displaying_directories/c1utfxb
+# Adapted from code found at <http://www.reddit.com/r/linux/comments/hejra/til_nifty_ls_option_for_displaying_directories/c1utfxb>
 GLS_ARGS="--classify --tabsize=0 --literal --color=auto --show-control-chars --human-readable --group-directories-first"
 alias ls="ls $GLS_ARGS"
 ls &> /dev/null
@@ -291,9 +299,13 @@ if command_exists most; then
   export PAGER=most
 fi
 
-# LSCOLORS - Default except for normal directories (first character) to replace hard-to-read blue.
-# For details, see manpage for ls.
+# LSCOLORS - Default except for normal directories (first character) to replace hard-to-read blue
+# For details, see manpage for ls
 export LSCOLORS=Gxfxcxdxbxegedabagacad
+
+# Clear out and reset PATH in case .zshrc is sourced multiple times in one session (while making changes)
+export PATH=
+. /etc/profile
 
 # If we're on OS X and using Homebrew package manager, add Homebrew binary directory to PATH
 if command_exists brew; then
@@ -306,7 +318,7 @@ if command_exists brew; then
 fi
 
 # Initialize the "personal bin"
-. ~/.bin/bin_init.zsh
+test -r ~/.bin/bin_init.zsh && . ~/.bin/bin_init.zsh
 
 # Include any machine-specific configuration if it exists
 test -r ~/.localrc && . ~/.localrc
