@@ -85,7 +85,7 @@ parse_git_branch() {
 parse_git_state() {
   local GIT_STATE=""
 
-  if [[ -n $(git cherry) ]]; then
+  if [[ -n $(git cherry 2> /dev/null) ]]; then
     GIT_STATE=$GIT_STATE$GIT_PROMPT_UNPUSHED
   fi
 
