@@ -7,7 +7,7 @@
 HISTFILE=~/.zsh_history
 HISTSIZE=1000
 SAVEHIST=1000
-setopt autocd beep extendedglob nomatch prompt_subst correct
+setopt autocd beep nomatch prompt_subst correct
 unsetopt notify
 bindkey -e #-v
 zstyle :compinstall filename "$HOME/.zshrc"
