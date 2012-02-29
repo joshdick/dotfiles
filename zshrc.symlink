@@ -1,6 +1,21 @@
-#!/bin/zsh
-# zshrc for Josh Dick <http://joshdick.net>
-# As far as I know, pretty much everything besides the stuff in the "ZSH-SPECIFIC SETTINGS" section should work in bash as well.
+# .zshrc for Josh Dick <http://joshdick.net>
+# Pretty much everything besides the stuff in the "ZSH-SPECIFIC SETTINGS" and "PROMPT FORMATTING" sections should work in bash as well.
+
+# *** MISC ***
+
+# When connecting via ssh, always [re]attach to a terminal manager
+# Adapted from code found at <http://involution.com/2004/11/17/1-32/> (now offline)
+if [ -f /usr/bin/tmux ] && [ -z $TMUX ]; then
+  if [ "$SSH_TTY" != "" -a "$TERM" -a "$TERM" != "screen" -a "$TERM" != "dumb" ]; then
+    pgrep tmux
+    # $? is the exit code of pgrep; 0 means there was a result (tmux is already running)
+    if [ $? -eq 0 ]; then
+      tmux -u attach -d
+    else
+      tmux -u
+    fi
+  fi
+fi
 
 # *** ZSH-SPECIFIC SETTINGS ***
 
@@ -9,7 +24,7 @@ HISTSIZE=1000
 SAVEHIST=1000
 setopt autocd beep nomatch prompt_subst correct
 unsetopt notify
-bindkey -e #-v
+bindkey -v # Enable Vi keybindings
 zstyle :compinstall filename "$HOME/.zshrc"
 autoload -Uz compinit && compinit
 autoload -U colors && colors # Enable colors in prompt
@@ -51,22 +66,6 @@ precmd () {
     _z --add "$(pwd -P)"
   fi
 }
-
-# *** MISC ***
-
-# When connecting via ssh, always [re]attach to a terminal manager
-# Found at http://involution.com/2004/11/17/1-32/
-if [ -f /usr/bin/tmux ] && [ -z $TMUX ]; then
-  if [ "$SSH_TTY" != "" -a "$TERM" -a "$TERM" != "screen" -a "$TERM" != "dumb" ]; then
-    pgrep tmux
-    # $? is the exit code of pgrep; 0 means there was a result (tmux is already running)
-    if [ $? -eq 0 ]; then
-      tmux -u attach -d
-    else
-      tmux -u
-    fi
-  fi
-fi
 
 # *** PROMPT FORMATTING ***
 
@@ -170,13 +169,16 @@ update() {
     sudo pacman -Syu
   fi
 
-  # If th the home directory was symlinked out of a Git repo, update all submodules.
-  if command_exists git && test -r ~/.dotfiles/.git; then
-    echo "Updating git submodules..."
+  # If the the home directory was symlinked out of a Git repo, update it and all submodules
+  if command_exists git; then
+    local DOTFILES_REPO_LOCATION=${$(readlink ~/.zshrc)%/*.*}
     pushd -q
-    cd ~/.dotfiles
-    # Found at http://stackoverflow.com/questions/1030169/git-easy-way-pull-latest-of-all-submodules
-    git submodule foreach 'git checkout master &> /dev/null; git checkout . &> /dev/null; git fetch origin && git merge origin/master'
+    cd $DOTFILES_REPO_LOCATION
+    echo "Updating dotfiles..."
+    git pull
+    echo "Updating git submodules..."
+    # Adapted from code found at <http://stackoverflow.com/questions/1030169/git-easy-way-pull-latest-of-all-submodules>
+    git submodule foreach 'git checkout master &> /dev/null; git checkout . &> /dev/null; git pull origin master'
     popd -q
   fi
 
@@ -201,43 +203,42 @@ push_ssh_cert() {
 # Extracts archives
 # Found at <http://pastebin.com/CTra4QTF>
 function extract() {
-   case $@ in
-       *.tar.bz2) tar -xvjf "$@"  ;;
-       *.tar.gz)  tar -xvzf "$@"  ;;
-       *.bz2)     bunzip2 "$@"  ;;
-       *.rar)     unrar x "$@"  ;;
-       *.gz)      gunzip "$@" ;;
-       *.tar)     tar xf "$@" ;;
-       *.tbz2)    tar -xvjf "$@"  ;;
-       *.tgz)     tar -xvzf "$@"  ;;
-       *.zip)     unzip "$@"    ;;
-       *.xpi)     unzip "$@"    ;;
-       *.Z)       uncompress "$@" ;;
-       *.7z)      7z x "$@" ;;
-       *.ace)     unace e "$@"  ;;
-       *.arj)     arj -y e "$@" ;;
-       *)         echo "'$@' cannot be extracted via $0()" ;;
-   esac
+  case $@ in
+    *.tar.bz2) tar -xvjf "$@"  ;;
+    *.tar.gz)  tar -xvzf "$@"  ;;
+    *.bz2)     bunzip2 "$@"  ;;
+    *.rar)     unrar x "$@"  ;;
+    *.gz)      gunzip "$@" ;;
+    *.tar)     tar xf "$@" ;;
+    *.tbz2)    tar -xvjf "$@"  ;;
+    *.tgz)     tar -xvzf "$@"  ;;
+    *.zip)     unzip "$@"    ;;
+    *.xpi)     unzip "$@"    ;;
+    *.Z)       uncompress "$@" ;;
+    *.7z)      7z x "$@" ;;
+    *.ace)     unace e "$@"  ;;
+    *.arj)     arj -y e "$@" ;;
+    *)         echo "'$@' cannot be extracted via $0()" ;;
+  esac
 }
 
 # Packs $2-$n into $1 depending on $1's extension
 # Found at <http://pastebin.com/CTra4QTF>
 function compress() {
-   if [ $# -lt 2 ] ; then
-      echo -e "\n$0() usage:"
-      echo -e "\t$0 archive_file_name file1 file2 ... fileN"
-      echo -e "\tcreates archive of files 1-N\n"
-   else
-     DEST=$1
-     shift
-
-     case $DEST in
-       *.tar.bz2) tar -cvjf $DEST "$@" ;;
-       *.tar.gz)  tar -cvzf $DEST "$@" ;;
-       *.zip)     zip -r $DEST "$@" ;;
-       *)         echo "Unknown file type - $DEST" ;;
-     esac
-   fi
+  if [ $# -lt 2 ] ; then
+    echo -e "\n$0() usage:"
+    echo -e "\t$0 archive_file_name file1 file2 ... fileN"
+    echo -e "\tcreates archive of files 1-N\n"
+  else
+    DEST=$1
+    shift
+    case $DEST in
+      *.tar.bz2) tar -cvjf $DEST "$@" ;;
+      *.tar.gz)  tar -cvzf $DEST "$@" ;;
+      *.zip)     zip -r $DEST "$@" ;;
+      *)         echo "Unknown file type - $DEST" ;;
+    esac
+  fi
 }
 
 # Poor-man's pgrep, for use on OS X where pgrep isn't available
