@@ -103,7 +103,7 @@ cmap w!! %!sudo tee > /dev/null %
 set listchars=tab:▸\ ,eol:¬
 
 "Function to run arbitrary commands while preserving state.
-"Found here: http://technotales.wordpress.com/2010/03/31/preserve-a-vim-function-that-keeps-your-state/
+"Found at <http://technotales.wordpress.com/2010/03/31/preserve-a-vim-function-that-keeps-your-state/>
 function! Preserve(command)
   "Preparation: save last search, and cursor position.
   let _s=@/
@@ -118,11 +118,24 @@ endfunction
 
 "NOTE - By default, <leader> is backslash.
 
+"Shortcuts for opening new splits.
+"Found at <http://technotales.wordpress.com/2010/04/29/vim-splits-a-guide-to-doing-exactly-what-you-want/>
+"Window
+nmap <leader>sw<left>  :topleft  vnew<CR>
+nmap <leader>sw<right> :botright vnew<CR>
+nmap <leader>sw<up>    :topleft  new<CR>
+nmap <leader>sw<down>  :botright new<CR>
+"Buffer
+nmap <leader>s<left>   :leftabove  vnew<CR>
+nmap <leader>s<right>  :rightbelow vnew<CR>
+nmap <leader>s<up>     :leftabove  new<CR>
+nmap <leader>s<down>   :rightbelow new<CR>
+
 "Shortcut to toggle NERDTree
 nmap <leader>e :NERDTreeToggle<CR>
 
 "Shorcut to toggle search hilighting
-"Found here: http://vim.wikia.com/wiki/Highlight_all_search_pattern_matches
+"Found at <http://vim.wikia.com/wiki/Highlight_all_search_pattern_matches>
 noremap <leader>h :set hlsearch! hlsearch?<CR>
 
 "Shortcut to toggle 'set list' (toggles invisible characters)
@@ -132,7 +145,7 @@ nmap <leader>l :set list!<CR>
 nmap <leader>n :set number! number?<CR>
 
 "Shortcut to toggle auto-indenting for code paste
-"Found here: http://vim.wikia.com/wiki/Toggle_auto-indenting_for_code_paste
+"Found at <http://vim.wikia.com/wiki/Toggle_auto-indenting_for_code_paste>
 nnoremap <leader>p :set invpaste paste?<CR>
 set pastetoggle=<leader>p
 set showmode
