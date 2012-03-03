@@ -170,7 +170,7 @@ update() {
   fi
 
   # If the the home directory was symlinked out of a Git repo, update it and all submodules
-  if command_exists git; then
+  if test -h ~/.zshrc && command_exists git; then
     local DOTFILES_REPO_LOCATION=${$(readlink ~/.zshrc)%/*.*}
     pushd -q
     cd $DOTFILES_REPO_LOCATION
