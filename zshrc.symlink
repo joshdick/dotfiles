@@ -24,12 +24,20 @@ HISTSIZE=1000
 SAVEHIST=1000
 setopt autocd beep nomatch prompt_subst correct
 unsetopt notify
-bindkey -v # Enable Vi keybindings...
-# ...but make alt-. work again. Found in the thread staring at <http://www.zsh.org/mla/users/2004/msg01157.html>
-bindkey -M viins '\e.' insert-last-word
 zstyle :compinstall filename "$HOME/.zshrc"
 autoload -Uz compinit && compinit
 autoload -U colors && colors # Enable colors in prompt
+
+# Enable Vi keybindings...
+bindkey -v
+# ...but make alt-. work again. Found in the thread staring at <http://www.zsh.org/mla/users/2004/msg01157.html>
+bindkey -M viins '\e.' insert-last-word
+
+# Whle in insert mode, make alt-e trigger an external editor
+# More info the thread starting at <http://www.zsh.org/mla/users/2005/msg01301.html>
+autoload edit-command-line
+zle -N edit-command-line
+bindkey -M viins '\ee' edit-command-line
 
 # Make control keys work properly in various terminal emulators
 # Found at <https://wiki.archlinux.org/index.php/Zsh>
