@@ -287,7 +287,12 @@ alias search='find . -name'
 alias scpresume='rsync --partial --progress --rsh=ssh'
 alias servedir='python -m SimpleHTTPServer $1'
 alias mirror='wget -H -r --level=1 -k -p $1'
+
 alias g='git'
+alias gs='git status'
+alias gd='git diff'
+alias gc='git commit'
+alias gclean='find . -name ".git" -type d -exec echo "Cleaning {}..." ; -exec git --git-dir="{}" gc --aggressive --quiet \;'
 
 # *** ENVIRONMENT ***
 
