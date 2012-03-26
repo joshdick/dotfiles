@@ -1,9 +1,9 @@
 [submodule "vim.symlink/vundle"]
 	path = vim.symlink/vundle
-	url = https://github.com/gmarik/vundle.git
+	url = https://github.com/gmarik/vundle
 [submodule "bin.symlink/z"]
 	path = bin.symlink/z
-	url = https://github.com/rupa/z.git
+	url = https://github.com/rupa/z
 [submodule "bin.symlink/resty"]
 	path = bin.symlink/resty
 	url = https://github.com/micha/resty
@@ -15,7 +15,7 @@
 	url = https://github.com/zsh-users/zsh-syntax-highlighting
 [submodule "bin.symlink/git-dude"]
 	path = bin.symlink/git-dude
-	url = https://github.com/sickill/git-dude.git
+	url = https://github.com/sickill/git-dude
 [submodule "bin.symlink/todo.txt-cli"]
 	path = bin.symlink/todo.txt-cli
 	url = https://github.com/ginatrapani/todo.txt-cli
@@ -24,4 +24,4 @@
 	url = https://github.com/joshdick/git-cr
 [submodule "bin.symlink/pytograph"]
 	path = bin.symlink/pytograph
-	url = git@github.com:joshdick/pytograph.git
+	url = https://github.com/joshdick/pytograph
