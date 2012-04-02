@@ -116,6 +116,15 @@ function! Preserve(command)
   call cursor(l, c)
 endfunction
 
+"Convert mixed line endings to LF-only (Unix.)
+"Found at <http://vim.wikia.com/wiki/File_format>
+function! ForceLF()
+  :update
+  :e ++ff=dos
+  :setlocal ff=unix
+  :w
+endfunction
+
 "NOTE - By default, <leader> is backslash.
 
 "Shortcuts for opening new splits.
@@ -158,3 +167,6 @@ nmap <silent> <leader>$ :call Preserve("%s/\\s\\+$//e")<CR>
 
 "Shortcut to auto-indent entire file
 nmap <silent> <leader>= :call Preserve("normal gg=G")<CR>
+
+"Shortcut to convert mixed line endings to LF-only (Unix)
+nmap <leader>d :call ForceLF()<CR>
