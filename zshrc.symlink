@@ -289,9 +289,15 @@ alias servedir='python -m SimpleHTTPServer $1'
 alias mirror='wget -H -r --level=1 -k -p $1'
 
 alias g='git'
-alias gs='git status'
-alias gd='git diff'
 alias gc='git commit'
+alias gco='git checkout'
+alias gd='git diff'
+alias gdc='git diff --cached'
+alias gl='git log'
+alias glo='git log --oneline'
+alias gm='git merge'
+alias gmf='git merge --ff'
+alias gs='git status'
 alias gclean='find . -name ".git" -type d -exec echo "Cleaning {}..." ; -exec git --git-dir="{}" gc --aggressive --quiet \;'
 
 # *** ENVIRONMENT ***
@@ -332,6 +338,9 @@ if command_exists brew; then
   GIT_BASH_COMPLETION=`brew --prefix`/etc/bash_completion.d/git-completion.bash
   test -r $GIT_BASH_COMPLETEION && . $GIT_BASH_COMPLETION
 fi
+
+# Initialize RVM if it's installed
+[[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
 
 # Initialize the "personal bin"
 test -r ~/.bin/bin_init.zsh && . ~/.bin/bin_init.zsh
