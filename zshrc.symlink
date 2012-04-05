@@ -199,15 +199,24 @@ update() {
 }
 
 # Pushes local SSH public key to another box
-# Found at <https://github.com/rtomayko/dotfiles/blob/rtomayko/.bashrc>
+# Adapted from code found at <https://github.com/rtomayko/dotfiles/blob/rtomayko/.bashrc>
 push_ssh_cert() {
-    local _host
+    if [[ $# -eq 0 || $# -gt 3 ]]; then
+      echo "Usage: push_ssh_cert host [port] [username]"
+      return
+    fi
+    local _host=$1
+    local _port=22
+    local _user=$USER
+    if [[ $# -ge 2 ]]; then
+      _port=$2
+    fi
+    if [[ $# -eq 3 ]]; then
+      _user=$3
+    fi
     test -f ~/.ssh/id_dsa.pub || ssh-keygen -t dsa
-    for _host in "$@";
-    do
-        echo $_host
-        ssh $_host 'mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys' < ~/.ssh/id_dsa.pub
-    done
+    echo "Pushing public key to $_user@$_host:$_port..."
+    ssh -p $_port $_user@$_host 'mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys' < ~/.ssh/id_dsa.pub
 }
 
 # Extracts archives
