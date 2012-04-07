@@ -216,7 +216,7 @@ push_ssh_cert() {
     fi
     test -f ~/.ssh/id_dsa.pub || ssh-keygen -t dsa
     echo "Pushing public key to $_user@$_host:$_port..."
-    ssh -p $_port $_user@$_host 'mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys' < ~/.ssh/id_dsa.pub
+    ssh -p $_port $_user@$_host 'mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys' < ~/.ssh/id_*sa.pub
 }
 
 # Extracts archives
