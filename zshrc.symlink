@@ -351,7 +351,11 @@ if command_exists brew; then
   # While we're here, set up completion for Git if it's available via the Homebrew bash-completion package.
   # ZSH's built-in Git completion doesn't complete filenames for some reason, so use bash's instead.
   GIT_BASH_COMPLETION=`brew --prefix`/etc/bash_completion.d/git-completion.bash
-  test -r $GIT_BASH_COMPLETEION && . $GIT_BASH_COMPLETION
+  test -r $GIT_BASH_COMPLETION && . $GIT_BASH_COMPLETION
+
+  # If Python 2 was installed via Homebrew, add it to PATH
+  PYTHON2_DIR="/usr/local/share/python"
+  test -d $PYTHON2_DIR && export PATH=$PYTHON2_DIR:$PATH
 fi
 
 # Initialize RVM if it's installed
