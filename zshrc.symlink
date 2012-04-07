@@ -268,9 +268,15 @@ function psgrep() {
 
 # mkdir and cd into it - supports hierarchies and spaces
 # Found at <http://onethingwell.org/post/586977440/mkcd-improved>
-function mkcd () {
+function mkcd() {
   mkdir -p "$*"
   cd "$*"
+}
+
+# Show uesful information about domain names using dig.
+# Found at <https://github.com/mathiasbynens/dotfiles/blob/master/.functions>
+function digit() {
+  dig +nocmd "$1" any +multiline +noall +answer
 }
 
 # *** ALIASES ***
