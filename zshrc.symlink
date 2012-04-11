@@ -326,6 +326,9 @@ else
   export VISUAL=nano
 fi
 
+# Prevent Git from prompting for merge commit messages (as of Git 1.7.10)
+export GIT_MERGE_AUTOEDIT=no
+
 # Emulate pgrep if we're on OS X
 if ! command_exists pgrep; then
   alias pgrep=psgrep
