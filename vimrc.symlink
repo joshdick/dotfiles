@@ -47,6 +47,7 @@ if has("gui") "Instead of gui_running, in case :gui is run manually on *NIX
     set keymodel-=stopsel "Make Visual mode work as expected when mswin.vim is sourced
   endif
   set guioptions=egmrt "Hide toolbar by default in MacVim
+  "Found at <http://support.markedapp.com/kb/how-to-tips-and-tricks/marked-bonus-pack-scripts-commands-and-bundles>
   :nnoremap <leader>m :silent !open -a Marked.app '%:p'<cr> "Bind a shortcut for opening the current document in Marked.app on Mac OS X
   if has("transparency") "Background transparency is a MacVim-specific feature, so prevent errors in other vims
     set transparency=5 "Enable background transparency in MacVim
