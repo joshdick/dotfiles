@@ -16,6 +16,13 @@ unbind '"'
 bind - split-window -v
 bind v split-window -v
 
+# [b]reak-out and [j]oin panes ('maximize' and 'minimize')
+# Found at <https://github.com/dallarosa/dotfiles/blob/master/tmux.conf>
+unbind b
+bind b new-window -d -n tmp \; swap-pane -s tmp.0 \; select-window -t tmp
+unbind j
+bind j last-window \; swap-pane -s tmp.0 \; kill-window -t tmp
+
 # Hilight the active window in the status bar
 setw -g window-status-current-fg yellow
 
