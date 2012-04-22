@@ -4,7 +4,7 @@
 # <https://github.com/joshdick/dotfiles>
 
 # Uncomment the following line to delete all symlinks at the root of $HOME - useful for reinstalls
-# find "$HOME" -maxdepth 1 -lname '*' -exec rm {} \;
+# find "$HOME" -maxdepth 1 -type l -exec rm -f {} \;
 
 SELF_PATH="$( cd "$( dirname "$0" )" && pwd )" # Path to the directory containing this script
 
