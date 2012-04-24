@@ -25,3 +25,6 @@
 [submodule "bin.symlink/pytograph"]
 	path = bin.symlink/pytograph
 	url = https://github.com/joshdick/pytograph
+[submodule "bin.symlink/spot-program"]
+	path = bin.symlink/spot-program
+	url = https://github.com/guille/spot
