@@ -1,11 +1,11 @@
 "Vundle plugin and bundle initialization
 set rtp+=~/.vim/vundle/
 call vundle#rc()
-"Git URL bundles
-Bundle 'git://git.wincent.com/command-t.git'
 "Github Bundles
 Bundle 'corntrace/bufexplorer'
 Bundle 'ervandew/supertab'
+Bundle 'mileszs/ack.vim'
+Bundle 'kien/ctrlp.vim'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/nerdtree'
 Bundle 'sjl/gundo.vim'
