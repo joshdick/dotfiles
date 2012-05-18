@@ -15,4 +15,5 @@
 	default = upstream
 [alias]
   mrc = !git --no-pager log --after='1 day ago' --pretty=oneline --author='Josh Dick'
-	lg = log --graph --pretty=format:'%Cred%h%Creset-%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+  lg = log --graph --pretty=format:'%Cred%h%Creset-%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+  showtool = !git difftool $1^!
