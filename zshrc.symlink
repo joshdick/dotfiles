@@ -154,6 +154,12 @@ command_exists() {
   hash "$1" &> /dev/null
 }
 
+# Search for files by name
+# Case-insensitive and allows partial search
+search() {
+  find . -iname "*$1*"
+}
+
 # To search for a given string inside every file with the given filename
 # (wildcards allowed) in the current directory, recursively:
 #   $ searchin filename pattern
@@ -298,7 +304,6 @@ fi
 alias lsd='ls -lah | grep "^d"'
 alias grep='grep --color'
 alias hgrep='history 1 | grep $1'
-alias search='find . -name'
 alias scpresume='rsync --partial --progress --rsh=ssh'
 alias servedir='python -m SimpleHTTPServer $1'
 alias mirror='wget -H -r --level=1 -k -p $1'
