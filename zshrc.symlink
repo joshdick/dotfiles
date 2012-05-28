@@ -361,6 +361,10 @@ if command_exists brew; then
   test -d $PYTHON2_DIR && export PATH=$PYTHON2_DIR:$PATH
 fi
 
+# If npm's global node_modules directory exists in the expected location, set NODE_PATH accordingly
+NODE_MODULE_PATH="/usr/local/lib/node_modules"
+test -d $NODE_MODULE_PATH && export NODE_PATH=$NODE_MODULE_PATH
+
 # Initialize RVM if it's installed
 [[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
 
