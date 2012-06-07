@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+
+# Originally found at https://gist.github.com/892979
+# Git command to list merged (or unmerged with -u) branches
+
+show_unmerged = ARGV[0] == '-u'
+branches = `git branch -r`.split("\n")
+
+branches.each do |branch|
+  is_merged = `git branch --contains #{branch}` =~ /master/
+  puts branch if show_unmerged ^ is_merged
+end
