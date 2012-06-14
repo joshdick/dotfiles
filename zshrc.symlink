@@ -318,7 +318,7 @@ alias glo='git log --oneline'
 alias gm='git merge'
 alias gmf='git merge --ff'
 alias gs='git status'
-alias gclean='find . -name ".git" -type d -exec echo "Cleaning {}..." ; -exec git --git-dir="{}" gc --aggressive --quiet \;'
+alias gclean='find . -name ".git" -type d -exec echo "Cleaning {}..." \; -exec git --git-dir="{}" gc --aggressive --quiet \;'
 
 # *** ENVIRONMENT ***
 
