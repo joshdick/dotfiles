@@ -2,10 +2,11 @@
 set rtp+=~/.vim/vundle/
 call vundle#rc()
 "Github Bundles
+Bundle 'benmills/vimux'
 Bundle 'corntrace/bufexplorer'
 Bundle 'ervandew/supertab'
-Bundle 'mileszs/ack.vim'
 Bundle 'kien/ctrlp.vim'
+Bundle 'mileszs/ack.vim'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/nerdtree'
 Bundle 'sjl/gundo.vim'
@@ -128,6 +129,27 @@ function! ForceLF()
 endfunction
 
 "NOTE - By default, <leader> is backslash.
+
+"vimux shortcuts.
+"Found at <https://raw.github.com/benmills/vimux/master/doc/vimux.txt>
+
+"Prompt for a command to run
+map <Leader>rp :VimuxPromptCommand<CR>
+
+"Run last command executed by VimuxRunCommand
+map <Leader>rl :VimuxRunLastCommand<CR>
+
+"Inspect runner pane
+map <Leader>ri :VimuxInspectRunner<CR>
+
+"Close all other tmux panes in current window
+map <Leader>rx :VimuxClosePanes<CR>
+
+"Close vim tmux runner opened by VimuxRunCommand
+map <Leader>rq :VimuxCloseRunner<CR>
+
+"Interrupt any command running in the runner pane
+map <Leader>rs :VimuxInterruptRunner<CR>
 
 "Shortcuts for opening new splits.
 "Found at <http://technotales.wordpress.com/2010/04/29/vim-splits-a-guide-to-doing-exactly-what-you-want/>
