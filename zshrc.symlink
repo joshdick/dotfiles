@@ -279,10 +279,21 @@ function mkcd() {
   cd "$*"
 }
 
-# Show uesful information about domain names using dig.
+# Show useful information about domain names using dig.
 # Found at <https://github.com/mathiasbynens/dotfiles/blob/master/.functions>
 function digit() {
   dig +nocmd "$1" any +multiline +noall +answer
+}
+
+# Retrieve dictionary definitions of words.
+# Adapted from code found at <http://onethingwell.org/post/25644890287/a-shell-function-to-define-words>
+function define() {
+  if [[ $# -ge 2 ]] then
+    echo "$0: too many arguments" >&2
+    return 1
+  else
+    curl "dict://dict.org/d:$1"
+  fi
 }
 
 # *** ALIASES ***
