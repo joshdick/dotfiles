@@ -58,7 +58,7 @@ endif
 "Disable splash screen/[I]ntro message
 set shortmess+=I
 
-colorscheme wombat256
+colorscheme Tomorrow-Night
 set number
 set nobackup
 set nowritebackup
