@@ -35,15 +35,16 @@ Bundle 'tpope/vim-vividchalk'
 
 if has("gui") "Instead of gui_running, in case :gui is run manually on *NIX
   set columns=90 lines=45
-  "Set the font based on OS.
+
+  "Font settings
+  set guifont=Ubuntu\ Mono:h15
+  "set noantialias
+  set antialias
+
+  "OS-specific settings.
   if has("unix")
-    "set guifont=Terminus:h13
-    set guifont=Monaco:h10
     set linespace=-1
-    set noantialias
   else
-    "set guifont=Tamsyn7x14
-    set guifont=Terminus:h12
     source $VIMRUNTIME/mswin.vim "Enable expected keyboard shortcuts for Windows - see :help :behave
     set keymodel-=stopsel "Make Visual mode work as expected when mswin.vim is sourced
   endif
