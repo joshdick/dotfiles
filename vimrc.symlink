@@ -38,7 +38,7 @@ if has("gui") "Instead of gui_running, in case :gui is run manually on *NIX
   set columns=90 lines=45
 
   "Font settings
-  set guifont=Ubuntu\ Mono:h15
+  set guifont=Ubuntu\ Mono\ for\ Powerline:h15
   "set noantialias
   set antialias
 
@@ -84,12 +84,14 @@ filetype indent on "Enable automatic indentation based on detected filetype
 syntax on
 
 "Statusline
-if exists("vimpager")
-  set statusline=%<%F%h%m%r%h%w%y\ %{&ff}\ %{strftime(\"%c\",getftime(expand(\"%:p\")))}\ %=\ lin:%l\/%L\ col:%c%V\ %P
-else
-  set statusline=%<%F%h%m%r%h%w%y\ %{&ff}\ %{strftime(\"%c\",getftime(expand(\"%:p\")))}\ %{fugitive#statusline()}\ %=\ lin:%l\/%L\ col:%c%V\ %P
-endif
+"Commented out; replaced by vim-powerline
+"if exists("vimpager")
+"  set statusline=%<%F%h%m%r%h%w%y\ %{&ff}\ %{strftime(\"%c\",getftime(expand(\"%:p\")))}\ %=\ lin:%l\/%L\ col:%c%V\ %P
+"else
+"  set statusline=%<%F%h%m%r%h%w%y\ %{&ff}\ %{strftime(\"%c\",getftime(expand(\"%:p\")))}\ %{fugitive#statusline()}\ %=\ lin:%l\/%L\ col:%c%V\ %P
+"endif
 set laststatus=2
+let g:Powerline_symbols = 'fancy'
 
 "Invisible (list) character colors
 "highlight NonText guifg=#555555 "EOL
