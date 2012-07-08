@@ -150,13 +150,13 @@ RPS1='$(git_custom_status)'
 
 # Test whether a given command exists
 # Adapted from http://stackoverflow.com/questions/592620/check-if-a-program-exists-from-a-bash-script/3931779#3931779
-command_exists() {
+function command_exists() {
   hash "$1" &> /dev/null
 }
 
 # Search for files by name
 # Case-insensitive and allows partial search
-search() {
+function search() {
   find . -iname "*$1*"
 }
 
@@ -166,7 +166,7 @@ search() {
 #
 # To search for a given string inside every file inside the current directory, recursively:
 #   $ searchin pattern
-searchin() {
+function searchin() {
   if [ -n "$2" ]; then
     find . -name "$1" -type f -exec grep -l "$2" {} \;
   else
@@ -174,8 +174,21 @@ searchin() {
   fi
 }
 
+# Serves the current directory over HTTP, on an optionally-specified port.
+# If on Mac OS X, opens in the default browser.
+function serve() {
+  port=$1
+  if [ $# -ne  1 ]; then
+    port=8000
+  fi
+  if command_exists open; then
+    open http://localhost:$port/
+  fi
+  python -m SimpleHTTPServer $port
+}
+
 # Performs a system update on Debian-based and Arch Linux systems, updates Homebrew packages on OS X, updates all Git submodules
-update() {
+function update() {
   if command_exists apt-get; then
     echo "Updating packages via apt-get..."
     sudo apt-get update
@@ -206,7 +219,7 @@ update() {
 
 # Pushes local SSH public key to another box
 # Adapted from code found at <https://github.com/rtomayko/dotfiles/blob/rtomayko/.bashrc>
-push_ssh_cert() {
+function push_ssh_cert() {
     if [[ $# -eq 0 || $# -gt 3 ]]; then
       echo "Usage: push_ssh_cert host [port] [username]"
       return
@@ -316,7 +329,6 @@ alias lsd='ls -lah | grep "^d"'
 alias grep='grep --color'
 alias hgrep='history 1 | grep $1'
 alias scpresume='rsync --partial --progress --rsh=ssh'
-alias servedir='python -m SimpleHTTPServer $1'
 alias mirror='wget -H -r --level=1 -k -p $1'
 
 alias g='git'
