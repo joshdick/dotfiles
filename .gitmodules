@@ -28,3 +28,6 @@
 [submodule "bin.symlink/spot-program"]
 	path = bin.symlink/spot-program
 	url = https://github.com/guille/spot
+[submodule "bin.symlink/formd"]
+	path = bin.symlink/formd
+	url = https://github.com/drbunsen/formd

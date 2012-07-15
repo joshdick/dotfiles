@@ -10,6 +10,9 @@ export PATH=$PATH:$PERSONAL_BIN
 # Set up resty <https://github.com/micha/resty>
 . $PERSONAL_BIN/resty/resty
 
+# set up formd
+export PATH=$PATH:$PERSONAL_BIN/formd
+
 # Set up git-dude <https://github.com/sickill/git-dude>
 export PATH=$PATH:$PERSONAL_BIN/git-dude
 
