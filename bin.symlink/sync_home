@@ -32,7 +32,9 @@ for host in "$@"; do
 + /.bin
 + /.bin/bin_init.zsh
 + /.bin/sync_home
-+ /.bin/init.zsh
++ /.bin/cronic
++ /.bin/formd
++ /.bin/formd/**
 + /.bin/gcr
 + /.bin/gcr/**
 + /.bin/resty
