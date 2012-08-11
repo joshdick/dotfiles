@@ -239,8 +239,7 @@ function update() {
 function sshicloud() {
   if [[ $# -eq 0 || $# -gt 2 ]]; then
     echo "Usage: $0 hostname [username]"
-  elif
-    ! command_exists scutil; then
+  elif ! command_exists scutil; then
     echo "$0 only works on Mac OS X! Aborting."
   else
     local _icloud_addr=`echo show Setup:/Network/BackToMyMac | scutil | sed -n 's/.* : *\(.*\).$/\1/p'`
