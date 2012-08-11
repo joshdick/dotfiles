@@ -156,8 +156,24 @@ function command_exists() {
 
 # Search for files by name
 # Case-insensitive and allows partial search
+# If on Mac OS X, will prompt to open the file if there is a single result
 function search() {
-  find . -iname "*$1*"
+  results=`find . -iname "*$1*"`
+  echo $results
+  if command_exists open; then
+    resultLength=`echo $results | wc -l |  sed -e "s/^[ \t]*//"`
+    if [ $resultLength -eq 1 ]; then
+      while true; do
+        echo "One result found! Open it? (y/n)?"
+        read yn
+        case $yn in
+          [Yy]* ) open $results; break;;
+          [Nn]* ) break;;
+          * ) echo "Please answer (Y/y)es or (N/n)o.";;
+        esac
+      done
+    fi
+  fi
 }
 
 # To search for a given string inside every file with the given filename
@@ -174,8 +190,8 @@ function searchin() {
   fi
 }
 
-# Serves the current directory over HTTP, on an optionally-specified port.
-# If on Mac OS X, opens in the default browser.
+# Serves the current directory over HTTP, on an optionally-specified port
+# If on Mac OS X, opens in the default browser
 function serve() {
   port=$1
   if [ $# -ne  1 ]; then
@@ -217,25 +233,44 @@ function update() {
   fi
 }
 
+# On Mac OS X, SSH to a computer by hostname via Back To My Mac (iCloud)
+# The client and target machines must both have Back To My Mac enabled
+# Adapted from code found at <http://onethingwell.org/post/27835796928/remote-ssh-bact-to-my-mac?6b3da608>
+function sshicloud() {
+  if [[ $# -eq 0 || $# -gt 2 ]]; then
+    echo "Usage: $0 hostname [username]"
+  elif
+    ! command_exists scutil; then
+    echo "$0 only works on Mac OS X! Aborting."
+  else
+    local _icloud_addr=`echo show Setup:/Network/BackToMyMac | scutil | sed -n 's/.* : *\(.*\).$/\1/p'`
+    local _username=`whoami`
+    if [[ $# -eq 2 ]]; then
+      _username=$2
+    fi
+    ssh $_username@$1.$_icloud_addr
+  fi
+}
+
 # Pushes local SSH public key to another box
 # Adapted from code found at <https://github.com/rtomayko/dotfiles/blob/rtomayko/.bashrc>
 function push_ssh_cert() {
-    if [[ $# -eq 0 || $# -gt 3 ]]; then
-      echo "Usage: push_ssh_cert host [port] [username]"
-      return
-    fi
-    local _host=$1
-    local _port=22
-    local _user=$USER
-    if [[ $# -ge 2 ]]; then
-      _port=$2
-    fi
-    if [[ $# -eq 3 ]]; then
-      _user=$3
-    fi
-    test -f ~/.ssh/id_dsa.pub || ssh-keygen -t dsa
-    echo "Pushing public key to $_user@$_host:$_port..."
-    ssh -p $_port $_user@$_host 'mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys' < ~/.ssh/id_*sa.pub
+  if [[ $# -eq 0 || $# -gt 3 ]]; then
+    echo "Usage: push_ssh_cert host [port] [username]"
+    return
+  fi
+  local _host=$1
+  local _port=22
+  local _user=$USER
+  if [[ $# -ge 2 ]]; then
+    _port=$2
+  fi
+  if [[ $# -eq 3 ]]; then
+    _user=$3
+  fi
+  test -f ~/.ssh/id_dsa.pub || ssh-keygen -t dsa
+  echo "Pushing public key to $_user@$_host:$_port..."
+  ssh -p $_port $_user@$_host 'mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys' < ~/.ssh/id_*sa.pub
 }
 
 # Extracts archives
