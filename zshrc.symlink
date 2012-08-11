@@ -235,7 +235,7 @@ function update() {
 
 # On Mac OS X, SSH to a computer by hostname via Back To My Mac (iCloud)
 # The client and target machines must both have Back To My Mac enabled
-# Adapted from code found at <http://onethingwell.org/post/27835796928/remote-ssh-bact-to-my-mac?6b3da608>
+# Adapted from code found at <http://onethingwell.org/post/27835796928/remote-ssh-bact-to-my-mac>
 function sshicloud() {
   if [[ $# -eq 0 || $# -gt 2 ]]; then
     echo "Usage: $0 hostname [username]"
