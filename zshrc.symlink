@@ -70,13 +70,6 @@ bindkey "^[[1;5D" backward-word
 bindkey "^[[1;5C" forward-word
 bindkey "\e[3~" delete-char # Del
 
-precmd () {
-  # If z <https://github.com/rupa/z> is available, make sure it captures the current directory
-  if `type _z &> /dev/null`; then
-    _z --add "$(pwd -P)"
-  fi
-}
-
 # *** PROMPT FORMATTING ***
 
 PS1="
