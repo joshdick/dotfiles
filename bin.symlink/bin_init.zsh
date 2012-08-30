@@ -27,3 +27,6 @@ source $PERSONAL_BIN/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Set up zsh-history-substring-search <https://github.com/zsh-users/zsh-history-substring-search>
 source $PERSONAL_BIN/zsh-history-substring-search/zsh-history-substring-search.zsh
+
+# Set up cdd <https://github.com/jestor/cdd>
+alias cdd="$PERSONAL_BIN/cdd/cdd.sh"

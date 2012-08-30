@@ -31,3 +31,6 @@
 [submodule "bin.symlink/formd"]
 	path = bin.symlink/formd
 	url = https://github.com/drbunsen/formd
+[submodule "bin.symlink/cdd"]
+	path = bin.symlink/cdd
+	url = https://github.com/jestor/cdd
