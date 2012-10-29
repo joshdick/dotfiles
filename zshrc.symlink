@@ -17,6 +17,11 @@ if [ -f /usr/bin/tmux ] && [ -z $TMUX ]; then
   fi
 fi
 
+# Clear out and reset PATH in case .zshrc is sourced multiple times in one session (while making changes)
+# Do this before anything else so that this file can override any default settings that may be in /etc/profile
+export PATH=
+. /etc/profile
+
 # *** ZSH-SPECIFIC SETTINGS ***
 
 HISTFILE=~/.zsh_history
@@ -397,10 +402,6 @@ fi
 # LSCOLORS - Default except for normal directories (first character) to replace hard-to-read blue
 # For details, see manpage for ls
 export LSCOLORS=Gxfxcxdxbxegedabagacad
-
-# Clear out and reset PATH in case .zshrc is sourced multiple times in one session (while making changes)
-export PATH=
-. /etc/profile
 
 # If we're on OS X and using Homebrew package manager, add Homebrew binary directory to PATH
 if command_exists brew; then
