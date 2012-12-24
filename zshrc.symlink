@@ -415,14 +415,19 @@ if command_exists brew; then
   # If Python 2 was installed via Homebrew, add it to PATH
   PYTHON2_DIR="/usr/local/share/python"
   test -d $PYTHON2_DIR && export PATH=$PYTHON2_DIR:$PATH
+
+  BREW_NPM_BINARY_DIR="/usr/local/share/npm/bin"
+  test -d $BREW_NPM_BINARY_DIR && export PATH=$BREW_NPM_BINARY_DIR:$PATH
 fi
 
 # If npm's global node_modules directory exists in the expected location, set NODE_PATH accordingly
-NODE_MODULE_PATH="/usr/local/lib/node_modules"
-test -d $NODE_MODULE_PATH && export NODE_PATH=$NODE_MODULE_PATH
+NODE_MODULE_DIR="/usr/local/lib/node_modules"
+test -d $NODE_MODULE_DIR && export NODE_PATH=$NODE_MODULE_DIR
 
 # Initialize RVM if it's installed
 [[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
+RVM_BIN_DIR="$HOME/.rvm/bin"
+test -d $RVM_BIN_DIR && export PATH=$RVM_BIN_DIR:$PATH
 
 # Initialize the "personal bin"
 test -r ~/.bin/bin_init.zsh && . ~/.bin/bin_init.zsh
