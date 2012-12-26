@@ -317,6 +317,13 @@ function psgrep() {
   ps ax | awk "/(^|[^)])$1/ { print \$1 }"
 }
 
+# Shows how long processes have been up.
+# No arguments shows all processes, one argument greps for a particular process.
+# Found at <http://hints.macworld.com/article.php?story=20121127064752309>
+function psup() {
+  ps acxo etime,command | grep -- "$1"
+}
+
 # mkdir and cd into it - supports hierarchies and spaces
 # Found at <http://onethingwell.org/post/586977440/mkcd-improved>
 function mkcd() {
