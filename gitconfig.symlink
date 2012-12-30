@@ -4,9 +4,9 @@
 [color]
 	ui = auto
 [merge]
-	tool = kdiff3
+	tool = Kaleidoscope
 [diff]
-	tool = kdiff3
+	tool = Kaleidoscope
 [difftool]
 	prompt = false
 [help]
@@ -17,3 +17,10 @@
   mrc = !git --no-pager log --after='1 day ago' --pretty=oneline --author='Josh Dick'
   lg = log --graph --pretty=format:'%Cred%h%Creset-%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
   showtool = !git difftool $1^!
+[difftool "Kaleidoscope"]
+	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+[mergetool "Kaleidoscope"]
+	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+	trustExitCode = true
+[mergetool]
+	prompt = false
