@@ -36,4 +36,4 @@
 	url = https://github.com/jestor/cdd
 [submodule "bin.symlink/git_prompt"]
 	path = bin.symlink/git_prompt
-	url = git@gist.github.com:4415470.git
+	url = https://gist.github.com/4415470.git
