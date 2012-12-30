@@ -4,6 +4,9 @@ PERSONAL_BIN=~/.bin
 # Add the personal bin to PATH
 export PATH=$PATH:$PERSONAL_BIN
 
+# Set up git prompt
+. $PERSONAL_BIN/git_prompt/git_prompt.zsh
+
 # Set up z <https://github.com/rupa/z>
 . $PERSONAL_BIN/z/z.sh
 
