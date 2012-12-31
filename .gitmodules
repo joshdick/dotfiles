@@ -7,12 +7,6 @@
 [submodule "bin.symlink/resty"]
 	path = bin.symlink/resty
 	url = https://github.com/micha/resty
-[submodule "bin.symlink/zsh-history-substring-search"]
-	path = bin.symlink/zsh-history-substring-search
-	url = https://github.com/zsh-users/zsh-history-substring-search
-[submodule "bin.symlink/zsh-syntax-highlighting"]
-	path = bin.symlink/zsh-syntax-highlighting
-	url = https://github.com/zsh-users/zsh-syntax-highlighting
 [submodule "bin.symlink/git-dude"]
 	path = bin.symlink/git-dude
 	url = https://github.com/sickill/git-dude
@@ -34,6 +28,12 @@
 [submodule "bin.symlink/cdd"]
 	path = bin.symlink/cdd
 	url = https://github.com/jestor/cdd
-[submodule "bin.symlink/git_prompt"]
-	path = bin.symlink/git_prompt
+[submodule "zsh.symlink/git-prompt"]
+	path = zsh.symlink/git-prompt
 	url = https://gist.github.com/4415470.git
+[submodule "zsh.symlink/zsh-history-substring-search"]
+	path = zsh.symlink/zsh-history-substring-search
+	url = https://github.com/zsh-users/zsh-history-substring-search
+[submodule "zsh.symlink/zsh-syntax-highlighting"]
+	path = zsh.symlink/zsh-syntax-highlighting
+	url = https://github.com/zsh-users/zsh-syntax-highlighting

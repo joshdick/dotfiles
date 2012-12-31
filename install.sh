@@ -19,7 +19,7 @@ for file in `find $SELF_PATH -maxdepth 1 -name \*.symlink`; do
   fi
 done
 
-# Initialize git submodules
+# Initialize Git submodules
 START_PATH=$PWD
 cd "$SELF_PATH"
 git submodule init && git submodule update
