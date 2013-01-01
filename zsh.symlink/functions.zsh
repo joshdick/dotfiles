@@ -212,7 +212,7 @@ function define() {
 # Copy dotfiles to one or more remote machines.
 function sync_home() {
   local DOTFILES_LOCATION=${$(readlink ~/.zshrc)%/*.*}
-  if [ "$DOTFILES_LOCATION" = "$HOME" ]; then
+  if [ -z "$DOTFILES_LOCATION" ] || [ "$DOTFILES_LOCATION" = "$HOME" ]; then
     echo "$0 can only operate from inside a self-contained dotfiles repository."
     echo "It's likely that $0 was used to sync dotfiles to this machine."
     echo "Exiting."
@@ -226,6 +226,8 @@ function sync_home() {
 
   for host in "$@"; do
     echo "Now syncing: $host"
-    rsync -avzL --exclude ".git*" --exclude "README.md" --exclude "install.sh" "$DOTFILES_LOCATION" "${host}:"
+    # Find all files/directories at the root level of $HOME that are symlinked into $DOTFILES_LOCATION
+    sync_list=(`find "$HOME" -maxdepth 1 -type l -lname "$DOTFILES_LOCATION*"`)
+    rsync -avzL "${sync_list[@]}" "${host}:"
   done
 }
