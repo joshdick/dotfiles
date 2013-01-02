@@ -69,7 +69,7 @@ function update() {
   # If the dotfiles location isn't the home directory,
   # assume it's a Git repository and update it and all submodules.
   local DOTFILES_LOCATION=${$(readlink ~/.zshrc)%/*.*}
-  if [ $DOTFILES_LOCATION != $HOME ] && command_exists git; then
+  if [ "$DOTFILES_LOCATION" != "$HOME" ] && command_exists git; then
     pushd -q
     cd $DOTFILES_LOCATION
     echo "Updating dotfiles..."
