@@ -135,16 +135,16 @@ fi
 # For details, see manpage for ls
 export LSCOLORS=Gxfxcxdxbxegedabagacad
 
-# TODO: Populate these once Arch Linux has Git version > 1.8.1, which includes git-completion.zsh
-GIT_BASH_COMPLETION_SOURCE=
-GIT_ZSH_COMPLETION_SOURCE=
+# Locations of the Git completion files in Arch Linux as of Git 1.8.1
+GIT_BASH_COMPLETION_SOURCE=/usr/share/git/completion/git-completion.bash
+GIT_ZSH_COMPLETION_SOURCE=/usr/share/git/completion/git-completion.zsh
 
 # If we're on OS X and using Homebrew package manager, do some Homebrew-specific environmental tweaks
 if command_exists brew; then
   export PATH=`brew --prefix`/bin:`brew --prefix`/sbin:$PATH
 
-  # Assume Git was installed via Homebrew, so ensure the Git completion setup below
-  # uses Homebrew-provided completion files
+  # Assume Git was installed via Homebrew, and that the Git completion setup below
+  # should use Homebrew-provided completion files instead of the Arch Linux defaults above
   GIT_BASH_COMPLETION_SOURCE=`brew --prefix`/etc/bash_completion.d/git-completion.bash
   GIT_ZSH_COMPLETION_SOURCE=`brew --prefix`/share/git-core/contrib/completion/git-completion.zsh
 
