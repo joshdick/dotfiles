@@ -68,10 +68,10 @@ function update() {
 
   # If the dotfiles location isn't the home directory,
   # assume it's a Git repository and update it and all submodules.
-  local DOTFILES_LOCATION=${$(readlink ~/.zshrc)%/*.*}
-  if [ "$DOTFILES_LOCATION" != "$HOME" ] && command_exists git; then
+  local DOTFILES_LOCATION="${$(readlink ~/.zshrc)%/*.*}"
+  if [ ! -z "$DOTFILES_LOCATION" ] && [ "$DOTFILES_LOCATION" != "$HOME" ] && command_exists git; then
     pushd -q
-    cd $DOTFILES_LOCATION
+    cd "$DOTFILES_LOCATION"
     echo "Updating dotfiles..."
     git pull
     echo "Updating git submodules..."
@@ -211,7 +211,7 @@ function define() {
 
 # Copy dotfiles to one or more remote machines.
 function sync_home() {
-  local DOTFILES_LOCATION=${$(readlink ~/.zshrc)%/*.*}
+  local DOTFILES_LOCATION="${$(readlink ~/.zshrc)%/*.*}"
   if [ -z "$DOTFILES_LOCATION" ] || [ "$DOTFILES_LOCATION" = "$HOME" ]; then
     echo "$0 can only operate from inside a self-contained dotfiles repository."
     echo "It's likely that $0 was used to sync dotfiles to this machine."
