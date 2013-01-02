@@ -135,14 +135,18 @@ fi
 # For details, see manpage for ls
 export LSCOLORS=Gxfxcxdxbxegedabagacad
 
-# If we're on OS X and using Homebrew package manager, add Homebrew binary directory to PATH
+# TODO: Populate these once Arch Linux has Git version > 1.8.1, which includes git-completion.zsh
+GIT_BASH_COMPLETION_SOURCE=
+GIT_ZSH_COMPLETION_SOURCE=
+
+# If we're on OS X and using Homebrew package manager, do some Homebrew-specific environmental tweaks
 if command_exists brew; then
   export PATH=`brew --prefix`/bin:`brew --prefix`/sbin:$PATH
 
-  # While we're here, set up completion for Git if it's available via the Homebrew bash-completion package.
-  # ZSH's built-in Git completion doesn't complete filenames for some reason, so use bash's instead.
-  GIT_BASH_COMPLETION=`brew --prefix`/etc/bash_completion.d/git-completion.bash
-  test -r $GIT_BASH_COMPLETION && . $GIT_BASH_COMPLETION
+  # Assume Git was installed via Homebrew, so ensure the Git completion setup below
+  # uses Homebrew-provided completion files
+  GIT_BASH_COMPLETION_SOURCE=`brew --prefix`/etc/bash_completion.d/git-completion.bash
+  GIT_ZSH_COMPLETION_SOURCE=`brew --prefix`/share/git-core/contrib/completion/git-completion.zsh
 
   # If Python 2 was installed via Homebrew, add it to PATH
   PYTHON2_DIR="/usr/local/share/python"
@@ -150,6 +154,15 @@ if command_exists brew; then
 
   BREW_NPM_BINARY_DIR="/usr/local/share/npm/bin"
   test -d $BREW_NPM_BINARY_DIR && export PATH=$BREW_NPM_BINARY_DIR:$PATH
+fi
+
+# Attempt to set up Git completion for zsh as documented inside git-completion.zsh
+if [ -r "$GIT_BASH_COMPLETION_SOURCE" ] && [ -r "$GIT_ZSH_COMPLETION_SOURCE" ]; then
+  zstyle ':completion:*:*:git:*' script $GIT_BASH_COMPLETION_SOURCE
+  # If it doesn't already exist, create a symlink to the zsh completion file as ~/.zsh/completion/_git.
+  [ ! -h ~/.zsh/completion/_git ] && mkdir -p ~/.zsh/completion && ln -s $GIT_ZSH_COMPLETION_SOURCE ~/.zsh/completion/_git
+  # Add the ~/.zsh/completion directory to fpath so zsh can find it.
+  fpath=(~/.zsh/completion $fpath)
 fi
 
 # If npm's global node_modules directory exists in the expected location, set NODE_PATH accordingly
