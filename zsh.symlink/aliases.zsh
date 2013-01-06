@@ -20,6 +20,7 @@ alias grep='grep --color'
 alias hgrep='history 1 | grep $1'
 alias scpresume='rsync --partial --progress --rsh=ssh'
 alias mirror='wget -H -r --level=1 -k -p $1'
+alias markdownify='wget -qO - "$1" | html2text'
 
 alias g='git'
 alias ga='git add'
