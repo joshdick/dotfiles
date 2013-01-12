@@ -18,6 +18,7 @@
 	myrecent = !git log --stat --since='1 Day Ago' --graph --pretty=oneline --abbrev-commit --date=relative --author='Josh Dick'
 	lg = log --graph --pretty=format:'%Cred%h%Creset-%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 	showtool = !git difftool $1^!
+	changes = !git log -p
 	scores = !git --no-pager shortlog -ns
 [difftool "Kaleidoscope"]
 	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
