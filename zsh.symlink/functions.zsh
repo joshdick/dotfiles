@@ -115,6 +115,18 @@ function cdf() {
   fi
 }
 
+# On Mac OS X, copies the contents of a text file to the clipboard
+# Found at <http://brettterpstra.com/2013/01/15/clip-text-file-a-handy-dumb-service>
+function clip() {
+  type=`file "$1"|grep -c text`
+  if [ $type -gt 0 ]; then
+    cat "$@" | pbcopy
+    echo "Contents of $1 are in the clipboard."
+  else
+    echo "File \"$1\" is not plain text."
+  fi
+}
+
 # Pushes local SSH public key to another box
 # Adapted from code found at <https://github.com/rtomayko/dotfiles/blob/rtomayko/.bashrc>
 function push_ssh_cert() {
