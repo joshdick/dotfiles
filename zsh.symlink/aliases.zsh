@@ -15,12 +15,18 @@ fi
 # Some of these aliases were found at <https://github.com/zan5hin/dotfiles/blob/master/.zsh/aliases>
 
 alias lsd='ls -lah | grep "^d"'
-alias lsappstore="mdfind kMDItemAppStoreHasReceipt=1"
 alias grep='grep --color'
 alias hgrep='history 1 | grep $1'
 alias scpresume='rsync --partial --progress --rsh=ssh'
 alias mirror='wget -H -r --level=1 -k -p $1'
 alias markdownify='wget -qO - "$1" | html2text'
+
+# Mac-specific aliases
+
+alias f="open -a Finder ./"
+alias lsappstore="mdfind kMDItemAppStoreHasReceipt=1"
+
+# Git aliases
 
 alias g='git'
 alias ga='git add'
