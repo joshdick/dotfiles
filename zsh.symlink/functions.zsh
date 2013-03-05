@@ -84,6 +84,19 @@ function update() {
     echo "Updating/upgrading/cleaning up Homebrew packages..."
     brew update && brew upgrade && brew cleanup && brew linkapps
   fi
+
+  if command_exists pip; then
+    # Blatantly stolen from <http://stackoverflow.com/questions/2720014/upgrading-all-packages-with-pip>
+    pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs pip install -U
+  fi
+
+  if command_exists npm; then
+    npm -g update
+  fi
+
+  if command_exists gem; then
+    gem update
+  fi
 }
 
 # On Mac OS X, SSH to another Mac by hostname via Back To My Mac (iCloud)
