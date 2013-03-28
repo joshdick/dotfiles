@@ -37,3 +37,6 @@
 [submodule "zsh.symlink/zsh-syntax-highlighting"]
 	path = zsh.symlink/zsh-syntax-highlighting
 	url = https://github.com/zsh-users/zsh-syntax-highlighting
+[submodule "bin.symlink/searchlink"]
+	path = bin.symlink/searchlink
+	url = https://gist.github.com/3900158.git
