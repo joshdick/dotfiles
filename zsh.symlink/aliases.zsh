@@ -19,12 +19,16 @@ alias grep='grep --color'
 alias hgrep='history 1 | grep $1'
 alias scpresume='rsync --partial --progress --rsh=ssh'
 alias mirror='wget -H -r --level=1 -k -p $1'
-alias markdownify='wget -qO - "$1" | html2text'
+alias md='wget -qO - "$1" | html2text -b 0'
+alias ip="curl icanhazip.com"
+alias cpu='top -o cpu'
+alias mem='top -o rsize' # memory
 
 # Mac-specific aliases
 
 alias f="open -a Finder ./"
 alias lsappstore="mdfind kMDItemAppStoreHasReceipt=1"
+alias flushdns="sudo killall -HUP mDNSResponder"
 
 # Git aliases
 
@@ -49,4 +53,5 @@ alias gp='git push'
 alias gprune='git remote prune origin'
 alias gpu='git pull'
 alias gpur='git pull --rebase'
+alias gr='while [ ! -d .git ]; do cd ..; done'
 alias gs='git status'
