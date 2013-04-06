@@ -146,7 +146,7 @@ if command_exists brew; then
   # Assume Git was installed via Homebrew, and that the Git completion setup below
   # should use Homebrew-provided completion files instead of the Arch Linux defaults above
   GIT_BASH_COMPLETION_SOURCE=`brew --prefix`/etc/bash_completion.d/git-completion.bash
-  GIT_ZSH_COMPLETION_SOURCE=`brew --prefix`/share/git-core/contrib/completion/git-completion.zsh
+  GIT_ZSH_COMPLETION_SOURCE=`brew --prefix`/share/zsh/site-functions/_git
 
   # If Python 2 was installed via Homebrew, add it to PATH
   PYTHON2_DIR="/usr/local/share/python"
