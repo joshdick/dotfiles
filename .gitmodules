@@ -40,3 +40,6 @@
 [submodule "bin.symlink/searchlink"]
 	path = bin.symlink/searchlink
 	url = https://gist.github.com/3900158.git
+[submodule "bin.symlink/tmuxstart"]
+	path = bin.symlink/tmuxstart
+	url = git://github.com/treyhunner/tmuxstart.git

@@ -1,0 +1,6 @@
+mpdscribble && mpd
+
+new_session -n Social weechat-curses
+split 0 -h ~/Software/TTYtter/start_ttytter.sh
+split 0.1 -v ~/Software/Texapp/Texapp.pl
+
