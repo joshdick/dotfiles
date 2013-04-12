@@ -1,9 +1,6 @@
 [submodule "vim.symlink/vundle"]
 	path = vim.symlink/vundle
 	url = https://github.com/gmarik/vundle
-[submodule "bin.symlink/z"]
-	path = bin.symlink/z
-	url = https://github.com/rupa/z
 [submodule "bin.symlink/resty"]
 	path = bin.symlink/resty
 	url = https://github.com/micha/resty
@@ -43,3 +40,6 @@
 [submodule "bin.symlink/tmuxstart"]
 	path = bin.symlink/tmuxstart
 	url = git://github.com/treyhunner/tmuxstart.git
+[submodule "bin.symlink/fasd"]
+	path = bin.symlink/fasd
+	url = git://github.com/clvv/fasd.git

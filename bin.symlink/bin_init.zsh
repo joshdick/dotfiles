@@ -4,8 +4,9 @@ PERSONAL_BIN=~/.bin
 # Add the personal bin to PATH
 export PATH=$PATH:$PERSONAL_BIN
 
-# Set up z <https://github.com/rupa/z>
-. $PERSONAL_BIN/z/z.sh
+# Set up fasd <https://github.com/clvv/fasd>
+export PATH=$PATH:$PERSONAL_BIN/fasd
+eval "$(fasd --init auto)"
 
 # Set up resty <https://github.com/micha/resty>
 . $PERSONAL_BIN/resty/resty
