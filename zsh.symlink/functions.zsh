@@ -75,8 +75,7 @@ function update() {
     echo "Updating dotfiles..."
     git pull
     echo "Updating git submodules..."
-    # Adapted from code found at <http://stackoverflow.com/questions/1030169/git-easy-way-pull-latest-of-all-submodules>
-    git submodule foreach 'git checkout master &> /dev/null; git checkout . &> /dev/null; git pull origin master'
+    git submodule foreach 'git fetch --all &> /dev/null; git reset --hard origin/master &> /dev/null'
     popd -q
   fi
 
