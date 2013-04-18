@@ -6,7 +6,7 @@ Bundle 'benmills/vimux'
 Bundle 'corntrace/bufexplorer'
 Bundle 'ervandew/supertab'
 Bundle 'kien/ctrlp.vim'
-Bundle 'Lokaltog/vim-powerline'
+Bundle 'Lokaltog/vim-easymotion'
 Bundle 'mileszs/ack.vim'
 Bundle 'nelstrom/vim-visual-star-search'
 Bundle 'scrooloose/nerdcommenter'
@@ -39,7 +39,7 @@ if has("gui") "Instead of gui_running, in case :gui is run manually on *NIX
   set columns=90 lines=45
 
   "Font settings
-  set guifont=Ubuntu\ Mono\ for\ Powerline:h15
+  set guifont=Ubuntu\ Mono:h15
   "set noantialias
   set antialias
 
@@ -85,12 +85,11 @@ filetype indent on "Enable automatic indentation based on detected filetype
 syntax on
 
 "Statusline
-"Commented out; replaced by vim-powerline
-"if exists("vimpager")
-"  set statusline=%<%F%h%m%r%h%w%y\ %{&ff}\ %{strftime(\"%c\",getftime(expand(\"%:p\")))}\ %=\ lin:%l\/%L\ col:%c%V\ %P
-"else
-"  set statusline=%<%F%h%m%r%h%w%y\ %{&ff}\ %{strftime(\"%c\",getftime(expand(\"%:p\")))}\ %{fugitive#statusline()}\ %=\ lin:%l\/%L\ col:%c%V\ %P
-"endif
+if exists("vimpager")
+  set statusline=%<%F%h%m%r%h%w%y\ %{&ff}\ %{strftime(\"%c\",getftime(expand(\"%:p\")))}\ %=\ lin:%l\/%L\ col:%c%V\ %P
+else
+  set statusline=%<%F%h%m%r%h%w%y\ %{&ff}\ %{strftime(\"%c\",getftime(expand(\"%:p\")))}\ %{fugitive#statusline()}\ %=\ lin:%l\/%L\ col:%c%V\ %P
+endif
 set laststatus=2
 let g:Powerline_symbols = 'fancy'
 
