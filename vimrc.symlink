@@ -138,22 +138,22 @@ endfunction
 "Found at <https://raw.github.com/benmills/vimux/master/doc/vimux.txt>
 
 "Prompt for a command to run
-map <Leader>rp :VimuxPromptCommand<CR>
+map <leader>rp :VimuxPromptCommand<CR>
 
 "Run last command executed by VimuxRunCommand
-map <Leader>rl :VimuxRunLastCommand<CR>
+map <leader>rl :VimuxRunLastCommand<CR>
 
 "Inspect runner pane
-map <Leader>ri :VimuxInspectRunner<CR>
+map <leader>ri :VimuxInspectRunner<CR>
 
 "Close all other tmux panes in current window
-map <Leader>rx :VimuxClosePanes<CR>
+map <leader>rx :VimuxClosePanes<CR>
 
 "Close vim tmux runner opened by VimuxRunCommand
-map <Leader>rq :VimuxCloseRunner<CR>
+map <leader>rq :VimuxCloseRunner<CR>
 
 "Interrupt any command running in the runner pane
-map <Leader>rs :VimuxInterruptRunner<CR>
+map <leader>rs :VimuxInterruptRunner<CR>
 
 "Shortcuts for opening new splits.
 "Found at <http://technotales.wordpress.com/2010/04/29/vim-splits-a-guide-to-doing-exactly-what-you-want/>
