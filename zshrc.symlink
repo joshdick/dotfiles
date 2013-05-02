@@ -97,6 +97,13 @@ PS1="
 # <https://github.com/zsh-users/zsh-history-substring-search>
 . ~/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh
 
+# Bind up and down keys for zsh-history-substring-search
+for keycode in '[' '0'; do
+  bindkey "^[${keycode}A" history-substring-search-up
+  bindkey "^[${keycode}B" history-substring-search-down
+done
+unset keycode
+
 # *** FUNCTIONS AND ALIASES ***
 
 . ~/.zsh/functions.zsh
