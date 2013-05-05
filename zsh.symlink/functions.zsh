@@ -185,7 +185,7 @@ function extract() {
 # Packs $2-$n into $1 depending on $1's extension
 # Found at <http://pastebin.com/CTra4QTF>
 function compress() {
-  if [ $# -lt 2 ] ; then
+  if [[ $# -lt 2 ]]; then
     echo -e "\n$0() usage:"
     echo -e "\t$0 archive_file_name file1 file2 ... fileN"
     echo -e "\tcreates archive of files 1-N\n"
@@ -236,12 +236,27 @@ function digit() {
 # Retrieve dictionary definitions of words.
 # Adapted from code found at <http://onethingwell.org/post/25644890287/a-shell-function-to-define-words>
 function define() {
-  if [[ $# -ge 2 ]] then
+  if [[ $# -ge 2 ]]; then
     echo "$0: too many arguments" >&2
     return 1
   else
     curl "dict://dict.org/d:$1"
   fi
+}
+
+# Convert a web page to Markdown.
+function md() {
+  if ! command_exists html2text; then
+    echo "Error: html2text must be installed (via \"pip install html2text\") in order to use $0."
+    return 1
+  fi
+  if [[ $# -ne 1 ]]; then
+    echo -e "\n$0() usage:"
+    echo -e "\t$0 [URL]"
+    return 1
+  fi
+  echo "Originally from [$1]($1)\n"
+  wget -qO - "$1" | html2text -b 0
 }
 
 # Copy dotfiles to one or more remote machines.
