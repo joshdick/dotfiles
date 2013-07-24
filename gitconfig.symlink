@@ -22,3 +22,5 @@
 	showtool = !git difftool -d $1^!
 	changes = !git log -p
 	scores = !git --no-pager shortlog -ns
+[core]
+	excludesfile = /Users/Josh/.gitignore
