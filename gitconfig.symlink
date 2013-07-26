@@ -11,16 +11,19 @@
 	tool = kdiff3
 [diff]
 	tool = kdiff3
+	algorithm = histogram
 [help]
 	format = web
+	autocorrect = 1
 [push]
 	default = upstream
+[core]
+	excludesfile = ~/.gitignore
+[rerere]
+	enabled = 1
 [alias]
 	recent = !git log --stat --since='1 Day Ago' --graph --pretty=oneline --abbrev-commit --date=relative
 	myrecent = !git log --stat --since='1 Day Ago' --graph --pretty=oneline --abbrev-commit --date=relative --author='Josh Dick'
 	lg = log --graph --pretty=format:'%Cred%h%Creset-%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 	showtool = !git difftool -d $1^!
-	changes = !git log -p
-	scores = !git --no-pager shortlog -ns
-[core]
-	excludesfile = /Users/Josh/.gitignore
+	scores = !git shortlog -ns
