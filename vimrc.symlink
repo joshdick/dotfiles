@@ -3,6 +3,7 @@ set rtp+=~/.vim/vundle/
 call vundle#rc()
 "Github Bundles
 Bundle 'benmills/vimux'
+Bundle 'chriskempson/base16-vim'
 Bundle 'corntrace/bufexplorer'
 Bundle 'ervandew/supertab'
 Bundle 'kien/ctrlp.vim'
@@ -61,11 +62,13 @@ endif
 "Disable splash screen/[I]ntro message
 set shortmess+=I
 
-colorscheme Tomorrow-Night
+set background=dark
+let base16colorspace=256  " Access colors present in 256 colorspace (base16 color scheme)
+colorscheme base16-tomorrow
+
 set number
 set nobackup
 set nowritebackup
-set background=dark
 "set list "Show invisible characters by default
 
 set softtabstop=2
@@ -78,7 +81,6 @@ set autoindent
 set smartindent
 set enc=utf-8
 set nowrap
-hi LineNr guifg=#333333
 filetype on
 filetype plugin on
 filetype indent on "Enable automatic indentation based on detected filetype
