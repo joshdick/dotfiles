@@ -1,6 +1,11 @@
 mpdscribble && mpd
 
 new_session -n Social weechat-curses
-split 0 -h ~/Software/TTYtter/start_ttytter.sh
+split 0 -h ~/Software/TTYtter/TTYtter.pl
 split 0.1 -v ~/Software/Texapp/Texapp.pl
 
+new_window -n E-Mail offlineimap
+split 1 -h mutt
+
+# Zoom the current pane (mutt), need to refer to "josh_session" since tmuxstart doesn't support resize-pane
+#tmux resize-pane -t josh_session -Z
