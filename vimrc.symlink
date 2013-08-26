@@ -37,8 +37,6 @@ Bundle 'tpope/vim-vividchalk'
 "endif
 
 if has("gui") "Instead of gui_running, in case :gui is run manually on *NIX
-  set columns=90 lines=45
-
   "Font settings
   set guifont=Ubuntu\ Mono:h15
   "set noantialias
