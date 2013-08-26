@@ -80,6 +80,13 @@ bindkey "^[[1;5D" backward-word
 bindkey "^[[1;5C" forward-word
 bindkey "\e[3~" delete-char # Del
 
+# *** COLOR SCHEME ***
+
+# Needed for base16-vim color scheme to work properly.
+# Using the "tomorrow" variant for vim while using the "bright"
+# variant for the shell seems to work fine.
+. ~/.zsh/base16-shell/base16-bright.dark.sh
+
 # *** PROMPT FORMATTING ***
 
 PS1="
