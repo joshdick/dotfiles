@@ -159,10 +159,6 @@ if command_exists brew; then
   GIT_BASH_COMPLETION_SOURCE=`brew --prefix`/etc/bash_completion.d/git-completion.bash
   GIT_ZSH_COMPLETION_SOURCE=`brew --prefix`/share/zsh/site-functions/_git
 
-  # If Python 2 was installed via Homebrew, add it to PATH
-  PYTHON2_DIR="/usr/local/share/python"
-  test -d $PYTHON2_DIR && export PATH=$PYTHON2_DIR:$PATH
-
   BREW_NPM_BINARY_DIR="/usr/local/share/npm/bin"
   test -d $BREW_NPM_BINARY_DIR && export PATH=$BREW_NPM_BINARY_DIR:$PATH
 fi
