@@ -91,8 +91,14 @@ function update() {
   fi
 
   if command_exists pip; then
-    # Blatantly stolen from <http://stackoverflow.com/questions/2720014/upgrading-all-packages-with-pip>
-    pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs pip install -U
+    # Inline Python script to update packages. Found at <http://stackoverflow.com/a/5839291/278810>
+python << END
+import pip
+from subprocess import call
+
+for dist in pip.get_installed_distributions():
+    call("pip install --upgrade " + dist.project_name, shell=True)
+END
   fi
 
   if command_exists npm; then
