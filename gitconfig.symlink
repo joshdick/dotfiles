@@ -25,5 +25,5 @@
 	recent = !git log --stat --since='1 Day Ago' --graph --pretty=oneline --abbrev-commit --date=relative
 	myrecent = !git log --stat --since='1 Day Ago' --graph --pretty=oneline --abbrev-commit --date=relative --author='Josh Dick'
 	lg = log --graph --pretty=format:'%Cred%h%Creset-%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
-	showtool = !git difftool -d $1^!
+	showtool = "!st() { commit=$1; if [ -z $commit ]; then commit=HEAD; fi; git difftool -d $commit^ $commit; }; st"
 	scores = !git shortlog -ns
