@@ -177,10 +177,12 @@ fi
 NODE_MODULE_DIR="/usr/local/lib/node_modules"
 test -d $NODE_MODULE_DIR && export NODE_PATH=$NODE_MODULE_DIR
 
-# Initialize RVM if it's installed
-[[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
-RVM_BIN_DIR="$HOME/.rvm/bin"
-test -d $RVM_BIN_DIR && export PATH=$RVM_BIN_DIR:$PATH
+# Initialize rbenv if it's installed
+RBENV_BIN_DIR="$HOME/.rbenv/bin"
+if [ -d $RBENV_BIN_DIR ]; then
+  export PATH="$RBENV_BIN_DIR:$PATH"
+  eval "$(rbenv init -)"
+fi
 
 # Initialize the "personal bin"
 . ~/.bin/bin_init.zsh
