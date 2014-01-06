@@ -167,7 +167,8 @@ fi
 if [ -r "$GIT_BASH_COMPLETION_SOURCE" ] && [ -r "$GIT_ZSH_COMPLETION_SOURCE" ]; then
   zstyle ':completion:*:*:git:*' script $GIT_BASH_COMPLETION_SOURCE
   # If it doesn't already exist, create a symlink to the zsh completion file as ~/.zsh/completion/_git.
-  [ ! -h ~/.zsh/completion/_git ] && mkdir -p ~/.zsh/completion && ln -s $GIT_ZSH_COMPLETION_SOURCE ~/.zsh/completion/_git
+  # If the file was copied via sync_home and isn't actually a symlink, it will be replaced with a symlink.
+  [ ! -h ~/.zsh/completion/_git ] && mkdir -p ~/.zsh/completion && rm -f ~/.zsh/completion/_git && ln -s $GIT_ZSH_COMPLETION_SOURCE ~/.zsh/completion/_git
   # Add the ~/.zsh/completion directory to fpath so zsh can find it.
   fpath=(~/.zsh/completion $fpath)
 fi
@@ -176,10 +177,12 @@ fi
 NODE_MODULE_DIR="/usr/local/lib/node_modules"
 test -d $NODE_MODULE_DIR && export NODE_PATH=$NODE_MODULE_DIR
 
-# Initialize RVM if it's installed
-[[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
-RVM_BIN_DIR="$HOME/.rvm/bin"
-test -d $RVM_BIN_DIR && export PATH=$RVM_BIN_DIR:$PATH
+# Initialize rbenv if it's installed
+RBENV_BIN_DIR="$HOME/.rbenv/bin"
+if [ -d $RBENV_BIN_DIR ]; then
+  export PATH="$RBENV_BIN_DIR:$PATH"
+  eval "$(rbenv init -)"
+fi
 
 # Initialize the "personal bin"
 . ~/.bin/bin_init.zsh
