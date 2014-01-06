@@ -267,7 +267,7 @@ function md() {
     echo -e "\t$0 [URL]"
     return 1
   fi
-  echo "Originally from [$1]($1)\n"
+  echo "[Source]($1)\n"
   wget -qO - "$1" | html2text -b 0
 }
 
