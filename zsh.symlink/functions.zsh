@@ -13,7 +13,7 @@ function search() {
   results=`find . -iname "*$1*"`
   echo $results
   if command_exists open; then
-    resultLength=`echo $results | wc -l |  sed -e "s/^[ \t]*//"`
+    resultLength=`echo $results | wc -l | sed -e "s/^[ \t]*//"`
     if [ $resultLength -eq 1 ]; then
       while true; do
         echo "One result found! Open it? (y/n)?"
