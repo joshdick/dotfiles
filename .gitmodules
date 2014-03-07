@@ -7,9 +7,6 @@
 [submodule "bin.symlink/git-dude"]
 	path = bin.symlink/git-dude
 	url = https://github.com/sickill/git-dude
-[submodule "bin.symlink/todo.txt-cli"]
-	path = bin.symlink/todo.txt-cli
-	url = https://github.com/ginatrapani/todo.txt-cli
 [submodule "bin.symlink/git-cr"]
 	path = bin.symlink/git-cr
 	url = https://github.com/joshdick/git-cr
