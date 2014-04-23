@@ -268,7 +268,7 @@ function md() {
     return 1
   fi
   echo "[Source]($1)\n"
-  wget -qO - "$1" | html2text -b 0
+  wget -qO - "$1" | iconv -t utf-8 | html2text -b 0
 }
 
 # Copy dotfiles to one or more remote machines.
