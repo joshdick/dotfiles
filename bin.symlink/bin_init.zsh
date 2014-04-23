@@ -28,3 +28,6 @@ export PATH=$PATH:$PERSONAL_BIN/tmuxstart
 
 # Set up cdd <https://github.com/jestor/cdd>
 alias cdd="$PERSONAL_BIN/cdd/cdd.sh"
+
+# Set up fzf <https://github.com/junegunn/fzf>
+alias fzf="$PERSONAL_BIN/fzf/fzf"
