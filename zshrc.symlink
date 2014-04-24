@@ -105,7 +105,7 @@ PS1="
 . ~/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh
 
 # <https://github.com/junegunn/fzf>
-. ~/.bin/fzf/fzf-completion.zsh
+. ~/.fzf.zsh
 
 # Bind up and down keys for zsh-history-substring-search
 for keycode in '[' '0'; do
