@@ -11,6 +11,7 @@ Bundle 'Lokaltog/vim-easymotion'
 Bundle 'marijnh/tern_for_vim'
 Bundle 'mileszs/ack.vim'
 Bundle 'nelstrom/vim-visual-star-search'
+Bundle 'plasticboy/vim-markdown'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/nerdtree'
 Bundle 'sjl/gundo.vim'
@@ -109,6 +110,9 @@ cmap w!! %!sudo tee > /dev/null %
 
 "Use the same symbols as TextMate for tabstops and EOLs
 set listchars=tab:▸\ ,eol:¬
+
+"Treat .md files as Markdown
+au BufRead,BufNewFile *.md set filetype=markdown
 
 "Super Retab
 "Found at <http://vim.wikia.com/wiki/Super_retab>
