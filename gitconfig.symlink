@@ -28,3 +28,4 @@
 	scores = !git shortlog -ns
 	log-hist = !git log-pretty --graph
 	log-pretty = "log --pretty=format:'%Cred%h%Creset%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'"
+	tags = "tag -l -n1"
