@@ -1,0 +1,42 @@
+#!/bin/bash
+
+if ! hash git &> /dev/null; then
+	echo "Error: This script requires git! Please install git, then try running this script again." 1>&2;
+	exit 1
+fi
+
+echo ""
+echo "This script will automatically install Josh Dick's dotfiles on your system."
+echo "(See https://github.com/joshdick/dotfiles for more information.)"
+echo ""
+echo "The dotfiles will live in a self-contained git repository on your system,"
+echo "and will be symlinked into your home directory. If there are conflicting files"
+echo "that already exist in your home directory, they won't be overwritten."
+echo ""
+echo "Press [ENTER] to proceed, or [CTRL+C] to cancel installation."
+read
+
+default_path="$HOME/.dotfiles"
+read -p "Where should the dotfiles repository be cloned to? [$default_path] " -e path
+if [ -z "$path" ]; then
+	path="$default_path"
+fi
+
+git clone https://github.com/joshdick/dotfiles.git "$path"
+
+if [ $? -ne 0 ]; then
+	echo "Error: There was a problem cloning the dotfiles repository! Try running this script again." 1>&2;
+	exit 1
+fi
+
+"$path"/install.sh
+install_exit_code=$?
+
+echo "================================================================================"
+
+if [ $install_exit_code -ne 0 ]; then
+	echo "An error occurred during dotfiles installation." 1>&2;
+	exit 1
+else
+	echo "The dotfiles were successfully installed! Enjoy!"
+fi
