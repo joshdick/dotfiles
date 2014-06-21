@@ -114,6 +114,9 @@ set listchars=tab:▸\ ,eol:¬
 "Treat .md files as Markdown
 au BufRead,BufNewFile *.md set filetype=markdown
 
+"Disable Markdown folding for vim-markdown plugin
+let g:vim_markdown_folding_disabled=1
+
 "Super Retab
 "Found at <http://vim.wikia.com/wiki/Super_retab>
 " Space2Tab  Convert spaces to tabs, only in indents.
