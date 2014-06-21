@@ -14,14 +14,14 @@ There are comments throughout my dotfiles attributing all known original sources
 
 ### fancypants single-line install
 
-`bash <(curl -fsSL https://raw.githubusercontent.com/joshdick/dotfiles/master/bootstrap)`
+`$ bash <(curl -fsSL https://raw.githubusercontent.com/joshdick/dotfiles/master/bootstrap)`
 
 ### plainpants several-line install
 
-```bash
-git clone git://github.com/joshdick/dotfiles.git ~/.dotfiles
-cd ~/.dotfiles
-./install.sh
+```
+$ git clone git://github.com/joshdick/dotfiles.git ~/.dotfiles
+$ cd ~/.dotfiles
+$ ./install.sh
 ```
 
 The install script looks for all files and directories in the root of the repository ending in the .symlink extension. It then symlinks those files and directories into your home directory with a dot prepended and the .symlink extension removed.
