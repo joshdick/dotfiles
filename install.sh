@@ -36,3 +36,9 @@ if [ $? -ne 0 ]; then
 	echo "Error: There was a problem updating the dotfiles repository submodules!" 1>&2;
 	exit 1
 fi
+
+vim +PluginInstall +qall
+
+if [ $? -ne 0 ]; then
+	echo "Warning: There was a problem installing Vim plugins via Vundle!"
+fi
