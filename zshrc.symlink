@@ -96,17 +96,6 @@ PS1="
 # Right-hand Git prompt <https://gist.github.com/4415470>
 . ~/.zsh/git-prompt/git_prompt.zsh
 
-# *** COLORATION OF ITERM TABS BASED ON HOSTNAME ***
-
-if [[ "$TERM_PROGRAM" == "iTerm.app" ]]; then
-  TAB_DECORATOR="$(~/.bin/rainbow-parade.py 0.7 0.4)"
-  function tab_color_precmd {
-    echo -n "$TAB_DECORATOR"
-  }
-  autoload -U add-zsh-hook
-  add-zsh-hook precmd tab_color_precmd
-fi
-
 # *** ZSH PLUGINS ***
 
 # <https://github.com/zsh-users/zsh-syntax-highlighting>
