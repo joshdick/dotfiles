@@ -3,15 +3,21 @@
 	email = josh@joshdick.net
 [color]
 	ui = auto
-[mergetool]
-	prompt = false
+[diff]
+	tool = bcomp
+	algorithm = histogram
 [difftool]
 	prompt = false
+[difftool "bcomp"]
+	trustExitCode = true
+	cmd = "/usr/local/bin/bcomp" "$LOCAL" "$REMOTE"
 [merge]
-	tool = kdiff3
-[diff]
-	tool = kdiff3
-	algorithm = histogram
+	tool = bcomp
+[mergetool]
+	prompt = false
+[mergetool "bcomp"]
+	trustExitCode = true
+	cmd = "/usr/local/bin/bcomp" "$LOCAL" "$REMOTE" "$BASE" "$MERGED"
 [help]
 	format = web
 	autocorrect = 1
