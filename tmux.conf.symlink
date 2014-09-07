@@ -16,10 +16,10 @@ unbind '"'
 bind - split-window -v
 bind v split-window -v
 
-# Hilight the active window in the status bar
+# Highlight the active window in the status bar
 setw -g window-status-current-fg yellow
 
-# Status Bar
+# Status bar
 set -g status-bg black
 set -g status-fg white
 set -g status-interval 1
@@ -34,8 +34,8 @@ set-option -g pane-active-border-bg black
 set-option -g pane-border-fg white
 set-option -g pane-border-bg black
 
-# Reload tmux configuration
-bind r source ~/.tmux.conf
+# Easy reload of tmux configuration
+bind r source ~/.tmux.conf \; display-message "tmux.conf reloaded."
 
 # Notify of non-focused window activities
 #setw -g monitor-activity on
@@ -45,14 +45,13 @@ bind r source ~/.tmux.conf
 set -g set-titles on
 set -g set-titles-string '#S:#I.#P #W'
 
-# Copy mode
-unbind [
-bind Escape copy-mode
-
-# Use Vi mode
+# Vi mode
 setw -g mode-keys vi
+
+# Mouse mode
+setw -g mode-mouse on
+set -g mouse-select-pane on
+set -g mouse-resize-pane on
 
 # Other misc. options
 set-option -g visual-bell on
-set-option -g mouse-select-pane off
-#setw -g mode-mouse on # Make mouse useful in copy mode
