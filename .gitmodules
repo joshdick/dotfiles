@@ -34,9 +34,6 @@
 [submodule "bin.symlink/searchlink"]
 	path = bin.symlink/searchlink
 	url = https://gist.github.com/3900158.git
-[submodule "bin.symlink/tmuxstart"]
-	path = bin.symlink/tmuxstart
-	url = git://github.com/treyhunner/tmuxstart.git
 [submodule "bin.symlink/fasd"]
 	path = bin.symlink/fasd
 	url = git://github.com/clvv/fasd.git
@@ -46,3 +43,6 @@
 [submodule "bin.symlink/fzf"]
 	path = bin.symlink/fzf
 	url = https://github.com/junegunn/fzf
+[submodule "bin.symlink/tmuxomatic"]
+	path = bin.symlink/tmuxomatic
+	url = https://github.com/oxidane/tmuxomatic.git

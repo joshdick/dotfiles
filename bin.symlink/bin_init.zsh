@@ -23,8 +23,8 @@ export PATH=$PATH:$PERSONAL_BIN/git-cr
 # Set up pytograph <https://github.com/joshdick/pytograph>
 export PATH=$PATH:$PERSONAL_BIN/pytograph
 
-# Set up tmuxstart <https://github.com/treyhunner/tmuxstart>
-export PATH=$PATH:$PERSONAL_BIN/tmuxstart
+# Set up tmuxomatic <https://github.com/oxidane/tmuxomatic>
+export PATH=$PATH:$PERSONAL_BIN/tmuxomatic
 
 # Set up cdd <https://github.com/jestor/cdd>
 alias cdd="$PERSONAL_BIN/cdd/cdd.sh"
