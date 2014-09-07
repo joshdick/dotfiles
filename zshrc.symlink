@@ -70,10 +70,10 @@ key[PageDown]=${terminfo[knp]}
 # Finally, make sure the terminal is in application mode, when zle is
 # active. Only then are the values from $terminfo valid.
 function zle-line-init () {
-    echoti smkx
+  echoti smkx
 }
 function zle-line-finish () {
-    echoti rmkx
+  echoti rmkx
 }
 zle -N zle-line-init
 zle -N zle-line-finish
@@ -102,15 +102,12 @@ PS1="
 # <https://github.com/zsh-users/zsh-history-substring-search>
 . ~/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh
 
+# Bind up and down keys for zsh-history-substring-search
+bindkey "${key[Up]}" history-substring-search-up
+bindkey "${key[Down]}" history-substring-search-down
+
 # <https://github.com/junegunn/fzf>
 . ~/.fzf.zsh
-
-# Bind up and down keys for zsh-history-substring-search
-for keycode in '[' '0'; do
-  bindkey "^[${keycode}A" history-substring-search-up
-  bindkey "^[${keycode}B" history-substring-search-down
-done
-unset keycode
 
 # *** FUNCTIONS AND ALIASES ***
 
