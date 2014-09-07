@@ -56,6 +56,3 @@ setw -g mode-keys vi
 set-option -g visual-bell on
 set-option -g mouse-select-pane off
 #setw -g mode-mouse on # Make mouse useful in copy mode
-
-# Set up key binding for tmuxstart
-bind S command-prompt -p "Make/attach session:" "new-window 'tmuxstart \'%%\''"
