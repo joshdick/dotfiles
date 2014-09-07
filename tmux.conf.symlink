@@ -1,8 +1,8 @@
 # Enable UTF-8
-set-window-option -g utf8 on
+setw -g utf8 on
 
 # Enable 256-color mode
-set-option -g default-terminal "screen-256color"
+set -g default-terminal "screen-256color"
 
 # Change prefix key to ^a
 unbind C-b
@@ -29,10 +29,10 @@ set -g status-left '#[fg=green][ #H ][#[default]'
 set -g status-right '#[fg=green]][ #[fg=yellow]#(uptime | grep -o ": .*" | cut -c3-)#[fg=green] ]#[default]'
 
 # Pane borders
-set-option -g pane-active-border-fg green
-set-option -g pane-active-border-bg black
-set-option -g pane-border-fg white
-set-option -g pane-border-bg black
+set -g pane-active-border-fg green
+set -g pane-active-border-bg black
+set -g pane-border-fg white
+set -g pane-border-bg black
 
 # Easy reload of tmux configuration
 bind r source ~/.tmux.conf \; display-message "tmux.conf reloaded."
@@ -48,10 +48,24 @@ set -g set-titles-string '#S:#I.#P #W'
 # Vi mode
 setw -g mode-keys vi
 
-# Mouse mode
+# Copy mode
+unbind [
+bind Escape copy-mode
+unbind ]
+bind C-p paste-buffer
+bind -t vi-copy v begin-selection
+bind -t vi-copy y copy-selection
+bind -t vi-copy C-v rectangle-toggle
+# In copy mode, use [prefix]+V to select the entire line
+# Found at <http://superuser.com/a/743904/64392>
+bind V send-keys "0v\$"
+
+# Mouse stuff
+# (In iTerm2, hold down the option key for Mac-native copying)
 setw -g mode-mouse on
 set -g mouse-select-pane on
 set -g mouse-resize-pane on
+set -g mouse-select-window on
 
 # Other misc. options
-set-option -g visual-bell on
+set -g visual-bell on
