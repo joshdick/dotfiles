@@ -22,12 +22,15 @@ alias mirror='wget -H -r --level=1 -k -p $1'
 alias ip="curl icanhazip.com"
 alias cpu='top -o cpu'
 alias mem='top -o rsize' # memory
+alias please='sudo $(fc -ln -1)' # or sudo $(history -p !!) for bash
 
 # Mac-specific aliases
 
 alias f="open -a Finder ./"
 alias lsappstore="mdfind kMDItemAppStoreHasReceipt=1"
 alias flushdns="sudo killall -HUP mDNSResponder"
+# For when ocspd is being dumb - https://majid.info/blog/ocspd-crashes/
+alias ugh="sudo -s 'kill -9 $(pgrep ocspd); rm -rf /private/var/db/crls/*; rm -rf /private/var/db/crls/.fl*'"
 
 # Git aliases
 
