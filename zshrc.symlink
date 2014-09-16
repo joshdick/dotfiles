@@ -32,7 +32,7 @@ function command_exists() {
 HISTFILE=~/.zsh_history
 HISTSIZE=1000
 SAVEHIST=1000
-setopt autocd beep nomatch prompt_subst correct
+setopt autocd beep nomatch prompt_subst correct inc_append_history share_history
 unsetopt notify
 zstyle :compinstall filename "$HOME/.zshrc"
 autoload -Uz compinit && compinit
