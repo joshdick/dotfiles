@@ -40,7 +40,7 @@ autoload -U colors && colors # Enable colors in prompt
 
 # *** ZSH KEYBOARD SETTINGS ***
 
-# This configuration was found at http://zshwiki.org/home/zle/bindkeys
+# Special key bindings, based on http://zshwiki.org/home/zle/bindkeys
 
 # Create a zkbd compatible hash;
 # to add other keys to this hash, see: man 5 terminfo
@@ -56,6 +56,7 @@ key[Left]=${terminfo[kcub1]}
 key[Right]=${terminfo[kcuf1]}
 key[PageUp]=${terminfo[kpp]}
 key[PageDown]=${terminfo[knp]}
+#key[Enter]=${terminfo[kent]}
 
 # Set up keys accordingly.
 [[ -n "${key[Home]}"    ]]  && bindkey  "${key[Home]}"    beginning-of-line
@@ -66,6 +67,7 @@ key[PageDown]=${terminfo[knp]}
 [[ -n "${key[Down]}"    ]]  && bindkey  "${key[Down]}"    down-line-or-history
 [[ -n "${key[Left]}"    ]]  && bindkey  "${key[Left]}"    backward-char
 [[ -n "${key[Right]}"   ]]  && bindkey  "${key[Right]}"   forward-char
+#[[ -n "${key[Enter]}"   ]]  && bindkey  "${key[Enter]}"   accept-line
 
 # Finally, make sure the terminal is in application mode, when zle is
 # active. Only then are the values from $terminfo valid.
@@ -78,12 +80,41 @@ function zle-line-finish () {
 zle -N zle-line-init
 zle -N zle-line-finish
 
+# Keypad bindings, based on http://superuser.com/a/742193/64392
+
+# To determine a keycode for a given key, press [CTRL-v] before typing it.
+
+# 0 . Enter
+bindkey -s "^[Op" "0"
+bindkey -s "^[On" "."
+bindkey -s "^[OM" "^M"
+# 1 2 3
+bindkey -s "^[Oq" "1"
+bindkey -s "^[Or" "2"
+bindkey -s "^[Os" "3"
+# 4 5 6
+bindkey -s "^[Ot" "4"
+bindkey -s "^[Ou" "5"
+bindkey -s "^[Ov" "6"
+# 7 8 9
+bindkey -s "^[Ow" "7"
+bindkey -s "^[Ox" "8"
+bindkey -s "^[Oy" "9"
+# + -  * /
+bindkey -s "^[Ok" "+"
+bindkey -s "^[Om" "-"
+bindkey -s "^[Oj" "*"
+bindkey -s "^[Oo" "/"
+
 # *** COLOR SCHEME ***
 
 # Needed for base16-vim color scheme to work properly.
 # Using the "tomorrow" variant for vim while using the "bright"
 # variant for the shell seems to work fine.
-. ~/.zsh/base16-shell/base16-bright.dark.sh
+# The test for $TERM_PROGRAM prevents the color scheme from being
+# loaded in IntelliJ IDEA ( https://youtrack.jetbrains.com/issue/IDEA-127884 ),
+# but allows it to load in iTerm and Terminal.app.
+test -n "$TERM_PROGRAM" && . ~/.zsh/base16-shell/base16-bright.dark.sh
 
 # *** PROMPT FORMATTING ***
 
