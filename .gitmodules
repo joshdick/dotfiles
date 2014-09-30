@@ -19,9 +19,6 @@
 [submodule "bin.symlink/formd"]
 	path = bin.symlink/formd
 	url = https://github.com/drbunsen/formd
-[submodule "bin.symlink/cdd"]
-	path = bin.symlink/cdd
-	url = https://github.com/jestor/cdd
 [submodule "zsh.symlink/git-prompt"]
 	path = zsh.symlink/git-prompt
 	url = https://gist.github.com/4415470.git
@@ -46,3 +43,6 @@
 [submodule "bin.symlink/tmuxomatic"]
 	path = bin.symlink/tmuxomatic
 	url = https://github.com/oxidane/tmuxomatic.git
+[submodule "bin.symlink/hr"]
+	path = bin.symlink/hr
+	url = https://github.com/LuRsT/hr.git
