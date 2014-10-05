@@ -68,7 +68,7 @@ function update() {
     sudo apt-get update
     sudo apt-get upgrade
   elif command_exists pacman; then
-    echo "Upadting packages via pacman..."
+    echo "Updating packages via pacman..."
     sudo pacman -Syu
   fi
 
@@ -81,6 +81,8 @@ function update() {
     echo "Updating dotfiles..."
     git pull
     echo "Updating git submodules..."
+    git submodule init
+    git submodule update
     git submodule foreach 'git fetch --all &> /dev/null; git reset --hard origin/master &> /dev/null'
     popd -q
   fi
