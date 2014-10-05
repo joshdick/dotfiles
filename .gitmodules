@@ -10,9 +10,6 @@
 [submodule "bin.symlink/git-cr"]
 	path = bin.symlink/git-cr
 	url = https://github.com/joshdick/git-cr
-[submodule "bin.symlink/pytograph"]
-	path = bin.symlink/pytograph
-	url = https://github.com/joshdick/pytograph
 [submodule "bin.symlink/spot-program"]
 	path = bin.symlink/spot-program
 	url = https://github.com/guille/spot
@@ -28,9 +25,6 @@
 [submodule "zsh.symlink/zsh-syntax-highlighting"]
 	path = zsh.symlink/zsh-syntax-highlighting
 	url = https://github.com/zsh-users/zsh-syntax-highlighting
-[submodule "bin.symlink/searchlink"]
-	path = bin.symlink/searchlink
-	url = https://gist.github.com/3900158.git
 [submodule "bin.symlink/fasd"]
 	path = bin.symlink/fasd
 	url = git://github.com/clvv/fasd.git
