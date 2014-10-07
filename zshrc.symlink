@@ -118,9 +118,16 @@ test -n "$TERM_PROGRAM" && . ~/.zsh/base16-shell/base16-bright.dark.sh
 
 # *** PROMPT FORMATTING ***
 
+# Echoes a username/host string when connected over SSH (empty otherwise)
+ssh_info() {
+  [[ "$SSH_CONNECTION" != '' ]] && echo '%(!.%{$fg[red]%}.%{$fg[yellow]%})%n%{$reset_color%}@%{$fg[green]%}%m%{$reset_color%}:' || echo ''
+}
+
+# Use ❯ as the non-root prompt character; # for root
+# Change the prompt character color if the last command had a nonzero exit code
 PS1="
-%(!.%{$fg[red]%}.%{$fg[magenta]%})%n%{$reset_color%}@%{$fg[yellow]%}%m%{$reset_color%}:%{$fg[green]%}%~%u%{$reset_color%}
-%{$fg[blue]%}›%{$reset_color%} "
+$(ssh_info)%{$fg[magenta]%}%~%u%{$reset_color%}
+%(?.%{$fg[blue]%}.%{$fg[red]%})%(!.#.❯)%{$reset_color%} "
 
 # Right-hand Git prompt <https://gist.github.com/4415470>
 . ~/.zsh/git-prompt/git_prompt.zsh
