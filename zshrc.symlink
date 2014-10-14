@@ -195,7 +195,8 @@ if command_exists brew; then
   GIT_BASH_COMPLETION_SOURCE=`brew --prefix`/etc/bash_completion.d/git-completion.bash
   GIT_ZSH_COMPLETION_SOURCE=`brew --prefix`/share/zsh/site-functions/_git
 
-  BREW_NPM_BINARY_DIR="/usr/local/share/npm/bin"
+  # Homebrew-provided npm
+  BREW_NPM_BINARY_DIR=`brew --prefix`/share/npm/bin
   test -d $BREW_NPM_BINARY_DIR && export PATH=$BREW_NPM_BINARY_DIR:$PATH
 fi
 
@@ -213,11 +214,11 @@ fi
 NODE_MODULE_DIR="/usr/local/lib/node_modules"
 test -d $NODE_MODULE_DIR && export NODE_PATH=$NODE_MODULE_DIR
 
-# Initialize rbenv if it's installed
+# Initialize rbenv if it's installed (it may be installed via Homebrew)
 RBENV_BIN_DIR="$HOME/.rbenv/bin"
-if [ -d $RBENV_BIN_DIR ]; then
-  export PATH="$RBENV_BIN_DIR:$PATH"
-  eval "$(rbenv init -)"
+test -d $RBENV_BIN_DIR && export PATH="$RBENV_BIN_DIR:$PATH"
+if command_exists rbenv; then
+  eval "$(rbenv init -)";
 fi
 
 # Initialize the "personal bin"
