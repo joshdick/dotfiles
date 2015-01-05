@@ -27,6 +27,9 @@ function command_exists() {
   hash "$1" &> /dev/null
 }
 
+# Include any machine-specific configuration if it exists
+test -r ~/.localrc && . ~/.localrc
+
 # *** ZSH-SPECIFIC SETTINGS ***
 
 HISTFILE=~/.zsh_history
@@ -221,8 +224,11 @@ if command_exists rbenv; then
   eval "$(rbenv init -)";
 fi
 
+# Initialize a default Python virtualenv if one is configured in ~/.localrc
+# (VIRTUALENV_ACTIVATOR should point to ./bin/activate)
+if [ -n "$VIRTUALENV_ACTIVATOR" -a -r "$VIRTUALENV_ACTIVATOR" ]; then
+  VIRTUAL_ENV_DISABLE_PROMPT=1 . "$VIRTUALENV_ACTIVATOR"
+fi
+
 # Initialize the "personal bin"
 . ~/.bin/bin_init.zsh
-
-# Include any machine-specific configuration if it exists
-test -r ~/.localrc && . ~/.localrc
