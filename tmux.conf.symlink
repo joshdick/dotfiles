@@ -64,7 +64,7 @@ bind C-p paste-buffer
 # Paste to a client Mac's clipboard via SSH; found at http://superuser.com/a/408374/64392
 # Requires "RemoteForward 4242 127.0.0.1:22" in the client machine's SSH configuration
 # or SSHing to the tmux machine by running "ssh -R 4242:localhost:22 tmuxMachine"
-bind C-P run "tmux save-buffer - | ssh -p 4242 localhost pbcopy"
+bind C-v run "tmux save-buffer - | ssh -p 4242 localhost pbcopy"
 
 # Mouse stuff
 # (In iTerm2, hold down the option key for Mac-native copying)
