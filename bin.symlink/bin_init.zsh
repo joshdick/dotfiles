@@ -7,3 +7,7 @@ eval "$(fasd --init auto)"
 
 # Set up resty <https://github.com/micha/resty>
 . resty
+
+# Set up tmuxomatic <https://github.com/oxidane/tmuxomatic>
+# (since symlinking it into ~/.bin confuses python)
+alias tmuxomatic=~/.bin/repos/tmuxomatic/tmuxomatic
