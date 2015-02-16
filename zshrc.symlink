@@ -117,7 +117,7 @@ bindkey -s "^[Oo" "/"
 # The test for $TERM_PROGRAM prevents the color scheme from being
 # loaded in IntelliJ IDEA ( https://youtrack.jetbrains.com/issue/IDEA-127884 ),
 # but allows it to load in iTerm and Terminal.app.
-test -n "$TERM_PROGRAM" && . ~/.zsh/base16-shell/base16-bright.dark.sh
+test -n "$TERM_PROGRAM" && . ~/.zsh/base16-shell/base16-tomorrow.dark.sh
 
 # *** PROMPT FORMATTING ***
 
