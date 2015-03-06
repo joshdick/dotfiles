@@ -14,6 +14,7 @@ Bundle 'nelstrom/vim-visual-star-search'
 Bundle 'plasticboy/vim-markdown'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/nerdtree'
+Bundle 'scrooloose/syntastic'
 Bundle 'sjl/gundo.vim'
 Bundle 'tpope/vim-fugitive'
 
@@ -64,6 +65,34 @@ if has("gui") "Instead of gui_running, in case :gui is run manually on *NIX
     set transparency=5 "Enable background transparency in MacVim
   endif
 endif
+
+" --------------- syntastic configuration ---------------
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+" --------------- /syntastic configuration ---------------
+
+" --------------- vim-airline configuration ---------------
+
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+
+" unicode symbols
+let g:airline_left_sep = '▶'
+let g:airline_right_sep = '◀'
+let g:airline_symbols.linenr = '␤'
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.whitespace = 'Ξ'
+
+" Turn off Vim's native mode indicator, since vim-airline shows the mode
+set noshowmode
+
+" --------------- /vim-airline configuration ---------------
 
 "Tell ack.vim to use ag if it's available
 if executable('ag')
@@ -241,10 +270,8 @@ nmap <leader>l :set list!<CR>
 nmap <leader>n :set number! number?<CR>
 
 "Shortcut to toggle auto-indenting for code paste
-"Found at <http://vim.wikia.com/wiki/Toggle_auto-indenting_for_code_paste>
-nnoremap <leader>p :set invpaste paste?<CR>
-set pastetoggle=<leader>p
-set showmode
+"Don't bother with pastetoggle, since it doesn't cooperate with vim-airline: <https://github.com/bling/vim-airline/issues/219>
+nmap <leader>p :set invpaste<CR>
 
 "Shortcut to toggle Gundo
 nmap <leader>u :GundoToggle<CR>
