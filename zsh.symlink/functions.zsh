@@ -61,7 +61,12 @@ function serve() {
   python -m SimpleHTTPServer $port
 }
 
-# Performs a system update on Debian-based and Arch Linux systems, updates Homebrew packages on OS X, updates all Git submodules
+# Updates stuff!
+# * Performs a system update on Debian-based and Arch Linux systems
+# * Updates all dotfiles Git submodules
+# * Updates all Vim plugins via Vundle
+# * Updates Homebrew packages on OS X
+# * Updates pip/gem/npm
 function update() {
   if command_exists apt-get; then
     echo "Updating packages via apt-get..."
@@ -85,6 +90,11 @@ function update() {
     git submodule update
     git submodule foreach 'git fetch --all &> /dev/null; git reset --hard origin/master &> /dev/null'
     popd -q
+  fi
+
+  if [ ! -z ~/.vim/vundle ]; then
+    echo "Updating Vim plugins via Vundle..."
+    vim +PluginInstall +qall
   fi
 
   if command_exists brew; then
