@@ -14,7 +14,7 @@ var doOperation = function(win, isOriented, name, options) {
         options.screen = "next";
     }
     win.doOperation(slate.operation(name, options));
-}
+};
 
 var positions = {
     TOP_LEFT: {
