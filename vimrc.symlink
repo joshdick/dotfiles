@@ -35,15 +35,15 @@ Bundle 'tpope/vim-fugitive'
 " 2) Match all tab characters at all times.
 " 3) Inside insert mode, don't match trailing whitespace on the current line.
 " 4) Outside insert mode, match all trailing whitespace on the current line.
-"highlight ExtraWhitespace ctermbg=red guibg=red
-"match ExtraWhitespace /\t\|\s\+$/
-"if has("autocmd")
-"  autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
-"  autocmd BufWinEnter * match ExtraWhitespace /\t\|\s\+$/
-"  autocmd InsertEnter * match ExtraWhitespace /\t\|\s\+\%#\@<!$/
-"  autocmd InsertLeave * match ExtraWhitespace /\t\|\s\+$/
-"  autocmd BufWinLeave * call clearmatches()
-"endif
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\t\|\s\+$/
+if has("autocmd")
+  autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+  autocmd BufWinEnter * match ExtraWhitespace /\t\|\s\+$/
+  autocmd InsertEnter * match ExtraWhitespace /\t\|\s\+\%#\@<!$/
+  autocmd InsertLeave * match ExtraWhitespace /\t\|\s\+$/
+  autocmd BufWinLeave * call clearmatches()
+endif
 
 if has("gui") "Instead of gui_running, in case :gui is run manually on *NIX
   "Font settings
@@ -62,7 +62,7 @@ if has("gui") "Instead of gui_running, in case :gui is run manually on *NIX
   "Found at <http://support.markedapp.com/kb/how-to-tips-and-tricks/marked-bonus-pack-scripts-commands-and-bundles>
   :nnoremap <leader>m :silent !open -a Marked.app '%:p'<cr> "Bind a shortcut for opening the current document in Marked.app on Mac OS X
   if has("transparency") "Background transparency is a MacVim-specific feature, so prevent errors in other vims
-    set transparency=5 "Enable background transparency in MacVim
+    set transparency=2 "Enable background transparency in MacVim
   endif
 endif
 
@@ -107,16 +107,21 @@ set mouse=a
 set background=dark
 let base16colorspace=256  " Access colors present in 256 colorspace (base16 color scheme)
 colorscheme base16-tomorrow
+"Hack to change the SpecialKey (nbsp/tab/trail) color after the colorscheme has loaded.
+"Colorscheme overriding technique found at <http://stackoverflow.com/a/7383051/278810>
+"The explicit color values were pulled from the base16-tomorrow theme.
+autocmd ColorScheme * hi SpecialKey guifg=#282a2e ctermfg=18
 
 set number
 set nobackup
 set nowritebackup
-"set list "Show invisible characters by default
+set cursorline
+set list "Show invisible characters by default
+set listchars=tab:→\ "This comment prevents trailing whitespace removal from removing the escaped space. :)
 
 set softtabstop=2
 set tabstop=2
 set shiftwidth=2
-set expandtab
 
 set bs=2 "Allow backspace to work properly
 set autoindent
@@ -136,10 +141,6 @@ else
 endif
 set laststatus=2
 
-"Invisible (list) character colors
-"highlight NonText guifg=#555555 "EOL
-"highlight SpecialKey guifg=#555555 "Tab
-
 "On Mac, map CMD-[ and CMD-] to indent while preserving any Visual mode selection as appropriate
 nmap <D-[> <<
 nmap <D-]> >>
@@ -148,9 +149,6 @@ vmap <D-]> >gv
 
 ":w!! will use sudo to save a non-writable file if you forgot to do 'sudo vim' by accident
 cmap w!! %!sudo tee > /dev/null %
-
-"Use the same symbols as TextMate for tabstops and EOLs
-set listchars=tab:▸\ ,eol:¬
 
 "Treat .md files as Markdown
 au BufRead,BufNewFile *.md set filetype=markdown
