@@ -36,12 +36,12 @@ Bundle 'tpope/vim-fugitive'
 " 3) Inside insert mode, don't match trailing whitespace on the current line.
 " 4) Outside insert mode, match all trailing whitespace on the current line.
 highlight ExtraWhitespace ctermbg=red guibg=red
-match ExtraWhitespace /\t\|\s\+$/
+match ExtraWhitespace /\s\+$/
 if has("autocmd")
   autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
-  autocmd BufWinEnter * match ExtraWhitespace /\t\|\s\+$/
-  autocmd InsertEnter * match ExtraWhitespace /\t\|\s\+\%#\@<!$/
-  autocmd InsertLeave * match ExtraWhitespace /\t\|\s\+$/
+  autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+  autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+  autocmd InsertLeave * match ExtraWhitespace /\s\+$/
   autocmd BufWinLeave * call clearmatches()
 endif
 
@@ -110,7 +110,9 @@ colorscheme base16-tomorrow
 "Hack to change the SpecialKey (nbsp/tab/trail) color after the colorscheme has loaded.
 "Colorscheme overriding technique found at <http://stackoverflow.com/a/7383051/278810>
 "The explicit color values were pulled from the base16-tomorrow theme.
-autocmd ColorScheme * hi SpecialKey guifg=#282a2e ctermfg=18
+if has("autocmd")
+  autocmd ColorScheme * hi SpecialKey guifg=#282a2e ctermfg=18
+endif
 
 set number
 set nobackup
