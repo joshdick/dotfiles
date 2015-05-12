@@ -94,7 +94,7 @@ function update() {
 
   if [ ! -z ~/.vim/vundle ]; then
     echo "Updating Vim plugins via Vundle..."
-    vim +PluginInstall +qall
+    vim +BundleInstall! +qall
   fi
 
   if command_exists brew; then
