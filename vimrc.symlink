@@ -4,7 +4,6 @@ call vundle#rc()
 "Github Bundles
 Bundle 'benmills/vimux'
 Bundle 'bling/vim-airline'
-Bundle 'chriskempson/base16-vim'
 Bundle 'corntrace/bufexplorer'
 Bundle 'ervandew/supertab'
 Bundle 'gabrielelana/vim-markdown'
@@ -17,9 +16,13 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/syntastic'
 Bundle 'sjl/gundo.vim'
 Bundle 'tpope/vim-fugitive'
+Bundle 'w0ng/vim-hybrid'
 
 "Unused colorschemes, here for future reference
+"Bundle 'chriskempson/base16-vim'
 "Bundle 'Lokaltog/vim-distinguished'
+"Bundle 'morhetz/gruvbox'
+"Bundle 'sickill/vim-monokai'
 "Bundle 'tpope/vim-vividchalk'
 
 "Disabled for now :P
@@ -89,6 +92,8 @@ let g:airline_symbols.branch = '⎇'
 let g:airline_symbols.paste = 'ρ'
 let g:airline_symbols.whitespace = 'Ξ'
 
+let g:airline_theme = 'tomorrow'
+
 " Turn off Vim's native mode indicator, since vim-airline shows the mode
 set noshowmode
 
@@ -105,14 +110,7 @@ set shortmess+=I
 set mouse=a
 
 set background=dark
-let base16colorspace=256  " Access colors present in 256 colorspace (base16 color scheme)
-colorscheme base16-tomorrow
-"Hack to change the SpecialKey (nbsp/tab/trail) color after the colorscheme has loaded.
-"Colorscheme overriding technique found at <http://stackoverflow.com/a/7383051/278810>
-"The explicit color values were pulled from the base16-tomorrow theme.
-if has("autocmd")
-  autocmd ColorScheme * hi SpecialKey guifg=#282a2e ctermfg=18
-endif
+colorscheme hybrid
 
 set number
 set nobackup
