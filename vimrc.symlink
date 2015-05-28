@@ -2,6 +2,7 @@
 set rtp+=~/.vim/vundle/
 call vundle#rc()
 "Github Bundles
+Bundle 'airblade/vim-gitgutter'
 Bundle 'benmills/vimux'
 Bundle 'bling/vim-airline'
 Bundle 'corntrace/bufexplorer'
@@ -18,6 +19,7 @@ Bundle 'scrooloose/syntastic'
 Bundle 'sjl/gundo.vim'
 Bundle 'tpope/vim-fugitive'
 Bundle 'w0ng/vim-hybrid'
+Bundle 'Xuyuanp/nerdtree-git-plugin'
 
 "Unused colorschemes, here for future reference
 "Bundle 'chriskempson/base16-vim'
