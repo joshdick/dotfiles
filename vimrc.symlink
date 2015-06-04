@@ -72,6 +72,25 @@ if has("gui") "Instead of gui_running, in case :gui is run manually on *NIX
   endif
 endif
 
+" ----------------- CtrlP configuration -----------------
+
+"Make CtrlP play nicer with Git projects.
+"Found at <http://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity/>
+
+let g:ctrlp_use_caching = 0
+if executable('ag')
+    set grepprg=ag\ --nogroup\ --nocolor
+
+    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+else
+  let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
+  let g:ctrlp_prompt_mappings = {
+    \ 'AcceptSelection("e")': ['<space>', '<cr>', '<2-LeftMouse>'],
+    \ }
+endif
+
+" ----------------- /CtrlP configuration -----------------
+
 " --------------- syntastic configuration ---------------
 
 let g:syntastic_always_populate_loc_list = 1
@@ -151,6 +170,9 @@ nmap <D-]> >>
 vmap <D-[> <gv
 vmap <D-]> >gv
 
+"Select the last-changed text
+noremap gV `[v`]
+
 ":w!! will use sudo to save a non-writable file if you forgot to do 'sudo vim' by accident
 cmap w!! %!sudo tee > /dev/null %
 
@@ -213,7 +235,7 @@ function! Preserve(command)
   call cursor(l, c)
 endfunction
 
-"Convert mixed line endings to LF-only (Unix.)
+"Convert mixed line endings to LF-only (Unix)
 "Found at <http://vim.wikia.com/wiki/File_format>
 function! ForceLF()
   :update
@@ -222,9 +244,10 @@ function! ForceLF()
   :w
 endfunction
 
-"NOTE - By default, <leader> is backslash.
+"NOTE - By default, <leader> is backslash
+let mapleader = "\<Space>"
 
-"vimux shortcuts.
+"vimux shortcuts
 "Found at <https://raw.github.com/benmills/vimux/master/doc/vimux.txt>
 
 "Prompt for a command to run
@@ -258,12 +281,31 @@ nmap <leader>s<right>  :rightbelow vnew<CR>
 nmap <leader>s<up>     :leftabove  new<CR>
 nmap <leader>s<down>   :rightbelow new<CR>
 
+"Shortcuts for interacting with the system clipboard
+"Found at <http://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity/>
+vmap <Leader>y "+y
+vmap <Leader>d "+d
+nmap <Leader>p "+p
+nmap <Leader>P "+P
+vmap <Leader>p "+p
+vmap <Leader>P "+P
+
 "Shortcut to toggle NERDTree
 nmap <leader>e :NERDTreeToggle<CR>
+
+"Shortcut to toggle Gundo
+nmap <leader>u :GundoToggle<CR>
+
+"Shortcut to toggle CtrlP (for 'o'pening files)
+nnoremap <Leader>o :CtrlP<CR>
 
 "Shorcut to toggle search hilighting
 "Found at <http://vim.wikia.com/wiki/Highlight_all_search_pattern_matches>
 noremap <leader>h :set hlsearch! hlsearch?<CR>
+
+"Shortcut to sort words inside a single line
+"Found at <http://stackoverflow.com/a/1329899/278810>
+vnoremap <leader>, d:execute 'normal a' . join(sort(split(getreg('"'))), ' ')<CR>
 
 "Shortcut to toggle 'set list' (toggles invisible characters)
 nmap <leader>l :set list!<CR>
@@ -273,10 +315,13 @@ nmap <leader>n :set number! number?<CR>
 
 "Shortcut to toggle auto-indenting for code paste
 "Don't bother with pastetoggle, since it doesn't cooperate with vim-airline: <https://github.com/bling/vim-airline/issues/219>
-nmap <leader>p :set invpaste<CR>
+nmap <leader>v :set invpaste<CR>
 
-"Shortcut to toggle Gundo
-nmap <leader>u :GundoToggle<CR>
+"Shortcut for entering visual line mode
+nmap <Leader><Leader> V
+
+"Shortcut for saving
+nnoremap <Leader>w :w<CR>
 
 "Shortcut to strip trailing whitespace
 nmap <silent> <leader>$ :call Preserve("%s/\\s\\+$//e")<CR>
@@ -286,3 +331,4 @@ nmap <silent> <leader>= :call Preserve("normal gg=G")<CR>
 
 "Shortcut to convert mixed line endings to LF-only (Unix)
 nmap <leader>d :call ForceLF()<CR>
+
