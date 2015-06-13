@@ -311,6 +311,22 @@ function gss() {
   fi
 }
 
+# Calculate a hash of all files in the current directory.
+# Adapted from code found at <http://stackoverflow.com/a/1658554/278810>
+function md5dir() {
+	if command_exists gmd5sum; then
+		md5Command='gmd5sum' # Mac (coreutils via Homebrew)
+	elif command_exists md5; then
+		md5Command='md5 -q' # Mac (native)
+	elif command_exists md5sum; then
+		md5Command='md5sum' # Linux
+	else
+		echo "Error: No md5 program available!"
+		return 1
+	fi
+	eval "find . -type f -exec $md5Command {} + | cut -d ' ' -f 1 | sort | $md5Command | cut -d ' ' -f 1"
+}
+
 # Copy dotfiles to one or more remote machines.
 function sync_home() {
   local DOTFILES_LOCATION="${$(readlink ~/.zshrc)%/*.*}"
