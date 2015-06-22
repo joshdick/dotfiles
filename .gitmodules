@@ -40,3 +40,6 @@
 [submodule "bin.symlink/repos/resty"]
 	path = bin.symlink/repos/resty
 	url = git://github.com/micha/resty
+[submodule "bin.symlink/repos/anigrate"]
+	path = bin.symlink/repos/anigrate
+	url = https://github.com/GGLucas/anigrate.git
