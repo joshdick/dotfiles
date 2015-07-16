@@ -10,9 +10,11 @@ Bundle 'ervandew/supertab'
 Bundle 'gabrielelana/vim-markdown'
 Bundle 'kien/ctrlp.vim'
 Bundle 'Lokaltog/vim-easymotion'
+Bundle 'marijnh/tern_for_vim'
 Bundle 'mileszs/ack.vim'
 Bundle 'nelstrom/vim-visual-star-search'
 Bundle 'pangloss/vim-javascript'
+Bundle 'rizzatti/dash.vim'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/syntastic'
@@ -27,9 +29,6 @@ Bundle 'Xuyuanp/nerdtree-git-plugin'
 "Bundle 'morhetz/gruvbox'
 "Bundle 'sickill/vim-monokai'
 "Bundle 'tpope/vim-vividchalk'
-
-"Disabled for now :P
-"Bundle 'marijnh/tern_for_vim'
 
 "NOTE: This block was commented out in favor of 'set list'. Uncomment all
 "executable lines in this block to restore tab/whitespace hilighting

@@ -37,9 +37,6 @@
 [submodule "bin.symlink/repos/formd"]
 	path = bin.symlink/repos/formd
 	url = git://github.com/drbunsen/formd
-[submodule "bin.symlink/repos/resty"]
-	path = bin.symlink/repos/resty
-	url = git://github.com/micha/resty
 [submodule "bin.symlink/repos/anigrate"]
 	path = bin.symlink/repos/anigrate
 	url = https://github.com/GGLucas/anigrate.git

@@ -5,9 +5,6 @@ export PATH=$(cd -P -- "$(dirname -- "$0")" && pwd -P):$PATH
 # Set up fasd <https://github.com/clvv/fasd>
 eval "$(fasd --init auto)"
 
-# Set up resty <https://github.com/micha/resty>
-. resty
-
 # Set up tmuxomatic <https://github.com/oxidane/tmuxomatic>
 # (since symlinking it into ~/.bin confuses python)
 alias tmuxomatic=~/.bin/repos/tmuxomatic/tmuxomatic
