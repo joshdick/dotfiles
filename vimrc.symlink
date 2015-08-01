@@ -52,9 +52,8 @@ endif
 
 if has("gui") "Instead of gui_running, in case :gui is run manually on *NIX
   "Font settings
-  set guifont=DejaVu\ Sans\ Mono:h12
-  "set noantialias
-  set antialias
+  set guifont=PragmataPro\ Mono:h12
+  set noantialias
 
   "OS-specific settings.
   if has("unix")
@@ -102,17 +101,7 @@ let g:syntastic_javascript_checkers = ['jshint', 'jscs']
 
 " --------------- vim-airline configuration ---------------
 
-if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
-endif
-
-" unicode symbols
-let g:airline_left_sep = '▶'
-let g:airline_right_sep = '◀'
-let g:airline_symbols.linenr = '␤'
-let g:airline_symbols.branch = '⎇'
-let g:airline_symbols.paste = 'ρ'
-let g:airline_symbols.whitespace = 'Ξ'
+let g:airline_powerline_fonts = 1
 
 let g:airline_theme = 'tomorrow'
 
