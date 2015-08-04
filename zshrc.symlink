@@ -45,8 +45,10 @@ autoload -U colors && colors # Enable colors in prompt
 
 bindkey "^[[H" beginning-of-line
 bindkey "^[[1~" beginning-of-line
+bindkey "^[[7~" beginning-of-line
 bindkey "^[[F" end-of-line
 bindkey "^[[4~" end-of-line
+bindkey "^[[8~" end-of-line
 bindkey "^[[3~" delete-char
 bindkey "^[[1;2C" forward-word
 bindkey "^[[1;2D" backward-word
@@ -56,10 +58,10 @@ bindkey "^[[1;2D" backward-word
 # Needed for base16-vim color scheme to work properly.
 # Using the "tomorrow" variant for vim while using the "bright"
 # variant for the shell seems to work fine.
-# The test for $TERM_PROGRAM prevents the color scheme from being
+# The environment variable tests prevent the color scheme from being
 # loaded in IntelliJ IDEA ( https://youtrack.jetbrains.com/issue/IDEA-127884 ),
-# but allows it to load in iTerm and Terminal.app.
-test -n "$TERM_PROGRAM" && . ~/.zsh/base16-shell/base16-tomorrow.dark.sh
+# but allow it to load in iTerm, Terminal.app, and urxvt.
+[[ -n "$TERM_PROGRAM" || -n "$COLORTERM" ]] && . ~/.zsh/base16-shell/base16-tomorrow.dark.sh
 
 # *** PROMPT FORMATTING ***
 
