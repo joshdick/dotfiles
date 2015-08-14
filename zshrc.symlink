@@ -55,13 +55,10 @@ bindkey "^[[1;2D" backward-word
 
 # *** COLOR SCHEME ***
 
-# Needed for base16-vim color scheme to work properly.
-# Using the "tomorrow" variant for vim while using the "bright"
-# variant for the shell seems to work fine.
 # The environment variable tests prevent the color scheme from being
 # loaded in IntelliJ IDEA ( https://youtrack.jetbrains.com/issue/IDEA-127884 ),
 # but allow it to load in iTerm, Terminal.app, and urxvt.
-[[ -n "$TERM_PROGRAM" || -n "$COLORTERM" ]] && . ~/.zsh/base16-shell/base16-tomorrow.dark.sh
+[[ -n "$TERM_PROGRAM" || -n "$COLORTERM" ]] && . ~/.zsh/base16-shell/base16-eighties.dark.sh
 
 # *** PROMPT FORMATTING ***
 
