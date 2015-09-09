@@ -151,9 +151,15 @@ if [ -r "$GIT_BASH_COMPLETION_SOURCE" ] && [ -r "$GIT_ZSH_COMPLETION_SOURCE" ]; 
   fpath=(~/.zsh/completion $fpath)
 fi
 
-# If npm's global node_modules directory exists in the expected location, set NODE_PATH accordingly
-NODE_MODULE_DIR="/usr/local/lib/node_modules"
-test -d $NODE_MODULE_DIR && export NODE_PATH=$NODE_MODULE_DIR
+NVM_DIR="/Users/Josh/.nvm"
+HOMEBREW_NODE_MODULE_DIR="/usr/local/lib/node_modules"
+if [ -s "$NVM_DIR/nvm.sh" ]; then
+  # Initialize nvm if it's installed
+  . "$NVM_DIR/nvm.sh"
+elif [ -d $HOMEBREW_NODE_MODULE_DIR ]; then
+  # If node was installed via Homebrew, set NODE_PATH accordingly
+  export NODE_PATH=$HOMEBREW_NODE_MODULE_DIR
+fi
 
 # Initialize rbenv if it's installed (it may be installed via Homebrew)
 RBENV_BIN_DIR="$HOME/.rbenv/bin"
