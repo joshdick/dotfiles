@@ -151,7 +151,7 @@ if [ -r "$GIT_BASH_COMPLETION_SOURCE" ] && [ -r "$GIT_ZSH_COMPLETION_SOURCE" ]; 
   fpath=(~/.zsh/completion $fpath)
 fi
 
-NVM_DIR="/Users/Josh/.nvm"
+NVM_DIR="$HOME/.nvm"
 HOMEBREW_NODE_MODULE_DIR="/usr/local/lib/node_modules"
 if [ -s "$NVM_DIR/nvm.sh" ]; then
   # Initialize nvm if it's installed
