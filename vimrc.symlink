@@ -30,10 +30,6 @@ Bundle 'Xuyuanp/nerdtree-git-plugin'
 "Bundle 'sickill/vim-monokai'
 "Bundle 'tpope/vim-vividchalk'
 
-"NOTE: This block was commented out in favor of 'set list'. Uncomment all
-"executable lines in this block to restore tab/whitespace hilighting
-"functionality.
-"
 "Whitespace matching: must appear before the colorscheme is set
 "SUMMARY OF BEHAVIOR:
 " 1) Apply to all buffers.
@@ -103,7 +99,7 @@ let g:syntastic_javascript_checkers = ['jshint', 'jscs']
 
 let g:airline_powerline_fonts = 1
 
-let g:airline_theme = 'tomorrow'
+let g:airline_theme = 'powerlineish'
 
 " Turn off Vim's native mode indicator, since vim-airline shows the mode
 set noshowmode
@@ -122,6 +118,9 @@ set mouse=a
 
 set background=dark
 colorscheme hybrid
+"Override the theme background; use the terminal color instead
+autocmd ColorScheme * highlight Normal ctermbg=None
+autocmd ColorScheme * highlight NonText ctermbg=None
 
 set number
 set nobackup
