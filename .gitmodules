@@ -1,6 +1,3 @@
-[submodule "vim.symlink/vundle"]
-	path = vim.symlink/vundle
-	url = https://github.com/gmarik/vundle
 [submodule "zsh.symlink/git-prompt"]
 	path = zsh.symlink/git-prompt
 	url = https://gist.github.com/4415470.git
@@ -40,3 +37,6 @@
 [submodule "bin.symlink/repos/anigrate"]
 	path = bin.symlink/repos/anigrate
 	url = https://github.com/GGLucas/anigrate.git
+[submodule "vim.symlink/bundle/Vundle.vim"]
+	path = vim.symlink/bundle/Vundle.vim
+	url = https://github.com/VundleVim/Vundle.vim.git

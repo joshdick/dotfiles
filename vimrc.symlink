@@ -1,34 +1,38 @@
 "Vundle plugin and bundle initialization
-set rtp+=~/.vim/vundle/
-call vundle#rc()
-"Github Bundles
-Bundle 'airblade/vim-gitgutter'
-Bundle 'benmills/vimux'
-Bundle 'bling/vim-airline'
-Bundle 'chriskempson/base16-vim'
-Bundle 'corntrace/bufexplorer'
-Bundle 'ervandew/supertab'
-Bundle 'gabrielelana/vim-markdown'
-Bundle 'kien/ctrlp.vim'
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'marijnh/tern_for_vim'
-Bundle 'mileszs/ack.vim'
-Bundle 'nelstrom/vim-visual-star-search'
-Bundle 'pangloss/vim-javascript'
-Bundle 'rizzatti/dash.vim'
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'scrooloose/nerdtree'
-Bundle 'scrooloose/syntastic'
-Bundle 'sjl/gundo.vim'
-Bundle 'tpope/vim-fugitive'
-Bundle 'Xuyuanp/nerdtree-git-plugin'
+set nocompatible
+filetype off
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+"Github Plugins
+Plugin 'airblade/vim-gitgutter'
+Plugin 'benmills/vimux'
+Plugin 'bling/vim-airline'
+Plugin 'chriskempson/base16-vim'
+Plugin 'corntrace/bufexplorer'
+Plugin 'ervandew/supertab'
+Plugin 'gabrielelana/vim-markdown'
+Plugin 'kien/ctrlp.vim'
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'marijnh/tern_for_vim'
+Plugin 'mileszs/ack.vim'
+Plugin 'nelstrom/vim-visual-star-search'
+Plugin 'pangloss/vim-javascript'
+Plugin 'rizzatti/dash.vim'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/syntastic'
+Plugin 'sjl/gundo.vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+call vundle#end()
 
 "Unused colorschemes, here for future reference
-"Bundle 'Lokaltog/vim-distinguished'
-"Bundle 'morhetz/gruvbox'
-"Bundle 'sickill/vim-monokai'
-"Bundle 'tpope/vim-vividchalk'
-"Bundle 'w0ng/vim-hybrid'
+"Plugin 'Lokaltog/vim-distinguished'
+"Plugin 'morhetz/gruvbox'
+"Plugin 'sickill/vim-monokai'
+"Plugin 'tpope/vim-vividchalk'
+"Plugin 'w0ng/vim-hybrid'
 
 "Whitespace matching: must appear before the colorscheme is set
 "SUMMARY OF BEHAVIOR:
