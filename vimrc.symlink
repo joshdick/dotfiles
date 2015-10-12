@@ -64,6 +64,10 @@ if has("gui") "Instead of gui_running, in case :gui is run manually on *NIX
   if has("transparency") "Background transparency is a MacVim-specific feature, so prevent errors in other vims
     set transparency=2 "Enable background transparency in MacVim
   endif
+else
+  "If running on a terminal, override the theme background; use the terminal color instead
+  autocmd ColorScheme * highlight Normal ctermbg=None
+  autocmd ColorScheme * highlight NonText ctermbg=None
 endif
 
 " ----------------- CtrlP configuration -----------------
@@ -118,9 +122,6 @@ set mouse=a
 
 set background=dark
 colorscheme hybrid
-"Override the theme background; use the terminal color instead
-autocmd ColorScheme * highlight Normal ctermbg=None
-autocmd ColorScheme * highlight NonText ctermbg=None
 
 set number
 set nobackup
