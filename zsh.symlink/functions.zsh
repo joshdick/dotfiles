@@ -225,6 +225,16 @@ function compress() {
   fi
 }
 
+# Found at <http://www.askapache.com/linux/zen-terminal-escape-codes.html#3rd_Dimension_Broken_Bash>
+function colortest() {
+  x=`tput op` y=`printf %$((${COLUMNS}-6))s`
+  for i in {0..256}
+  do
+    o=00$i
+    echo -e ${o:${#o}-3:3} `tput setaf $i;tput setab $i`${y// /=}$x
+  done
+}
+
 # Poor-man's pgrep, for use on OS X where pgrep isn't available
 function poorpgrep() {
   echo "Warning: using poor-man's pgrep. Consider installing the \"proctools\" package via Homebrew."
