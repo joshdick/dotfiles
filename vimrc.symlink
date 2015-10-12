@@ -126,7 +126,7 @@ colorscheme hybrid
 set number
 set nobackup
 set nowritebackup
-set cursorline
+"set cursorline "Commented due to poor rendering performance
 set list "Show invisible characters by default
 set listchars=tab:→\ "This comment prevents trailing whitespace removal from removing the escaped space. :)
 
