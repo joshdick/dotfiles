@@ -270,12 +270,12 @@ nmap <leader>s<down>   :rightbelow new<CR>
 
 "Shortcuts for interacting with the system clipboard
 "Found at <http://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity/>
-vmap <Leader>y "+y
-vmap <Leader>d "+d
-nmap <Leader>p "+p
-nmap <Leader>P "+P
-vmap <Leader>p "+p
-vmap <Leader>P "+P
+vmap <leader>y "+y
+vmap <leader>d "+d
+nmap <leader>p "+p
+nmap <leader>P "+P
+vmap <leader>p "+p
+vmap <leader>P "+P
 
 "Shortcut to toggle NERDTree
 nmap <leader>e :NERDTreeToggle<CR>
@@ -284,7 +284,7 @@ nmap <leader>e :NERDTreeToggle<CR>
 nmap <leader>u :GundoToggle<CR>
 
 "Shortcut to toggle CtrlP (for 'o'pening files)
-nnoremap <Leader>o :CtrlP<CR>
+nnoremap <leader>o :CtrlP<CR>
 
 "Shorcut to toggle search hilighting
 "Found at <http://vim.wikia.com/wiki/Highlight_all_search_pattern_matches>
@@ -305,10 +305,10 @@ nmap <leader>n :set number! number?<CR>
 nmap <leader>v :set invpaste<CR>
 
 "Shortcut for entering visual line mode
-nmap <Leader><Leader> V
+nmap <leader><leader> V
 
 "Shortcut for saving
-nnoremap <Leader>w :w<CR>
+nnoremap <leader>w :w<CR>
 
 "Shortcut to strip trailing whitespace
 nmap <silent> <leader>$ :call Preserve("%s/\\s\\+$//e")<CR>
