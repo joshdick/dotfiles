@@ -17,9 +17,8 @@ I foc
 
 window E-Mail
 
-OM
+M
 
   dir ~
-O run offlineimap
 M run mutt
 M foc
