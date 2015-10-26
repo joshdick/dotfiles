@@ -7,17 +7,19 @@ call vundle#begin()
 Plugin 'airblade/vim-gitgutter'
 Plugin 'benmills/vimux'
 Plugin 'bling/vim-airline'
-Plugin 'chriskempson/base16-vim'
 Plugin 'corntrace/bufexplorer'
 Plugin 'ervandew/supertab'
 Plugin 'gabrielelana/vim-markdown'
+"Plugin 'jelera/vim-javascript-syntax'
+Plugin 'joshdick/onedark.vim'
 Plugin 'kien/ctrlp.vim'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'marijnh/tern_for_vim'
 Plugin 'mileszs/ack.vim'
-Plugin 'mxw/vim-jsx.git'
+"Plugin 'mxw/vim-jsx.git'
 Plugin 'nelstrom/vim-visual-star-search'
-Plugin 'pangloss/vim-javascript'
+Plugin 'othree/yajs.vim'
+"Plugin 'pangloss/vim-javascript'
 Plugin 'rizzatti/dash.vim'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
@@ -29,11 +31,21 @@ Plugin 'Xuyuanp/nerdtree-git-plugin'
 call vundle#end()
 
 "Unused colorschemes, here for future reference
+"Plugin 'chriskempson/base16-vim'
+"Plugin 'cocopon/iceberg.vim'
+"Plugin 'geoffharcourt/one-dark.vim'
+"Plugin 'jonathanfilip/vim-lucius'
 "Plugin 'Lokaltog/vim-distinguished'
+"Plugin 'MaxSt/FlatColor'
 "Plugin 'morhetz/gruvbox'
+"Plugin 'nanotech/jellybeans.vim'
+"Plugin 'noah/vim256-color'
 "Plugin 'sickill/vim-monokai'
+"Plugin 'tomasr/molokai'
 "Plugin 'tpope/vim-vividchalk'
 "Plugin 'w0ng/vim-hybrid'
+"Plugin 'yosiat/oceanic-next-vim'
+"Plugin 'zeis/vim-kolor.git'
 
 "Whitespace matching: must appear before the colorscheme is set
 "SUMMARY OF BEHAVIOR:
@@ -53,12 +65,12 @@ endif
 
 if has("gui") "Instead of gui_running, in case :gui is run manually on *NIX
   "Font settings
-  set guifont=PragmataPro\ Mono:h12
-  set noantialias
+  set guifont=PragmataPro\ Mono:h11
+  set antialias
 
   "OS-specific settings.
   if has("unix")
-    set linespace=-1
+    set linespace=2
   else
     source $VIMRUNTIME/mswin.vim "Enable expected keyboard shortcuts for Windows - see :help :behave
     set keymodel-=stopsel "Make Visual mode work as expected when mswin.vim is sourced
@@ -76,14 +88,14 @@ endif
 "Make CtrlP play nicer with Git projects.
 "Found at <http://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity/>
 
-let g:ctrlp_use_caching = 0
+let g:ctrlp_use_caching=0
 if executable('ag')
     set grepprg=ag\ --nogroup\ --nocolor
 
-    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+    let g:ctrlp_user_command='ag %s -l --nocolor -g ""'
 else
-  let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
-  let g:ctrlp_prompt_mappings = {
+  let g:ctrlp_user_command=['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
+  let g:ctrlp_prompt_mappings={
     \ 'AcceptSelection("e")': ['<space>', '<cr>', '<2-LeftMouse>'],
     \ }
 endif
@@ -92,21 +104,21 @@ endif
 
 " --------------- syntastic configuration ---------------
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+let g:syntastic_always_populate_loc_list=1
+let g:syntastic_auto_loc_list=1
+let g:syntastic_check_on_open=1
+let g:syntastic_check_on_wq=0
 let g:syntastic_javascript_checkers = ['eslint'] " Note: install eslint-cli via npm in order to use local eslint
 
 " --------------- /syntastic configuration ---------------
 
 " --------------- vim-airline configuration ---------------
 
-let g:airline_powerline_fonts = 1
+let g:airline_powerline_fonts=1
 
-let g:airline_theme = 'base16'
+"let g:airline_theme='onedark'
 
-" Turn off Vim's native mode indicator, since vim-airline shows the mode
+"Turn off Vim's native mode indicator, since vim-airline shows the mode
 set noshowmode
 
 let g:airline#extensions#syntastic#enabled = 1
@@ -121,7 +133,7 @@ let g:jsx_ext_required = 0
 
 "Tell ack.vim to use ag if it's available
 if executable('ag')
-  let g:ackprg = 'ag --vimgrep'
+  let g:ackprg='ag --vimgrep'
 endif
 
 "Disable splash screen/[I]ntro message
@@ -129,9 +141,8 @@ set shortmess+=I
 
 set mouse=a
 
-set background=dark
-let base16colorspace=256 " Access colors present in 256 colorspace
-colorscheme base16-eighties
+let g:onedark_termcolors=16
+colorscheme onedark
 
 set number
 set nobackup
@@ -189,26 +200,26 @@ let g:vim_markdown_folding_disabled=1
 "------------------------------------------------
 
 " Return indent (all whitespace at start of a line), converted from
-" tabs to spaces if what = 1, or from spaces to tabs otherwise.
+" tabs to spaces if what=1, or from spaces to tabs otherwise.
 " When converting to tabs, result has no redundant spaces.
 function! Indenting(indent, what, cols)
-  let spccol = repeat(' ', a:cols)
-  let result = substitute(a:indent, spccol, '\t', 'g')
-  let result = substitute(result, ' \+\ze\t', '', 'g')
+  let spccol=repeat(' ', a:cols)
+  let result=substitute(a:indent, spccol, '\t', 'g')
+  let result=substitute(result, ' \+\ze\t', '', 'g')
   if a:what == 1
-    let result = substitute(result, '\t', spccol, 'g')
+    let result=substitute(result, '\t', spccol, 'g')
   endif
   return result
 endfunction
 
-" Convert whitespace used for indenting (before first non-whitespace).
-" what = 0 (convert spaces to tabs), or 1 (convert tabs to spaces).
-" cols = string with number of columns per tab, or empty to use 'tabstop'.
-" The cursor position is restored, but the cursor will be in a different
-" column when the number of characters in the indent of the line is changed.
+"Convert whitespace used for indenting (before first non-whitespace).
+"what=0 (convert spaces to tabs), or 1 (convert tabs to spaces).
+"cols=string with number of columns per tab, or empty to use 'tabstop'.
+"The cursor position is restored, but the cursor will be in a different
+"column when the number of characters in the indent of the line is changed.
 function! IndentConvert(line1, line2, what, cols)
-  let savepos = getpos('.')
-  let cols = empty(a:cols) ? &tabstop : a:cols
+  let savepos=getpos('.')
+  let cols=empty(a:cols) ? &tabstop : a:cols
   execute a:line1 . ',' . a:line2 . 's/^\s\+/\=Indenting(submatch(0), a:what, cols)/e'
   call histdel('search', -1)
   call setpos('.', savepos)
@@ -219,13 +230,19 @@ command! -nargs=? -range=% RetabIndent call IndentConvert(<line1>,<line2>,&et,<q
 
 "------------------------------------------------
 
+"Function that shows the syntax highlighting group used at the cursor.
+"Found at <http://vim.wikia.com/wiki/Identify_the_syntax_highlighting_group_used_at_the_cursor>
+map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+			\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+			\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+
 "Function to run arbitrary commands while preserving state.
 "Found at <http://technotales.wordpress.com/2010/03/31/preserve-a-vim-function-that-keeps-your-state/>
 function! Preserve(command)
   "Preparation: save last search, and cursor position.
   let _s=@/
-  let l = line(".")
-  let c = col(".")
+  let l=line(".")
+  let c=col(".")
   "Do the business:
   execute a:command
   "Clean up: restore previous search history, and cursor position
@@ -243,7 +260,7 @@ function! ForceLF()
 endfunction
 
 "NOTE - By default, <leader> is backslash
-let mapleader = "\<Space>"
+let mapleader="\<Space>"
 
 "vimux shortcuts
 "Found at <https://raw.github.com/benmills/vimux/master/doc/vimux.txt>
