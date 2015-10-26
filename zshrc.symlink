@@ -53,13 +53,6 @@ bindkey "^[[3~" delete-char
 bindkey "^[[1;2C" forward-word
 bindkey "^[[1;2D" backward-word
 
-# *** COLOR SCHEME ***
-
-# The environment variable tests prevent the color scheme from being
-# loaded in IntelliJ IDEA ( https://youtrack.jetbrains.com/issue/IDEA-127884 ),
-# but allow it to load in iTerm, Terminal.app, and urxvt.
-[[ -n "$TERM_PROGRAM" || -n "$COLORTERM" ]] && . ~/.zsh/base16-shell/base16-eighties.dark.sh
-
 # *** PROMPT FORMATTING ***
 
 # Echoes a username/host string when connected over SSH (empty otherwise)
