@@ -11,6 +11,7 @@ Plugin 'corntrace/bufexplorer'
 Plugin 'ervandew/supertab'
 Plugin 'gabrielelana/vim-markdown'
 "Plugin 'jelera/vim-javascript-syntax'
+Plugin 'joshdick/airline-onedark.vim'
 Plugin 'joshdick/onedark.vim'
 Plugin 'kien/ctrlp.vim'
 Plugin 'Lokaltog/vim-easymotion'
@@ -116,7 +117,7 @@ let g:syntastic_javascript_checkers = ['eslint'] " Note: install eslint-cli via 
 
 let g:airline_powerline_fonts=1
 
-"let g:airline_theme='onedark'
+let g:airline_theme='onedark'
 
 "Turn off Vim's native mode indicator, since vim-airline shows the mode
 set noshowmode
