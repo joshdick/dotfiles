@@ -66,7 +66,7 @@ endif
 
 if has("gui") "Instead of gui_running, in case :gui is run manually on *NIX
   "Font settings
-  set guifont=PragmataPro\ Mono:h11
+  set guifont=PragmataPro\ Mono:h12
   set antialias
 
   "OS-specific settings.
