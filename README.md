@@ -35,7 +35,3 @@ I take no responsibility for any havoc the install script may wreak on your syst
 `~/.localrc` will be sourced if it exists. Anything that should be kept secret/doesn't need to be version controlled should go in this file. It is useful for machine-specific configuration.
 
 `~/.bin` contains git submodules for various utilities I use. These are added to `PATH` as appropriate via the `~/.bin/bin_init.zsh` script. `~/.bin` itself is also added to `PATH`.
-
-`~/.vim` contains [vundle][1] as a git submodule, which manages the vim plugins I use.
-
-  [1]: https://github.com/gmarik/vundle

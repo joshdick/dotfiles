@@ -92,9 +92,9 @@ function update() {
     popd -q
   fi
 
-  if [ ! -z ~/.vim/vundle ]; then
-    echo "Updating Vim plugins via Vundle..."
-    vim +BundleInstall! +qall
+  if [ ! -z ~/.vim/plugged ]; then
+    echo "Updating Vim plugins via vim-plug..."
+    vim +PlugUpgrade +PlugUpdate +qall
   fi
 
   if command_exists brew; then
