@@ -121,6 +121,9 @@ export LSCOLORS=Gxfxcxdxbxegedabagacad
 GIT_BASH_COMPLETION_SOURCE=/usr/share/git/completion/git-completion.bash
 GIT_ZSH_COMPLETION_SOURCE=/usr/share/git/completion/git-completion.zsh
 
+# Get ready to initialize nvm
+export NVM_DIR="$HOME/.nvm"
+
 # If we're on OS X and using Homebrew package manager, do some Homebrew-specific environmental tweaks
 if command_exists brew; then
   export PATH=`brew --prefix`/bin:`brew --prefix`/sbin:$PATH
@@ -130,9 +133,9 @@ if command_exists brew; then
   GIT_BASH_COMPLETION_SOURCE=`brew --prefix`/etc/bash_completion.d/git-completion.bash
   GIT_ZSH_COMPLETION_SOURCE=`brew --prefix`/share/zsh/site-functions/_git
 
-  # Homebrew-provided npm
-  BREW_NPM_BINARY_DIR=`brew --prefix`/share/npm/bin
-  test -d $BREW_NPM_BINARY_DIR && export PATH=$BREW_NPM_BINARY_DIR:$PATH
+  # Initialize nvm if it was installed via Homebrew
+  NVM_SH_PATH="$(brew --prefix nvm)/nvm.sh"
+  [ -s "$NVM_SH_PATH" ] && . "$NVM_SH_PATH"
 fi
 
 # Attempt to set up Git completion for zsh as documented inside git-completion.zsh
@@ -145,14 +148,9 @@ if [ -r "$GIT_BASH_COMPLETION_SOURCE" ] && [ -r "$GIT_ZSH_COMPLETION_SOURCE" ]; 
   fpath=(~/.zsh/completion $fpath)
 fi
 
-NVM_DIR="$HOME/.nvm"
-HOMEBREW_NODE_MODULE_DIR="/usr/local/lib/node_modules"
-if [ -s "$NVM_DIR/nvm.sh" ]; then
-  # Initialize nvm if it's installed
+# Initialize nvm if it's installed (and not already initialized via Homebrew, above)
+if ! command_exists nvm && [ -s "$NVM_DIR/nvm.sh" ]; then
   . "$NVM_DIR/nvm.sh"
-elif [ -d $HOMEBREW_NODE_MODULE_DIR ]; then
-  # If node was installed via Homebrew, set NODE_PATH accordingly
-  export NODE_PATH=$HOMEBREW_NODE_MODULE_DIR
 fi
 
 # Initialize rbenv if it's installed (it may be installed via Homebrew)
