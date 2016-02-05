@@ -34,6 +34,6 @@
 [submodule "bin.symlink/repos/anigrate"]
 	path = bin.symlink/repos/anigrate
 	url = https://github.com/GGLucas/anigrate.git
-[submodule "bin.symlink/repos/emojify"]
-	path = bin.symlink/repos/emojify
-	url = https://github.com/mrowa44/emojify.git
+[submodule "bin.symlink/repos/fmj"]
+	path = bin.symlink/repos/fmj
+	url = https://github.com/ecmendenhall/fmj.git
