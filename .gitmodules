@@ -9,28 +9,28 @@
 	url = https://github.com/zsh-users/zsh-syntax-highlighting
 [submodule "bin.symlink/repos/fasd"]
 	path = bin.symlink/repos/fasd
-	url = git://github.com/clvv/fasd.git
+	url = https://github.com/clvv/fasd.git
 [submodule "bin.symlink/repos/hr"]
 	path = bin.symlink/repos/hr
-	url = git://github.com/LuRsT/hr.git
+	url = https://github.com/LuRsT/hr.git
 [submodule "bin.symlink/repos/spot"]
 	path = bin.symlink/repos/spot
-	url = git://github.com/guille/spot
+	url = https://github.com/guille/spot
 [submodule "bin.symlink/repos/tmuxomatic"]
 	path = bin.symlink/repos/tmuxomatic
-	url = git://github.com/oxidane/tmuxomatic.git
+	url = https://github.com/oxidane/tmuxomatic.git
 [submodule "bin.symlink/repos/git-dude"]
 	path = bin.symlink/repos/git-dude
-	url = git://github.com/sickill/git-dude
+	url = https://github.com/sickill/git-dude
 [submodule "bin.symlink/repos/fzf"]
 	path = bin.symlink/repos/fzf
-	url = git://github.com/junegunn/fzf
+	url = https://github.com/junegunn/fzf
 [submodule "bin.symlink/repos/git-cr"]
 	path = bin.symlink/repos/git-cr
-	url = git://github.com/joshdick/git-cr
+	url = https://github.com/joshdick/git-cr
 [submodule "bin.symlink/repos/formd"]
 	path = bin.symlink/repos/formd
-	url = git://github.com/drbunsen/formd
+	url = https://github.com/drbunsen/formd
 [submodule "bin.symlink/repos/anigrate"]
 	path = bin.symlink/repos/anigrate
 	url = https://github.com/GGLucas/anigrate.git
