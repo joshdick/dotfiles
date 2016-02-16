@@ -25,6 +25,7 @@
 	default = upstream
 [core]
 	excludesfile = ~/.gitignore
+	pager = fmj | less -rX
 [rerere]
 	enabled = 1
 [alias]
@@ -37,3 +38,12 @@
 	tags = "tag -l -n1"
 [dude]
 	notify-command = osascript -e \"display notification \\\"$DESCRIPTION\\\" with title \\\"$TITLE\\\"\"
+[pager]
+	diff = fmj | diff-highlight | less -rX
+	show = fmj | diff-highlight | less -rX
+	log = fmj | diff-highlight | less -rX
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
