@@ -84,18 +84,19 @@ unbind [
 bind Escape copy-mode
 unbind ]
 bind -t vi-copy v begin-selection
-bind -t vi-copy y copy-selection
+# Rebind Enter/bind y to use Clipper < https://github.com/wincent/clipper >.
+# ~/.ssh/config must have "RemoteForward 8377 localhost:8377" configured
+# on the client machine for the host where tmux runs.
+unbind -t vi-copy Enter
+bind -t vi-copy Enter copy-pipe "nc -c localhost 8377"
+bind -t vi-copy y copy-pipe "nc -c localhost 8377"
 bind -t vi-copy C-v rectangle-toggle
 # In copy mode, use [prefix]+V to select the entire line
-# Found at <http://superuser.com/a/743904/64392>
+# Found at < http://superuser.com/a/743904/64392 >
 bind V send-keys "0v\$"
 
 # Buffer pasting
-bind C-p paste-buffer
-# Paste to a client Mac's clipboard via SSH; found at http://superuser.com/a/408374/64392
-# Requires "RemoteForward 4242 127.0.0.1:22" in the client machine's SSH configuration
-# or SSHing to the tmux machine by running "ssh -R 4242:localhost:22 tmuxMachine"
-bind C-v run "tmux save-buffer - | ssh -p 4242 localhost pbcopy"
+bind C-v paste-buffer
 
 # Mouse stuff
 # (In iTerm2, hold down the option key for Mac-native copying)
