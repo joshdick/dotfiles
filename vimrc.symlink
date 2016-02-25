@@ -13,6 +13,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'benmills/vimux'
 Plug 'bling/vim-airline'
 Plug 'corntrace/bufexplorer'
+"Plug 'edkolev/tmuxline.vim'
 Plug 'ervandew/supertab'
 Plug 'gabrielelana/vim-markdown'
 "Plug 'jelera/vim-javascript-syntax'
@@ -86,6 +87,15 @@ if has("gui") "Instead of gui_running, in case :gui is run manually on *NIX
   endif
 endif
 
+" --------------- ack.vim configuration
+
+" Use ag if it's available
+if executable('ag')
+  let g:ackprg='ag --vimgrep'
+endif
+
+" --------------- /ack.vim configuration
+
 " ----------------- CtrlP configuration -----------------
 
 "Make CtrlP play nicer with Git projects.
@@ -115,6 +125,17 @@ let g:syntastic_javascript_checkers = ['eslint'] " Note: install eslint-cli via 
 
 " --------------- /syntastic configuration ---------------
 
+" --------------- tmuxline configuration ---------------
+
+let g:tmuxline_preset = {
+  \'a'    : '#S',
+  \'win'  : ['#I', '#W'],
+  \'cwin' : ['#I', '#W'],
+  \'y'    : '#(uptime | grep -o ": .*" | cut -c3-)',
+  \'z'    : '#H' }
+
+" --------------- /tmuxline configuration ---------------
+
 " --------------- vim-airline configuration ---------------
 
 let g:airline_powerline_fonts=1
@@ -134,11 +155,6 @@ let g:airline#extensions#syntastic#enabled = 1
 let g:jsx_ext_required = 0
 
 " --------------- /vim-jsx configuration
-
-"Tell ack.vim to use ag if it's available
-if executable('ag')
-  let g:ackprg='ag --vimgrep'
-endif
 
 "Disable splash screen/[I]ntro message
 set shortmess+=I
