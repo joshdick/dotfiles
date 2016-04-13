@@ -1,4 +1,5 @@
 vim.symlink/plugged
+vim.symlink/autoload/plug.vim.old
 vim.symlink/init.vim
 vim.symlink/.netrwhist
 zsh.symlink/completion
