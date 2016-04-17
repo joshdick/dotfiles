@@ -11,7 +11,6 @@ unlet g:plug_url_format
 
 Plug 'airblade/vim-gitgutter'
 Plug 'benmills/vimux'
-Plug 'bling/vim-airline'
 Plug 'corntrace/bufexplorer'
 "Plug 'edkolev/tmuxline.vim'
 Plug 'ervandew/supertab'
@@ -31,6 +30,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
 Plug 'sjl/gundo.vim'
 Plug 'tpope/vim-fugitive'
+Plug 'vim-airline/vim-airline'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 call plug#end()
 
@@ -160,6 +160,11 @@ let g:jsx_ext_required = 0
 set shortmess+=I
 
 set mouse=a
+
+"Use true-color mode in Neovim
+if has("nvim")
+  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+endif
 
 let g:onedark_termcolors=16
 colorscheme onedark
