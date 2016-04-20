@@ -172,3 +172,8 @@ fi
 
 # Initialize the "personal bin"
 . ~/.bin/bin_init.zsh
+
+# ALL GLORY TO THE HYPNOTOAD
+if command_exists cowsay && command_exists fortune; then
+  fortune | cowsay -f ~/.hypnotoad.cow -W 60
+fi
