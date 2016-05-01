@@ -179,7 +179,7 @@ function push_ssh_cert() {
   if [[ $# -eq 3 ]]; then
     _user=$3
   fi
-  test -f ~/.ssh/id_dsa.pub || ssh-keygen -t dsa
+  test -f ~/.ssh/id_*sa.pub || ssh-keygen -t rsa
   echo "Pushing public key to $_user@$_host:$_port..."
   ssh -p $_port $_user@$_host 'mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys' < ~/.ssh/id_*sa.pub
 }
