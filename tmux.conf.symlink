@@ -83,3 +83,4 @@ set -g pane-base-index 1
 
 # Other misc. options
 set -g visual-bell on
+set -s escape-time 0 # For vim < http://unix.stackexchange.com/a/25638/9580 >
