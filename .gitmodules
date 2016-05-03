@@ -37,3 +37,6 @@
 [submodule "bin.symlink/repos/fmj"]
 	path = bin.symlink/repos/fmj
 	url = https://github.com/ecmendenhall/fmj.git
+[submodule "bin.symlink/repos/tmux-scroll-copy-mode"]
+	path = bin.symlink/repos/tmux-scroll-copy-mode
+	url = https://github.com/nhdaly/tmux-scroll-copy-mode
