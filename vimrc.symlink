@@ -162,8 +162,12 @@ set shortmess+=I
 set mouse=a
 
 "Use true-color mode in Neovim
-if has("nvim")
-  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+"when outside tmux. Wait until tmux > 2.2 is available via Homebrew for true color support:
+" * http://sunaku.github.io/tmux-24bit-color.html#usage
+" * https://github.com/tmux/tmux/issues/34
+" * https://github.com/Homebrew/homebrew-core/pull/240
+if (has("nvim") && empty($TMUX))
+	let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 endif
 
 let g:onedark_termcolors=16
