@@ -2,20 +2,6 @@
 
 # *** MISC ***
 
-# When connecting via ssh, always [re]attach to a terminal manager
-# Adapted from code found at <http://involution.com/2004/11/17/1-32/> (now offline)
-if [ -f /usr/bin/tmux ] && [ -z $TMUX ]; then
-  if [ "$SSH_TTY" != "" -a "$TERM" -a "$TERM" != "screen" -a "$TERM" != "dumb" ]; then
-    pgrep tmux
-    # $? is the exit code of pgrep; 0 means there was a result (tmux is already running)
-    if [ $? -eq 0 ]; then
-      tmux -u attach -d
-    else
-      tmux -u
-    fi
-  fi
-fi
-
 # Clear out and reset PATH in case .zshrc is sourced multiple times in one session (while making changes)
 # Do this before anything else so that this file can override any default settings that may be in /etc/profile
 export PATH=
@@ -29,6 +15,20 @@ function command_exists() {
 
 # Include any machine-specific configuration if it exists
 test -r ~/.localrc && . ~/.localrc
+
+# When connecting via ssh, always [re]attach to a terminal manager
+# Adapted from code found at <http://involution.com/2004/11/17/1-32/> (now offline)
+if command_exists tmux && [ -z $TMUX ]; then
+  if [ "$SSH_TTY" != "" -a "$TERM" -a "$TERM" != "screen" -a "$TERM" != "dumb" ]; then
+    pgrep tmux
+    # $? is the exit code of pgrep; 0 means there was a result (tmux is already running)
+    if [ $? -eq 0 ]; then
+      tmux -u attach -d
+    else
+      tmux -u
+    fi
+  fi
+fi
 
 # *** ZSH-SPECIFIC SETTINGS ***
 
