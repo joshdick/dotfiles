@@ -30,6 +30,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
 Plug 'sjl/gundo.vim'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-sleuth'
 Plug 'vim-airline/vim-airline'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 call plug#end()
@@ -72,7 +73,7 @@ if has("gui") "Instead of gui_running, in case :gui is run manually on *NIX
   set guifont=PragmataPro\ Mono:h12
   set antialias
 
-  "OS-specific settings.
+  "OS-specific settings
   if has("unix")
     set linespace=2
   else
@@ -82,21 +83,21 @@ if has("gui") "Instead of gui_running, in case :gui is run manually on *NIX
   set guioptions=egmrt "Hide toolbar by default in MacVim
   "Found at <http://support.markedapp.com/kb/how-to-tips-and-tricks/marked-bonus-pack-scripts-commands-and-bundles>
   :nnoremap <leader>m :silent !open -a Marked.app '%:p'<cr> "Bind a shortcut for opening the current document in Marked.app on Mac OS X
-  if has("transparency") "Background transparency is a MacVim-specific feature, so prevent errors in other vims
-    set transparency=2 "Enable background transparency in MacVim
-  endif
+  "if has("transparency") "Background transparency is a MacVim-specific feature, so prevent errors in other vims
+    "set transparency=2 "Enable background transparency in MacVim
+  "endif
 endif
 
-" --------------- ack.vim configuration
+"--------------- ack.vim configuration
 
-" Use ag if it's available
+"Use ag if it's available
 if executable('ag')
   let g:ackprg='ag --vimgrep'
 endif
 
-" --------------- /ack.vim configuration
+"--------------- /ack.vim configuration
 
-" ----------------- CtrlP configuration -----------------
+"----------------- CtrlP configuration -----------------
 
 "Make CtrlP play nicer with Git projects.
 "Found at <http://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity/>
@@ -113,19 +114,19 @@ else
     \ }
 endif
 
-" ----------------- /CtrlP configuration -----------------
+"----------------- /CtrlP configuration -----------------
 
-" --------------- syntastic configuration ---------------
+"--------------- syntastic configuration ---------------
 
 let g:syntastic_always_populate_loc_list=1
 let g:syntastic_auto_loc_list=1
 let g:syntastic_check_on_open=1
 let g:syntastic_check_on_wq=0
-let g:syntastic_javascript_checkers = ['eslint'] " Note: install eslint-cli via npm in order to use local eslint
+let g:syntastic_javascript_checkers = ['eslint'] "Note: install eslint-cli via npm in order to use local eslint
 
-" --------------- /syntastic configuration ---------------
+"--------------- /syntastic configuration ---------------
 
-" --------------- tmuxline configuration ---------------
+"--------------- tmuxline configuration ---------------
 
 let g:tmuxline_preset = {
   \'a'    : '#S',
@@ -134,9 +135,9 @@ let g:tmuxline_preset = {
   \'y'    : '#(uptime | grep -o ": .*" | cut -c3-)',
   \'z'    : '#H' }
 
-" --------------- /tmuxline configuration ---------------
+"--------------- /tmuxline configuration ---------------
 
-" --------------- vim-airline configuration ---------------
+"--------------- vim-airline configuration ---------------
 
 let g:airline_powerline_fonts=1
 
@@ -146,15 +147,15 @@ let g:airline_theme='onedark'
 set noshowmode
 
 let g:airline#extensions#syntastic#enabled = 1
-" let g:airline#extensions#tabline#enabled = 1
+"let g:airline#extensions#tabline#enabled = 1
 
-" --------------- /vim-airline configuration ---------------
+"--------------- /vim-airline configuration ---------------
 
-" --------------- vim-jsx configuration
+"--------------- vim-jsx configuration
 
 let g:jsx_ext_required = 0
 
-" --------------- /vim-jsx configuration
+"--------------- /vim-jsx configuration
 
 "Disable splash screen/[I]ntro message
 set shortmess+=I
@@ -166,8 +167,8 @@ set mouse=a
 " * http://sunaku.github.io/tmux-24bit-color.html#usage
 " * https://github.com/tmux/tmux/issues/34
 " * https://github.com/Homebrew/homebrew-core/pull/240
-if (has("nvim") && empty($TMUX) && empty($ITERM_SESSION_ID))
-	let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+if (has("nvim") && empty($TMUX))
+  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 endif
 
 let g:onedark_termcolors=16
