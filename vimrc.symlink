@@ -166,7 +166,7 @@ set mouse=a
 " * http://sunaku.github.io/tmux-24bit-color.html#usage
 " * https://github.com/tmux/tmux/issues/34
 " * https://github.com/Homebrew/homebrew-core/pull/240
-if (has("nvim") && empty($TMUX))
+if (has("nvim") && empty($TMUX) && empty($ITERM_SESSION_ID))
 	let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 endif
 
