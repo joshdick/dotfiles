@@ -18,15 +18,14 @@ unbind '"'
 bind - split-window -v
 bind v split-window -v
 
-# Highlight the active window in the status bar
-setw -g window-status-current-fg yellow
-
 # Status bar
 set -g status-interval 5
+bind t set status # Toggles the status bar
 
 # Minimal status bar theme
 #set -g status-bg black
 #set -g status-fg white
+#setw -g window-status-current-fg yellow
 #set -g status-left '#[fg=yellow]#S #[fg=green]|#[default] '
 #set -g status-right '#[fg=red]#(uptime | grep -o ": .*" | cut -c3-) #[fg=green]| #[fg=cyan]#H #[default]'
 
@@ -56,6 +55,7 @@ set -g status-left "#[fg=colour7,bg=colour15] #S #[fg=colour15,bg=colour0,nobold
 set -g status-right "#[fg=colour8,bg=colour0,nobold,nounderscore,noitalics]#[fg=colour7,bg=colour8] #(uptime | grep -o \": .*\" | cut -c3-) #[fg=colour15,bg=colour8,nobold,nounderscore,noitalics]#[fg=colour7,bg=colour15] #H "
 setw -g window-status-format "#[fg=colour0,bg=colour0,nobold,nounderscore,noitalics]#[default] #I  #W #[fg=colour0,bg=colour0,nobold,nounderscore,noitalics]"
 setw -g window-status-current-format "#[fg=colour0,bg=colour8,nobold,nounderscore,noitalics]#[fg=colour7,bg=colour8] #I  #W #[fg=colour8,bg=colour0,nobold,nounderscore,noitalics]"
+setw -g window-status-bell-style 'fg=yellow'
 
 # Pane borders
 set -g pane-active-border-fg "colour7"
