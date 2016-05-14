@@ -1,16 +1,14 @@
-# tmuxomatic config for cyril
+# tmuxomatic config for lana
 
 #-------------------------
 
 window Social
 
-IA
 IT
 
   dir ~
 I run weechat-curses
-A run ~/Software/Texapp/Texapp.pl
-T run ~/Software/TTYtter/TTYtter.pl
+T run rainbowstream
 I foc
 
 #-------------------------
