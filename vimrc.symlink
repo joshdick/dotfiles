@@ -59,10 +59,14 @@ call plug#end()
 " 2) Match all tab characters at all times.
 " 3) Inside insert mode, don't match trailing whitespace on the current line.
 " 4) Outside insert mode, match all trailing whitespace on the current line.
-highlight ExtraWhitespace ctermbg=red guibg=red
+let ExtraWhitespace_cterm = synIDattr(synIDtrans(hlID('Error')), 'fg', 'cterm')
+let ExtraWhitespace_gui = synIDattr(synIDtrans(hlID('Error')), 'fg', 'gui')
+exe 'highlight ExtraWhitespace ctermbg=' . ExtraWhitespace_cterm . ' guibg=' . ExtraWhitespace_gui
 match ExtraWhitespace /\s\+$/
 if has("autocmd")
-  autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+  autocmd ColorScheme * let ExtraWhitespace_cterm = synIDattr(synIDtrans(hlID('Error')), 'fg', 'cterm')
+  autocmd ColorScheme * let ExtraWhitespace_gui = synIDattr(synIDtrans(hlID('Error')), 'fg', 'gui')
+  autocmd ColorScheme * exe 'highlight ExtraWhitespace ctermbg=' . ExtraWhitespace_cterm . ' guibg=' . ExtraWhitespace_gui
   autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
   autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
   autocmd InsertLeave * match ExtraWhitespace /\s\+$/
