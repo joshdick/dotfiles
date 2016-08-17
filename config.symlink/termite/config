@@ -1,0 +1,44 @@
+[options]
+
+clickable_url = true
+font = DejaVu Sans Mono 9
+
+[colors]
+
+# special
+foreground = #ABB2C0
+background = #282C34
+cursor = #ABB2C0
+
+# black
+color0 = #282C34
+color8 = #3E4452
+
+# red
+color1 = #E26B73
+color9 = #C04F43
+
+# green
+color2 = #97C475
+color10 = #97C475
+
+# yellow
+color3 = #E6C176
+color11 = #D29B62
+
+# blue
+color4 = #5DAEF2
+color12 = #5DAEF2
+
+# magenta
+color5 = #C775DF
+color13 = #C775DF
+
+# cyan
+color6 = #51B6C3
+color14 = #51B6C3
+
+# white
+color7 = #ABB2C0
+color15 = #5C6670
+
