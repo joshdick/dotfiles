@@ -5,7 +5,6 @@ call plug#begin('~/.vim/plugged')
 
 "Use GitHub SSH URLs for my own plugins
 let g:plug_url_format = 'git@github.com:%s.git'
-Plug 'joshdick/airline-onedark.vim'
 Plug 'joshdick/onedark.vim'
 unlet g:plug_url_format
 
