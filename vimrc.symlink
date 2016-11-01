@@ -428,6 +428,8 @@ endfunction
 "NOTE - By default, <leader> is backslash
 let mapleader="\<Space>"
 
+imap ;; <Esc>
+
 "vimux shortcuts
 "Found at <https://raw.github.com/benmills/vimux/master/doc/vimux.txt>
 
