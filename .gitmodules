@@ -40,3 +40,6 @@
 [submodule "bin.symlink/repos/tmux-scroll-copy-mode"]
 	path = bin.symlink/repos/tmux-scroll-copy-mode
 	url = https://github.com/nhdaly/tmux-scroll-copy-mode
+[submodule "vim.symlink/vim-plug"]
+	path = vim.symlink/vim-plug
+	url = https://github.com/junegunn/vim-plug

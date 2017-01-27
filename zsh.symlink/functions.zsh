@@ -94,7 +94,7 @@ function update() {
 
   if [ ! -z ~/.vim/plugged ]; then
     echo "Updating Vim plugins via vim-plug..."
-    vim +PlugUpgrade +PlugUpdate +qall
+    vim +PlugUpdate +qall
   fi
 
   if command_exists brew; then
