@@ -111,6 +111,8 @@ endif
 
 "----------------- ale configuration -----------------
 
+let g:ale_statusline_format = ['⨉ %d', '⚠ %d', ''] " Don't show an 'OK' status so lightline.vim won't treat it as an error
+autocmd User ALELint call lightline#update()
 let g:ale_open_list=1
 
 "----------------- /ale configuration -----------------
@@ -153,7 +155,7 @@ let g:lightline = {
   \ 'colorscheme': 'onedark',
   \ 'active': {
   \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ], ['ctrlpmark'] ],
-  \   'right': [ [ 'syntastic', 'lineinfo' ], ['percent'], [ 'fileformat', 'fileencoding', 'filetype' ] ]
+  \   'right': [ [ 'linter', 'lineinfo' ], ['percent'], [ 'fileformat', 'fileencoding', 'filetype' ] ]
   \ },
   \ 'component_function': {
   \   'fugitive': 'LightlineFugitive',
@@ -165,10 +167,10 @@ let g:lightline = {
   \   'ctrlpmark': 'CtrlPMark',
   \ },
   \ 'component_expand': {
-  \   'syntastic': 'SyntasticStatuslineFlag',
+  \   'linter': 'ALEGetStatusLine',
   \ },
   \ 'component_type': {
-  \   'syntastic': 'error',
+  \   'linter': 'error',
   \ },
   \ 'separator': { 'left': '⮀', 'right': '⮂' },
   \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
@@ -264,15 +266,6 @@ let g:tagbar_status_func = 'TagbarStatusFunc'
 function! TagbarStatusFunc(current, sort, fname, ...) abort
     let g:lightline.fname = a:fname
   return lightline#statusline(0)
-endfunction
-
-augroup AutoSyntastic
-  autocmd!
-  autocmd BufWritePost *.c,*.cpp call s:syntastic()
-augroup END
-function! s:syntastic()
-  SyntasticCheck
-  call lightline#update()
 endfunction
 
 let g:unite_force_overwrite_statusline = 0
