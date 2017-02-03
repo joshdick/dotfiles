@@ -27,12 +27,12 @@ Plug 'nelstrom/vim-visual-star-search'
 Plug 'rizzatti/dash.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
-Plug 'scrooloose/syntastic'
 Plug 'sheerun/vim-polyglot'
 Plug 'sjl/gundo.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-sleuth'
 "Plug 'vim-airline/vim-airline'
+Plug 'w0rp/ale'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 call plug#end()
 
@@ -100,14 +100,20 @@ if has("gui") "Instead of gui_running, in case :gui is run manually on *NIX
   "endif
 endif
 
-"--------------- ack.vim configuration
+"----------------- ack.vim configuration -----------------
 
 "Use ag if it's available
 if executable('ag')
   let g:ackprg='ag --vimgrep'
 endif
 
-"--------------- /ack.vim configuration
+"----------------- /ack.vim configuration -----------------
+
+"----------------- ale configuration -----------------
+
+let g:ale_open_list=1
+
+"----------------- /ale configuration -----------------
 
 "----------------- CtrlP configuration -----------------
 
@@ -127,17 +133,6 @@ else
 endif
 
 "----------------- /CtrlP configuration -----------------
-
-"--------------- syntastic configuration ---------------
-
-let g:syntastic_always_populate_loc_list=1
-let g:syntastic_auto_loc_list=1
-let g:syntastic_check_on_open=1
-let g:syntastic_check_on_wq=0
-let g:syntastic_javascript_checkers = ['eslint'] "Note: install eslint-cli via npm in order to use local eslint
-let g:loaded_syntastic_java_javac_checker = 1 "Disable Java compilation per < http://stackoverflow.com/a/28244756/278810 >
-
-"--------------- /syntastic configuration ---------------
 
 "--------------- tmuxline configuration ---------------
 
