@@ -27,12 +27,12 @@ Plug 'nelstrom/vim-visual-star-search'
 Plug 'rizzatti/dash.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/syntastic'
 Plug 'sheerun/vim-polyglot'
 Plug 'sjl/gundo.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-sleuth'
 "Plug 'vim-airline/vim-airline'
-Plug 'w0rp/ale'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 call plug#end()
 
@@ -109,14 +109,6 @@ endif
 
 "----------------- /ack.vim configuration -----------------
 
-"----------------- ale configuration -----------------
-
-let g:ale_statusline_format = ['⨉ %d', '⚠ %d', ''] " Don't show an 'OK' status so lightline.vim won't treat it as an error
-autocmd User ALELint call lightline#update()
-let g:ale_open_list=1
-
-"----------------- /ale configuration -----------------
-
 "----------------- CtrlP configuration -----------------
 
 "Make CtrlP play nicer with Git projects.
@@ -135,6 +127,17 @@ else
 endif
 
 "----------------- /CtrlP configuration -----------------
+
+"--------------- syntastic configuration ---------------
+
+let g:syntastic_always_populate_loc_list=1
+let g:syntastic_auto_loc_list=1
+let g:syntastic_check_on_open=1
+let g:syntastic_check_on_wq=0
+let g:syntastic_javascript_checkers = ['eslint'] "Note: install eslint-cli via npm in order to use local eslint
+let g:loaded_syntastic_java_javac_checker = 1 "Disable Java compilation per < http://stackoverflow.com/a/28244756/278810 >
+
+"--------------- /syntastic configuration ---------------
 
 "--------------- tmuxline configuration ---------------
 
@@ -155,7 +158,7 @@ let g:lightline = {
   \ 'colorscheme': 'onedark',
   \ 'active': {
   \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ], ['ctrlpmark'] ],
-  \   'right': [ [ 'linter', 'lineinfo' ], ['percent'], [ 'fileformat', 'fileencoding', 'filetype' ] ]
+  \   'right': [ [ 'syntastic', 'lineinfo' ], ['percent'], [ 'fileformat', 'fileencoding', 'filetype' ] ]
   \ },
   \ 'component_function': {
   \   'fugitive': 'LightlineFugitive',
@@ -167,10 +170,10 @@ let g:lightline = {
   \   'ctrlpmark': 'CtrlPMark',
   \ },
   \ 'component_expand': {
-  \   'linter': 'ALEGetStatusLine',
+  \   'syntastic': 'SyntasticStatuslineFlag',
   \ },
   \ 'component_type': {
-  \   'linter': 'error',
+  \   'syntastic': 'error',
   \ },
   \ 'separator': { 'left': '⮀', 'right': '⮂' },
   \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
@@ -266,6 +269,15 @@ let g:tagbar_status_func = 'TagbarStatusFunc'
 function! TagbarStatusFunc(current, sort, fname, ...) abort
     let g:lightline.fname = a:fname
   return lightline#statusline(0)
+endfunction
+
+augroup AutoSyntastic
+  autocmd!
+  autocmd BufWritePost *.c,*.cpp call s:syntastic()
+augroup END
+function! s:syntastic()
+  SyntasticCheck
+  call lightline#update()
 endfunction
 
 let g:unite_force_overwrite_statusline = 0
