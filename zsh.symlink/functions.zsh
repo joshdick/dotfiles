@@ -99,7 +99,7 @@ function update() {
 
   if command_exists brew; then
     echo "Updating/upgrading/cleaning up Homebrew packages..."
-    brew update && brew upgrade && brew cleanup && brew linkapps
+    brew update && brew upgrade && brew cleanup && brew prune
   fi
 
   if command_exists pip; then
