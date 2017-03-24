@@ -113,7 +113,7 @@ endif
 
 let g:ale_statusline_format = ['⨉ %d', '⚠ %d', ''] " Don't show an 'OK' status so lightline.vim won't treat it as an error
 autocmd User ALELint call lightline#update()
-" let g:ale_open_list=1 " Re-enable once https://github.com/w0rp/ale/issues/272 is fixed
+let g:ale_open_list=1
 let g:ale_lint_on_save=1
 let g:ale_lint_on_text_changed=0
 
