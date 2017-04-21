@@ -6,6 +6,7 @@ call plug#begin('~/.vim/plugged')
 "Use GitHub SSH URLs for my own plugins
 let g:plug_url_format = 'git@github.com:%s.git'
 Plug 'joshdick/onedark.vim'
+Plug 'joshdick/vim-action-ack'
 unlet g:plug_url_format
 
 Plug 'airblade/vim-gitgutter'
@@ -107,7 +108,21 @@ if executable('ag')
   let g:ackprg='ag --vimgrep'
 endif
 
+"Alias 'ag' commands for use with ack.vim
+cnoreabbrev ag Ack
+cnoreabbrev aG Ack
+cnoreabbrev Ag Ack
+cnoreabbrev AG Ack
+command Ag Ack
+
 "----------------- /ack.vim configuration -----------------
+
+"--------------- vim-action-ack configuration -----------------
+
+nmap * <Plug>AckActionWord
+vmap * <Plug>AckActionVisual
+
+"--------------- /vim-action-ack configuration -----------------
 
 "----------------- ale configuration -----------------
 
@@ -148,6 +163,19 @@ let g:tmuxline_preset = {
   \'z'    : '#H' }
 
 "--------------- /tmuxline configuration ---------------
+
+"--------------- vim-jsx configuration -----------------
+
+let g:jsx_ext_required = 0
+
+"--------------- /vim-jsx configuration -----------------
+
+"--------------- NERDCommenter configuration -----------------
+
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+
+"--------------- /NERDCommenter configuration -----------------
 
 "--------------- lightline.vim configuration ---------------
 
@@ -275,12 +303,6 @@ let g:vimfiler_force_overwrite_statusline = 0
 let g:vimshell_force_overwrite_statusline = 0
 
 "--------------- /lightline.vim configuration ---------------
-
-"--------------- vim-jsx configuration
-
-let g:jsx_ext_required = 0
-
-"--------------- /vim-jsx configuration
 
 "Disable splash screen/[I]ntro message
 set shortmess+=I
