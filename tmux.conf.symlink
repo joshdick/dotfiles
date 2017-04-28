@@ -65,14 +65,11 @@ setw -g mode-keys vi
 unbind [
 bind Escape copy-mode
 unbind ]
-bind -t vi-copy v begin-selection
-# Rebind Enter/bind y to use Clipper < https://github.com/wincent/clipper >.
-# ~/.ssh/config must have "RemoteForward 8377 localhost:8377" configured
-# on the client machine for the host where tmux runs.
-unbind -t vi-copy Enter
-bind -t vi-copy Enter copy-pipe "nc -c localhost 8377"
-bind -t vi-copy y copy-pipe "nc -c localhost 8377"
-bind -t vi-copy C-v rectangle-toggle
+bind -Tcopy-mode-vi v send -X begin-selection
+bind -Tcopy-mode-vi y send -X copy-selection
+unbind -Tcopy-mode-vi Enter
+bind -Tcopy-mode-vi Enter send -X copy-selection
+bind -Tcopy-mode-vi C-v send -X rectangle-toggle
 # In copy mode, use [prefix]+V to select the entire line
 # Found at < http://superuser.com/a/743904/64392 >
 bind V send-keys "0v\$"
