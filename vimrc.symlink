@@ -1,4 +1,4 @@
-set nocompatible
+set enc=utf-8
 
 "vim-plug initialization
 call plug#begin('~/.vim/plugged')
@@ -94,8 +94,6 @@ if has("gui") "Instead of gui_running, in case :gui is run manually on *NIX
     set keymodel-=stopsel "Make Visual mode work as expected when mswin.vim is sourced
   endif
   set guioptions=egmrt "Hide toolbar by default in MacVim
-  "Found at <http://support.markedapp.com/kb/how-to-tips-and-tricks/marked-bonus-pack-scripts-commands-and-bundles>
-  :nnoremap <leader>m :silent !open -a Marked.app '%:p'<cr> "Bind a shortcut for opening the current document in Marked.app on Mac OS X
   "if has("transparency") "Background transparency is a MacVim-specific feature, so prevent errors in other vims
     "set transparency=2 "Enable background transparency in MacVim
   "endif
@@ -345,7 +343,6 @@ set shiftwidth=2
 set bs=2 "Allow backspace to work properly
 set autoindent
 set smartindent
-set enc=utf-8
 set nowrap
 filetype plugin indent on
 syntax on
@@ -511,6 +508,10 @@ vnoremap <leader>, d:execute 'normal a' . join(sort(split(getreg('"'))), ' ')<CR
 
 "Shortcut to toggle 'set list' (toggles invisible characters)
 nmap <leader>l :set list!<CR>
+
+"Bind a shortcut for opening the current document in Marked.app on Mac OS X.
+"Found at <https://github.com/kotfu/marked-bonus-pack#vim>
+nnoremap <leader>m :silent !open -a Marked\ 2.app '%:p'<cr>
 
 "Shortcut to toggle line number visibility
 nmap <leader>n :set number! number?<CR>
