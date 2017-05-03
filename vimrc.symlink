@@ -10,15 +10,13 @@ Plug 'joshdick/vim-action-ack'
 unlet g:plug_url_format
 
 Plug 'airblade/vim-gitgutter'
-Plug 'benmills/vimux'
 Plug 'corntrace/bufexplorer'
 Plug 'ctrlpvim/ctrlp.vim'
-"Plug 'edkolev/tmuxline.vim'
+Plug 'easymotion/vim-easymotion'
 Plug 'ervandew/supertab'
-Plug 'gabrielelana/vim-markdown'
+"Plug 'gabrielelana/vim-markdown'
 "Plug 'jelera/vim-javascript-syntax'
 Plug 'itchyny/lightline.vim'
-Plug 'Lokaltog/vim-easymotion'
 Plug 'marijnh/tern_for_vim'
 Plug 'mileszs/ack.vim'
 "Plug 'mxw/vim-jsx.git'
@@ -27,59 +25,48 @@ Plug 'nelstrom/vim-visual-star-search'
 "Plug 'pangloss/vim-javascript'
 Plug 'rizzatti/dash.vim'
 Plug 'scrooloose/nerdcommenter'
-Plug 'scrooloose/nerdtree'
 Plug 'sheerun/vim-polyglot'
 Plug 'sjl/gundo.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-sleuth'
 "Plug 'vim-airline/vim-airline'
 Plug 'w0rp/ale'
-Plug 'Xuyuanp/nerdtree-git-plugin'
 call plug#end()
 
-"Unused colorschemes, here for future reference
-"Plug 'chriskempson/base16-vim'
-"Plug 'cocopon/iceberg.vim'
-"Plug 'geoffharcourt/one-dark.vim'
-"Plug 'jonathanfilip/vim-lucius'
-"Plug 'Lokaltog/vim-distinguished'
-"Plug 'MaxSt/FlatColor'
-"Plug 'morhetz/gruvbox'
-"Plug 'nanotech/jellybeans.vim'
-"Plug 'noah/vim256-color'
-"Plug 'sickill/vim-monokai'
-"Plug 'tomasr/molokai'
-"Plug 'tpope/vim-vividchalk'
-"Plug 'w0ng/vim-hybrid'
-"Plug 'yosiat/oceanic-next-vim'
-"Plug 'zeis/vim-kolor.git'
+" +-----------------------+
+" | General Configuration |
+" +-----------------------+
 
-"Whitespace matching: must appear before the colorscheme is set
-"SUMMARY OF BEHAVIOR:
-" 1) Apply to all buffers.
-" 2) Match all tab characters at all times.
-" 3) Inside insert mode, don't match trailing whitespace on the current line.
-" 4) Outside insert mode, match all trailing whitespace on the current line.
-let ExtraWhitespace_cterm = synIDattr(synIDtrans(hlID('Error')), 'fg', 'cterm')
-let ExtraWhitespace_gui = synIDattr(synIDtrans(hlID('Error')), 'fg', 'gui')
-exe 'highlight ExtraWhitespace ctermbg=' . ExtraWhitespace_cterm . ' guibg=' . ExtraWhitespace_gui
-match ExtraWhitespace /\s\+$/
-if has("autocmd")
-  autocmd ColorScheme * let ExtraWhitespace_cterm = synIDattr(synIDtrans(hlID('Error')), 'fg', 'cterm')
-  autocmd ColorScheme * let ExtraWhitespace_gui = synIDattr(synIDtrans(hlID('Error')), 'fg', 'gui')
-  autocmd ColorScheme * exe 'highlight ExtraWhitespace ctermbg=' . ExtraWhitespace_cterm . ' guibg=' . ExtraWhitespace_gui
-  autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
-  autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-  autocmd InsertLeave * match ExtraWhitespace /\s\+$/
-  autocmd BufWinLeave * call clearmatches()
+set autoindent
+set smartindent
+set nowrap
+filetype plugin indent on
+syntax on
 
-  " onedark.vim override: Don't set a background color when running in a terminal;
-  " just use the terminal's background color
-  if (!has("gui"))
-    let s:white = { "gui": "#ABB2BF", "cterm": "145", "cterm16" : "7" }
-    autocmd ColorScheme * call onedark#set_highlight("Normal", { "fg": s:white }) " No `bg` setting
-  end
+set softtabstop=2
+set tabstop=2
+set shiftwidth=2
+
+set bs=2 "Allow backspace to work properly
+set cursorline
+set list "Show invisible characters by default
+set listchars=tab:→\ "This comment prevents trailing whitespace removal from removing the escaped space. :)
+set mouse=a
+set nobackup
+set nowritebackup
+set number
+set shortmess+=I "Disable splash screen/[I]ntro message
+
+"Statusline
+if exists("vimpager")
+  set statusline=%<%F%h%m%r%h%w%y\ %{&ff}\ %{strftime(\"%c\",getftime(expand(\"%:p\")))}\ %=\ lin:%l\/%L\ col:%c%V\ %P
+else
+  set statusline=%<%F%h%m%r%h%w%y\ %{&ff}\ %{strftime(\"%c\",getftime(expand(\"%:p\")))}\ %{fugitive#statusline()}\ %=\ lin:%l\/%L\ col:%c%V\ %P
 endif
+set laststatus=2
+
+"Treat .md files as Markdown
+au BufRead,BufNewFile *.md set filetype=markdown
 
 if has("gui") "Instead of gui_running, in case :gui is run manually on *NIX
   "Font settings
@@ -98,6 +85,129 @@ if has("gui") "Instead of gui_running, in case :gui is run manually on *NIX
     "set transparency=2 "Enable background transparency in MacVim
   "endif
 endif
+
+" +-------------+
+" | Colorscheme |
+" +-------------+
+
+"Use 24-bit (true-color) mode.
+" More information about true-color mode in tmux:
+" * http://sunaku.github.io/tmux-24bit-color.html#usage
+" * https://github.com/tmux/tmux/issues/34
+if (has("nvim"))
+  "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
+  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+endif
+"For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
+"Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
+if (has("termguicolors"))
+  set termguicolors
+endif
+
+"For testing/development of <https://github.com/joshdick/onedark.vim>
+"let g:onedark_termcolors=256
+let g:onedark_termcolors=16
+
+let g:onedark_terminal_italics=1
+
+colorscheme onedark
+
+" onedark.vim override: Don't set a background color when running in a terminal;
+" just use the terminal's background color
+if (has("autocmd") && !has("gui"))
+  let s:white = { "gui": "#ABB2BF", "cterm": "145", "cterm16" : "7" }
+  autocmd ColorScheme * call onedark#set_highlight("Normal", { "fg": s:white }) " No `bg` setting
+end
+
+" +----------+
+" | Mappings |
+" +----------+
+
+"NOTE - By default, <leader> is backslash
+let mapleader="\<Space>"
+
+imap ;; <Esc>
+
+"On Mac, map CMD-[ and CMD-] to indent while preserving any Visual mode selection as appropriate
+nmap <D-[> <<
+nmap <D-]> >>
+vmap <D-[> <gv
+vmap <D-]> >gv
+
+"Select the last-changed text
+noremap gV `[v`]
+
+":w!! will use sudo to save a non-writable file if you forgot to do 'sudo vim' by accident
+cmap w!! %!sudo tee > /dev/null %
+
+"Shortcuts for opening new splits
+"Found at <http://technotales.wordpress.com/2010/04/29/vim-splits-a-guide-to-doing-exactly-what-you-want/>
+"Window
+nmap <leader>sw<left>  :topleft  vnew<CR>
+nmap <leader>sw<right> :botright vnew<CR>
+nmap <leader>sw<up>    :topleft  new<CR>
+nmap <leader>sw<down>  :botright new<CR>
+"Buffer
+nmap <leader>s<left>   :leftabove  vnew<CR>
+nmap <leader>s<right>  :rightbelow vnew<CR>
+nmap <leader>s<up>     :leftabove  new<CR>
+nmap <leader>s<down>   :rightbelow new<CR>
+
+"Shortcuts for interacting with the system clipboard
+"Found at <http://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity/>
+vmap <leader>y "+y
+vmap <leader>d "+d
+nmap <leader>p "+p
+nmap <leader>P "+P
+vmap <leader>p "+p
+vmap <leader>P "+P
+
+"Shortcut to toggle netrw
+map <silent> <leader>e :call ToggleVExplorer()<CR>
+
+"Shortcut to toggle Gundo
+nmap <leader>u :GundoToggle<CR>
+
+"Shortcut to toggle CtrlP (for 'o'pening files)
+nnoremap <leader>o :CtrlP<CR>
+
+"Shorcut to toggle search hilighting
+"Found at <http://vim.wikia.com/wiki/Highlight_all_search_pattern_matches>
+noremap <leader>h :set hlsearch! hlsearch?<CR>
+
+"Shortcut to sort words inside a single line
+"Found at <http://stackoverflow.com/a/1329899/278810>
+vnoremap <leader>, d:execute 'normal a' . join(sort(split(getreg('"'))), ' ')<CR>
+
+"Shortcut to toggle 'set list' (toggles invisible characters)
+nmap <leader>l :set list!<CR>
+
+"Bind a shortcut for opening the current document in Marked.app on Mac OS X
+"Found at <https://github.com/kotfu/marked-bonus-pack#vim>
+nnoremap <leader>m :silent !open -a Marked\ 2.app '%:p'<cr>
+
+"Shortcut to toggle line numbers
+nmap <leader>n :set number! number?<CR>
+
+"Shortcut to toggle auto-indenting for code paste
+"Don't bother with pastetoggle, since it doesn't cooperate with vim-airline: <https://github.com/bling/vim-airline/issues/219>
+nmap <leader>v :set invpaste<CR>
+
+"Shortcut for saving
+nnoremap <leader>w :w<CR>
+
+"Shortcut to strip trailing whitespace
+nmap <silent> <leader>$ :call Preserve("%s/\\s\\+$//e")<CR>
+
+"Shortcut to auto-indent entire file
+nmap <silent> <leader>= :call Preserve("normal gg=G")<CR>
+
+"Shortcut to convert mixed line endings to LF-only (Unix)
+nmap <leader>d :call ForceLF()<CR>
+
+" +----------------------+
+" | Plugin Configuration |
+" +----------------------+
 
 "----------------- ack.vim configuration -----------------
 
@@ -151,29 +261,28 @@ endif
 
 "----------------- /CtrlP configuration -----------------
 
-"--------------- tmuxline configuration ---------------
-
-let g:tmuxline_preset = {
-  \'a'    : '#S',
-  \'win'  : ['#I', '#W'],
-  \'cwin' : ['#I', '#W'],
-  \'y'    : '#(uptime | grep -o ": .*" | cut -c3-)',
-  \'z'    : '#H' }
-
-"--------------- /tmuxline configuration ---------------
-
-"--------------- vim-jsx configuration -----------------
-
-let g:jsx_ext_required = 0
-
-"--------------- /vim-jsx configuration -----------------
-
 "--------------- NERDCommenter configuration -----------------
 
 " Add spaces after comment delimiters by default
 let g:NERDSpaceDelims = 1
 
 "--------------- /NERDCommenter configuration -----------------
+
+"--------------- netrw configuration -----------------
+"
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+let g:netrw_browse_split = 4
+let g:netrw_altv = 1
+let g:netrw_winsize = 25
+
+"--------------- /netrw configuration -----------------
+
+"--------------- vim-markdown configuration (via vim-polyglot) -----------------
+
+let g:vim_markdown_folding_disabled=1
+
+"--------------- /vim-markdown configuration -----------------
 
 "--------------- lightline.vim configuration ---------------
 
@@ -216,7 +325,7 @@ function! LightlineFilename()
   let fname = expand('%:t')
   return fname == 'ControlP' && has_key(g:lightline, 'ctrlp_item') ? g:lightline.ctrlp_item :
         \ fname == '__Tagbar__' ? g:lightline.fname :
-        \ fname =~ '__Gundo\|NERD_tree' ? '' :
+        \ fname =~ '__Gundo' ? '' :
         \ &ft == 'vimfiler' ? vimfiler#get_status_string() :
         \ &ft == 'unite' ? unite#get_status_string() :
         \ &ft == 'vimshell' ? vimshell#get_status_string() :
@@ -255,7 +364,7 @@ function! LightlineMode()
         \ fname == 'ControlP' ? 'CtrlP' :
         \ fname == '__Gundo__' ? 'Gundo' :
         \ fname == '__Gundo_Preview__' ? 'Gundo Preview' :
-        \ fname =~ 'NERD_tree' ? 'NERDTree' :
+        \ fname =~ 'NetrwTreeListing' ? 'Tree Listing' :
         \ &ft == 'unite' ? 'Unite' :
         \ &ft == 'vimfiler' ? 'VimFiler' :
         \ &ft == 'vimshell' ? 'VimShell' :
@@ -302,82 +411,33 @@ let g:vimshell_force_overwrite_statusline = 0
 
 "--------------- /lightline.vim configuration ---------------
 
-"Disable splash screen/[I]ntro message
-set shortmess+=I
+" +-------------------------+
+" | Functions/Miscellaneous |
+" +-------------------------+
 
-set mouse=a
-
-"Use 24-bit (true-color) mode.
-" More information about true-color mode in tmux:
-" * http://sunaku.github.io/tmux-24bit-color.html#usage
-" * https://github.com/tmux/tmux/issues/34
-if (has("nvim"))
-  "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
-  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+" Highlight trailing whitespace.
+" Adapted from <http://vim.wikia.com/wiki/Highlight_unwanted_spaces>
+" * Inside insert mode, don't match trailing whitespace on the current line.
+" * Outside insert mode, match all trailing whitespace on the current line.
+let ExtraWhitespace_cterm = synIDattr(synIDtrans(hlID('Error')), 'fg', 'cterm')
+let ExtraWhitespace_gui = synIDattr(synIDtrans(hlID('Error')), 'fg', 'gui')
+exe 'highlight ExtraWhitespace ctermbg=' . ExtraWhitespace_cterm . ' guibg=' . ExtraWhitespace_gui
+match ExtraWhitespace /\s\+$/
+if has("autocmd")
+  autocmd ColorScheme * let ExtraWhitespace_cterm = synIDattr(synIDtrans(hlID('Error')), 'fg', 'cterm')
+  autocmd ColorScheme * let ExtraWhitespace_gui = synIDattr(synIDtrans(hlID('Error')), 'fg', 'gui')
+  autocmd ColorScheme * exe 'highlight ExtraWhitespace ctermbg=' . ExtraWhitespace_cterm . ' guibg=' . ExtraWhitespace_gui
+  autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+  autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+  autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+  autocmd BufWinLeave * call clearmatches()
 endif
-"For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
-"Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
-if (has("termguicolors"))
-  set termguicolors
-endif
 
-"For testing/development of < https://github.com/joshdick/onedark.vim/ >
-"let g:onedark_termcolors=256
-let g:onedark_termcolors=16
-
-let g:onedark_terminal_italics=1
-
-colorscheme onedark
-
-set number
-set nobackup
-set nowritebackup
-set cursorline
-set list "Show invisible characters by default
-set listchars=tab:→\ "This comment prevents trailing whitespace removal from removing the escaped space. :)
-
-set softtabstop=2
-set tabstop=2
-set shiftwidth=2
-
-set bs=2 "Allow backspace to work properly
-set autoindent
-set smartindent
-set nowrap
-filetype plugin indent on
-syntax on
-
-"Statusline
-if exists("vimpager")
-  set statusline=%<%F%h%m%r%h%w%y\ %{&ff}\ %{strftime(\"%c\",getftime(expand(\"%:p\")))}\ %=\ lin:%l\/%L\ col:%c%V\ %P
-else
-  set statusline=%<%F%h%m%r%h%w%y\ %{&ff}\ %{strftime(\"%c\",getftime(expand(\"%:p\")))}\ %{fugitive#statusline()}\ %=\ lin:%l\/%L\ col:%c%V\ %P
-endif
-set laststatus=2
-
-"On Mac, map CMD-[ and CMD-] to indent while preserving any Visual mode selection as appropriate
-nmap <D-[> <<
-nmap <D-]> >>
-vmap <D-[> <gv
-vmap <D-]> >gv
-
-"Select the last-changed text
-noremap gV `[v`]
-
-":w!! will use sudo to save a non-writable file if you forgot to do 'sudo vim' by accident
-cmap w!! %!sudo tee > /dev/null %
-
-"Treat .md files as Markdown
-au BufRead,BufNewFile *.md set filetype=markdown
-
-"Disable Markdown folding for vim-markdown plugin
-let g:vim_markdown_folding_disabled=1
-
-"Super Retab
-"Found at <http://vim.wikia.com/wiki/Super_retab>
-" Space2Tab  Convert spaces to tabs, only in indents.
-" Tab2Space  Convert tabs to spaces, only in indents.
-" RetabIndent  Execute Space2Tab (if 'expandtab' is set), or Tab2Space (otherwise).
+" Super Retab
+" Found at <http://vim.wikia.com/wiki/Super_retab>
+"   Space2Tab  Convert spaces to tabs, only in indents.
+"   Tab2Space  Convert tabs to spaces, only in indents.
+"   RetabIndent  Execute Space2Tab (if 'expandtab' is set), or Tab2Space (otherwise).
 " Each command accepts an argument that specifies the number of spaces in a tab column. By default, the 'tabstop' setting is used.
 "------------------------------------------------
 
@@ -394,11 +454,11 @@ function! Indenting(indent, what, cols)
   return result
 endfunction
 
-"Convert whitespace used for indenting (before first non-whitespace).
-"what=0 (convert spaces to tabs), or 1 (convert tabs to spaces).
-"cols=string with number of columns per tab, or empty to use 'tabstop'.
-"The cursor position is restored, but the cursor will be in a different
-"column when the number of characters in the indent of the line is changed.
+" Convert whitespace used for indenting (before first non-whitespace).
+" what=0 (convert spaces to tabs), or 1 (convert tabs to spaces).
+" cols=string with number of columns per tab, or empty to use 'tabstop'.
+" The cursor position is restored, but the cursor will be in a different
+" column when the number of characters in the indent of the line is changed.
 function! IndentConvert(line1, line2, what, cols)
   let savepos=getpos('.')
   let cols=empty(a:cols) ? &tabstop : a:cols
@@ -412,14 +472,14 @@ command! -nargs=? -range=% RetabIndent call IndentConvert(<line1>,<line2>,&et,<q
 
 "------------------------------------------------
 
-"Function that shows the syntax highlighting group used at the cursor.
-"Found at <http://vim.wikia.com/wiki/Identify_the_syntax_highlighting_group_used_at_the_cursor>
+" Function that shows the syntax highlighting group used at the cursor.
+" Found at <http://vim.wikia.com/wiki/Identify_the_syntax_highlighting_group_used_at_the_cursor>
 map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
-			\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
-			\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+  \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+  \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
-"Function to run arbitrary commands while preserving state.
-"Found at <http://technotales.wordpress.com/2010/03/31/preserve-a-vim-function-that-keeps-your-state/>
+" Function to run arbitrary commands while preserving state.
+" Found at <http://technotales.wordpress.com/2010/03/31/preserve-a-vim-function-that-keeps-your-state/>
 function! Preserve(command)
   "Preparation: save last search, and cursor position.
   let _s=@/
@@ -432,8 +492,8 @@ function! Preserve(command)
   call cursor(l, c)
 endfunction
 
-"Convert mixed line endings to LF-only (Unix)
-"Found at <http://vim.wikia.com/wiki/File_format>
+" Convert mixed line endings to LF-only (Unix)
+" Found at <http://vim.wikia.com/wiki/File_format>
 function! ForceLF()
   :update
   :e ++ff=dos
@@ -441,97 +501,24 @@ function! ForceLF()
   :w
 endfunction
 
-"NOTE - By default, <leader> is backslash
-let mapleader="\<Space>"
-
-imap ;; <Esc>
-
-"vimux shortcuts
-"Found at <https://raw.github.com/benmills/vimux/master/doc/vimux.txt>
-
-"Prompt for a command to run
-map <leader>rp :VimuxPromptCommand<CR>
-
-"Run last command executed by VimuxRunCommand
-map <leader>rl :VimuxRunLastCommand<CR>
-
-"Inspect runner pane
-map <leader>ri :VimuxInspectRunner<CR>
-
-"Close all other tmux panes in current window
-map <leader>rx :VimuxClosePanes<CR>
-
-"Close vim tmux runner opened by VimuxRunCommand
-map <leader>rq :VimuxCloseRunner<CR>
-
-"Interrupt any command running in the runner pane
-map <leader>rs :VimuxInterruptRunner<CR>
-
-"Shortcuts for opening new splits.
-"Found at <http://technotales.wordpress.com/2010/04/29/vim-splits-a-guide-to-doing-exactly-what-you-want/>
-"Window
-nmap <leader>sw<left>  :topleft  vnew<CR>
-nmap <leader>sw<right> :botright vnew<CR>
-nmap <leader>sw<up>    :topleft  new<CR>
-nmap <leader>sw<down>  :botright new<CR>
-"Buffer
-nmap <leader>s<left>   :leftabove  vnew<CR>
-nmap <leader>s<right>  :rightbelow vnew<CR>
-nmap <leader>s<up>     :leftabove  new<CR>
-nmap <leader>s<down>   :rightbelow new<CR>
-
-"Shortcuts for interacting with the system clipboard
-"Found at <http://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity/>
-vmap <leader>y "+y
-vmap <leader>d "+d
-nmap <leader>p "+p
-nmap <leader>P "+P
-vmap <leader>p "+p
-vmap <leader>P "+P
-
-"Shortcut to toggle NERDTree
-nmap <leader>e :NERDTreeToggle<CR>
-
-"Shortcut to toggle Gundo
-nmap <leader>u :GundoToggle<CR>
-
-"Shortcut to toggle CtrlP (for 'o'pening files)
-nnoremap <leader>o :CtrlP<CR>
-
-"Shorcut to toggle search hilighting
-"Found at <http://vim.wikia.com/wiki/Highlight_all_search_pattern_matches>
-noremap <leader>h :set hlsearch! hlsearch?<CR>
-
-"Shortcut to sort words inside a single line
-"Found at <http://stackoverflow.com/a/1329899/278810>
-vnoremap <leader>, d:execute 'normal a' . join(sort(split(getreg('"'))), ' ')<CR>
-
-"Shortcut to toggle 'set list' (toggles invisible characters)
-nmap <leader>l :set list!<CR>
-
-"Bind a shortcut for opening the current document in Marked.app on Mac OS X.
-"Found at <https://github.com/kotfu/marked-bonus-pack#vim>
-nnoremap <leader>m :silent !open -a Marked\ 2.app '%:p'<cr>
-
-"Shortcut to toggle line number visibility
-nmap <leader>n :set number! number?<CR>
-
-"Shortcut to toggle auto-indenting for code paste
-"Don't bother with pastetoggle, since it doesn't cooperate with vim-airline: <https://github.com/bling/vim-airline/issues/219>
-nmap <leader>v :set invpaste<CR>
-
-"Shortcut for entering visual line mode
-nmap <leader><leader> V
-
-"Shortcut for saving
-nnoremap <leader>w :w<CR>
-
-"Shortcut to strip trailing whitespace
-nmap <silent> <leader>$ :call Preserve("%s/\\s\\+$//e")<CR>
-
-"Shortcut to auto-indent entire file
-nmap <silent> <leader>= :call Preserve("normal gg=G")<CR>
-
-"Shortcut to convert mixed line endings to LF-only (Unix)
-nmap <leader>d :call ForceLF()<CR>
+" Toggle Vexplore
+" Found at <http://stackoverflow.com/a/5636941>
+function! ToggleVExplorer()
+  if exists("t:expl_buf_num")
+      let expl_win_num = bufwinnr(t:expl_buf_num)
+      if expl_win_num != -1
+          let cur_win_nr = winnr()
+          exec expl_win_num . 'wincmd w'
+          close
+          exec cur_win_nr . 'wincmd w'
+          unlet t:expl_buf_num
+      else
+          unlet t:expl_buf_num
+      endif
+  else
+      exec '1wincmd w'
+      Vexplore
+      let t:expl_buf_num = bufnr("%")
+  endif
+endfunction
 
