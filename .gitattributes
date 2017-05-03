@@ -1,0 +1,3 @@
+*js.symlink linguist-language=javascript
+vimrc.symlink linguist-language=vim
+zshrc.symlink linguist-language=shell
