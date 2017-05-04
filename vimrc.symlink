@@ -13,7 +13,6 @@ Plug 'joshdick/vim-action-ack'
 unlet g:plug_url_format
 
 Plug 'airblade/vim-gitgutter'
-Plug 'corntrace/bufexplorer'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'ervandew/supertab'
@@ -188,6 +187,9 @@ nnoremap <leader>p "+p
 nnoremap <leader>P "+P
 xnoremap <leader>p "+p
 xnoremap <leader>P "+P
+
+"Show buffer search
+nnoremap <leader>b :CtrlPBuffer<CR>
 
 "Shortcut to convert mixed line endings to LF-only (Unix)
 nnoremap <leader>d :call ForceLF()<CR>
