@@ -1,4 +1,7 @@
-set enc=utf-8
+" vim:fdm=marker
+set encoding=utf-8
+
+"Plugins {{{
 
 "vim-plug initialization
 call plug#begin('~/.vim/plugged')
@@ -33,12 +36,11 @@ Plug 'tpope/vim-sleuth'
 Plug 'w0rp/ale'
 call plug#end()
 
-" +-----------------------+
-" | General Configuration |
-" +-----------------------+
+"}}}
+
+"General Configuration {{{
 
 set autoindent
-set smartindent
 set nowrap
 filetype plugin indent on
 syntax on
@@ -47,8 +49,9 @@ set softtabstop=2
 set tabstop=2
 set shiftwidth=2
 
-set bs=2 "Allow backspace to work properly
+set backspace=2 "Allow backspace to work properly
 set cursorline
+set hidden "Allow more than one unsaved buffer
 set list "Show invisible characters by default
 set listchars=tab:→\ "This comment prevents trailing whitespace removal from removing the escaped space. :)
 set mouse=a
@@ -65,35 +68,55 @@ else
 endif
 set laststatus=2
 
-"Treat .md files as Markdown
-au BufRead,BufNewFile *.md set filetype=markdown
+"Built-in extended '%' matching
+runtime macros/matchit.vim
 
-if has("gui") "Instead of gui_running, in case :gui is run manually on *NIX
-  "Font settings
-  set guifont=PragmataPro\ Mono:h12
-  set antialias
-
-  "OS-specific settings
-  if has("unix")
-    set linespace=2
+if !exists('g:os')
+  if has('win32') || has('win16')
+    let g:os = 'Windows'
   else
-    source $VIMRUNTIME/mswin.vim "Enable expected keyboard shortcuts for Windows - see :help :behave
-    set keymodel-=stopsel "Make Visual mode work as expected when mswin.vim is sourced
+    let g:os = substitute(system('uname'), '\n', '', '')
   endif
-  set guioptions=egmrt "Hide toolbar by default in MacVim
-  "if has("transparency") "Background transparency is a MacVim-specific feature, so prevent errors in other vims
-    "set transparency=2 "Enable background transparency in MacVim
-  "endif
 endif
 
-" +-------------+
-" | Colorscheme |
-" +-------------+
+if has("gui") "Instead of gui_running, in case :gui is run manually on *NIX
+
+  "Font settings
+  set guifont=PragmataPro\ Mono:h13
+  set antialias
+
+  if g:os == 'Darwin'
+    "set guioptions=egmrt "Hide toolbar by default in MacVim
+    "if has("transparency") "Background transparency is a MacVim-specific feature, so prevent errors in other vims
+      "set transparency=2 "Enable background transparency in MacVim
+    "endif
+    "Map CMD-[ and CMD-] to indent while preserving any Visual mode selection as appropriate
+    nnoremap <D-[> <<
+    nnoremap <D-]> >>
+    xnoremap <D-[> <gv
+    xnoremap <D-]> >gv
+  endif
+
+  "if g:os == 'Linux'
+  "endif
+
+  if g:os == 'Windows'
+    "See :help behave
+    behave mswin
+    source $VIMRUNTIME/mswin.vim "Enable expected keyboard shortcuts for Windows
+    set keymodel-=stopsel "Make Visual mode work as expected when mswin.vim is sourced
+  endif
+
+endif
+
+"}}}
+
+"Colorscheme {{{
 
 "Use 24-bit (true-color) mode.
-" More information about true-color mode in tmux:
-" * http://sunaku.github.io/tmux-24bit-color.html#usage
-" * https://github.com/tmux/tmux/issues/34
+"More information about true-color mode in tmux:
+"* http://sunaku.github.io/tmux-24bit-color.html#usage
+"* https://github.com/tmux/tmux/issues/34
 if (has("nvim"))
   "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
@@ -112,104 +135,103 @@ let g:onedark_terminal_italics=1
 
 colorscheme onedark
 
-" onedark.vim override: Don't set a background color when running in a terminal;
-" just use the terminal's background color
+"onedark.vim override: Don't set a background color when running in a terminal;
+"just use the terminal's background color
 if (has("autocmd") && !has("gui"))
-  let s:white = { "gui": "#ABB2BF", "cterm": "145", "cterm16" : "7" }
-  autocmd ColorScheme * call onedark#set_highlight("Normal", { "fg": s:white }) " No `bg` setting
+  augroup colors
+    autocmd!
+    let s:white = { "gui": "#ABB2BF", "cterm": "145", "cterm16": "7"}
+    autocmd ColorScheme * call onedark#set_highlight("Normal", { "fg": s:white }) "No `bg` setting
+  augroup END
 end
 
-" +----------+
-" | Mappings |
-" +----------+
+"}}}
 
-"NOTE - By default, <leader> is backslash
+"Mappings {{{
+
+"Note: By default, <leader> is backslash
 let mapleader="\<Space>"
-
-imap ;; <Esc>
-
-"On Mac, map CMD-[ and CMD-] to indent while preserving any Visual mode selection as appropriate
-nmap <D-[> <<
-nmap <D-]> >>
-vmap <D-[> <gv
-vmap <D-]> >gv
 
 "Select the last-changed text
 noremap gV `[v`]
 
-":w!! will use sudo to save a non-writable file if you forgot to do 'sudo vim' by accident
-cmap w!! %!sudo tee > /dev/null %
-
-"Shortcuts for opening new splits
-"Found at <http://technotales.wordpress.com/2010/04/29/vim-splits-a-guide-to-doing-exactly-what-you-want/>
-"Window
-nmap <leader>sw<left>  :topleft  vnew<CR>
-nmap <leader>sw<right> :botright vnew<CR>
-nmap <leader>sw<up>    :topleft  new<CR>
-nmap <leader>sw<down>  :botright new<CR>
-"Buffer
-nmap <leader>s<left>   :leftabove  vnew<CR>
-nmap <leader>s<right>  :rightbelow vnew<CR>
-nmap <leader>s<up>     :leftabove  new<CR>
-nmap <leader>s<down>   :rightbelow new<CR>
-
-"Shortcuts for interacting with the system clipboard
-"Found at <http://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity/>
-vmap <leader>y "+y
-vmap <leader>d "+d
-nmap <leader>p "+p
-nmap <leader>P "+P
-vmap <leader>p "+p
-vmap <leader>P "+P
-
 "Shortcut to toggle netrw
-map <silent> <leader>e :call ToggleVExplorer()<CR>
-
-"Shortcut to toggle Gundo
-nmap <leader>u :GundoToggle<CR>
-
-"Shortcut to toggle CtrlP (for 'o'pening files)
-nnoremap <leader>o :CtrlP<CR>
+noremap <silent> <leader>e :call ToggleVExplorer()<CR>
 
 "Shorcut to toggle search hilighting
 "Found at <http://vim.wikia.com/wiki/Highlight_all_search_pattern_matches>
 noremap <leader>h :set hlsearch! hlsearch?<CR>
 
-"Shortcut to sort words inside a single line
-"Found at <http://stackoverflow.com/a/1329899/278810>
-vnoremap <leader>, d:execute 'normal a' . join(sort(split(getreg('"'))), ' ')<CR>
+inoremap ;; <Esc>
+
+":w!! will use sudo to save a non-writable file if you forgot to do 'sudo vim' by accident
+cnoremap w!! %!sudo tee > /dev/null %
+
+"Shortcuts for opening new splits
+"Found at <http://technotales.wordpress.com/2010/04/29/vim-splits-a-guide-to-doing-exactly-what-you-want/>
+"Window
+nnoremap <leader>sw<left>  :topleft  vnew<CR>
+nnoremap <leader>sw<right> :botright vnew<CR>
+nnoremap <leader>sw<up>    :topleft  new<CR>
+nnoremap <leader>sw<down>  :botright new<CR>
+"Buffer
+nnoremap <leader>s<left>   :leftabove  vnew<CR>
+nnoremap <leader>s<right>  :rightbelow vnew<CR>
+nnoremap <leader>s<up>     :leftabove  new<CR>
+nnoremap <leader>s<down>   :rightbelow new<CR>
+
+"Shortcuts for interacting with the system clipboard
+"Found at <http://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity/>
+xnoremap <leader>y "+y
+xnoremap <leader>d "+d
+nnoremap <leader>p "+p
+nnoremap <leader>P "+P
+xnoremap <leader>p "+p
+xnoremap <leader>P "+P
+
+"Shortcut to convert mixed line endings to LF-only (Unix)
+nnoremap <leader>d :call ForceLF()<CR>
 
 "Shortcut to toggle 'set list' (toggles invisible characters)
-nmap <leader>l :set list!<CR>
+nnoremap <leader>l :set list!<CR>
 
 "Bind a shortcut for opening the current document in Marked.app on Mac OS X
 "Found at <https://github.com/kotfu/marked-bonus-pack#vim>
-nnoremap <leader>m :silent !open -a Marked\ 2.app '%:p'<cr>
+if g:os == 'Darwin'
+  nnoremap <leader>m :silent !open -a Marked\ 2.app '%:p'<cr>
+endif
 
 "Shortcut to toggle line numbers
-nmap <leader>n :set number! number?<CR>
+nnoremap <leader>n :set number! number?<CR>
+
+"Shortcut to toggle CtrlP (for 'o'pening files)
+nnoremap <leader>o :CtrlP<CR>
+
+"Shortcut to toggle Gundo
+nnoremap <leader>u :GundoToggle<CR>
 
 "Shortcut to toggle auto-indenting for code paste
 "Don't bother with pastetoggle, since it doesn't cooperate with vim-airline: <https://github.com/bling/vim-airline/issues/219>
-nmap <leader>v :set invpaste<CR>
+nnoremap <leader>v :set invpaste<CR>
 
 "Shortcut for saving
 nnoremap <leader>w :w<CR>
 
 "Shortcut to strip trailing whitespace
-nmap <silent> <leader>$ :call Preserve("%s/\\s\\+$//e")<CR>
+nnoremap <silent> <leader>$ :call Preserve("%s/\\s\\+$//e")<CR>
 
 "Shortcut to auto-indent entire file
-nmap <silent> <leader>= :call Preserve("normal gg=G")<CR>
+nnoremap <silent> <leader>= :call Preserve("normal gg=G")<CR>
 
-"Shortcut to convert mixed line endings to LF-only (Unix)
-nmap <leader>d :call ForceLF()<CR>
+"Shortcut to sort words inside a single line
+"Found at <http://stackoverflow.com/a/1329899/278810>
+xnoremap <leader>, d:execute 'normal a' . join(sort(split(getreg('"'))), ' ')<CR>
 
-" +----------------------+
-" | Plugin Configuration |
-" +----------------------+
+"}}}
 
-"----------------- ack.vim configuration -----------------
+"Plugin Configuration {{{
+
+"ack.vim {{{
 
 "Use ag if it's available
 if executable('ag')
@@ -223,35 +245,39 @@ cnoreabbrev Ag Ack
 cnoreabbrev AG Ack
 command Ag Ack
 
-"----------------- /ack.vim configuration -----------------
+"}}}
 
-"--------------- vim-action-ack configuration -----------------
+"vim-action-ack {{{
 
 nmap * <Plug>AckActionWord
-vmap * <Plug>AckActionVisual
+xmap * <Plug>AckActionVisual
 
-"--------------- /vim-action-ack configuration -----------------
+"}}}
 
-"----------------- ale configuration -----------------
+"ale {{{
 
-let g:ale_statusline_format = ['⨉ %d', '⚠ %d', ''] " Don't show an 'OK' status so lightline.vim won't treat it as an error
-autocmd User ALELint call lightline#update()
+let g:ale_statusline_format = ['⨉ %d', '⚠ %d', ''] "Don't show an 'OK' status so lightline.vim won't treat it as an error
 let g:ale_open_list=1
 let g:ale_lint_on_save=1
 let g:ale_lint_on_text_changed=0
+if has("autocmd")
+  augroup lint
+    autocmd!
+    autocmd User ALELint call lightline#update()
+  augroup END
+endif
 
-"----------------- /ale configuration -----------------
+"}}}
 
-"----------------- CtrlP configuration -----------------
+"CtrlP {{{
 
 "Make CtrlP play nicer with Git projects.
 "Found at <http://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity/>
 
 let g:ctrlp_use_caching=0
 if executable('ag')
-    set grepprg=ag\ --nogroup\ --nocolor
-
-    let g:ctrlp_user_command='ag %s -l --nocolor -g ""'
+  set grepprg=ag\ --nogroup\ --nocolor
+  let g:ctrlp_user_command='ag %s -l --nocolor -g ""'
 else
   let g:ctrlp_user_command=['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
   let g:ctrlp_prompt_mappings={
@@ -259,32 +285,32 @@ else
     \ }
 endif
 
-"----------------- /CtrlP configuration -----------------
+"}}}
 
-"--------------- NERDCommenter configuration -----------------
+"NERDCommenter {{{
 
-" Add spaces after comment delimiters by default
+"Add spaces after comment delimiters by default
 let g:NERDSpaceDelims = 1
 
-"--------------- /NERDCommenter configuration -----------------
+"}}}
 
-"--------------- netrw configuration -----------------
-"
+"netrw {{{
+
 let g:netrw_banner = 0
 let g:netrw_liststyle = 3
 let g:netrw_browse_split = 4
 let g:netrw_altv = 1
 let g:netrw_winsize = 25
 
-"--------------- /netrw configuration -----------------
+"}}}
 
-"--------------- vim-markdown configuration (via vim-polyglot) -----------------
+"vim-markdown (via vim-polyglot) {{{
 
 let g:vim_markdown_folding_disabled=1
 
-"--------------- /vim-markdown configuration -----------------
+"}}}
 
-"--------------- lightline.vim configuration ---------------
+"lightline.vim {{{
 
 set noshowmode
 
@@ -409,14 +435,14 @@ let g:unite_force_overwrite_statusline = 0
 let g:vimfiler_force_overwrite_statusline = 0
 let g:vimshell_force_overwrite_statusline = 0
 
-"--------------- /lightline.vim configuration ---------------
+"}}}
 
-" +-------------------------+
-" | Functions/Miscellaneous |
-" +-------------------------+
+"}}}
 
-" Highlight trailing whitespace.
-" Adapted from <http://vim.wikia.com/wiki/Highlight_unwanted_spaces>
+"Functions/Miscellaneous {{{
+
+"Highlight trailing whitespace.
+"Adapted from <http://vim.wikia.com/wiki/Highlight_unwanted_spaces>
 " * Inside insert mode, don't match trailing whitespace on the current line.
 " * Outside insert mode, match all trailing whitespace on the current line.
 let ExtraWhitespace_cterm = synIDattr(synIDtrans(hlID('Error')), 'fg', 'cterm')
@@ -424,26 +450,29 @@ let ExtraWhitespace_gui = synIDattr(synIDtrans(hlID('Error')), 'fg', 'gui')
 exe 'highlight ExtraWhitespace ctermbg=' . ExtraWhitespace_cterm . ' guibg=' . ExtraWhitespace_gui
 match ExtraWhitespace /\s\+$/
 if has("autocmd")
-  autocmd ColorScheme * let ExtraWhitespace_cterm = synIDattr(synIDtrans(hlID('Error')), 'fg', 'cterm')
-  autocmd ColorScheme * let ExtraWhitespace_gui = synIDattr(synIDtrans(hlID('Error')), 'fg', 'gui')
-  autocmd ColorScheme * exe 'highlight ExtraWhitespace ctermbg=' . ExtraWhitespace_cterm . ' guibg=' . ExtraWhitespace_gui
-  autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
-  autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-  autocmd InsertLeave * match ExtraWhitespace /\s\+$/
-  autocmd BufWinLeave * call clearmatches()
+  augroup whitespace_highlighting
+    autocmd!
+    autocmd ColorScheme * let ExtraWhitespace_cterm = synIDattr(synIDtrans(hlID('Error')), 'fg', 'cterm')
+    autocmd ColorScheme * let ExtraWhitespace_gui = synIDattr(synIDtrans(hlID('Error')), 'fg', 'gui')
+    autocmd ColorScheme * exe 'highlight ExtraWhitespace ctermbg=' . ExtraWhitespace_cterm . ' guibg=' . ExtraWhitespace_gui
+    autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+    autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+    autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+    autocmd BufWinLeave * call clearmatches()
+  augroup END
 endif
 
-" Super Retab
-" Found at <http://vim.wikia.com/wiki/Super_retab>
-"   Space2Tab  Convert spaces to tabs, only in indents.
-"   Tab2Space  Convert tabs to spaces, only in indents.
-"   RetabIndent  Execute Space2Tab (if 'expandtab' is set), or Tab2Space (otherwise).
-" Each command accepts an argument that specifies the number of spaces in a tab column. By default, the 'tabstop' setting is used.
+"Super Retab
+"Found at <http://vim.wikia.com/wiki/Super_retab>
+"  Space2Tab  Convert spaces to tabs, only in indents.
+"  Tab2Space  Convert tabs to spaces, only in indents.
+"  RetabIndent  Execute Space2Tab (if 'expandtab' is set), or Tab2Space (otherwise).
+"Each command accepts an argument that specifies the number of spaces in a tab column. By default, the 'tabstop' setting is used.
 "------------------------------------------------
 
-" Return indent (all whitespace at start of a line), converted from
-" tabs to spaces if what=1, or from spaces to tabs otherwise.
-" When converting to tabs, result has no redundant spaces.
+"Return indent (all whitespace at start of a line), converted from
+"tabs to spaces if what=1, or from spaces to tabs otherwise.
+"When converting to tabs, result has no redundant spaces.
 function! Indenting(indent, what, cols)
   let spccol=repeat(' ', a:cols)
   let result=substitute(a:indent, spccol, '\t', 'g')
@@ -454,11 +483,11 @@ function! Indenting(indent, what, cols)
   return result
 endfunction
 
-" Convert whitespace used for indenting (before first non-whitespace).
-" what=0 (convert spaces to tabs), or 1 (convert tabs to spaces).
-" cols=string with number of columns per tab, or empty to use 'tabstop'.
-" The cursor position is restored, but the cursor will be in a different
-" column when the number of characters in the indent of the line is changed.
+"Convert whitespace used for indenting (before first non-whitespace).
+"what=0 (convert spaces to tabs), or 1 (convert tabs to spaces).
+"cols=string with number of columns per tab, or empty to use 'tabstop'.
+"The cursor position is restored, but the cursor will be in a different
+"column when the number of characters in the indent of the line is changed.
 function! IndentConvert(line1, line2, what, cols)
   let savepos=getpos('.')
   let cols=empty(a:cols) ? &tabstop : a:cols
@@ -472,14 +501,14 @@ command! -nargs=? -range=% RetabIndent call IndentConvert(<line1>,<line2>,&et,<q
 
 "------------------------------------------------
 
-" Function that shows the syntax highlighting group used at the cursor.
-" Found at <http://vim.wikia.com/wiki/Identify_the_syntax_highlighting_group_used_at_the_cursor>
-map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+"Function that shows the syntax highlighting group used at the cursor.
+"Found at <http://vim.wikia.com/wiki/Identify_the_syntax_highlighting_group_used_at_the_cursor>
+map <F10> :echo "hi<". synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
   \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
   \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
-" Function to run arbitrary commands while preserving state.
-" Found at <http://technotales.wordpress.com/2010/03/31/preserve-a-vim-function-that-keeps-your-state/>
+"Function to run arbitrary commands while preserving state.
+"Found at <http://technotales.wordpress.com/2010/03/31/preserve-a-vim-function-that-keeps-your-state/>
 function! Preserve(command)
   "Preparation: save last search, and cursor position.
   let _s=@/
@@ -492,8 +521,8 @@ function! Preserve(command)
   call cursor(l, c)
 endfunction
 
-" Convert mixed line endings to LF-only (Unix)
-" Found at <http://vim.wikia.com/wiki/File_format>
+"Convert mixed line endings to LF-only (Unix)
+"Found at <http://vim.wikia.com/wiki/File_format>
 function! ForceLF()
   :update
   :e ++ff=dos
@@ -501,8 +530,8 @@ function! ForceLF()
   :w
 endfunction
 
-" Toggle Vexplore
-" Found at <http://stackoverflow.com/a/5636941>
+"Toggle Vexplore
+"Found at <http://stackoverflow.com/a/5636941>
 function! ToggleVExplorer()
   if exists("t:expl_buf_num")
       let expl_win_num = bufwinnr(t:expl_buf_num)
@@ -522,3 +551,4 @@ function! ToggleVExplorer()
   endif
 endfunction
 
+"}}}
