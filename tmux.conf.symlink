@@ -1,9 +1,7 @@
 # Note: Colors assume use of the 16-color palette from < https://github.com/joshdick/onedark.vim >.
 
-# Enable true-color mode per < http://sunaku.github.io/tmux-24bit-color.html#usage > (tmux 2.2+)
-# Depends on xterm-256color-italic.terminfo < https://gist.github.com/sos4nt/3187620 >
-set -g default-terminal "xterm-256color-italic"
-set-option -ga terminal-overrides ",xterm-256color-italic:Tc"
+set -g default-terminal "tmux" # use 'tmux' instead of 'screen-*' to enable italics support per tmux FAQ
+set-option -ga terminal-overrides ",*256col*:Tc" # Enable true-color support per https://github.com/tmux/tmux/issues/34#issuecomment-261017036
 
 # Change prefix key to ^a
 unbind C-b
