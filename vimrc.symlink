@@ -67,6 +67,11 @@ else
 endif
 set laststatus=2
 
+"Force cursor styling in nvim+tmux per <https://github.com/neovim/neovim/wiki/Following-HEAD#20170402>
+if (has("nvim") && $TERM == 'tmux')
+  set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor
+endif
+
 "Built-in extended '%' matching
 runtime macros/matchit.vim
 
