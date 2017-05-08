@@ -1,7 +1,7 @@
 # Note: Colors assume use of the 16-color palette from < https://github.com/joshdick/onedark.vim >.
 
 set -g default-terminal "xterm-256color"
-set-option -ga terminal-overrides ",*256col*:Tc" # Enable true-color support per https://github.com/tmux/tmux/issues/34#issuecomment-261017036
+set-option -ga terminal-overrides ",*256col*:Tc" # Enable true-color support per < https://github.com/tmux/tmux/issues/34#issuecomment-261017036 >
 
 # Change prefix key to ^a
 unbind C-b
