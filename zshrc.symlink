@@ -184,3 +184,5 @@ fi
 if command_exists cowsay && command_exists fortune; then
   fortune | cowsay -f ~/.hypnotoad.cow -W 60
 fi
+
+export PATH="$HOME/.yarn/bin:$PATH"
