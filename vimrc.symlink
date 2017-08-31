@@ -140,7 +140,7 @@ if (has("autocmd") && !has("gui_running"))
     let s:white = { "gui": "#ABB2BF", "cterm": "145", "cterm16": "7"}
     autocmd ColorScheme * call onedark#set_highlight("Normal", { "fg": s:white }) "No `bg` setting
   augroup END
-end
+endif
 
 "For testing/development of <https://github.com/joshdick/onedark.vim>
 "let g:onedark_termcolors=256
@@ -186,6 +186,16 @@ nnoremap <leader>s<right>  :rightbelow vnew<CR>
 nnoremap <leader>s<up>     :leftabove  new<CR>
 nnoremap <leader>s<down>   :rightbelow new<CR>
 
+"Shortcuts for manipulating window focus
+nnoremap <leader><left> <c-w>h<CR>
+nnoremap <leader><down> <c-w>j<CR>
+nnoremap <leader><up> <c-w>k<CR>
+nnoremap <leader><right> <c-w>l<CR>
+
+"Shortcuts for switching tabs
+nnoremap <c-h> :tabprevious<CR>
+nnoremap <c-l> :tabnext<CR>
+
 "Shortcuts for interacting with the system clipboard
 "Found at <http://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity/>
 xnoremap <leader>y "+y
@@ -216,6 +226,9 @@ nnoremap <leader>n :set number! number?<CR>
 "Shortcut to toggle CtrlP (for 'o'pening files)
 nnoremap <leader>o :CtrlP<CR>
 
+"Shortcut to close a window
+nnoremap <leader>q :close<CR>
+
 "Shortcut to toggle Gundo
 nnoremap <leader>u :GundoToggle<CR>
 
@@ -225,6 +238,10 @@ nnoremap <leader>v :set invpaste<CR>
 
 "Shortcut for saving
 nnoremap <leader>w :w<CR>
+
+"Shortcut that deletes a buffer without closing its window
+"Found at <https://stackoverflow.com/questions/1444322/how-can-i-close-a-buffer-without-closing-the-window#comment16482171_5179609>
+nnoremap <silent> <leader>x :ene<CR>:bd #<CR>
 
 "Shortcut to strip trailing whitespace
 nnoremap <silent> <leader>$ :call Preserve("%s/\\s\\+$//e")<CR>
@@ -252,7 +269,7 @@ cnoreabbrev ag Ack
 cnoreabbrev aG Ack
 cnoreabbrev Ag Ack
 cnoreabbrev AG Ack
-command Ag Ack
+command! Ag Ack
 
 "}}}
 
@@ -490,13 +507,34 @@ let g:unite_force_overwrite_statusline = 0
 let g:vimfiler_force_overwrite_statusline = 0
 let g:vimshell_force_overwrite_statusline = 0
 
+" Show the current working directory in tab names.
+" Per <https://github.com/itchyny/lightline.vim/issues/245>
+function! CustomTabname(n) abort
+  return fnamemodify(getcwd(tabpagewinnr(a:n), a:n), ':t')
+endfunction
+
+let g:lightline.tab_component_function = {
+      \ 'custom_tabname': 'CustomTabname',
+      \ 'modified': 'lightline#tab#modified',
+      \ 'readonly': 'lightline#tab#readonly',
+      \ 'tabnum': 'lightline#tab#tabnum'
+      \ }
+
+let g:lightline.tab = {
+      \ 'active': [ 'tabnum', 'custom_tabname', 'modified' ],
+      \ 'inactive': [ 'tabnum', 'custom_tabname', 'modified' ] }
+
+let g:lightline.tabline_separator = { 'left': '', 'right': '' }
+let g:lightline.tabline_subseparator = { 'left': '‖', 'right': '‖' }
+
 "}}}
 
 "}}}
 
 "Functions/Miscellaneous {{{
 
-"Highlight trailing whitespace.
+"Highlight trailing whitespace {{{
+
 "Adapted from <http://vim.wikia.com/wiki/Highlight_unwanted_spaces>
 " * Inside insert mode, don't match trailing whitespace on the current line.
 " * Outside insert mode, match all trailing whitespace on the current line.
@@ -517,13 +555,16 @@ if has("autocmd")
   augroup END
 endif
 
-"Super Retab
+"}}}
+
+"Super Retab {{{
+
 "Found at <http://vim.wikia.com/wiki/Super_retab>
+
 "  Space2Tab  Convert spaces to tabs, only in indents.
 "  Tab2Space  Convert tabs to spaces, only in indents.
 "  RetabIndent  Execute Space2Tab (if 'expandtab' is set), or Tab2Space (otherwise).
 "Each command accepts an argument that specifies the number of spaces in a tab column. By default, the 'tabstop' setting is used.
-"------------------------------------------------
 
 "Return indent (all whitespace at start of a line), converted from
 "tabs to spaces if what=1, or from spaces to tabs otherwise.
@@ -550,19 +591,54 @@ function! IndentConvert(line1, line2, what, cols)
   call histdel('search', -1)
   call setpos('.', savepos)
 endfunction
+
 command! -nargs=? -range=% Space2Tab call IndentConvert(<line1>,<line2>,0,<q-args>)
 command! -nargs=? -range=% Tab2Space call IndentConvert(<line1>,<line2>,1,<q-args>)
 command! -nargs=? -range=% RetabIndent call IndentConvert(<line1>,<line2>,&et,<q-args>)
 
-"------------------------------------------------
+"}}}
 
-"Function that shows the syntax highlighting group used at the cursor.
+"Automatic Working directory {{{
+
+"Adapted from <http://inlehmansterms.net/2014/09/04/sane-vim-working-directories/>
+
+" If in a Git repo, sets the working directory to its root,
+" or if not, to the directory of the current file.
+function! SetWorkingDirectory()
+  " Default to the current file's directory (resolving symlinks.)
+  let current_file = expand('%:p')
+  if getftype(current_file) == 'link'
+    let current_file = resolve(current_file)
+  endif
+  exe ':lcd' . fnamemodify(current_file, ':h')
+
+  let git_dir = system("git rev-parse --show-toplevel")[:-2]
+  " See if the command output starts with 'fatal' (if it does, not in a Git repo.)
+  let is_not_git_dir = matchstr(git_dir, '^fatal:.*')
+  " If in a Git repo, change the working directory to its root.
+  if empty(is_not_git_dir)
+    :lcd `=git_dir`
+  endif
+endfunction
+
+if has("autocmd")
+  augroup working_directory
+    autocmd!
+    autocmd BufRead * call SetWorkingDirectory()
+  augroup END
+endif
+
+"}}}
+
+"Miscellaneous {{{
+
+"Shows the syntax highlighting group used at the cursor.
 "Found at <http://vim.wikia.com/wiki/Identify_the_syntax_highlighting_group_used_at_the_cursor>
 map <F10> :echo "hi<". synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
   \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
   \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
-"Function to run arbitrary commands while preserving state.
+"Runs arbitrary commands while preserving state.
 "Found at <http://technotales.wordpress.com/2010/03/31/preserve-a-vim-function-that-keeps-your-state/>
 function! Preserve(command)
   "Preparation: save last search, and cursor position.
@@ -576,7 +652,7 @@ function! Preserve(command)
   call cursor(l, c)
 endfunction
 
-"Convert mixed line endings to LF-only (Unix)
+"Converts mixed line endings to LF-only (Unix.)
 "Found at <http://vim.wikia.com/wiki/File_format>
 function! ForceLF()
   :update
