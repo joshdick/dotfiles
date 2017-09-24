@@ -64,24 +64,26 @@ module.exports = {
 
     // some color overrides. see http://bit.ly/29k1iU2 for
     // the full list
-    colors: [
-      '#282C34',
-      '#e06c75',
-      '#98c379',
-      '#e5c07b',
-      '#61afef',
-      '#c678dd',
-      '#56b6c2',
-      '#abb2bf',
-      '#808080',
-      '#be5046',
-      '#98c379',
-      '#d19a66',
-      '#61afef',
-      '#c678dd',
-      '#56b6c2',
-      '#ffffff'
-    ]
+    colors: {
+        'black':        '#282C34',
+        'red':          '#e06c75',
+        'green':        '#98c379',
+        'yellow':       '#e5c07b',
+        'blue':         '#61afef',
+        'magenta':      '#c678dd',
+        'cyan':         '#56b6c2',
+        'white':        '#abb2bf',
+        'lightBlack':   '#808080',
+        'lightRed':     '#be5046',
+        'lightGreen':   '#98c379',
+        'lightYellow':  '#d19a66',
+        'lightBlue':    '#61afef',
+        'lightMagenta': '#c678dd',
+        'lightCyan':    '#56b6c2',
+        'lightWhite':   '#ffffff'
+        //'colorCubes':
+        //'grayscale':
+    }
   },
 
   // a list of plugins to fetch and install from npm
