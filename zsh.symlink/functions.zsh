@@ -68,41 +68,44 @@ function serve() {
 # * Updates Homebrew packages on OS X
 # * Updates pip/gem/npm
 function update() {
+  heading() { echo -e "\e[1m\e[34m==>\e[39m $1\e[0m" }
+
   if command_exists apt-get; then
-    echo "Updating packages via apt-get..."
+    heading "[apt-get] Updating system packages..."
     sudo apt-get update
     sudo apt-get upgrade
+    sudo apt-get clean
+    sudo apt-get autoremove
   elif command_exists pacman; then
-    echo "Updating packages via pacman..."
+    heading "[pacman] Updating system packages..."
     sudo pacman -Syu
+    sudo pacman -Scc
+  elif command_exists brew; then
+    heading "[homebrew] Updating system packages..."
+    brew update && brew upgrade && brew cleanup && brew prune
   fi
 
   # If the dotfiles location isn't the home directory,
   # assume it's a Git repository and update it and all submodules.
   local DOTFILES_LOCATION="${$(readlink ~/.zshrc)%/*.*}"
   if [ ! -z "$DOTFILES_LOCATION" ] && [ "$DOTFILES_LOCATION" != "$HOME" ] && command_exists git; then
+    heading "[git] Updating dotfiles..."
     pushd -q
     cd "$DOTFILES_LOCATION"
-    echo "Updating dotfiles..."
-    git pull
-    echo "Updating git submodules..."
+    # The following works with Git 1.7.3 or later
+    git pull --recurse-submodules
     git submodule init
-    git submodule update
-    git submodule foreach 'git fetch --all &> /dev/null; git reset --hard origin/master &> /dev/null'
+    git submodule update --recursive --remote
     popd -q
   fi
 
   if [ ! -z ~/.vim/plugged ]; then
-    echo "Updating Vim plugins via vim-plug..."
+    heading "[vim-plug] Updating Vim plugins..."
     vim +PlugUpdate +qall
   fi
 
-  if command_exists brew; then
-    echo "Updating/upgrading/cleaning up Homebrew packages..."
-    brew update && brew upgrade && brew cleanup && brew prune
-  fi
-
   if command_exists pip; then
+    heading "[pip] Updating global packages..."
     # Inline Python script to update packages. Found at <http://stackoverflow.com/a/5839291/278810>
 python << END
 import pip
@@ -114,10 +117,12 @@ END
   fi
 
   if command_exists npm; then
+    heading "[npm] Updating global packages..."
     npm -g update
   fi
 
   if command_exists gem; then
+    heading "[gem] Updating global packages..."
     gem update
   fi
 }
