@@ -19,6 +19,7 @@ Plug 'ervandew/supertab'
 "Plug 'gabrielelana/vim-markdown'
 "Plug 'jelera/vim-javascript-syntax'
 Plug 'itchyny/lightline.vim'
+Plug 'maximbaz/lightline-ale'
 Plug 'janko-m/vim-test'
 Plug 'marijnh/tern_for_vim'
 Plug 'mileszs/ack.vim'
@@ -282,16 +283,9 @@ xmap * <Plug>AckActionVisual
 
 "ale {{{
 
-let g:ale_statusline_format = ['⨉ %d', '⚠ %d', ''] "Don't show an 'OK' status so lightline.vim won't treat it as an error
 let g:ale_open_list=1
 let g:ale_lint_on_save=1
 let g:ale_lint_on_text_changed=0
-if has("autocmd")
-  augroup lint
-    autocmd!
-    autocmd User ALELint call lightline#update()
-  augroup END
-endif
 
 "}}}
 
@@ -386,11 +380,12 @@ let g:vim_markdown_folding_disabled=1
 
 set noshowmode
 
+" For 'active' -> 'right' configuration, can optionally add 'linter_ok' after 'linter_warnings'
 let g:lightline = {
   \ 'colorscheme': 'onedark',
   \ 'active': {
   \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ], ['ctrlpmark'] ],
-  \   'right': [ [ 'linter', 'lineinfo' ], ['percent'], [ 'fileformat', 'fileencoding', 'filetype' ] ]
+  \   'right': [ [ 'linter_checking', 'linter_errors', 'linter_warnings', 'lineinfo' ], ['percent'], [ 'fileformat', 'fileencoding', 'filetype' ] ]
   \ },
   \ 'component_function': {
   \   'fugitive': 'LightlineFugitive',
@@ -402,10 +397,16 @@ let g:lightline = {
   \   'ctrlpmark': 'CtrlPMark',
   \ },
   \ 'component_expand': {
-  \   'linter': 'ALEGetStatusLine',
+  \  'linter_checking': 'lightline#ale#checking',
+  \  'linter_warnings': 'lightline#ale#warnings',
+  \  'linter_errors': 'lightline#ale#errors',
+  \  'linter_ok': 'lightline#ale#ok',
   \ },
   \ 'component_type': {
-  \   'linter': 'error',
+  \  'linter_checking': 'left',
+  \  'linter_warnings': 'warning',
+  \  'linter_errors': 'error',
+  \  'linter_ok': 'left',
   \ },
   \ 'separator': { 'left': '⮀', 'right': '⮂' },
   \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
@@ -526,6 +527,11 @@ let g:lightline.tab = {
 
 let g:lightline.tabline_separator = { 'left': '', 'right': '' }
 let g:lightline.tabline_subseparator = { 'left': '‖', 'right': '‖' }
+
+let g:lightline#ale#indicator_checking = "⏳"
+let g:lightline#ale#indicator_warnings = "⚠️"
+let g:lightline#ale#indicator_errors = "🚫"
+let g:lightline#ale#indicator_ok = "✓"
 
 "}}}
 
