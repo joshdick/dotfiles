@@ -39,7 +39,9 @@
 	log-pretty = "log --pretty=format:'%Cred%h%Creset%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'"
 	tags = "tag -l -n1"
 [dude]
+	interval = 0
 	notify-command = osascript -e \"display notification \\\"$DESCRIPTION\\\" with title \\\"$TITLE\\\"\"
+	screensaver-command = false # Workaround until https://github.com/sickill/git-dude/pull/44 is merged
 [pager]
 	diff = fmj | diff-highlight | less -R
 	show = fmj | diff-highlight | less -R
