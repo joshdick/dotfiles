@@ -1,45 +1,60 @@
 [submodule "zsh.symlink/git-prompt"]
 	path = zsh.symlink/git-prompt
 	url = https://gist.github.com/4415470.git
+	branch = master
 [submodule "zsh.symlink/zsh-history-substring-search"]
 	path = zsh.symlink/zsh-history-substring-search
 	url = https://github.com/zsh-users/zsh-history-substring-search
+	branch = master
 [submodule "zsh.symlink/zsh-syntax-highlighting"]
 	path = zsh.symlink/zsh-syntax-highlighting
 	url = https://github.com/zsh-users/zsh-syntax-highlighting
+	branch = master
 [submodule "bin.symlink/repos/fasd"]
 	path = bin.symlink/repos/fasd
 	url = https://github.com/clvv/fasd.git
+	branch = master
 [submodule "bin.symlink/repos/hr"]
 	path = bin.symlink/repos/hr
 	url = https://github.com/LuRsT/hr.git
+	branch = master
 [submodule "bin.symlink/repos/spot"]
 	path = bin.symlink/repos/spot
 	url = https://github.com/guille/spot
+	branch = master
 [submodule "bin.symlink/repos/tmuxomatic"]
 	path = bin.symlink/repos/tmuxomatic
 	url = https://github.com/oxidane/tmuxomatic.git
+	branch = master
 [submodule "bin.symlink/repos/git-dude"]
 	path = bin.symlink/repos/git-dude
 	url = https://github.com/sickill/git-dude
+	branch = master
 [submodule "bin.symlink/repos/fzf"]
 	path = bin.symlink/repos/fzf
 	url = https://github.com/junegunn/fzf
+	branch = master
 [submodule "bin.symlink/repos/git-cr"]
 	path = bin.symlink/repos/git-cr
 	url = https://github.com/joshdick/git-cr
+	branch = master
 [submodule "bin.symlink/repos/formd"]
 	path = bin.symlink/repos/formd
 	url = https://github.com/drbunsen/formd
+	branch = master
 [submodule "bin.symlink/repos/anigrate"]
 	path = bin.symlink/repos/anigrate
 	url = https://github.com/GGLucas/anigrate.git
+	branch = master
 [submodule "bin.symlink/repos/fmj"]
 	path = bin.symlink/repos/fmj
 	url = https://github.com/ecmendenhall/fmj.git
+	branch = master
 [submodule "bin.symlink/repos/tmux-scroll-copy-mode"]
 	path = bin.symlink/repos/tmux-scroll-copy-mode
 	url = https://github.com/nhdaly/tmux-scroll-copy-mode
+	branch = master
 [submodule "vim.symlink/vim-plug"]
 	path = vim.symlink/vim-plug
 	url = https://github.com/junegunn/vim-plug
+	branch = master
