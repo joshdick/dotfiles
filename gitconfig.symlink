@@ -10,16 +10,22 @@
 	prompt = false
 [difftool "bcomp"]
 	trustExitCode = true
-	cmd = "/usr/local/bin/bcomp" "$LOCAL" "$REMOTE"
-[merge]
-	tool = bcomp
+	cmd = bcomp \"$LOCAL\" \"$REMOTE\"
+[difftool "Kaleidoscope"]
+	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+[difftool "vscode"]
+	trustExitCode = false
+	cmd = code --reuse-window --wait --diff \"$LOCAL\" \"$REMOTE\"
 [mergetool]
 	prompt = false
 [mergetool "bcomp"]
 	trustExitCode = true
-	cmd = bcomp "$LOCAL" "$REMOTE" "$BASE" "$MERGED"
+	cmd = bcomp \"$LOCAL\" \"$REMOTE\" \"$BASE\" \"$MERGED\"
+[mergetool "Kaleidoscope"]
+	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+	trustexitcode = true
 [mergetool "vimdiff"]
-	cmd = nvim -d "$BASE" "$LOCAL" "$REMOTE" "$MERGED" -c '$wincmd w' -c 'wincmd J'
+	cmd = nvim -d \"$BASE\" \"$LOCAL\" \"$REMOTE\" \"$MERGED\" -c '$wincmd w' -c 'wincmd J'
 [help]
 	format = web
 	autocorrect = 1
