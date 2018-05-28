@@ -22,18 +22,10 @@ done
 # Set up git submodules
 
 # Run in a subshell so the user's working directory doesn't change
-(cd "$SELF_PATH" && git submodule init)
+(cd "$SELF_PATH" && git submodule update --recursive --checkout --remote --init)
 
 if [ $? -ne 0 ]; then
 	echo "Error: There was a problem initializing the dotfiles repository submodules!" 1>&2;
-	exit 1
-fi
-
-# Run in a subshell so the user's working directory doesn't change
-(cd "$SELF_PATH" && git submodule update)
-
-if [ $? -ne 0 ]; then
-	echo "Error: There was a problem updating the dotfiles repository submodules!" 1>&2;
 	exit 1
 fi
 

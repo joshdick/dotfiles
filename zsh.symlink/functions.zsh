@@ -90,13 +90,8 @@ function update() {
   local DOTFILES_LOCATION="${$(readlink ~/.zshrc)%/*.*}"
   if [ ! -z "$DOTFILES_LOCATION" ] && [ "$DOTFILES_LOCATION" != "$HOME" ] && command_exists git; then
     heading "[git] Updating dotfiles..."
-    pushd -q
-    cd "$DOTFILES_LOCATION"
-    # The following works with Git 1.7.3 or later
-    git pull --recurse-submodules
-    git submodule init
-    git submodule update --recursive --remote
-    popd -q
+    # Run in a subshell so the user's working directory doesn't change
+    (cd "$DOTFILES_LOCATION" &&  git submodule update --recursive --checkout --remote)
   fi
 
   if [ ! -z ~/.vim/plugged ]; then
