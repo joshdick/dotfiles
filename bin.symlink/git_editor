@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# This script is meant to used with Git's GIT_EDITOR environment variable.
+
+if [ "$TERM_PROGRAM" == "vscode" ]; then
+	code -w -g "$@:1"
+else
+	"$EDITOR" "$@"
+fi

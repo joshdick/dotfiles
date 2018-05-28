@@ -13,7 +13,7 @@ function command_exists() {
 }
 
 # Include any machine-specific configuration if it exists
-test -r ~/.localrc && . ~/.localrc
+test -e ~/.localrc && . ~/.localrc
 
 # When connecting via ssh, always [re]attach to a terminal manager
 # Adapted from code found at <http://involution.com/2004/11/17/1-32/> (now offline)

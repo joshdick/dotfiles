@@ -297,6 +297,16 @@ function md() {
   wget -qO - "$1" | iconv -t utf-8 | html2text -b 0
 }
 
+# Visual Studio Code-enabled replacement for `gdt` alias.
+function gdt() {
+  # If running inside Visual Stuido Code, use it if diffing a single file (it doesn't support directory diffs.)
+  if [ "$#" -eq 1 ] && [ -f "$1" ] && [ "$TERM_PROGRAM" == "vscode" ]; then
+    git difftool --tool vscode "$@"
+  else
+    git difftool -d "$@"
+  fi
+}
+
 # "Smart show" for Git. Show what I most likely want to see at any given time.
 function gss() {
   git status &> /dev/null
