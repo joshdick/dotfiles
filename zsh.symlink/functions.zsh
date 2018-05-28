@@ -100,8 +100,11 @@ function update() {
   fi
 
   if command_exists pip; then
-    heading "[pip] Updating global packages..."
-    # Inline Python script to update packages. Found at <http://stackoverflow.com/a/5839291/278810>
+    pip_location="$(which pip)"
+    # Only attempt to update `pip` packages if uisng a non-system `pip`.
+    if test "${pip_location#*/home/}" != "$pip_location"; then
+      heading "[pip] Updating global packages..."
+      # Inline Python script to update packages. Found at <http://stackoverflow.com/a/5839291/278810>
 python << END
 import pip
 from subprocess import call
@@ -109,6 +112,7 @@ from subprocess import call
 for dist in pip.get_installed_distributions():
     call("pip install --upgrade " + dist.project_name, shell=True)
 END
+    fi
   fi
 
   if command_exists npm; then
