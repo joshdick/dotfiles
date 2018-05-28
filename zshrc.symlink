@@ -64,7 +64,7 @@ ssh_info() {
 git_info() {
 
   # Git branch/tag, or name-rev if on detached head
-  local GIT_LOCATION=${$((git symbolic-ref -q HEAD || git name-rev --name-only --no-undefined --always HEAD) 2> /dev/null)#(refs/heads/|tags/)}
+  local GIT_LOCATION=${$(git symbolic-ref -q HEAD || git name-rev --name-only --no-undefined --always HEAD 2> /dev/null)#(refs/heads/|tags/)}
 
   if [ -n "$GIT_LOCATION" ]; then
 
