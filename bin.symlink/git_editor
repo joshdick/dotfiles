@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# This script is meant to used with Git's GIT_EDITOR environment variable.
+# This script is meant to be used as the value of Git's GIT_EDITOR environment variable.
 
 if [ "$TERM_PROGRAM" == "vscode" ]; then
 	code -w -g "$@:1"

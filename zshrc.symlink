@@ -1,4 +1,4 @@
-# .zshrc for Josh Dick <http://joshdick.net>
+# Josh Dick's .zshrc <https://joshdick.net>
 
 # *** MISC ***
 
@@ -152,6 +152,7 @@ else
   export VISUAL=nano
 fi
 
+export GIT_EDITOR="$HOME/.bin/git_editor"
 export PAGER=less
 
 # gpg-agent
@@ -175,27 +176,21 @@ fi
 # For details, see manpage for ls
 export LSCOLORS=Gxfxcxdxbxegedabagacad
 
-# Locations of the Git completion files are for Arch Linux as of Git 1.8.1
-GIT_BASH_COMPLETION_SOURCE=/usr/share/git/completion/git-completion.bash
-GIT_ZSH_COMPLETION_SOURCE=/usr/share/git/completion/git-completion.zsh
-GIT_DIFF_HIGHLIGHT_PATH=~/.bin/diff-highlight
-
-# Get ready to initialize nvm
-export NVM_DIR="$HOME/.nvm"
-
 # If we're on OS X and using Homebrew package manager, do some Homebrew-specific environmental tweaks
 if command_exists brew; then
-  export PATH=`brew --prefix`/bin:`brew --prefix`/sbin:$PATH
+  HOMEBREW_PREFIX="$(brew --prefix)"
+  export PATH="$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$PATH"
 
   # Assume Git was installed via Homebrew, and that the Git configuration below
-  # should use Homebrew-provided locations instead of the defaults above
-  GIT_BASH_COMPLETION_SOURCE=`brew --prefix`/etc/bash_completion.d/git-completion.bash
-  GIT_ZSH_COMPLETION_SOURCE=`brew --prefix`/share/zsh/site-functions/_git
-  GIT_DIFF_HIGHLIGHT_PATH=`brew --prefix`/share/git-core/contrib/diff-highlight
-
-  # Initialize nvm if it was installed via Homebrew
-  NVM_SH_PATH="$(brew --prefix nvm)/nvm.sh"
-  [ -s "$NVM_SH_PATH" ] && . "$NVM_SH_PATH"
+  # should use Homebrew-provided locations instead of the defaults below
+  GIT_BASH_COMPLETION_SOURCE="$HOMEBREW_PREFIX/etc/bash_completion.d/git-completion.bash"
+  GIT_ZSH_COMPLETION_SOURCE="$HOMEBREW_PREFIX/share/zsh/site-functions/_git"
+  GIT_DIFF_HIGHLIGHT_PATH="$HOMEBREW_PREFIX/share/git-core/contrib/diff-highlight"
+else
+  # Locations of the Git completion files for Arch Linux as of Git 1.8.1
+  GIT_BASH_COMPLETION_SOURCE=/usr/share/git/completion/git-completion.bash
+  GIT_ZSH_COMPLETION_SOURCE=/usr/share/git/completion/git-completion.zsh
+  GIT_DIFF_HIGHLIGHT_PATH=~/.bin/diff-highlight
 fi
 
 # Set up diff-highlight
@@ -211,16 +206,20 @@ if [ -r "$GIT_BASH_COMPLETION_SOURCE" ] && [ -r "$GIT_ZSH_COMPLETION_SOURCE" ]; 
   fpath=(~/.zsh/completion $fpath)
 fi
 
-# Initialize nvm if it's installed (and not already initialized via Homebrew, above)
-if ! command_exists nvm && [ -s "$NVM_DIR/nvm.sh" ]; then
-  . "$NVM_DIR/nvm.sh"
+# <https://github.com/nodenv/nodenv>
+# Initialize nodenv if it's installed (it may be installed via Homebrew)
+NODENV_BIN_DIR="$HOME/.nodenv/bin"
+test -d "$NODENV_BIN_DIR" && export PATH="$NODENV_BIN_DIR:$PATH"
+if command_exists nodenv; then
+  eval "$(nodenv init -)"
 fi
 
+# <https://github.com/rbenv/rbenv>
 # Initialize rbenv if it's installed (it may be installed via Homebrew)
 RBENV_BIN_DIR="$HOME/.rbenv/bin"
-test -d $RBENV_BIN_DIR && export PATH="$RBENV_BIN_DIR:$PATH"
+test -d "$RBENV_BIN_DIR" && export PATH="$RBENV_BIN_DIR:$PATH"
 if command_exists rbenv; then
-  eval "$(rbenv init -)";
+  eval "$(rbenv init -)"
 fi
 
 # Initialize a default Python virtualenv if one is configured in ~/.localrc
@@ -237,4 +236,3 @@ if command_exists cowsay && command_exists fortune; then
   fortune | cowsay -f ~/.hypnotoad.cow -W 60
 fi
 
-export PATH="$HOME/.yarn/bin:$PATH"
