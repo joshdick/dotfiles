@@ -403,8 +403,8 @@ let g:lightline = {
   \  'linter_errors': 'error',
   \  'linter_ok': 'left',
   \ },
-  \ 'separator': { 'left': '⮀', 'right': '⮂' },
-  \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
+  \ 'separator': { 'left': '', 'right': '' },
+  \ 'subseparator': { 'left': '', 'right': '' }
   \ }
 
 function! LightlineModified()
@@ -431,7 +431,7 @@ endfunction
 function! LightlineFugitive()
   try
     if expand('%:t') !~? 'Tagbar\|Gundo\|NERD' && &ft !~? 'vimfiler' && exists('*fugitive#head')
-      let mark = '⭠ '
+      let mark = ' '
       let branch = fugitive#head()
       return branch !=# '' ? mark.branch : ''
     endif
