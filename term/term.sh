@@ -12,5 +12,6 @@ export TERMINFO=~/.terminfo
 curl http://invisible-island.net/datafiles/current/terminfo.src.gz | gunzip > "$TERMINFO/terminfo.src"
 tic -x -e tmux "$TERMINFO/terminfo.src"
 tic -x -e tmux-256color "$TERMINFO/terminfo.src"
+tic -x -e xterm-256color "$TERMINFO/terminfo.src"
 
 tic -x "$SCRIPT_PATH/terminfo/iterm2.terminfo"
