@@ -4,57 +4,110 @@
 	branch = master
 [submodule "zsh.symlink/zsh-history-substring-search"]
 	path = zsh.symlink/zsh-history-substring-search
-	url = https://github.com/zsh-users/zsh-history-substring-search
+	url = git@github.com:zsh-users/zsh-history-substring-search
 	branch = master
 [submodule "zsh.symlink/zsh-syntax-highlighting"]
 	path = zsh.symlink/zsh-syntax-highlighting
-	url = https://github.com/zsh-users/zsh-syntax-highlighting
+	url = git@github.com:zsh-users/zsh-syntax-highlighting
 	branch = master
 [submodule "bin.symlink/repos/fasd"]
 	path = bin.symlink/repos/fasd
-	url = https://github.com/clvv/fasd.git
+	url = git@github.com:clvv/fasd.git
 	branch = master
 [submodule "bin.symlink/repos/hr"]
 	path = bin.symlink/repos/hr
-	url = https://github.com/LuRsT/hr.git
+	url = git@github.com:LuRsT/hr.git
 	branch = master
 [submodule "bin.symlink/repos/spot"]
 	path = bin.symlink/repos/spot
-	url = https://github.com/guille/spot
+	url = git@github.com:guille/spot
 	branch = master
 [submodule "bin.symlink/repos/tmuxomatic"]
 	path = bin.symlink/repos/tmuxomatic
-	url = https://github.com/oxidane/tmuxomatic.git
+	url = git@github.com:oxidane/tmuxomatic.git
 	branch = master
 [submodule "bin.symlink/repos/git-dude"]
 	path = bin.symlink/repos/git-dude
-	url = https://github.com/sickill/git-dude
+	url = git@github.com:sickill/git-dude
 	branch = master
 [submodule "bin.symlink/repos/fzf"]
 	path = bin.symlink/repos/fzf
-	url = https://github.com/junegunn/fzf
+	url = git@github.com:junegunn/fzf
 	branch = master
 [submodule "bin.symlink/repos/git-cr"]
 	path = bin.symlink/repos/git-cr
-	url = https://github.com/joshdick/git-cr
+	url = git@github.com:joshdick/git-cr
 	branch = master
 [submodule "bin.symlink/repos/formd"]
 	path = bin.symlink/repos/formd
-	url = https://github.com/drbunsen/formd
+	url = git@github.com:drbunsen/formd
 	branch = master
 [submodule "bin.symlink/repos/anigrate"]
 	path = bin.symlink/repos/anigrate
-	url = https://github.com/GGLucas/anigrate.git
+	url = git@github.com:GGLucas/anigrate.git
 	branch = master
 [submodule "bin.symlink/repos/fmj"]
 	path = bin.symlink/repos/fmj
-	url = https://github.com/ecmendenhall/fmj.git
+	url = git@github.com:ecmendenhall/fmj.git
 	branch = master
 [submodule "bin.symlink/repos/tmux-scroll-copy-mode"]
 	path = bin.symlink/repos/tmux-scroll-copy-mode
-	url = https://github.com/nhdaly/tmux-scroll-copy-mode
+	url = git@github.com:nhdaly/tmux-scroll-copy-mode
 	branch = master
-[submodule "vim.symlink/vim-plug"]
-	path = vim.symlink/vim-plug
-	url = https://github.com/junegunn/vim-plug
-	branch = master
+[submodule "vim.symlink/pack/plugins/start/lightline.vim"]
+	path = vim.symlink/pack/plugins/start/lightline.vim
+	url = git@github.com:itchyny/lightline.vim
+[submodule "vim.symlink/pack/plugins/start/vim-gitgutter"]
+	path = vim.symlink/pack/plugins/start/vim-gitgutter
+	url = git@github.com:airblade/vim-gitgutter
+[submodule "vim.symlink/pack/plugins/start/ale"]
+	path = vim.symlink/pack/plugins/start/ale
+	url = git@github.com:w0rp/ale
+[submodule "vim.symlink/pack/plugins/opt/onedark.vim"]
+	path = vim.symlink/pack/plugins/opt/onedark.vim
+	url = git@github.com:joshdick/onedark.vim.git
+[submodule "vim.symlink/pack/plugins/start/dash.vim"]
+	path = vim.symlink/pack/plugins/start/dash.vim
+	url = git@github.com:rizzatti/dash.vim
+[submodule "vim.symlink/pack/plugins/start/vim-polyglot"]
+	path = vim.symlink/pack/plugins/start/vim-polyglot
+	url = git@github.com:sheerun/vim-polyglot
+[submodule "vim.symlink/pack/plugins/start/lightline-ale"]
+	path = vim.symlink/pack/plugins/start/lightline-ale
+	url = git@github.com:maximbaz/lightline-ale
+[submodule "vim.symlink/pack/plugins/start/vim-sleuth"]
+	path = vim.symlink/pack/plugins/start/vim-sleuth
+	url = git@github.com:tpope/vim-sleuth
+[submodule "vim.symlink/pack/plugins/start/vim-fugitive"]
+	path = vim.symlink/pack/plugins/start/vim-fugitive
+	url = git@github.com:tpope/vim-fugitive
+[submodule "vim.symlink/pack/plugins/start/gv.vim"]
+	path = vim.symlink/pack/plugins/start/gv.vim
+	url = git@github.com:junegunn/gv.vim
+[submodule "vim.symlink/pack/plugins/start/nerdcommenter"]
+	path = vim.symlink/pack/plugins/start/nerdcommenter
+	url = git@github.com:scrooloose/nerdcommenter
+[submodule "vim.symlink/pack/plugins/start/vim-action-ack"]
+	path = vim.symlink/pack/plugins/start/vim-action-ack
+	url = git@github.com:joshdick/vim-action-ack
+[submodule "vim.symlink/pack/plugins/start/ack.vim"]
+	path = vim.symlink/pack/plugins/start/ack.vim
+	url = git@github.com:mileszs/ack.vim
+[submodule "vim.symlink/pack/plugins/start/ctrlp.vim"]
+	path = vim.symlink/pack/plugins/start/ctrlp.vim
+	url = git@github.com:ctrlpvim/ctrlp.vim
+[submodule "vim.symlink/pack/plugins/start/gundo.vim"]
+	path = vim.symlink/pack/plugins/start/gundo.vim
+	url = git@github.com:sjl/gundo.vim
+[submodule "vim.symlink/pack/plugins/start/vim-easymotion"]
+	path = vim.symlink/pack/plugins/start/vim-easymotion
+	url = git@github.com:easymotion/vim-easymotion
+[submodule "vim.symlink/pack/plugins/start/supertab"]
+	path = vim.symlink/pack/plugins/start/supertab
+	url = git@github.com:ervandew/supertab
+[submodule "vim.symlink/pack/plugins/start/tern_for_vim"]
+	path = vim.symlink/pack/plugins/start/tern_for_vim
+	url = git@github.com:marijnh/tern_for_vim
+[submodule "vim.symlink/pack/plugins/start/vim-test"]
+	path = vim.symlink/pack/plugins/start/vim-test
+	url = git@github.com:janko-m/vim-test

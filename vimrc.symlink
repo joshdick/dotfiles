@@ -3,34 +3,11 @@ set encoding=utf-8
 
 "Plugins {{{
 
-"vim-plug initialization
-call plug#begin('~/.vim/plugged')
+"My Vim plugins are installed as Vim 8 packages (`:help packages`) via Git submodules.
+"To see which ones are used, go to:
+"< https://github.com/joshdick/dotfiles/search?q=filename%3A.gitmodules+%5Bsubmodule+%22vim.symlink%2Fpack%2F&unscoped_q=filename%3A.gitmodules+%5Bsubmodule+%22vim.symlink%2Fpack%2F >
 
-"Use GitHub SSH URLs for my own plugins
-let g:plug_url_format = 'git@github.com:%s.git'
-Plug 'joshdick/onedark.vim'
-Plug 'joshdick/vim-action-ack'
-unlet g:plug_url_format
-
-Plug 'airblade/vim-gitgutter'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'easymotion/vim-easymotion'
-Plug 'ervandew/supertab'
-Plug 'itchyny/lightline.vim'
-Plug 'janko-m/vim-test'
-Plug 'junegunn/gv.vim'
-Plug 'marijnh/tern_for_vim'
-Plug 'maximbaz/lightline-ale'
-Plug 'mileszs/ack.vim'
-Plug 'nelstrom/vim-visual-star-search'
-Plug 'rizzatti/dash.vim'
-Plug 'scrooloose/nerdcommenter'
-Plug 'sheerun/vim-polyglot'
-Plug 'sjl/gundo.vim'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-sleuth'
-Plug 'w0rp/ale'
-call plug#end()
+packadd! onedark.vim
 
 "}}}
 
@@ -64,9 +41,22 @@ else
 endif
 set laststatus=2
 
-"Force cursor styling in nvim+tmux per <https://github.com/neovim/neovim/wiki/Following-HEAD#20170402>
+"Cursor Styling
 if (has("nvim") && !empty($TMUX))
+  "Neovim + tmux per <https://github.com/neovim/neovim/wiki/Following-HEAD#20170402>
   set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor
+elseif !empty($ITERM_PROFILE) "We're running inside iterm2
+  if empty($TMUX)
+    "iTerm2 per <http://vim.wikia.com/wiki/Change_cursor_shape_in_different_modes>
+    let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+    let &t_SR = "\<Esc>]50;CursorShape=2\x7"
+    let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+  else
+    "tmux + iterm2 per <http://vim.wikia.com/wiki/Change_cursor_shape_in_different_modes>
+    let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+    let &t_SR = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=2\x7\<Esc>\\"
+    let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+  endif
 endif
 
 "Built-in extended '%' matching
@@ -125,6 +115,12 @@ endif
 "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
 "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
 if (has("termguicolors"))
+  if !empty($TMUX)
+    "Set Vim-specific sequences for RGB colors; only seems to be needed for Vim 8 running inside tmux with $TERM=tmux
+    "Found at < https://github.com/vim/vim/issues/993#issuecomment-255651605 >
+    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+  endif
   set termguicolors
 endif
 
@@ -534,7 +530,7 @@ let g:lightline#ale#indicator_ok = "✓"
 
 "Functions/Miscellaneous {{{
 
-"Highlight trailing whitespace {{{
+"Highlight Trailing Whitespace {{{
 
 "Adapted from <http://vim.wikia.com/wiki/Highlight_unwanted_spaces>
 " * Inside insert mode, don't match trailing whitespace on the current line.
@@ -599,7 +595,7 @@ command! -nargs=? -range=% RetabIndent call IndentConvert(<line1>,<line2>,&et,<q
 
 "}}}
 
-"Automatic Working directory {{{
+"Automatic Working Directory {{{
 
 "Adapted from <http://inlehmansterms.net/2014/09/04/sane-vim-working-directories/>
 
@@ -628,6 +624,28 @@ if has("autocmd")
     autocmd BufRead * call SetWorkingDirectory()
   augroup END
 endif
+
+"}}}
+
+"Automatic Helptags Generation {{{
+
+"Disabled in favor of update() function in `~/.zsh/functions.zsh`,
+"since this doesn't really need to run every time Vim starts.
+
+" function! GenerateHelpTags()
+  " silent! helptags ALL
+" endfunction
+
+" if v:vim_did_enter
+  " call s:GenerateHelpTags
+" else
+  " if has("autocmd")
+    " augroup generate_helptags
+      " autocmd!
+      " autocmd VimEnter * call GenerateHelpTags()
+    " augroup END
+  " endif
+" endif
 
 "}}}
 
@@ -661,5 +679,7 @@ function! ForceLF()
   :setlocal ff=unix
   :w
 endfunction
+
+"}}}
 
 "}}}

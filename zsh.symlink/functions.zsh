@@ -63,8 +63,7 @@ function serve() {
 
 # Updates stuff!
 # * Performs a system update on Debian-based and Arch Linux systems
-# * Updates all dotfiles Git submodules
-# * Updates all Vim plugins via Vundle
+# * Updates all dotfiles Git submodules (including Vim packages)
 # * Updates Homebrew packages on OS X
 # * Updates pip/gem/npm
 function update() {
@@ -94,10 +93,9 @@ function update() {
     (cd "$DOTFILES_LOCATION" && git pull && git submodule update --recursive --checkout --remote)
   fi
 
-  if [ ! -z ~/.vim/plugged ]; then
-    heading "[vim-plug] Updating Vim plugins..."
-    vim +PlugUpdate +qall
-  fi
+  # Since Vim packages may have been updated, update Vim helptags.
+  heading "[vim] Updating Vim helptags..."
+  vim '+helptags ALL' +qall
 
   if command_exists pip; then
     pip_location="$(which pip)"
