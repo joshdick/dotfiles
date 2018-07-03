@@ -90,7 +90,7 @@ function update() {
   if [ ! -z "$DOTFILES_LOCATION" ] && [ "$DOTFILES_LOCATION" != "$HOME" ] && command_exists git; then
     heading "[git] Updating dotfiles..."
     # Run in a subshell so the user's working directory doesn't change
-    (cd "$DOTFILES_LOCATION" && git pull && git submodule update --recursive --checkout --remote)
+    (cd "$DOTFILES_LOCATION" && git pull && git submodule update --recursive --checkout --remote --init)
   fi
 
   # Since Vim packages may have been updated, update Vim helptags.
