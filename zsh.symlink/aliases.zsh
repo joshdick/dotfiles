@@ -16,11 +16,9 @@ fi
 
 alias cpu='top -o cpu'
 alias grep='grep --color'
-alias hgrep='history 1 | grep $1'
 alias ip="curl icanhazip.com"
 alias lsd='ls -lah | grep "^d"'
 alias mem='top -o rsize' # memory
-alias mirror='wget -H -r --level=1 -k -p $1'
 alias please='sudo $(fc -ln -1)' # or sudo $(history -p !!) for bash
 alias scpresume='rsync --partial --progress --rsh=ssh'
 alias ssh='TERM=xterm-256color ssh'
