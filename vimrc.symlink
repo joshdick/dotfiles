@@ -3,8 +3,8 @@ set encoding=utf-8
 
 "Plugins {{{
 
-"Work around https://github.com/vim/vim/issues/3117 < https://github.com/vim/vim/issues/3117#issuecomment-402622616 >
-if has('python3')
+"Work around https://github.com/vim/vim/issues/3117 < https://github.com/vim/vim/issues/3117#issuecomment-406853295 >
+if has('python3') && !has('patch-8.1.201')
   silent! python3 1
 endif
 
