@@ -75,7 +75,7 @@ endif
 if has("gui") "Instead of gui_running, in case :gui is run manually on *NIX
 
   "Font settings
-  set guifont=PragmataPro\ Mono:h13
+  set guifont=InputMonoCondensed\ ExLight:h13
   set antialias
 
   if g:os == 'Darwin'
@@ -259,11 +259,14 @@ if executable('ag')
 endif
 
 "Alias 'ag' commands for use with ack.vim
-cnoreabbrev ag Ack
-cnoreabbrev aG Ack
-cnoreabbrev Ag Ack
-cnoreabbrev AG Ack
+cnoreabbrev ag Ack!
+cnoreabbrev aG Ack!
+cnoreabbrev Ag Ack!
+cnoreabbrev AG Ack!
 command! Ag Ack
+
+cnoreabbrev Ack Ack!
+nnoremap <Leader>a :Ack!<Space>
 
 "}}}
 
