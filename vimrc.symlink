@@ -211,7 +211,7 @@ nnoremap <leader>l :set list!<CR>
 "Bind a shortcut for opening the current document in Marked.app on Mac OS X
 "Found at <https://github.com/kotfu/marked-bonus-pack#vim>
 if g:os == 'Darwin'
-  nnoremap <leader>m :silent !open -a Marked\ 2.app '%:p'<cr>
+  nnoremap <leader>m :silent !open -a Marked\ 2.app '%:p'<CR>
 endif
 
 "Shortcut to toggle line numbers
@@ -251,32 +251,6 @@ xnoremap <leader>, d:execute 'normal a' . join(sort(split(getreg('"'))), ' ')<CR
 
 "Plugin Configuration {{{
 
-"ack.vim {{{
-
-"Use ag if it's available
-if executable('ag')
-  let g:ackprg='ag --vimgrep'
-endif
-
-"Alias 'ag' commands for use with ack.vim
-cnoreabbrev ag Ack!
-cnoreabbrev aG Ack!
-cnoreabbrev Ag Ack!
-cnoreabbrev AG Ack!
-command! Ag Ack
-
-cnoreabbrev Ack Ack!
-nnoremap <Leader>a :Ack!<Space>
-
-"}}}
-
-"vim-action-ack {{{
-
-nmap * <Plug>AckActionWord
-xmap * <Plug>AckActionVisual
-
-"}}}
-
 "ale {{{
 
 let g:ale_set_loclist=0
@@ -287,21 +261,18 @@ let g:ale_lint_on_text_changed=0
 
 "}}}
 
-"CtrlP {{{
+"fzf.vim {{{
 
-"Make CtrlP play nicer with Git projects.
-"Found at <http://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity/>
-
-let g:ctrlp_use_caching=0
-if executable('ag')
-  set grepprg=ag\ --nogroup\ --nocolor
-  let g:ctrlp_user_command='ag %s -l --nocolor -g ""'
-else
-  let g:ctrlp_user_command=['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
-  let g:ctrlp_prompt_mappings={
-    \ 'AcceptSelection("e")': ['<space>', '<cr>', '<2-LeftMouse>'],
-    \ }
+" junegunn/fzf.vim depends on junegunn/fzf, which is installed
+" in the following location when using https://github.com/joshdick/dotfiles:
+if isdirectory($HOME . "/.bin/repos/fzf")
+  set rtp+=~/.bin/repos/fzf
 endif
+
+cnoreabbrev ag Ag
+nnoremap <Leader>a :Ag<Space>
+nnoremap <Leader>ga :exe ':Ag ' . expand("<cword>")<CR>
+noremap <C-p> :Files<CR>
 
 "}}}
 

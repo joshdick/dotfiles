@@ -1,6 +1,5 @@
 config.symlink
-vim.symlink/plugged
-vim.symlink/autoload/plug.vim.old
 vim.symlink/init.vim
 vim.symlink/.netrwhist
+vim.symlink/session
 zsh.symlink/completion

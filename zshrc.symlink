@@ -155,6 +155,25 @@ PS1='
 $(ssh_info)%{$fg[magenta]%}%~%u $(git_info)
 %(?.%{$fg[blue]%}.%{$fg[red]%})%(!.#.❯)%{$reset_color%} '
 
+# *** HOMEBREW ***
+
+# If we're on OS X and using Homebrew package manager, do some Homebrew-specific environmental tweaks
+if command_exists brew; then
+  HOMEBREW_PREFIX="$(brew --prefix)"
+  export PATH="$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$PATH"
+
+  # Assume Git was installed via Homebrew, and that the Git configuration below
+  # should use Homebrew-provided locations instead of the defaults below
+  GIT_BASH_COMPLETION_SOURCE="$HOMEBREW_PREFIX/etc/bash_completion.d/git-completion.bash"
+  GIT_ZSH_COMPLETION_SOURCE="$HOMEBREW_PREFIX/share/zsh/site-functions/_git"
+  GIT_DIFF_HIGHLIGHT_PATH="$HOMEBREW_PREFIX/share/git-core/contrib/diff-highlight"
+else
+  # Locations of the Git completion files for Arch Linux as of Git 1.8.1
+  GIT_BASH_COMPLETION_SOURCE=/usr/share/git/completion/git-completion.bash
+  GIT_ZSH_COMPLETION_SOURCE=/usr/share/git/completion/git-completion.zsh
+  GIT_DIFF_HIGHLIGHT_PATH=~/.bin/diff-highlight
+fi
+
 # *** ZSH PLUGINS ***
 
 # <https://github.com/zsh-users/zsh-syntax-highlighting>
@@ -169,6 +188,12 @@ $(ssh_info)%{$fg[magenta]%}%~%u $(git_info)
 
 # <https://github.com/junegunn/fzf>
 . ~/.fzf.zsh
+# Configure fzf to use `ag` instead of `find` since `ag` respects `.gitignore`.
+# For use with fzf's Vim plugin(s).
+if command_exists ag; then
+  export FZF_DEFAULT_COMMAND='ag -g ""'
+  export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+fi
 
 # *** FUNCTIONS AND ALIASES ***
 
@@ -209,23 +234,6 @@ fi
 # LSCOLORS - Default except for normal directories (first character) to replace hard-to-read blue
 # For details, see manpage for ls
 export LSCOLORS=Gxfxcxdxbxegedabagacad
-
-# If we're on OS X and using Homebrew package manager, do some Homebrew-specific environmental tweaks
-if command_exists brew; then
-  HOMEBREW_PREFIX="$(brew --prefix)"
-  export PATH="$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$PATH"
-
-  # Assume Git was installed via Homebrew, and that the Git configuration below
-  # should use Homebrew-provided locations instead of the defaults below
-  GIT_BASH_COMPLETION_SOURCE="$HOMEBREW_PREFIX/etc/bash_completion.d/git-completion.bash"
-  GIT_ZSH_COMPLETION_SOURCE="$HOMEBREW_PREFIX/share/zsh/site-functions/_git"
-  GIT_DIFF_HIGHLIGHT_PATH="$HOMEBREW_PREFIX/share/git-core/contrib/diff-highlight"
-else
-  # Locations of the Git completion files for Arch Linux as of Git 1.8.1
-  GIT_BASH_COMPLETION_SOURCE=/usr/share/git/completion/git-completion.bash
-  GIT_ZSH_COMPLETION_SOURCE=/usr/share/git/completion/git-completion.zsh
-  GIT_DIFF_HIGHLIGHT_PATH=~/.bin/diff-highlight
-fi
 
 # Set up diff-highlight
 export PATH=$GIT_DIFF_HIGHLIGHT_PATH:$PATH

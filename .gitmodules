@@ -87,15 +87,6 @@
 [submodule "vim.symlink/pack/plugins/start/nerdcommenter"]
 	path = vim.symlink/pack/plugins/start/nerdcommenter
 	url = git@github.com:scrooloose/nerdcommenter
-[submodule "vim.symlink/pack/plugins/start/vim-action-ack"]
-	path = vim.symlink/pack/plugins/start/vim-action-ack
-	url = git@github.com:joshdick/vim-action-ack
-[submodule "vim.symlink/pack/plugins/start/ack.vim"]
-	path = vim.symlink/pack/plugins/start/ack.vim
-	url = git@github.com:mileszs/ack.vim
-[submodule "vim.symlink/pack/plugins/start/ctrlp.vim"]
-	path = vim.symlink/pack/plugins/start/ctrlp.vim
-	url = git@github.com:ctrlpvim/ctrlp.vim
 [submodule "vim.symlink/pack/plugins/start/gundo.vim"]
 	path = vim.symlink/pack/plugins/start/gundo.vim
 	url = git@github.com:sjl/gundo.vim
@@ -111,3 +102,9 @@
 [submodule "vim.symlink/pack/plugins/start/vim-test"]
 	path = vim.symlink/pack/plugins/start/vim-test
 	url = git@github.com:janko-m/vim-test
+[submodule "vim.symlink/pack/plugins/start/fzf.vim"]
+	path = vim.symlink/pack/plugins/start/fzf.vim
+	url = git@github.com:junegunn/fzf.vim
+[submodule "vim.symlink/pack/plugins/start/vim-startify"]
+	path = vim.symlink/pack/plugins/start/vim-startify
+	url = git@github.com:mhinz/vim-startify
