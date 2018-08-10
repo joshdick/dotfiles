@@ -587,12 +587,15 @@ function! SetWorkingDirectory()
   endif
   exe ':lcd' . fnamemodify(current_file, ':h')
 
-  let git_dir = system("git rev-parse --show-toplevel")[:-2]
-  " See if the command output starts with 'fatal' (if it does, not in a Git repo.)
+  " Get the path to `.git` if we're inside a Git repo.
+  " Works both when inside a worktree, or inside an internal `.git` folder.
+  :silent let git_dir = system('git rev-parse --git-dir')[:-2]
+  " Check whether the command output starts with 'fatal'; if it does, we're not inside a Git repo.
   let is_not_git_dir = matchstr(git_dir, '^fatal:.*')
-  " If in a Git repo, change the working directory to its root.
+  " If we're inside a Git repo, change the working directory to its root.
   if empty(is_not_git_dir)
-    :lcd `=git_dir`
+    " Expand path -> Remove trailing slash -> Remove trailing `.git`.
+    exe ':lcd' . fnamemodify(git_dir, ':p:h:h')
   endif
 endfunction
 
