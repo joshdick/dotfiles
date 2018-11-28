@@ -105,6 +105,3 @@
 [submodule "vim.symlink/pack/plugins/start/fzf.vim"]
 	path = vim.symlink/pack/plugins/start/fzf.vim
 	url = git@github.com:junegunn/fzf.vim
-[submodule "vim.symlink/pack/plugins/start/vim-startify"]
-	path = vim.symlink/pack/plugins/start/vim-startify
-	url = git@github.com:mhinz/vim-startify
