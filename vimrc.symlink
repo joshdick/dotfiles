@@ -200,7 +200,7 @@ xnoremap <leader>p "+p
 xnoremap <leader>P "+P
 
 "Show buffer search
-nnoremap <leader>b :CtrlPBuffer<CR>
+nnoremap <leader>b :Buffers<CR>
 
 "Shortcut to convert mixed line endings to LF-only (Unix)
 nnoremap <leader>d :call ForceLF()<CR>
@@ -216,9 +216,6 @@ endif
 
 "Shortcut to toggle line numbers
 nnoremap <leader>n :set number! number?<CR>
-
-"Shortcut to toggle CtrlP (for 'o'pening files)
-nnoremap <leader>o :CtrlP<CR>
 
 "Shortcut to close a window
 nnoremap <leader>q :close<CR>
@@ -246,6 +243,9 @@ nnoremap <silent> <leader>= :call Preserve("normal gg=G")<CR>
 "Shortcut to sort words inside a single line
 "Found at <http://stackoverflow.com/a/1329899/278810>
 xnoremap <leader>, d:execute 'normal a' . join(sort(split(getreg('"'))), ' ')<CR>
+
+"Shortcut for adding JavaScript console logs
+nnoremap <leader>l a console.log('');<ESC>hhi
 
 "}}}
 
