@@ -4,7 +4,7 @@ set encoding=utf-8
 "Plugins {{{
 
 "Work around https://github.com/vim/vim/issues/3117 < https://github.com/vim/vim/issues/3117#issuecomment-406853295 >
-if has('python3') && !has('patch-8.1.201')
+if has("python3") && !has("patch-8.1.201")
   silent! python3 1
 endif
 
@@ -37,6 +37,9 @@ set nobackup
 set nowritebackup
 set number
 set shortmess+=I "Disable splash screen/[I]ntro message
+if !has("nvim")
+  set diffopt+=indent-heuristic,algorithm:patience
+endif
 
 "Statusline
 if exists("vimpager")
@@ -136,12 +139,9 @@ if (has("autocmd") && !has("gui_running"))
   augroup END
 endif
 
-"For testing/development of <https://github.com/joshdick/onedark.vim>
-"let g:onedark_termcolors=256
 let g:onedark_termcolors=16
-
 let g:onedark_terminal_italics=1
-
+let g:onedark_hide_endofbuffer=1
 colorscheme onedark
 
 "}}}
@@ -570,6 +570,48 @@ endfunction
 command! -nargs=? -range=% Space2Tab call IndentConvert(<line1>,<line2>,0,<q-args>)
 command! -nargs=? -range=% Tab2Space call IndentConvert(<line1>,<line2>,1,<q-args>)
 command! -nargs=? -range=% RetabIndent call IndentConvert(<line1>,<line2>,&et,<q-args>)
+
+"}}}
+
+"Drop-down Persistent Terminal for NeoVim {{{
+
+"Found at <https://pastebin.com/FjdkegRH>
+
+if has("nvim")
+
+  function! ChooseTerm(termname, slider)
+    let pane = bufwinnr(a:termname)
+    let buf = bufexists(a:termname)
+    if pane > 0
+      " pane is visible
+      if a:slider > 0
+        :exe pane . "wincmd c"
+      else
+        :exe "e #"
+      endif
+    elseif buf > 0
+      " buffer is not in pane
+      if a:slider
+        :exe "topleft split"
+      endif
+      :exe "buffer " . a:termname
+    else
+      " buffer is not loaded, create
+      if a:slider
+        :exe "topleft split"
+      endif
+      :terminal
+      :exe "f " a:termname
+    endif
+  endfunction
+
+  " Toggle 'default' terminal
+  nnoremap <leader>t :call ChooseTerm("term-slider", 1)<CR>
+
+  " Start terminal in current pane
+  nnoremap <leader>T :call ChooseTerm("term-pane", 0)<CR>
+
+endif
 
 "}}}
 
