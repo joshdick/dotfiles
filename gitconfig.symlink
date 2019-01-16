@@ -6,6 +6,7 @@
 [diff]
 	tool = bcomp
 	algorithm = histogram
+	indentHeuristic = true
 [difftool]
 	prompt = false
 [difftool "bcomp"]
