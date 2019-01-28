@@ -22,6 +22,7 @@ alias mem='top -o rsize' # memory
 alias please='sudo $(fc -ln -1)' # or sudo $(history -p !!) for bash
 alias scpresume='rsync --partial --progress --rsh=ssh'
 alias ssh='TERM=xterm-256color ssh'
+alias wipe='echo -en "\033c\033[3J"'
 
 # Mac-specific aliases
 
