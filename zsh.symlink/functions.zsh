@@ -330,7 +330,7 @@ function update() {
     sudo pacman -Scc
   elif command_exists brew; then
     heading "[homebrew] Updating system packages..."
-    brew update && brew upgrade && brew cleanup && brew prune
+    brew update && brew upgrade && brew cleanup
   fi
 
   # If the dotfiles location isn't the home directory,
