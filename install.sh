@@ -29,8 +29,5 @@ if [ $? -ne 0 ]; then
 	exit 1
 fi
 
-vim +PluginInstall +qall
-
-if [ $? -ne 0 ]; then
-	echo "Warning: There was a problem installing Vim plugins via Vundle!"
-fi
+echo "Updating termcap database..."
+$SELF_PATH/term/term.sh
