@@ -230,6 +230,11 @@ if ! command_exists tree; then
   alias tree=poortree
 fi
 
+# Substitute bat <https://github.com/sharkdp/bat> for cat if it's available
+if command_exists bat; then
+  alias cat=bat
+fi
+
 # LSCOLORS - Default except for normal directories (first character) to replace hard-to-read blue
 # For details, see manpage for ls
 export LSCOLORS=Gxfxcxdxbxegedabagacad
@@ -277,3 +282,13 @@ if command_exists cowsay && command_exists fortune; then
   fortune | cowsay -f ~/.hypnotoad.cow -W 60
 fi
 
+
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+[[ -f /Users/joshdick/Code/marketplace-api/node_modules/tabtab/.completions/serverless.zsh ]] && . /Users/joshdick/Code/marketplace-api/node_modules/tabtab/.completions/serverless.zsh
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+[[ -f /Users/joshdick/Code/marketplace-api/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/joshdick/Code/marketplace-api/node_modules/tabtab/.completions/sls.zsh
+# tabtab source for slss package
+# uninstall by removing these lines or running `tabtab uninstall slss`
+[[ -f /Users/joshdick/Code/marketplace-api/node_modules/tabtab/.completions/slss.zsh ]] && . /Users/joshdick/Code/marketplace-api/node_modules/tabtab/.completions/slss.zsh
