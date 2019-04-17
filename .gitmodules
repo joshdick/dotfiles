@@ -93,9 +93,6 @@
 [submodule "vim.symlink/pack/plugins/start/vim-easymotion"]
 	path = vim.symlink/pack/plugins/start/vim-easymotion
 	url = git@github.com:easymotion/vim-easymotion
-[submodule "vim.symlink/pack/plugins/start/supertab"]
-	path = vim.symlink/pack/plugins/start/supertab
-	url = git@github.com:ervandew/supertab
 [submodule "vim.symlink/pack/plugins/start/tern_for_vim"]
 	path = vim.symlink/pack/plugins/start/tern_for_vim
 	url = git@github.com:marijnh/tern_for_vim
@@ -105,3 +102,6 @@
 [submodule "vim.symlink/pack/plugins/start/fzf.vim"]
 	path = vim.symlink/pack/plugins/start/fzf.vim
 	url = git@github.com:junegunn/fzf.vim
+[submodule "vim.symlink/pack/plugins/start/coc.nvim"]
+	path = vim.symlink/pack/plugins/start/coc.nvim
+	url = git@github.com:neoclide/coc.nvim.git
