@@ -29,5 +29,7 @@ if [ $? -ne 0 ]; then
 	exit 1
 fi
 
+vim -c ':call coc#util#install()'
+
 echo "Updating termcap database..."
 $SELF_PATH/term/term.sh
