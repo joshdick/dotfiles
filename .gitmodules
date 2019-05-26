@@ -87,9 +87,6 @@
 [submodule "vim.symlink/pack/plugins/start/nerdcommenter"]
 	path = vim.symlink/pack/plugins/start/nerdcommenter
 	url = git@github.com:scrooloose/nerdcommenter
-[submodule "vim.symlink/pack/plugins/start/gundo.vim"]
-	path = vim.symlink/pack/plugins/start/gundo.vim
-	url = git@github.com:sjl/gundo.vim
 [submodule "vim.symlink/pack/plugins/start/vim-easymotion"]
 	path = vim.symlink/pack/plugins/start/vim-easymotion
 	url = git@github.com:easymotion/vim-easymotion
@@ -105,3 +102,6 @@
 [submodule "vim.symlink/pack/plugins/start/coc.nvim"]
 	path = vim.symlink/pack/plugins/start/coc.nvim
 	url = git@github.com:neoclide/coc.nvim.git
+[submodule "vim.symlink/pack/plugins/start/undotree"]
+	path = vim.symlink/pack/plugins/start/undotree
+	url = https://github.com/mbbill/undotree

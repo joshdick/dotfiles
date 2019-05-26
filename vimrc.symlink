@@ -220,8 +220,8 @@ nnoremap <leader>n :set number! number?<CR>
 "Shortcut to close a window
 nnoremap <leader>q :close<CR>
 
-"Shortcut to toggle Gundo
-nnoremap <leader>u :GundoToggle<CR>
+"Shortcut to toggle undotree
+nnoremap <leader>u :UndotreeToggle<CR>
 
 "Shortcut to toggle auto-indenting for code paste
 "Don't bother with pastetoggle, since it doesn't cooperate with vim-airline: <https://github.com/bling/vim-airline/issues/219>
