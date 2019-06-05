@@ -35,18 +35,15 @@ setw -g window-status-current-format "#[fg=colour8,bg=colour7] #I#F #[fg=colour7
 bind s set status # Toggles the status bar
 
 # Messaging
-set -g message-fg colour0
-set -g message-bg colour3
-set -g message-command-fg colour2
-set -g message-command-bg colour0
+set -g message-style fg=colour0,bg=colour3
+set -g message-command-style fg=colour2,bg=colour0
 
 # Window Mode
-setw -g mode-bg colour3
-setw -g mode-fg colour0
+setw -g mode-style fg=colour0,bg=colour3
 
 # Pane borders
-set -g pane-active-border-fg "colour11"
-set -g pane-border-fg "colour15"
+set -g pane-active-border-style fg=colour11
+set -g pane-border-style fg=colour15
 
 # Easy reload of tmux configuration
 bind R source ~/.tmux.conf \; display-message "tmux.conf reloaded."
