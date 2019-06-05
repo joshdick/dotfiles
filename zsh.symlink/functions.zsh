@@ -346,29 +346,34 @@ function update() {
   heading "[vim] Updating Vim helptags..."
   vim '+helptags ALL' +qall
 
+  if command_exists npm; then
+    heading "[npm] Updating global packages..."
+    npm -g update
+  fi
+
   if command_exists pip; then
     pip_location="$(which pip)"
     # Only attempt to update `pip` packages if uisng a non-system `pip`.
     if test "${pip_location#*/home/}" != "$pip_location"; then
       heading "[pip] Updating global packages..."
       # Inline Python script to update packages. Found at <http://stackoverflow.com/a/5839291/278810>
+      # Assume we have pip >= 10.0.1.
 python << END
-import pip
+import pkg_resources
 from subprocess import call
 
-for dist in pip.get_installed_distributions():
-    call("pip install --upgrade " + dist.project_name, shell=True)
+packages = [dist.project_name for dist in pkg_resources.working_set]
+  call("pip install --upgrade " + ' '.join(packages), shell=True)
 END
     fi
   fi
 
-  if command_exists npm; then
-    heading "[npm] Updating global packages..."
-    npm -g update
-  fi
-
   if command_exists gem; then
-    heading "[gem] Updating global packages..."
-    gem update
+    gem_location="$(which gem)"
+    # Only attempt to update `gem` packages if uisng a non-system `gem`.
+    if test "${gem_location#*/home/}" != "$gem_location"; then
+      heading "[gem] Updating global packages..."
+      gem update
+    fi
   fi
 }
