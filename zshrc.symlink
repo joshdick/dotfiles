@@ -230,11 +230,6 @@ if ! command_exists tree; then
   alias tree=poortree
 fi
 
-# Substitute bat <https://github.com/sharkdp/bat> for cat if it's available
-if command_exists bat; then
-  alias cat=bat
-fi
-
 # LSCOLORS - Default except for normal directories (first character) to replace hard-to-read blue
 # For details, see manpage for ls
 export LSCOLORS=Gxfxcxdxbxegedabagacad
