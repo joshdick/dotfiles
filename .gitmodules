@@ -62,7 +62,7 @@
 	url = git@github.com:airblade/vim-gitgutter
 [submodule "vim.symlink/pack/plugins/start/ale"]
 	path = vim.symlink/pack/plugins/start/ale
-	url = git@github.com:w0rp/ale
+	url = git@github.com:dense-analysis/ale
 [submodule "vim.symlink/pack/plugins/opt/onedark.vim"]
 	path = vim.symlink/pack/plugins/opt/onedark.vim
 	url = git@github.com:joshdick/onedark.vim.git
