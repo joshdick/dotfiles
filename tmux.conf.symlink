@@ -78,6 +78,9 @@ bind V send-keys "0v\$"
 # Buffer pasting
 bind C-v paste-buffer
 
+# Clear scrollback buffer
+bind C-k send-keys -R \; clear-history
+
 # Mouse stuff
 # (In iTerm2, hold down the option key for Mac-native copying)
 run-shell ~/.bin/repos/tmux-scroll-copy-mode/scroll_copy_mode.tmux
