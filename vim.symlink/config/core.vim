@@ -9,10 +9,6 @@ if has("python3") && !has("patch-8.1.201")
   silent! python3 1
 endif
 
-"My Vim plugins are installed as Vim 8 packages (`:help packages`) via Git submodules.
-"To see which ones are used, go to:
-"< https://github.com/joshdick/dotfiles/search?q=filename%3A.gitmodules+%5Bsubmodule+%22vim.symlink%2Fpack%2F&unscoped_q=filename%3A.gitmodules+%5Bsubmodule+%22vim.symlink%2Fpack%2F >
-
 set autoindent
 set nowrap
 filetype plugin indent on

@@ -1,0 +1,17 @@
+"Disabled in favor of update() function in `~/.zsh/functions.zsh`,
+"since this doesn't really need to run every time Vim starts.
+
+function! GenerateHelpTags()
+  silent! helptags ALL
+endfunction
+
+if v:vim_did_enter
+  call s:GenerateHelpTags
+else
+  if has("autocmd")
+    augroup generate_helptags
+      autocmd!
+      autocmd VimEnter * call GenerateHelpTags()
+    augroup END
+  endif
+endif
