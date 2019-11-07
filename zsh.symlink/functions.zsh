@@ -348,7 +348,7 @@ function update() {
 
   if command_exists yarn; then
     heading "[coc] Updating coc.nvim and associated extensions..."
-    ls -d $DOTFILES_LOCATION/vim.symlink/pack/plugins/opt/coc* | xargs -L 1 zsh -c 'cd "$0" && yarn install --frozen-lockfile'
+    ls -d ~/.vim/pack/plugins/opt/coc* | xargs -L 1 zsh -c 'cd "$0" && yarn install --frozen-lockfile'
   fi
 
   if command_exists npm; then
