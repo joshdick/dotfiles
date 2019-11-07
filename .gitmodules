@@ -102,3 +102,24 @@
 [submodule "vim.symlink/pack/plugins/start/undotree"]
 	path = vim.symlink/pack/plugins/start/undotree
 	url = https://github.com/mbbill/undotree
+[submodule "vim.symlink/pack/plugins/start/coc-eslint"]
+	path = vim.symlink/pack/plugins/opt/coc-eslint
+	url = https://github.com/neoclide/coc-eslint
+[submodule "vim.symlink/coc-prettier"]
+	path = vim.symlink/pack/plugins/opt/coc-prettier
+	url = https://github.com/neoclide/coc-prettier
+[submodule "vim.symlink/coc-tsserver"]
+	path = vim.symlink/pack/plugins/opt/coc-tsserver
+	url = https://github.com/neoclide/coc-tsserver
+[submodule "vim.symlink/coc-css"]
+	path = vim.symlink/pack/plugins/opt/coc-css
+	url = https://github.com/neoclide/coc-css
+[submodule "vim.symlink/coc-json"]
+	path = vim.symlink/pack/plugins/opt/coc-json
+	url = https://github.com/neoclide/coc-json
+[submodule "vim.symlink/coc-html"]
+	path = vim.symlink/pack/plugins/opt/coc-html
+	url = https://github.com/neoclide/coc-html
+[submodule "vim.symlink/coc-yaml"]
+	path = vim.symlink/pack/plugins/opt/coc-yaml
+	url = https://github.com/neoclide/coc-yaml

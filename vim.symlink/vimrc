@@ -259,6 +259,14 @@ nnoremap <leader>l a console.log('');<ESC>hhi
 if executable('node')
 packadd! coc.nvim
 
+packadd! coc-css
+packadd! coc-eslint
+packadd! coc-html
+packadd! coc-json
+packadd! coc-prettier
+packadd! coc-tsserver
+packadd! coc-yaml
+
 " if hidden is not set, TextEdit might fail.
 set hidden
 
