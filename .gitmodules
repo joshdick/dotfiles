@@ -87,9 +87,6 @@
 [submodule "vim.symlink/pack/plugins/start/vim-easymotion"]
 	path = vim.symlink/pack/plugins/start/vim-easymotion
 	url = git@github.com:easymotion/vim-easymotion
-[submodule "vim.symlink/pack/plugins/start/tern_for_vim"]
-	path = vim.symlink/pack/plugins/start/tern_for_vim
-	url = git@github.com:marijnh/tern_for_vim
 [submodule "vim.symlink/pack/plugins/start/vim-test"]
 	path = vim.symlink/pack/plugins/start/vim-test
 	url = git@github.com:janko-m/vim-test
