@@ -120,3 +120,6 @@
 [submodule "vim.symlink/coc-yaml"]
 	path = vim.symlink/pack/plugins/opt/coc-yaml
 	url = https://github.com/neoclide/coc-yaml
+[submodule "bin.symlink/repos/dntw"]
+	path = bin.symlink/repos/dntw
+	url = git://github.com/joshdick/dntw.git
