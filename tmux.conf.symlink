@@ -26,17 +26,17 @@ bind v split-window -v
 set -g status-interval 5
 set -g status-position top
 set -g status-left ''
-set -g status-bg colour0
+set -g status-bg terminal
 set -g status-fg colour7
 set -g status-justify left
-set -g status-right '#[fg=colour7,bg=colour0]#(uptime | grep -o ": .*" | cut -c3-) #[fg=colour15]| #[fg=colour11]#H #[default]'
+set -g status-right '#[fg=colour7,bg=terminal]#(uptime | grep -o ": .*" | cut -c3-) #[fg=colour8]| #[fg=colour11]#H #[default]'
 setw -g window-status-format "#[fg=colour8,bg=colour15] #I#F #{?window_bell_flag,#[fg=colour1],#[fg=colour15]}#[bg=colour8] #W "
 setw -g window-status-current-format "#[fg=colour8,bg=colour7] #I#F #[fg=colour7,bg=colour8] #W "
 bind s set status # Toggles the status bar
 
 # Messaging
 set -g message-style fg=colour0,bg=colour3
-set -g message-command-style fg=colour2,bg=colour0
+set -g message-command-style fg=colour2,bg=terminal
 
 # Window Mode
 setw -g mode-style fg=colour0,bg=colour3
