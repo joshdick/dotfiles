@@ -20,7 +20,7 @@ alias ip="curl icanhazip.com"
 alias lsd='ls -lah | grep "^d"'
 alias mem='top -o rsize' # memory
 alias please='sudo $(fc -ln -1)' # or sudo $(history -p !!) for bash
-alias scpresume='rsync -r --partial --progress --rsh=ssh -e "ssh -p 22"'
+alias rsyncresume='rsync -r --partial --progress --rsh=ssh -e "ssh -p 22"'
 alias ssh='TERM=xterm-256color ssh'
 alias wipe='echo -en "\033c\033[3J"'
 
