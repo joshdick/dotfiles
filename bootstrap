@@ -22,7 +22,7 @@ if [ -z "$path" ]; then
 	path="$default_path"
 fi
 
-git clone https://github.com/joshdick/dotfiles.git "$path"
+git clone git://github.com/joshdick/dotfiles.git "$path"
 
 if [ $? -ne 0 ]; then
 	echo "Error: There was a problem cloning the dotfiles repository! Try running this script again." 1>&2;
