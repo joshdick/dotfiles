@@ -2,14 +2,14 @@
 "To see which ones are used, go to:
 "< https://github.com/joshdick/dotfiles/search?q=filename%3A.gitmodules+%5Bsubmodule+%22vim.symlink%2Fpack%2F&unscoped_q=filename%3A.gitmodules+%5Bsubmodule+%22vim.symlink%2Fpack%2F >
 
-"Basic settings to load before everything else
-runtime! config/core.vim
-
-"Settings for Vim itself; mappings, colorscheme, etc.
-runtime! config/settings/**/*.vim
-
 "Settings for Vim plugins (the plugins themselves are Vim 8 packages via Git submodules)
 runtime! config/plugins/**/*.vim
+
+"Basic/core settings for Vim itself
+runtime! config/core.vim
+
+"Misc. settings for Vim itself; mappings, colorscheme, etc.
+runtime! config/settings/**/*.vim
 
 "Stuff that doesn't fit into any of the above categories
 runtime! config/misc/**/*.vim
