@@ -22,11 +22,16 @@ if [ -z "$path" ]; then
 	path="$default_path"
 fi
 
-git clone git://github.com/joshdick/dotfiles.git "$path"
+git clone https://github.com/joshdick/dotfiles.git "$path"
 
 if [ $? -ne 0 ]; then
 	echo "Error: There was a problem cloning the dotfiles repository! Try running this script again." 1>&2;
 	exit 1
+fi
+
+read -p "Use SSH remote for the dotfiles repository? [y/n] " -n 1 -r
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+	git -C "$path" remote set-url origin git@github.com:joshdick/dotfiles.git
 fi
 
 "$path"/install.sh
