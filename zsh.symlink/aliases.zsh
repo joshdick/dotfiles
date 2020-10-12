@@ -18,6 +18,7 @@ alias cpu='top -o cpu'
 alias grep='grep --color'
 alias ip="curl icanhazip.com"
 alias lsd='ls -lah | grep "^d"'
+alias lsescaped='ls -1 | sed "s/\ /\\\ /g" | tr "\n" " " | cat - <(echo)'
 alias mem='top -o rsize' # memory
 alias please='sudo $(fc -ln -1)' # or sudo $(history -p !!) for bash
 alias rsyncresume='rsync -r --partial --progress --rsh=ssh -e "ssh -p 22"'
