@@ -29,8 +29,8 @@ if [ $? -ne 0 ]; then
 	exit 1
 fi
 
-read -p "Use SSH remote for the dotfiles repository? [y/n] " -n 1 -r
-if [[ $REPLY =~ ^[Yy]$ ]]; then
+read -p "Use SSH remote for the dotfiles repository? [y/n] " -e USE_SSH_REMOTE
+if [[ $USE_SSH_REMOTE =~ ^[Yy]$ ]]; then
 	git -C "$path" remote set-url origin git@github.com:joshdick/dotfiles.git
 fi
 

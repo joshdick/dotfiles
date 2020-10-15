@@ -14,7 +14,7 @@ There are comments throughout my dotfiles attributing all known original sources
 
 ### fancypants single-line install
 
-`$ bash <(curl -fsSL https://raw.githubusercontent.com/joshdick/dotfiles/master/bootstrap)`
+`$ bash <(curl -fsSL https://raw.githubusercontent.com/joshdick/dotfiles/main/bootstrap)`
 
 ### plainpants several-line install
 
