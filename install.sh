@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 # Install script for Josh Dick's dotfiles
 # <https://github.com/joshdick/dotfiles>
@@ -33,3 +33,6 @@ vim -c ':call coc#util#install()'
 
 echo "Updating termcap database..."
 $SELF_PATH/term/term.sh
+
+# Needed on macOS Catalina. Source: https://stackoverflow.com/a/22753363
+compaudit | xargs chmod g-w
