@@ -77,15 +77,15 @@ function define() {
 # Transfer files to a specific machine depending on the currenlty-active network
 # by choosing the corresponding host in SSH configuration.
 function dispatch () {
-  local host="kreiger"
+  local host="hermes"
   local network="the Internet (WAN)"
   local gateway=$(route -n get default &> /dev/null | grep gateway | tr -d ' ' | cut -f 2 -d ':')
   if [ "$gateway" = "192.168.7.1" ]; then
-    host="kreiger_local"
+    host="hermes.local"
     network="the local network (LAN)"
   fi
   echo "Transferring files to $host via $network..."
-  rsync -avz --partial --progress -e "ssh $host" "$@" ":~/Desktop/"
+  rsync -avz --partial --progress -e "ssh josh@$host" "$@" ":~/Desktop/"
 }
 
 # Extracts archives
