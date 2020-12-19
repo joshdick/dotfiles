@@ -30,6 +30,11 @@ if (has("autocmd") && !has("gui_running"))
   augroup END
 endif
 
+"Match background color of material-theme-palenight-2-1 terminal theme
+let g:onedark_color_overrides = {
+\ "black": {"gui": "#141828", "cterm": "235", "cterm16": "0" },
+\}
+
 let g:onedark_termcolors=16
 let g:onedark_terminal_italics=1
 let g:onedark_hide_endofbuffer=1
