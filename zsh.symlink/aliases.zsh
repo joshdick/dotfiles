@@ -21,6 +21,7 @@ alias lsd='ls -lah | grep "^d"'
 alias lsescaped='ls -1 | sed "s/\ /\\\ /g" | tr "\n" " " | cat - <(echo)'
 alias mem='top -o rsize' # memory
 alias please='sudo $(fc -ln -1)' # or sudo $(history -p !!) for bash
+alias rg="rg --hidden --glob '!.git'" # Make ripgrep always search hidden directories; <found at https://github.com/BurntSushi/ripgrep/issues/623#issuecomment-659909044>
 alias rsyncresume='rsync -r --partial --progress --rsh=ssh -e "ssh -p 22"'
 alias ssh='TERM=xterm-256color ssh'
 alias wipe='echo -en "\033c\033[3J"'
