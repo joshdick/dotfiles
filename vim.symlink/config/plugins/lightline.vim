@@ -140,3 +140,17 @@ let g:lightline.tab = {
 
 let g:lightline.tabline_separator = { 'left': '', 'right': '' }
 let g:lightline.tabline_subseparator = { 'left': '‖', 'right': '‖' }
+
+let g:lightline.mode_map = {
+      \ 'n' : '🅝',
+      \ 'i' : '🅘',
+      \ 'R' : '🅡',
+      \ 'v' : '🅥',
+      \ 'V' : '🅥 🅛',
+      \ "\<C-v>": '🅥 🅑',
+      \ 'c' : '🅒',
+      \ 's' : '🅢',
+      \ 'S' : '🅢 🅛',
+      \ "\<C-s>": '🅢 🅑',
+      \ 't': '🅣',
+      \ }
