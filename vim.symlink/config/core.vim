@@ -26,11 +26,18 @@ set listchars=tab:→\ "This comment prevents trailing whitespace removal from r
 set mouse=a
 set nobackup
 set nowritebackup
-set number
 set shortmess+=I "Disable splash screen/[I]ntro message
 if !has("nvim")
   set diffopt+=indent-heuristic,algorithm:patience
 endif
+
+"Line numbers
+"< https://www.reddit.com/r/vim/comments/m736j3/how_do_people_move_vertically/grae7ak?context=3 >
+set number relativenumber
+augroup relnum_focus
+    autocmd FocusLost,InsertEnter * setl norelativenumber
+    autocmd FocusGained,InsertLeave * setl relativenumber
+augroup END
 
 "Note: By default, <leader> is backslash
 let mapleader="\<Space>"
