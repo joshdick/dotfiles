@@ -113,7 +113,7 @@ function extract() {
 # Visual Studio Code-enabled replacement for `gdt` alias.
 function gdt() {
   # If running inside Visual Stuido Code, use it if diffing a single file (it doesn't support directory diffs.)
-  if [ "$#" -eq 1 ] && [ -f "$1" ] && [ "$TERM_PROGRAM" == "vscode" ]; then
+  if [[ $# -eq 1 ]] && [ -f "$1" ] && [[ "$TERM_PROGRAM" == "vscode" ]]; then
     git difftool --tool vscode "$@"
   else
     git difftool -d "$@"
