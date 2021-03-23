@@ -5,8 +5,8 @@ SELF="$(cd -P -- "$(dirname -- "$0")" && pwd -P)"
 # Add the folder containing this script to PATH.
 export PATH="$SELF:$PATH"
 
-# Set up fasd <https://github.com/clvv/fasd>.
-eval "$(fasd --init auto)"
+# Set up z <https://github.com/rupa/z>.
+. $SELF/z/z.sh
 
 # Set up tmuxomatic <https://github.com/oxidane/tmuxomatic>
 # (since symlinking it into ~/.bin confuses Python.)

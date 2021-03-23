@@ -10,10 +10,6 @@
 	path = zsh.symlink/zsh-syntax-highlighting
 	url = https://github.com/zsh-users/zsh-syntax-highlighting
 	branch = master
-[submodule "bin.symlink/repos/fasd"]
-	path = bin.symlink/repos/fasd
-	url = https://github.com/clvv/fasd.git
-	branch = master
 [submodule "bin.symlink/repos/hr"]
 	path = bin.symlink/repos/hr
 	url = https://github.com/LuRsT/hr.git
@@ -126,3 +122,6 @@
 [submodule "bin.symlink/repos/d33ef5b6e6da4a3e4aa9b07b093d3c23"]
 	path = bin.symlink/repos/d33ef5b6e6da4a3e4aa9b07b093d3c23
 	url = https://gist.github.com/d33ef5b6e6da4a3e4aa9b07b093d3c23.git
+[submodule "bin.symlink/z"]
+	path = bin.symlink/z
+	url = https://github.com/rupa/z
