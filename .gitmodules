@@ -86,6 +86,9 @@
 [submodule "vim.symlink/pack/plugins/start/vim-test"]
 	path = vim.symlink/pack/plugins/start/vim-test
 	url = https://github.com/janko-m/vim-test
+[submodule "vim.symlink/pack/plugins/start/vim-tmux-navigator"]
+	path = vim.symlink/pack/plugins/start/vim-tmux-navigator
+	url = https://github.com/christoomey/vim-tmux-navigator
 [submodule "vim.symlink/pack/plugins/start/fzf.vim"]
 	path = vim.symlink/pack/plugins/start/fzf.vim
 	url = https://github.com/junegunn/fzf.vim
