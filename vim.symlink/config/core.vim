@@ -45,7 +45,9 @@ let mapleader="\<Space>"
 let maplocalleader="_"
 
 if executable('rg')
-  let &grepprg = "rg --vimgrep"
+  "< https://github.com/BurntSushi/ripgrep/issues/425#issuecomment-702244167 >
+  set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
+  set grepformat=%f:%l:%c:%m,%f:%l:%m
 endif
 
 "Built-in extended '%' matching
