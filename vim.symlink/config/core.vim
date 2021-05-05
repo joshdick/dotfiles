@@ -96,7 +96,8 @@ endif
 if has("gui") "Instead of gui_running, in case :gui is run manually on *NIX
 
   "Font settings
-  set guifont=InputMonoNarrow\ ExLight:h13
+  set guifont=InputMonoNarrow\ Light:h15
+  set linespace=-3
   set antialias
 
   if g:os == 'Darwin'
