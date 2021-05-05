@@ -27,6 +27,7 @@ set mouse=a
 set nobackup
 set nowritebackup
 set shortmess+=I "Disable splash screen/[I]ntro message
+set switchbuf=usetab,newtab "If a buffer is already open in a window in any tab, switch to that tab/window < https://stackoverflow.com/a/3476411/278810 >
 if !has("nvim")
   set diffopt+=indent-heuristic,algorithm:patience
 endif
