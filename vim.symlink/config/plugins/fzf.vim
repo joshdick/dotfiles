@@ -8,3 +8,9 @@ cnoreabbrev rg Rg
 nnoremap <Leader>r :Rg<Space>
 nnoremap <Leader>gs:exe ':Rg ' . expand("<cword>")<CR>
 noremap <C-p> :Files<CR>
+
+let g:fzf_action = {
+  \ 'enter': 'drop',
+  \ 'ctrl-t': 'tab drop',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
