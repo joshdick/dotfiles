@@ -4,9 +4,6 @@ nnoremap <Leader>VR :source $MYVIMRC<CR>
 "Mapping to select the last-changed text
 noremap gV `[v`]
 
-"Mapping to toggle netrw
-noremap <silent> <leader>e :Lexplore<CR>
-
 "Mapping to toggle search hilighting
 "Found at <http://vim.wikia.com/wiki/Highlight_all_search_pattern_matches>
 noremap <leader>h :set hlsearch! hlsearch?<CR>
