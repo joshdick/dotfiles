@@ -128,3 +128,6 @@
 [submodule "bin.symlink/z"]
 	path = bin.symlink/repos/z
 	url = https://github.com/rupa/z
+[submodule "vim.symlink/pack/plugins/start/vim-github-url"]
+	path = vim.symlink/pack/plugins/start/vim-github-url
+	url = git@github.com:pgr0ss/vim-github-url.git
