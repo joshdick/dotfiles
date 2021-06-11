@@ -126,5 +126,5 @@
 	path = bin.symlink/repos/d33ef5b6e6da4a3e4aa9b07b093d3c23
 	url = https://gist.github.com/d33ef5b6e6da4a3e4aa9b07b093d3c23.git
 [submodule "bin.symlink/z"]
-	path = bin.symlink/z
+	path = bin.symlink/repos/z
 	url = https://github.com/rupa/z

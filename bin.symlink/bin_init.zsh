@@ -6,7 +6,7 @@ SELF="$(cd -P -- "$(dirname -- "$0")" && pwd -P)"
 export PATH="$SELF:$PATH"
 
 # Set up z <https://github.com/rupa/z>.
-. $SELF/z/z.sh
+. $SELF/repos/z/z.sh
 
 # Set up tmuxomatic <https://github.com/oxidane/tmuxomatic>
 # (since symlinking it into ~/.bin confuses Python.)
