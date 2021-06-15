@@ -11,7 +11,7 @@ if executable('node')
   packadd! coc-yaml
 
   " Better display for messages
-  set cmdheight=2
+  " set cmdheight=2 " Commented out by Josh; prefer default cmdheight
 
   " You will have bad experience for diagnostic messages when it's default 4000.
   set updatetime=300
@@ -69,7 +69,7 @@ if executable('node')
   autocmd CursorHold * silent call CocActionAsync('highlight')
 
   " Remap for rename current word
-  nmap <leader>rn <Plug>(coc-rename)
+  nmap <leader>2 <Plug>(coc-rename)
 
   " Remap for format selected region
   xmap <leader>f  <Plug>(coc-format-selected)
