@@ -20,7 +20,7 @@
 	branch = master
 [submodule "bin.symlink/repos/tmuxomatic"]
 	path = bin.symlink/repos/tmuxomatic
-	url = https://github.com/oxidane/tmuxomatic.git
+	url = https://github.com/joshdick/tmuxomatic.git
 	branch = master
 [submodule "bin.symlink/repos/git-dude"]
 	path = bin.symlink/repos/git-dude
