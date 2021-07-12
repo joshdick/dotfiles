@@ -131,3 +131,6 @@
 [submodule "vim.symlink/pack/plugins/start/vim-github-url"]
 	path = vim.symlink/pack/plugins/start/vim-github-url
 	url = git@github.com:pgr0ss/vim-github-url.git
+[submodule "vim.symlink/pack/plugins/opt/nvim-lspconfig"]
+	path = vim.symlink/pack/plugins/opt/nvim-lspconfig
+	url = git@github.com:neovim/nvim-lspconfig.git
