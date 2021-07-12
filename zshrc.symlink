@@ -191,7 +191,7 @@ fi
 # since both are faster than `find` and have better filtering (.gitignore, node_modules, etc.)
 # For use with fzf's Vim plugin(s).
 if command_exists rg; then
-  export FZF_DEFAULT_COMMAND='rg --smart-case --files --follow --no-ignore-vcs --hidden -g "!{node_modules/*,.git/*}"'
+  export FZF_DEFAULT_COMMAND='rg --smart-case --files --follow --no-ignore-vcs --hidden --glob "!{node_modules/*,.git/*}"'
   export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 elif command_exists ag; then
   export FZF_DEFAULT_COMMAND='ag -g ""'
