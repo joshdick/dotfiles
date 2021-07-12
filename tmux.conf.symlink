@@ -29,9 +29,9 @@ set -g status-left ''
 set -g status-bg terminal
 set -g status-fg colour7
 set -g status-justify left
-set -g status-right '#[fg=colour7,bg=terminal]#(uptime | grep -o ": .*" | cut -c3-) #[fg=colour8]| #[fg=colour11]#H #[default]'
-setw -g window-status-format "#[fg=colour8,bg=colour15] #I#F #{?window_bell_flag,#[fg=colour1],#[fg=colour15]}#[bg=colour8] #W "
-setw -g window-status-current-format "#[fg=colour8,bg=colour7] #I#F #[fg=colour7,bg=colour8] #W "
+set -g status-right '#[fg=colour8,bg=terminal]#(uptime | grep -o ": .*" | cut -c3-) #[fg=colour15]| #[fg=colour11]#H #[default]'
+setw -g window-status-format "#[fg=colour7,bg=colour0] #I#F #{?window_bell_flag,#[fg=colour1],#[fg=colour0]}#[bg=colour7] #W "
+setw -g window-status-current-format "#[fg=colour15,bg=colour8] #I#F #[fg=colour8,bg=colour15] #W "
 bind s set status # Toggles the status bar
 
 # Messaging
