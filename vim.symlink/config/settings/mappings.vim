@@ -1,5 +1,5 @@
 "Mapping to reload Vim configuration
-nnoremap <Leader>VR :source $MYVIMRC<CR>
+nnoremap <leader>VR :source $MYVIMRC<CR>
 
 "Mapping to select the last-changed text
 noremap gV `[v`]
