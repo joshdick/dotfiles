@@ -5,12 +5,11 @@ if isdirectory($HOME . "/.bin/repos/fzf")
 endif
 
 cnoreabbrev rg Rg
-nnoremap <Leader>r :Rg<Space>
-nnoremap <Leader>gs:exe ':Rg ' . expand("<cword>")<CR>
+nnoremap <leader>rg :Rg<Space>
+nnoremap <leader>gs :exe ':Rg ' . expand("<cword>")<CR>
 noremap <C-p> :Files<CR>
 
 let g:fzf_action = {
-  \ 'enter': 'drop',
   \ 'ctrl-t': 'tab drop',
   \ 'ctrl-x': 'split',
   \ 'ctrl-v': 'vsplit' }
