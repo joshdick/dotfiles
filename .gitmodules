@@ -121,7 +121,7 @@
 	url = https://github.com/neoclide/coc-yaml
 [submodule "bin.symlink/repos/dntw"]
 	path = bin.symlink/repos/dntw
-	url = git://github.com/joshdick/dntw.git
+	url = https://github.com/joshdick/dntw.git
 [submodule "bin.symlink/repos/d33ef5b6e6da4a3e4aa9b07b093d3c23"]
 	path = bin.symlink/repos/d33ef5b6e6da4a3e4aa9b07b093d3c23
 	url = https://gist.github.com/d33ef5b6e6da4a3e4aa9b07b093d3c23.git
@@ -130,7 +130,7 @@
 	url = https://github.com/rupa/z
 [submodule "vim.symlink/pack/plugins/start/vim-github-url"]
 	path = vim.symlink/pack/plugins/start/vim-github-url
-	url = git@github.com:pgr0ss/vim-github-url.git
+	url = https://github.com/pgr0ss/vim-github-url.git
 [submodule "vim.symlink/pack/plugins/opt/nvim-lspconfig"]
 	path = vim.symlink/pack/plugins/opt/nvim-lspconfig
-	url = git@github.com:neovim/nvim-lspconfig.git
+	url = https://github.com/neovim/nvim-lspconfig.git
