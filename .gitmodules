@@ -122,3 +122,6 @@
 [submodule "vim.symlink/pack/plugins/opt/nvim-lspconfig"]
 	path = vim.symlink/pack/plugins/opt/nvim-lspconfig
 	url = https://github.com/neovim/nvim-lspconfig.git
+[submodule "vim.symlink/pack/plugins/opt/tokyonight.nvim"]
+	path = vim.symlink/pack/plugins/opt/tokyonight.nvim
+	url = https://github.com/folke/tokyonight.nvim.git

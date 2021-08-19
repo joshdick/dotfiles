@@ -1,11 +1,17 @@
 set noshowmode
 
 function! CocCurrentFunction()
-    return get(b:, 'coc_current_function', '')
+  return get(b:, 'coc_current_function', '')
 endfunction
 
+if has('nvim')
+  let s:colorscheme = 'tokyonight'
+else
+  let s:colorscheme = 'onedark'
+endif
+
 let g:lightline = {
-  \ 'colorscheme': 'onedark',
+  \ 'colorscheme': s:colorscheme,
   \ 'active': {
   \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ], ['ctrlpmark'] ],
   \   'right': [ [ 'cocstatus', 'coccurrentfunction', 'lineinfo' ], ['percent'], [ 'fileformat', 'fileencoding', 'filetype' ] ]
@@ -36,14 +42,14 @@ endfunction
 function! LightlineFilename()
   let fname = expand('%:t')
   return fname == 'ControlP' && has_key(g:lightline, 'ctrlp_item') ? g:lightline.ctrlp_item :
-        \ fname == '__Tagbar__' ? g:lightline.fname :
-        \ fname =~ '__Gundo' ? '' :
-        \ &ft == 'vimfiler' ? vimfiler#get_status_string() :
-        \ &ft == 'unite' ? unite#get_status_string() :
-        \ &ft == 'vimshell' ? vimshell#get_status_string() :
-        \ ('' != LightlineReadonly() ? LightlineReadonly() . ' ' : '') .
-        \ ('' != fname ? fname : '[No Name]') .
-        \ ('' != LightlineModified() ? ' ' . LightlineModified() : '')
+    \ fname == '__Tagbar__' ? g:lightline.fname :
+    \ fname =~ '__Gundo' ? '' :
+    \ &ft == 'vimfiler' ? vimfiler#get_status_string() :
+    \ &ft == 'unite' ? unite#get_status_string() :
+    \ &ft == 'vimshell' ? vimshell#get_status_string() :
+    \ ('' != LightlineReadonly() ? LightlineReadonly() . ' ' : '') .
+    \ ('' != fname ? fname : '[No Name]') .
+    \ ('' != LightlineModified() ? ' ' . LightlineModified() : '')
 endfunction
 
 function! LightlineFugitive()
@@ -73,14 +79,14 @@ endfunction
 function! LightlineMode()
   let fname = expand('%:t')
   return fname == '__Tagbar__' ? 'Tagbar' :
-        \ fname == 'ControlP' ? 'CtrlP' :
-        \ fname == '__Gundo__' ? 'Gundo' :
-        \ fname == '__Gundo_Preview__' ? 'Gundo Preview' :
-        \ fname =~ 'NetrwTreeListing' ? 'Tree Listing' :
-        \ &ft == 'unite' ? 'Unite' :
-        \ &ft == 'vimfiler' ? 'VimFiler' :
-        \ &ft == 'vimshell' ? 'VimShell' :
-        \ winwidth(0) > 60 ? lightline#mode() : ''
+    \ fname == 'ControlP' ? 'CtrlP' :
+    \ fname == '__Gundo__' ? 'Gundo' :
+    \ fname == '__Gundo_Preview__' ? 'Gundo Preview' :
+    \ fname =~ 'NetrwTreeListing' ? 'Tree Listing' :
+    \ &ft == 'unite' ? 'Unite' :
+    \ &ft == 'vimfiler' ? 'VimFiler' :
+    \ &ft == 'vimshell' ? 'VimShell' :
+    \ winwidth(0) > 60 ? lightline#mode() : ''
 endfunction
 
 function! CtrlPMark()
@@ -128,29 +134,29 @@ function! CustomTabname(n) abort
 endfunction
 
 let g:lightline.tab_component_function = {
-      \ 'custom_tabname': 'CustomTabname',
-      \ 'modified': 'lightline#tab#modified',
-      \ 'readonly': 'lightline#tab#readonly',
-      \ 'tabnum': 'lightline#tab#tabnum'
-      \ }
+  \ 'custom_tabname': 'CustomTabname',
+  \ 'modified': 'lightline#tab#modified',
+  \ 'readonly': 'lightline#tab#readonly',
+  \ 'tabnum': 'lightline#tab#tabnum'
+  \ }
 
 let g:lightline.tab = {
-      \ 'active': [ 'tabnum', 'custom_tabname', 'modified' ],
-      \ 'inactive': [ 'tabnum', 'custom_tabname', 'modified' ] }
+  \ 'active': [ 'tabnum', 'custom_tabname', 'modified' ],
+  \ 'inactive': [ 'tabnum', 'custom_tabname', 'modified' ] }
 
 let g:lightline.tabline_separator = { 'left': '', 'right': '' }
 let g:lightline.tabline_subseparator = { 'left': '‖', 'right': '‖' }
 
 let g:lightline.mode_map = {
-      \ 'n' : '🅝',
-      \ 'i' : '🅘',
-      \ 'R' : '🅡',
-      \ 'v' : '🅥',
-      \ 'V' : '🅥 🅛',
-      \ "\<C-v>": '🅥 🅑',
-      \ 'c' : '🅒',
-      \ 's' : '🅢',
-      \ 'S' : '🅢 🅛',
-      \ "\<C-s>": '🅢 🅑',
-      \ 't': '🅣',
-      \ }
+  \ 'n' : '🅝',
+  \ 'i' : '🅘',
+  \ 'R' : '🅡',
+  \ 'v' : '🅥',
+  \ 'V' : '🅥 🅛',
+  \ "\<C-v>": '🅥 🅑',
+  \ 'c' : '🅒',
+  \ 's' : '🅢',
+  \ 'S' : '🅢 🅛',
+  \ "\<C-s>": '🅢 🅑',
+  \ 't': '🅣',
+  \ }
