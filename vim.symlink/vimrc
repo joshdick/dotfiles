@@ -2,11 +2,11 @@
 "To see which ones are used, go to:
 "< https://github.com/joshdick/dotfiles/search?q=filename%3A.gitmodules+%5Bsubmodule+%22vim.symlink%2Fpack%2F&unscoped_q=filename%3A.gitmodules+%5Bsubmodule+%22vim.symlink%2Fpack%2F >
 
-"Settings for Vim plugins (the plugins themselves are Vim 8 packages via Git submodules)
-runtime! config/plugins/**/*.vim
-
 "Basic/core settings for Vim itself
 runtime! config/core.vim
+
+"Settings for Vim plugins (the plugins themselves are Vim 8 packages via Git submodules)
+runtime! config/plugins/**/*.vim
 
 "Misc. settings for Vim itself; mappings, colorscheme, etc.
 runtime! config/settings/**/*.vim
