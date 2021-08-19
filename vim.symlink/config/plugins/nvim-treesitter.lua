@@ -1,8 +1,5 @@
-if has("nvim")
+vim.cmd [[packadd nvim-treesitter]]
 
-  packadd! nvim-treesitter
-
-lua << EOF
 require'nvim-treesitter.configs'.setup {
    -- one of "all", "maintained" (parsers with maintainers), or a list of languages
   ensure_installed = {
@@ -20,6 +17,4 @@ require'nvim-treesitter.configs'.setup {
     enable = true
   },
 }
-EOF
 
-endif

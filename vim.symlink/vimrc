@@ -6,6 +6,9 @@
 runtime! config/core.vim
 
 "Settings for Vim plugins (the plugins themselves are Vim 8 packages via Git submodules)
+if has('nvim')
+  runtime! config/plugins/**/*.lua
+endif
 runtime! config/plugins/**/*.vim
 
 "Misc. settings for Vim itself; mappings, colorscheme, etc.
