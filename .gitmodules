@@ -131,3 +131,6 @@
 [submodule "vim.symlink/pack/plugins/opt/telescope.nvim"]
 	path = vim.symlink/pack/plugins/opt/telescope.nvim
 	url = https://github.com/nvim-telescope/telescope.nvim
+[submodule "vim.symlink/pack/plugins/opt/nvim-treesitter"]
+	path = vim.symlink/pack/plugins/opt/nvim-treesitter
+	url = https://github.com/nvim-treesitter/nvim-treesitter
