@@ -125,3 +125,9 @@
 [submodule "vim.symlink/pack/plugins/opt/tokyonight.nvim"]
 	path = vim.symlink/pack/plugins/opt/tokyonight.nvim
 	url = https://github.com/folke/tokyonight.nvim.git
+[submodule "vim.symlink/pack/plugins/opt/plenary.nvim"]
+	path = vim.symlink/pack/plugins/opt/plenary.nvim
+	url = https://github.com/nvim-lua/plenary.nvim
+[submodule "vim.symlink/pack/plugins/opt/telescope.nvim"]
+	path = vim.symlink/pack/plugins/opt/telescope.nvim
+	url = https://github.com/nvim-telescope/telescope.nvim
