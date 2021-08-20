@@ -22,7 +22,7 @@ function! SetWorkingDirectory()
   endif
 endfunction
 
-if has("autocmd")
+if has('autocmd')
   augroup working_directory
     autocmd!
     autocmd BufRead * call SetWorkingDirectory()

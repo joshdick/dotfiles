@@ -5,7 +5,7 @@
 set encoding=utf-8
 
 "Work around https://github.com/vim/vim/issues/3117 < https://github.com/vim/vim/issues/3117#issuecomment-406853295 >
-if has("python3") && !has("patch-8.1.201")
+if has('python3') && !has('patch-8.1.201')
   silent! python3 1
 endif
 
@@ -28,8 +28,19 @@ set nobackup
 set nowritebackup
 set shortmess+=I "Disable splash screen/[I]ntro message
 set switchbuf=usetab,newtab "If a buffer is already open in a window in any tab, switch to that tab/window < https://stackoverflow.com/a/3476411/278810 >
-if !has("nvim")
-  set diffopt+=indent-heuristic,algorithm:patience
+
+" command-line completion
+" Settings found at: <https://www.reddit.com/r/vim/comments/oo9gms/any_way_to_get_vim_to_not_defaulting_to_the_first/>
+set wildmode=longest:full,full
+set wildmenu
+set wildignore=*.o,*~
+set wildignorecase
+
+" TODO:
+" https://github.com/thoughtbot/dotfiles/issues/655#issuecomment-605019271
+" https://www.micahsmith.com/blog/2019/11/fixing-vim-invalid-argument-diffopt-iwhite/
+if has('nvim-0.3.2') || has('patch-8.1.0360')
+  set diffopt=filler,internal,algorithm:histogram,indent-heuristic
 endif
 
 "Line numbers
@@ -57,7 +68,7 @@ runtime macros/matchit.vim
 
 "Statusline {{{
 
-if exists("vimpager")
+if exists('vimpager')
   set statusline=%<%F%h%m%r%h%w%y\ %{&ff}\ %{strftime(\"%c\",getftime(expand(\"%:p\")))}\ %=\ lin:%l\/%L\ col:%c%V\ %P
 else
   set statusline=%<%F%h%m%r%h%w%y\ %{&ff}\ %{strftime(\"%c\",getftime(expand(\"%:p\")))}\ %{fugitive#statusline()}\ %=\ lin:%l\/%L\ col:%c%V\ %P
@@ -68,7 +79,7 @@ set laststatus=2
 
 "Cursor Styling {{{
 
-if !empty($ITERM_PROFILE) && !has("nvim") "We're running non-Neovim inside iterm2
+if !empty($ITERM_PROFILE) && !has('nvim') "We're running non-Neovim inside iterm2
   if empty($TMUX)
     "iTerm2 per <http://vim.wikia.com/wiki/Change_cursor_shape_in_different_modes>
     let &t_SI="\<Esc>]50;CursorShape=1\x7"
@@ -93,7 +104,7 @@ if !exists('g:os')
   endif
 endif
 
-if has("gui") "Instead of gui_running, in case :gui is run manually on *NIX
+if has('gui') "Instead of gui_running, in case :gui is run manually on *NIX
 
   "Font settings
   set guifont=MonoLisa\ Light:h15
@@ -102,7 +113,7 @@ if has("gui") "Instead of gui_running, in case :gui is run manually on *NIX
 
   if g:os == 'Darwin'
     "set guioptions=egmrt "Hide toolbar by default in MacVim
-    "if has("transparency") "Background transparency is a MacVim-specific feature, so prevent errors in other vims
+    "if has('transparency') "Background transparency is a MacVim-specific feature, so prevent errors in other vims
       "set transparency=2 "Enable background transparency in MacVim
     "endif
     "Map CMD-[ and CMD-] to indent while preserving any Visual mode selection as appropriate

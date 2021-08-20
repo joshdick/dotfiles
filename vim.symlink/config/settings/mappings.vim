@@ -45,11 +45,11 @@ nnoremap <leader>P "+P
 xnoremap <leader>p "+p
 xnoremap <leader>P "+P
 
-"Mapping to show buffer search
-nnoremap <leader>b :Buffers<CR>
+"Mapping for Dash search
+nmap <silent> <leader>d <Plug>DashSearch
 
 "Mapping to convert mixed line endings to LF-only (Unix)
-nnoremap <leader>d :call ForceLF()<CR>
+nnoremap <leader>% :call ForceLF()<CR>
 
 "Mapping to toggle 'set list' (toggles invisible characters)
 nnoremap <leader>l :set list!<CR>
@@ -78,17 +78,17 @@ nnoremap <silent> <leader>x :ene<CR>:bd #<CR>
 nnoremap <silent> <leader>$ :call Preserve("%s/\\s\\+$//e")<CR>
 
 "Mapping to auto-indent entire file
-nnoremap <silent> <leader>= :call Preserve("normal gg=G")<CR>
+nnoremap <silent> <leader>= :call Preserve('normal gg=G')<CR>
 
 "Mapping to sort words inside a single line
 "Found at <http://stackoverflow.com/a/1329899/278810>
 xnoremap <leader>, d:execute 'normal a' . join(sort(split(getreg('"'))), ' ')<CR>
 
 "Mapping for adding JavaScript console logs
-nnoremap <leader>l a console.log('');<ESC>hhi
+nnoremap <leader>jl a console.log('');<ESC>hhi
 
 "Shows the syntax highlighting group used at the cursor.
 "Found at <http://vim.wikia.com/wiki/Identify_the_syntax_highlighting_group_used_at_the_cursor>
-map <F10> :echo "hi<". synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
-  \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
-  \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+map <F10> :echo "hi<". synIDattr(synID(line('.'),col('.'),1),"name") . '> trans<'
+  \ . synIDattr(synID(line('.'),col('.'),0),"name") . "> lo<"
+  \ . synIDattr(synIDtrans(synID(line('.'),col('.'),1)),"name") . ">"<CR>

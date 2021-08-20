@@ -21,7 +21,7 @@ if !has('nvim')
   command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
 
   nnoremap <leader>g :RG<CR>
-  nnoremap <leader>cg :exe ':RG ' . expand("<cword>")<CR>
+  nnoremap <leader>cg :exe ':RG ' . expand('<cword>')<CR>
   noremap <C-p> :Files<CR>
   nnoremap <C-b> :Buffers<CR>
 

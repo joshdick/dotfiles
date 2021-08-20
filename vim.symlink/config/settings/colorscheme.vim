@@ -1,8 +1,9 @@
-if has("nvim")
+if has('nvim')
 
   packadd! tokyonight.nvim
 
-  let g:tokyonight_style = "night"
+  let g:tokyonight_style="night"
+  let g:tokyonight_italic_keywords="false"
   colorscheme tokyonight
 
 else

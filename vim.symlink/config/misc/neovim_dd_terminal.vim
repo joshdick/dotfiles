@@ -2,7 +2,7 @@
 
 "Found at <https://pastebin.com/FjdkegRH>
 
-if has("nvim")
+if has('nvim')
 
   function! ChooseTerm(termname, slider)
     let pane = bufwinnr(a:termname)

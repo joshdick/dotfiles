@@ -8,7 +8,7 @@ endfunction
 if v:vim_did_enter
   call s:GenerateHelpTags
 else
-  if has("autocmd")
+  if has('autocmd')
     augroup generate_helptags
       autocmd!
       autocmd VimEnter * call GenerateHelpTags()

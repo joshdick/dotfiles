@@ -5,7 +5,7 @@ let ExtraWhitespace_cterm = synIDattr(synIDtrans(hlID('Error')), 'fg', 'cterm')
 let ExtraWhitespace_gui = synIDattr(synIDtrans(hlID('Error')), 'fg', 'gui')
 exe 'highlight ExtraWhitespace ctermbg=' . ExtraWhitespace_cterm . ' guibg=' . ExtraWhitespace_gui
 match ExtraWhitespace /\s\+$/
-if has("autocmd")
+if has('autocmd')
   augroup whitespace_highlighting
     autocmd!
     autocmd ColorScheme * let ExtraWhitespace_cterm = synIDattr(synIDtrans(hlID('Error')), 'fg', 'cterm')
