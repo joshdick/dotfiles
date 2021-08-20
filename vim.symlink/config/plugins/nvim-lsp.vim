@@ -38,19 +38,65 @@ lua << EOF
     buf_set_keymap("n", '<leader>f', "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
   end
 
-  -- Use a loop to conveniently call 'setup' on multiple servers and
-  -- map buffer local keybindings when the language server attaches.
-  -- `tsserver` depends on `typescript` and `typescript-language-server`
-  local servers = { "tsserver" }
+  -- tsserver setup
+  -- Requires: `npm i -g typescript typescript-language-server`
+  nvim_lsp.tsserver.setup {
+    -- root_dir = nvim_lsp.util.root_pattern("yarn.lock", "lerna.json", ".git"),
+    on_attach = function(client, bufnr)
+      -- Ensure that tsserver is not used for formatting (prefer prettier)
+      client.resolved_capabilities.document_formatting = false
 
-  for _, lsp in ipairs(servers) do
-    nvim_lsp[lsp].setup {
-      on_attach = on_attach,
-      flags = {
-        debounce_text_changes = 150,
-      }
-    }
-  end
+      -- TODO: Research https://github.com/tomaskallup/dotfiles/blob/master/nvim/lua/plugins/lsp-ts-utils.lua
+      --ts_utils_attach(client)
+      on_attach(client, bufnr)
+    end,
+    settings = { documentFormatting = false }
+  }
+
+  -- Formatting/linting via efm
+  -- Based on https://github.com/tomaskallup/dotfiles/blob/master/nvim/lua/plugins/nvim-lspconfig.lua#L122
+  -- Requires: `brew install efm-langserver` and `npm i -g eslint_d`
+  local prettier = {
+    formatCommand = "./node_modules/.bin/prettier --stdin-filepath ${INPUT}",
+    formatStdin = true,
+    rootMarkers = { ".prettierrc", ".prettierrc.json" }
+  }
+
+  local eslint = {
+    lintCommand = "eslint_d -f unix --stdin --stdin-filename ${INPUT}",
+    lintIgnoreExitCode = true,
+    lintStdin = true,
+    lintFormats = { "%f:%l:%c: %m" },
+    rootMarkers = { "package.json" }
+  }
+
+  local languages = {
+    typescript = { prettier, eslint },
+    javascript = { prettier, eslint },
+    typescriptreact = { prettier, eslint },
+    javascriptreact = { prettier, eslint },
+    yaml = { prettier },
+    json = { prettier },
+    html = { prettier },
+    scss = { prettier },
+    css = { prettier },
+    markdown = { prettier }
+  }
+
+  nvim_lsp.efm.setup {
+    root_dir = nvim_lsp.util.root_pattern("package.json", ".git"),
+    filetypes = vim.tbl_keys(languages),
+    init_options = { documentFormatting = true, codeAction = true },
+    settings = { languages = languages, log_level = 1, log_file = '~/efm.log' },
+    on_attach = on_attach
+  }
 EOF
 
 endif
+
+augroup format_on_save
+  autocmd BufWritePre *.js lua vim.lsp.buf.formatting_sync(nil, 1000)
+  autocmd BufWritePre *.jsx lua vim.lsp.buf.formatting_sync(nil, 1000)
+  autocmd BufWritePre *.tsx lua vim.lsp.buf.formatting_sync(nil, 1000)
+  autocmd BufWritePre *.ts lua vim.lsp.buf.formatting_sync(nil, 1000)
+augroup END
