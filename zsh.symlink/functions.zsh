@@ -360,11 +360,6 @@ function update() {
   heading "[vim] Updating Vim helptags..."
   vim '+helptags ALL' +qall
 
-  if command_exists yarn; then
-    heading "[coc] Updating coc.nvim and associated extensions..."
-    ls -d ~/.vim/pack/plugins/opt/coc* | xargs -L 1 zsh -c 'cd "$0" && yarn install --frozen-lockfile'
-  fi
-
   if command_exists npm; then
     heading "[npm] Updating global packages..."
     npm -g update
