@@ -110,3 +110,6 @@
 [submodule "vim.symlink/pack/plugins/opt/nvim-treesitter"]
 	path = vim.symlink/pack/plugins/opt/nvim-treesitter
 	url = https://github.com/nvim-treesitter/nvim-treesitter
+[submodule "vim.symlink/pack/plugins/opt/efm-langserver"]
+	path = vim.symlink/pack/plugins/opt/efm-langserver
+	url = https://github.com/mattn/efm-langserver
