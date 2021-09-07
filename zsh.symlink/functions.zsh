@@ -332,16 +332,12 @@ function sync_home() {
 function update() {
   heading() { echo -e "\e[1m\e[34m==>\e[39m $1\e[0m" }
 
-  if command_exists apt-get; then
-    heading "[apt-get] Updating system packages..."
-    sudo apt-get update
-    sudo apt-get upgrade
-    sudo apt-get clean
-    sudo apt-get autoremove
+  if command_exists apt; then
+    heading "[apt] Updating system packages..."
+    sudo bash -c "apt update && apt upgrade && apt clean && apt autoremove"
   elif command_exists pacman; then
     heading "[pacman] Updating system packages..."
-    sudo pacman -Syu
-    sudo pacman -Scc
+    sudo bash -c "pacman -Syu && pacman -Scc"
   elif command_exists brew; then
     heading "[homebrew] Updating system packages..."
     brew update && brew upgrade && brew cleanup
