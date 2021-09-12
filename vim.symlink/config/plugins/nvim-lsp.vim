@@ -1,6 +1,8 @@
-if has('nvim')
+if !has('nvim')
+  finish
+endif
 
-  packadd! nvim-lspconfig
+packadd! nvim-lspconfig
 
 " Based on example at
 " < https://github.com/neovim/nvim-lspconfig#keybindings-and-completion >
@@ -91,8 +93,6 @@ lua << EOF
     on_attach = on_attach
   }
 EOF
-
-endif
 
 augroup format_on_save
   autocmd BufWritePre *.js lua vim.lsp.buf.formatting_sync(nil, 1000)
