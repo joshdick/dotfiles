@@ -113,7 +113,6 @@
 [submodule "vim.symlink/pack/plugins/opt/efm-langserver"]
 	path = vim.symlink/pack/plugins/opt/efm-langserver
 	url = https://github.com/mattn/efm-langserver
-
 [submodule "vim.symlink/pack/plugins/opt/lualine.nvim"]
 	path = vim.symlink/pack/plugins/opt/lualine.nvim
 	url = https://github.com/hoob3rt/lualine.nvim.git
