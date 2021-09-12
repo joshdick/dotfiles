@@ -38,7 +38,7 @@
 	path = bin.symlink/repos/tmux-scroll-copy-mode
 	url = https://github.com/nhdaly/tmux-scroll-copy-mode
 [submodule "vim.symlink/pack/plugins/start/lightline.vim"]
-	path = vim.symlink/pack/plugins/start/lightline.vim
+	path = vim.symlink/pack/plugins/opt/lightline.vim
 	url = https://github.com/itchyny/lightline.vim
 [submodule "vim.symlink/pack/plugins/start/vim-gitgutter"]
 	path = vim.symlink/pack/plugins/start/vim-gitgutter
@@ -113,3 +113,7 @@
 [submodule "vim.symlink/pack/plugins/opt/efm-langserver"]
 	path = vim.symlink/pack/plugins/opt/efm-langserver
 	url = https://github.com/mattn/efm-langserver
+
+[submodule "vim.symlink/pack/plugins/opt/lualine.nvim"]
+	path = vim.symlink/pack/plugins/opt/lualine.nvim
+	url = https://github.com/hoob3rt/lualine.nvim.git
