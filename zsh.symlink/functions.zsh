@@ -332,7 +332,7 @@ function sync_home() {
 function update() {
   heading() { echo -e "\e[1m\e[34m==>\e[39m $1\e[0m" }
 
-  if command_exists apt; then
+  if (! uname | grep -qi darwin) && (command_exists apt); then
     heading "[apt] Updating system packages..."
     sudo bash -c "apt update && apt upgrade && apt clean && apt autoremove"
   elif command_exists pacman; then
