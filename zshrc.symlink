@@ -159,6 +159,12 @@ PS1="
 # If we're on OS X and using Homebrew package manager, do some Homebrew-specific environmental tweaks
 if command_exists brew; then
   HOMEBREW_PREFIX="$(brew --prefix)"
+else
+  # M1 install
+  HOMEBREW_PREFIX="/opt/homebrew"
+fi
+
+if [ -d $HOMEBREW_PREFIX ]; then
   export PATH="$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$PATH"
 
   # Assume Git was installed via Homebrew, and that the Git configuration below
@@ -218,10 +224,12 @@ export GIT_EDITOR="$HOME/.bin/git_editor"
 export PAGER=less
 
 # gpg-agent
-export GPG_TTY=$(tty)
-unset SSH_AGENT_PID
-if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
-  export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+if command_exists gpgconf; then
+  export GPG_TTY=$(tty)
+  unset SSH_AGENT_PID
+  if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
+    export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+  fi
 fi
 
 # Emulate pgrep if we're on OS X
