@@ -55,6 +55,12 @@ lua << EOF
     settings = { documentFormatting = false }
   }
 
+  local black = {
+    formatCommand = "black --quiet -",
+    formatStdin = true,
+    rootMarkers = { "pyproject.toml" }
+  }
+
   -- Formatting/linting via efm
   -- Based on https://github.com/tomaskallup/dotfiles/blob/master/nvim/lua/plugins/nvim-lspconfig.lua#L122
   -- Requires: `brew install efm-langserver` and `npm i -g eslint_d`
@@ -72,7 +78,23 @@ lua << EOF
     rootMarkers = { "package.json" }
   }
 
-  local languages = {
+  local pylint = {
+    lintCommand = "pylint --output-format text --score no --msg-template {path}:{line}:{column}:{C}:{msg} ${INPUT}",
+    lintStdin = false,
+    lintFormats = { "%f:%l:%c:%t:%m" },
+    lintOffsetColumns = 1,
+    lintCategoryMap = {
+      I = "H",
+      R = "I",
+      C = "I",
+      W = "W",
+      E = "E",
+      F = "E"
+    },
+    rootMarkers = { ".pylintrc" }
+  }
+
+  local efmLanguages = {
     typescript = { prettier, eslint },
     javascript = { prettier, eslint },
     typescriptreact = { prettier, eslint },
@@ -82,15 +104,41 @@ lua << EOF
     html = { prettier },
     scss = { prettier },
     css = { prettier },
-    markdown = { prettier }
+    markdown = { prettier },
+    python = { black, pylint }
   }
 
   nvim_lsp.efm.setup {
-    root_dir = nvim_lsp.util.root_pattern("package.json", ".git"),
-    filetypes = vim.tbl_keys(languages),
+    root_dir = nvim_lsp.util.root_pattern("package.json", "pyproject.toml", ".git"),
+    filetypes = vim.tbl_keys(efmLanguages),
     init_options = { documentFormatting = true, codeAction = true },
-    settings = { languages = languages, log_level = 1, log_file = '~/efm.log' },
+    settings = { languages = efmLanguages, log_level = 1, log_file = '~/efm.log' },
     on_attach = on_attach
+  }
+
+  -- Requires: `pip install -U jedi-language-server`
+  -- nvim_lsp.jedi_language_server.setup {
+    -- root_dir = nvim_lsp.util.root_pattern(".pylintrc", "pyproject.toml", ".git"),
+    -- on_attach = on_attach
+  -- }
+
+  -- Requires `npm i -g pyright`
+  nvim_lsp.pyright.setup {
+    cmd = { "pyright-langserver", "--stdio" },
+    filetypes = { "python" },
+    -- root_dir = function(startpath)
+    --  return M.search_ancestors(startpath, matcher)
+    -- end,
+    settings = {
+      python = {
+        analysis = {
+          autoSearchPaths = true,
+          diagnosticMode = "workspace",
+          useLibraryCodeForTypes = true
+        }
+      }
+    },
+    single_file_support = true
   }
 EOF
 
@@ -99,4 +147,5 @@ augroup format_on_save
   autocmd BufWritePre *.jsx lua vim.lsp.buf.formatting_sync(nil, 1000)
   autocmd BufWritePre *.tsx lua vim.lsp.buf.formatting_sync(nil, 1000)
   autocmd BufWritePre *.ts lua vim.lsp.buf.formatting_sync(nil, 1000)
+  autocmd BufWritePre *.py lua vim.lsp.buf.formatting_sync(nil, 1000)
 augroup END
