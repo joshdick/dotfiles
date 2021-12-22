@@ -55,19 +55,25 @@ lua << EOF
     settings = { documentFormatting = false }
   }
 
-  local black = {
-    formatCommand = "black --quiet -",
-    formatStdin = true,
-    rootMarkers = { "pyproject.toml" }
-  }
-
   -- Formatting/linting via efm
   -- Based on https://github.com/tomaskallup/dotfiles/blob/master/nvim/lua/plugins/nvim-lspconfig.lua#L122
   -- Requires: `brew install efm-langserver` and `npm i -g eslint_d`
+  local black = {
+    formatCommand = "black --quiet -",
+    formatStdin = true,
+    -- rootMarkers = { "pyproject.toml" }
+  }
+
   local prettier = {
     formatCommand = "./node_modules/.bin/prettier --stdin-filepath ${INPUT}",
     formatStdin = true,
     rootMarkers = { ".prettierrc", ".prettierrc.json" }
+  }
+
+  local isort = {
+    formatCommand = 'isort --quiet -',
+    formatStdin = true,
+    -- rootMarkers = { ".isort.cfg", "pyproject.toml", "setup.cfg", "setup.py" }
   }
 
   local eslint = {
@@ -105,16 +111,40 @@ lua << EOF
     scss = { prettier },
     css = { prettier },
     markdown = { prettier },
-    python = { black, pylint }
+    python = { black, isort, pylint },
   }
 
   nvim_lsp.efm.setup {
-    root_dir = nvim_lsp.util.root_pattern("package.json", "pyproject.toml", ".git"),
+    root_dir = nvim_lsp.util.root_pattern(".git"),
     filetypes = vim.tbl_keys(efmLanguages),
     init_options = { documentFormatting = true, codeAction = true },
     settings = { languages = efmLanguages, log_level = 1, log_file = '~/efm.log' },
     on_attach = on_attach
   }
+
+  -- Requires `npm i -g diagnostic-languageserver`
+  --nvim_lsp.diagnosticls.setup {
+  --  root_dir = nvim_lsp.util.root_pattern(".git"),
+  --  filetypes = { "python" },
+  --  init_options = {
+  --    formatters = {
+  --      black = {
+  --        command = "black",
+  --        args = { "--quiet", "-" },
+  --        rootPatterns = { "pyproject.toml" },
+  --      },
+  --      isort = {
+  --        command = "isort",
+  --        args = { "--quiet", "-" },
+  --        rootPatterns = { ".isort.cfg", "pyproject.toml" },
+  --      },
+  --      formatFiletypes = {
+  --        python = { "black", "isort" }
+  --      }
+  --    }
+  --  },
+  --  on_attach = on_attach
+  --}
 
   -- Requires: `pip install -U jedi-language-server`
   -- nvim_lsp.jedi_language_server.setup {
@@ -135,6 +165,9 @@ lua << EOF
           autoSearchPaths = true,
           diagnosticMode = "workspace",
           useLibraryCodeForTypes = true
+        },
+        organizeImports = {
+          provider = "isort"
         }
       }
     },
