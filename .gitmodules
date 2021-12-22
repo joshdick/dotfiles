@@ -119,3 +119,6 @@
 [submodule "vim.symlink/pack/plugins/opt/poet-v"]
 	path = vim.symlink/pack/plugins/opt/poet-v
 	url = https://github.com/petobens/poet-v.git
+[submodule "vim.symlink/pack/plugins/opt/diagnostic-languageserver"]
+	path = vim.symlink/pack/plugins/opt/diagnostic-languageserver
+	url = https://github.com/iamcco/diagnostic-languageserver.git
