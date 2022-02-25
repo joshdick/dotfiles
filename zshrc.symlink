@@ -12,9 +12,6 @@ function command_exists() {
   hash "$1" &> /dev/null
 }
 
-# Include any machine-specific configuration if it exists
-test -e ~/.localrc && . ~/.localrc
-
 # When connecting via ssh, always [re]attach to a terminal manager
 # Adapted from code found at <http://involution.com/2004/11/17/1-32/> (now offline)
 if command_exists tmux && [ -z $TMUX ]; then
@@ -210,6 +207,9 @@ fi
 . ~/.zsh/aliases.zsh
 
 # *** ENVIRONMENT ***
+
+# Include any machine-specific configuration if it exists
+test -e ~/.localrc && . ~/.localrc
 
 # Editor - See if vim lives around these parts, otherwise fall back to nano
 if command_exists vim; then
