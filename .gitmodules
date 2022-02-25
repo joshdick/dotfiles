@@ -110,15 +110,12 @@
 [submodule "vim.symlink/pack/plugins/opt/nvim-treesitter"]
 	path = vim.symlink/pack/plugins/opt/nvim-treesitter
 	url = https://github.com/nvim-treesitter/nvim-treesitter
-[submodule "vim.symlink/pack/plugins/opt/efm-langserver"]
-	path = vim.symlink/pack/plugins/opt/efm-langserver
-	url = https://github.com/mattn/efm-langserver
 [submodule "vim.symlink/pack/plugins/opt/lualine.nvim"]
 	path = vim.symlink/pack/plugins/opt/lualine.nvim
 	url = https://github.com/hoob3rt/lualine.nvim.git
 [submodule "vim.symlink/pack/plugins/opt/poet-v"]
 	path = vim.symlink/pack/plugins/opt/poet-v
 	url = https://github.com/petobens/poet-v.git
-[submodule "vim.symlink/pack/plugins/opt/diagnostic-languageserver"]
-	path = vim.symlink/pack/plugins/opt/diagnostic-languageserver
-	url = https://github.com/iamcco/diagnostic-languageserver.git
+[submodule "vim.symlink/pack/plugins/opt/null-ls.nvim"]
+	path = vim.symlink/pack/plugins/opt/null-ls.nvim
+	url = https://github.com/jose-elias-alvarez/null-ls.nvim

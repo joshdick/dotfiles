@@ -3,12 +3,12 @@ if !has('nvim')
 endif
 
 packadd! nvim-lspconfig
+packadd! null-ls.nvim
 
 " Based on example at
 " < https://github.com/neovim/nvim-lspconfig#keybindings-and-completion >
 lua << EOF
   local nvim_lsp = require('lspconfig')
-
 
   -- https://www.reddit.com/r/neovim/comments/ru871v/comment/hqxquvl/?utm_source=share&utm_medium=web2x&context=3
   vim.diagnostic.config({
@@ -48,7 +48,6 @@ lua << EOF
     buf_set_keymap("n", '<leader>f', "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
   end
 
-  -- tsserver setup
   -- Requires: `npm i -g typescript typescript-language-server`
   nvim_lsp.tsserver.setup {
     -- root_dir = nvim_lsp.util.root_pattern("yarn.lock", "lerna.json", ".git"),
@@ -63,74 +62,7 @@ lua << EOF
     settings = { documentFormatting = false }
   }
 
-  -- Formatting/linting via efm
-  -- Based on https://github.com/tomaskallup/dotfiles/blob/master/nvim/lua/plugins/nvim-lspconfig.lua#L122
-  -- Requires: `brew install efm-langserver` and `npm i -g eslint_d`
-  local black = {
-    formatCommand = "black --quiet -",
-    formatStdin = true,
-    -- rootMarkers = { "pyproject.toml" }
-  }
-
-  local prettier = {
-    formatCommand = "./node_modules/.bin/prettier --stdin-filepath ${INPUT}",
-    formatStdin = true,
-    rootMarkers = { ".prettierrc", ".prettierrc.json" }
-  }
-
-  local isort = {
-    formatCommand = 'isort --quiet -',
-    formatStdin = true,
-    -- rootMarkers = { ".isort.cfg", "pyproject.toml", "setup.cfg", "setup.py" }
-  }
-
-  local eslint = {
-    lintCommand = "eslint_d -f unix --stdin --stdin-filename ${INPUT}",
-    lintIgnoreExitCode = true,
-    lintStdin = true,
-    lintFormats = { "%f:%l:%c: %m" },
-    rootMarkers = { "package.json" }
-  }
-
-  local pylint = {
-    lintCommand = "pylint --output-format text --score no --msg-template {path}:{line}:{column}:{C}:{msg} ${INPUT}",
-    lintStdin = false,
-    lintFormats = { "%f:%l:%c:%t:%m" },
-    lintOffsetColumns = 1,
-    lintCategoryMap = {
-      I = "H",
-      R = "I",
-      C = "I",
-      W = "W",
-      E = "E",
-      F = "E"
-    },
-    rootMarkers = { ".pylintrc" }
-  }
-
-  local efmLanguages = {
-    typescript = { prettier, eslint },
-    javascript = { prettier, eslint },
-    typescriptreact = { prettier, eslint },
-    javascriptreact = { prettier, eslint },
-    yaml = { prettier },
-    json = { prettier },
-    html = { prettier },
-    scss = { prettier },
-    css = { prettier },
-    markdown = { prettier },
-    python = { black, isort, pylint },
-  }
-
-  nvim_lsp.efm.setup {
-    root_dir = nvim_lsp.util.root_pattern(".git"),
-    filetypes = vim.tbl_keys(efmLanguages),
-    init_options = { documentFormatting = true, codeAction = true },
-    settings = { languages = efmLanguages, log_level = 1, log_file = '~/efm.log' },
-    on_attach = on_attach
-  }
-
--- Requires `npm i -g pyright`
+  -- Requires `npm i -g pyright`
   nvim_lsp.pyright.setup {
     cmd = { "pyright-langserver", "--stdio" },
     filetypes = { "python" },
@@ -151,6 +83,20 @@ lua << EOF
     },
     single_file_support = true
   }
+
+  local null_ls = require("null-ls")
+
+  null_ls.setup({
+    sources = {
+      null_ls.builtins.formatting.prettier,
+      null_ls.builtins.formatting.eslint_d, -- requires `npm i -g eslint_d`
+      null_ls.builtins.formatting.black,
+      null_ls.builtins.formatting.isort,
+      null_ls.builtins.diagnostics.mypy,
+      null_ls.builtins.diagnostics.pylint
+    },
+    on_attach = on_attach
+  })
 EOF
 
 augroup format_on_save
