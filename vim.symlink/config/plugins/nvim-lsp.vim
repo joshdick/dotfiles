@@ -130,37 +130,7 @@ lua << EOF
     on_attach = on_attach
   }
 
-  -- Requires `npm i -g diagnostic-languageserver`
-  --nvim_lsp.diagnosticls.setup {
-  --  root_dir = nvim_lsp.util.root_pattern(".git"),
-  --  filetypes = { "python" },
-  --  init_options = {
-  --    formatters = {
-  --      black = {
-  --        command = "black",
-  --        args = { "--quiet", "-" },
-  --        rootPatterns = { "pyproject.toml" },
-  --      },
-  --      isort = {
-  --        command = "isort",
-  --        args = { "--quiet", "-" },
-  --        rootPatterns = { ".isort.cfg", "pyproject.toml" },
-  --      },
-  --      formatFiletypes = {
-  --        python = { "black", "isort" }
-  --      }
-  --    }
-  --  },
-  --  on_attach = on_attach
-  --}
-
-  -- Requires: `pip install -U jedi-language-server`
-  -- nvim_lsp.jedi_language_server.setup {
-    -- root_dir = nvim_lsp.util.root_pattern(".pylintrc", "pyproject.toml", ".git"),
-    -- on_attach = on_attach
-  -- }
-
-  -- Requires `npm i -g pyright`
+-- Requires `npm i -g pyright`
   nvim_lsp.pyright.setup {
     cmd = { "pyright-langserver", "--stdio" },
     filetypes = { "python" },
