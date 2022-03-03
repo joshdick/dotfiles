@@ -81,7 +81,8 @@ lua << EOF
         }
       }
     },
-    single_file_support = true
+    single_file_support = true,
+    on_attach = on_attach
   }
 
   local null_ls = require("null-ls")
