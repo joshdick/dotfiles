@@ -57,7 +57,7 @@ let maplocalleader="_"
 
 if executable('rg')
   "< https://github.com/BurntSushi/ripgrep/issues/425#issuecomment-702244167 >
-  set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
+  set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case\ --follow\ --no-ignore-vcs\ --hidden\ --glob\ '!node_modules'\ --glob\ '!.git'
   set grepformat=%f:%l:%c:%m,%f:%l:%m
 endif
 
