@@ -5,14 +5,14 @@
 "Basic/core settings for Vim itself
 runtime! config/core.vim
 
+"Misc. settings for Vim itself; mappings, colorscheme, etc.
+runtime! config/settings/**/*.vim
+
 "Settings for Vim plugins (the plugins themselves are Vim 8 packages via Git submodules)
 if has('nvim')
   runtime! config/plugins/**/*.lua
 endif
 runtime! config/plugins/**/*.vim
-
-"Misc. settings for Vim itself; mappings, colorscheme, etc.
-runtime! config/settings/**/*.vim
 
 "Stuff that doesn't fit into any of the above categories
 runtime! config/misc/**/*.vim
