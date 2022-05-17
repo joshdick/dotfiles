@@ -280,7 +280,7 @@ function serve() {
   if command_exists open; then
     open http://localhost:$port/
   fi
-  python -m SimpleHTTPServer $port
+  python3 -m http.server $port
 }
 
 # On Mac OS X, SSH to another Mac by hostname via Back To My Mac (iCloud)
