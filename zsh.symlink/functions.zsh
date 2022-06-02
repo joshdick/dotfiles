@@ -358,7 +358,7 @@ function update() {
 
   if command_exists npm; then
     heading "[npm] Updating global packages..."
-    npm -g update
+    npm --location=global update
   fi
 
   if command_exists pip; then
