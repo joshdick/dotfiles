@@ -4,6 +4,7 @@ if has('nvim')
 
   let g:tokyonight_style="night"
   let g:tokyonight_italic_keywords="false"
+  let g:tokyonight_colors = { "gitSigns": { "add": "#A8CD76", "change": "#D8B172", "delete": "#E77D8F" } }
   colorscheme tokyonight
 
 else
