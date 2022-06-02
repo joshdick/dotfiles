@@ -89,9 +89,6 @@
 [submodule "bin.symlink/repos/d33ef5b6e6da4a3e4aa9b07b093d3c23"]
 	path = bin.symlink/repos/d33ef5b6e6da4a3e4aa9b07b093d3c23
 	url = https://gist.github.com/d33ef5b6e6da4a3e4aa9b07b093d3c23.git
-[submodule "bin.symlink/z"]
-	path = bin.symlink/repos/z
-	url = https://github.com/rupa/z
 [submodule "vim.symlink/pack/plugins/start/vim-github-url"]
 	path = vim.symlink/pack/plugins/start/vim-github-url
 	url = https://github.com/pgr0ss/vim-github-url.git
