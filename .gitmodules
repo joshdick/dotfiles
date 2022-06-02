@@ -119,3 +119,6 @@
 [submodule "vim.symlink/pack/plugins/opt/trouble.nvim"]
 	path = vim.symlink/pack/plugins/opt/trouble.nvim
 	url = https://github.com/folke/trouble.nvim
+[submodule "bin.symlink/repos/z"]
+	path = bin.symlink/repos/z
+	url = https://github.com/rupa/z.git
