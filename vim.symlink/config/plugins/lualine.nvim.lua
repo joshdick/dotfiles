@@ -16,7 +16,10 @@ require('lualine').setup({
           'diagnostics',
           sources = { 'nvim_diagnostic' },
           symbols = {
-            hint = '  ',
+            error = '🅴 ',
+            warn = '🆆 ',
+            hint = '🅷 ',
+            info = '🅸 '
           },
           sections = { 'error', 'warn', 'info', 'hint' },
         },

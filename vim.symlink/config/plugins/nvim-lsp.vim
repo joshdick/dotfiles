@@ -10,6 +10,12 @@ packadd! null-ls.nvim
 lua << EOF
   local nvim_lsp = require('lspconfig')
 
+  local signs = { Error = "🅴", Warn = "🆆", Hint = "🅷", Info = "🅸" }
+  for type, icon in pairs(signs) do
+    local hl = "DiagnosticSign" .. type
+    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+  end
+
   -- https://www.reddit.com/r/neovim/comments/ru871v/comment/hqxquvl/?utm_source=share&utm_medium=web2x&context=3
   vim.diagnostic.config({
     virtual_text = false,
