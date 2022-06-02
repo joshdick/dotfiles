@@ -116,3 +116,6 @@
 [submodule "vim.symlink/pack/plugins/opt/null-ls.nvim"]
 	path = vim.symlink/pack/plugins/opt/null-ls.nvim
 	url = https://github.com/jose-elias-alvarez/null-ls.nvim
+[submodule "vim.symlink/pack/plugins/opt/trouble.nvim"]
+	path = vim.symlink/pack/plugins/opt/trouble.nvim
+	url = https://github.com/folke/trouble.nvim
