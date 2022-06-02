@@ -26,8 +26,7 @@ bind v split-window -v
 set -g status-interval 5
 set -g status-position top
 set -g status-left ''
-set -g status-bg terminal
-set -g status-fg colour7
+set -g status-style "fg=colour7,bg=terminal"
 set -g status-justify left
 set -g status-right '#[fg=colour8,bg=terminal]#(uptime | grep -o ": .*" | cut -c3-) #[fg=colour15]| #[fg=colour11]#H #[default]'
 setw -g window-status-format "#[fg=colour7,bg=colour0] #I#F #{?window_bell_flag,#[fg=colour1],#[fg=colour0]}#[bg=colour7] #W "
