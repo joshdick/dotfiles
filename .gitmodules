@@ -119,3 +119,6 @@
 [submodule "bin.symlink/repos/z"]
 	path = bin.symlink/repos/z
 	url = https://github.com/rupa/z.git
+[submodule "vim.symlink/pack/plugins/opt/catppuccin"]
+	path = vim.symlink/pack/plugins/opt/catppuccin
+	url = https://github.com/catppuccin/nvim.git
