@@ -68,9 +68,6 @@
 [submodule "vim.symlink/pack/plugins/start/nerdcommenter"]
 	path = vim.symlink/pack/plugins/start/nerdcommenter
 	url = https://github.com/scrooloose/nerdcommenter
-[submodule "vim.symlink/pack/plugins/start/vim-easymotion"]
-	path = vim.symlink/pack/plugins/start/vim-easymotion
-	url = https://github.com/easymotion/vim-easymotion
 [submodule "vim.symlink/pack/plugins/start/vim-test"]
 	path = vim.symlink/pack/plugins/start/vim-test
 	url = https://github.com/janko-m/vim-test
