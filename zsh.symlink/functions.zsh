@@ -352,9 +352,12 @@ function update() {
     (cd "$DOTFILES_LOCATION" && git pull && git submodule update --recursive --checkout --remote --init)
   fi
 
-  # Since Vim packages may have been updated, update Vim helptags.
+  # Perform vim-related updates since corresponding Git submodules
+  # (Vim packages) may have been updated.
   heading "[vim] Updating Vim helptags..."
   vim '+helptags ALL' +qall
+  heading "[vim] Updating Vim treesitter parsers..."
+  vim -c 'TSUpdate | q'
 
   if command_exists npm; then
     heading "[npm] Updating global packages..."
