@@ -212,7 +212,10 @@ fi
 test -e ~/.localrc && . ~/.localrc
 
 # Editor - See if vim lives around these parts, otherwise fall back to nano
-if command_exists vim; then
+if command_exists nvim; then
+  export EDITOR=nvim
+  export VISUAL=nvim
+elif command_exists vim; then
   export EDITOR=vim
   export VISUAL=vim
 else
