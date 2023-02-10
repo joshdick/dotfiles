@@ -1,4 +1,5 @@
 vim.cmd [[packadd nvim-treesitter]]
+vim.cmd [[packadd spellsitter.nvim]]
 
 require'nvim-treesitter.configs'.setup {
    -- one of "all", "maintained" (parsers with maintainers), or a list of languages
@@ -18,3 +19,8 @@ require'nvim-treesitter.configs'.setup {
   },
 }
 
+require'spellsitter'.setup {
+  -- Whether enabled, can be a list of filetypes, e.g. {'python', 'lua'}
+  enable = true,
+  debug = false
+}
