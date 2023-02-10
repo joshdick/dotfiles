@@ -122,3 +122,6 @@
 [submodule "vim.symlink/pack/plugins/opt/catppuccin"]
 	path = vim.symlink/pack/plugins/opt/catppuccin
 	url = https://github.com/catppuccin/nvim.git
+[submodule "vim.symlink/pack/plugins/start/vim-dirdiff"]
+	path = vim.symlink/pack/plugins/start/vim-dirdiff
+	url = https://github.com/will133/vim-dirdiff
