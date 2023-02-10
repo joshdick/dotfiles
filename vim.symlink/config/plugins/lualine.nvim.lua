@@ -1,9 +1,11 @@
 vim.cmd [[packadd lualine.nvim]]
 
+local theme = vim.env.VIM_USE_ONEDARK == nil and 'catppuccin' or 'onedark'
+
 require('lualine').setup({
     options = {
       icons_enabled = true,
-      theme = 'catppuccin', -- 'onedark', 'tokyonight',
+      theme = theme, -- 'tokyonight',
       component_separators = { '', ' ' },
       section_separators = { '', '' },
     },
