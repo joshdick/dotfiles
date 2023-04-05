@@ -26,6 +26,7 @@ lua << EOF
           return {
               -- Undo https://github.com/catppuccin/nvim/pull/383/files
               TroubleNormal = { bg = colors.none },
+              TroubleText = { fg = colors.subtext0 }
           }
       end,
     }
