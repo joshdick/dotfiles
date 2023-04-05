@@ -125,3 +125,6 @@
 [submodule "vim.symlink/pack/plugins/start/vim-dirdiff"]
 	path = vim.symlink/pack/plugins/start/vim-dirdiff
 	url = https://github.com/will133/vim-dirdiff
+[submodule "vim.symlink/pack/plugins/start/fzf"]
+	path = vim.symlink/pack/plugins/start/fzf
+	url = https://github.com/junegunn/fzf
