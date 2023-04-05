@@ -20,6 +20,14 @@ lua << EOF
       lsp_trouble = true,
       gitgutter = true,
       telescope = true,
+    },
+    highlight_overrides = {
+      all = function(colors)
+          return {
+              -- Undo https://github.com/catppuccin/nvim/pull/383/files
+              TroubleNormal = { bg = colors.none },
+          }
+      end,
     }
   })
   vim.g.catppuccin_flavour = "mocha" -- latte, frappe, macchiato, mocha
