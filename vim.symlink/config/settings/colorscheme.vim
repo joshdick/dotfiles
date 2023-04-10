@@ -6,7 +6,7 @@ if has('nvim') && empty($VIM_USE_ONEDARK)
   " let g:tokyonight_colors = { "gitSigns": { "add": "#A8CD76", "change": "#D8B172", "delete": "#E77D8F" } }
   " colorscheme tokyonight
 
-  packadd! catppuccin
+  packadd! catppuccin_nvim
 
 lua << EOF
   local catppuccin = require("catppuccin")
@@ -35,7 +35,14 @@ lua << EOF
   vim.cmd[[colorscheme catppuccin]]
 EOF
 
+elseif empty($VIM_USE_ONEDARK)
+
+  set termguicolors
+  packadd! catppuccin_vim
+  colorscheme catppuccin_mocha
+
 else
+
   packadd! onedark.vim
 
   set termguicolors

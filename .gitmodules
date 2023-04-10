@@ -120,7 +120,7 @@
 	path = bin.symlink/repos/z
 	url = https://github.com/rupa/z.git
 [submodule "vim.symlink/pack/plugins/opt/catppuccin"]
-	path = vim.symlink/pack/plugins/opt/catppuccin
+	path = vim.symlink/pack/plugins/opt/catppuccin_nvim
 	url = https://github.com/catppuccin/nvim.git
 [submodule "vim.symlink/pack/plugins/start/vim-dirdiff"]
 	path = vim.symlink/pack/plugins/start/vim-dirdiff
@@ -128,3 +128,6 @@
 [submodule "vim.symlink/pack/plugins/start/fzf"]
 	path = vim.symlink/pack/plugins/start/fzf
 	url = https://github.com/junegunn/fzf
+[submodule "vim.symlink/pack/plugins/opt/catppuccin_vim"]
+	path = vim.symlink/pack/plugins/opt/catppuccin_vim
+	url = https://github.com/catppuccin/vim.git

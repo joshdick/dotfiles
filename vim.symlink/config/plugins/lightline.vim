@@ -1,13 +1,15 @@
-if has('nvim')
+if has('nvim') && empty($VIM_USE_ONEDARK)
   "let s:colorscheme = 'tokyonight'
   finish
+elseif empty($VIM_USE_ONEDARK)
+  let s:colorscheme = 'catppuccin_mocha'
+else
+  let s:colorscheme = 'onedark'
 endif
 
 packadd! lightline.vim
 
 set noshowmode
-
-let s:colorscheme = 'onedark'
 
 let g:lightline = {
   \ 'colorscheme': s:colorscheme,
