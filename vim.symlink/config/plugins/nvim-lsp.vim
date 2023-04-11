@@ -110,9 +110,9 @@ lua << EOF
 EOF
 
 augroup format_on_save
-  autocmd BufWritePre *.js lua vim.lsp.buf.formatting_sync(nil, 1000)
-  autocmd BufWritePre *.jsx lua vim.lsp.buf.formatting_sync(nil, 1000)
-  autocmd BufWritePre *.tsx lua vim.lsp.buf.formatting_sync(nil, 1000)
-  autocmd BufWritePre *.ts lua vim.lsp.buf.formatting_sync(nil, 1000)
-  autocmd BufWritePre *.py lua vim.lsp.buf.formatting_sync(nil, 1000)
+  autocmd BufWritePre *.js lua vim.lsp.buf.format()
+  autocmd BufWritePre *.jsx lua vim.lsp.buf.format()
+  autocmd BufWritePre *.tsx lua vim.lsp.buf.format()
+  autocmd BufWritePre *.ts lua vim.lsp.buf.format()
+  autocmd BufWritePre *.py lua vim.lsp.buf.format()
 augroup END
