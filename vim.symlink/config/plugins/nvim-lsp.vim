@@ -54,7 +54,7 @@ lua << EOF
     vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
     vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
     vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-    vim.keymap.set('n', '<leader>f', vim.lsp.buf.formatting, bufopts)
+    vim.keymap.set('n', '<leader>f', vim.lsp.buf.format, bufopts)
   end
 
   -- Requires: `npm i -g typescript typescript-language-server`
