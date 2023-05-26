@@ -356,8 +356,10 @@ function update() {
   # (Vim packages) may have been updated.
   heading "[vim] Updating Vim helptags..."
   vim '+helptags ALL' +qall
-  heading "[vim] Updating Vim treesitter parsers..."
-  vim -c 'TSUpdate | q'
+  if command_exists nvim; then
+    heading "[vim] Updating Neovim treesitter parsers..."
+    nvim -c 'TSUpdate | q'
+  fi
 
   if command_exists npm; then
     heading "[npm] Updating global packages..."
