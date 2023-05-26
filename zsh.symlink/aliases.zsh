@@ -14,6 +14,7 @@ fi
 
 # Some of these aliases were found at <https://github.com/zan5hin/dotfiles/blob/master/.zsh/aliases>
 
+alias colors='msgcat --color=test'
 alias cpu='top -o cpu'
 alias grep='grep --color'
 alias ip="curl icanhazip.com"
