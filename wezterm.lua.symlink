@@ -1,4 +1,5 @@
 local wezterm = require 'wezterm'
+local wt_act = wezterm.action
 
 local custom_mocha = wezterm.color.get_builtin_schemes()['Catppuccin Mocha']
 -- Overrides with alternate colors from the official Catppuccin Mocha PNG palette:
@@ -16,18 +17,18 @@ return {
 
   font = wezterm.font {
     family = 'MonoLisa Josh',
+    weight = 'Light',
     harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' },
   },
-  -- font_size = 14.5,
-  font_size = 15,
+  font_size = 15.75,
   -- cell_width = .9,
 
   window_frame = {
     font = wezterm.font {
       family = 'MonoLisa Josh',
-      -- weight = 'Bold'
+      weight = 'Light'
     },
-    font_size = 13.0,
+    font_size = 14.75,
     active_titlebar_bg = '#111120',
     inactive_titlebar_bg = '#111120',
   },
@@ -39,12 +40,24 @@ return {
     {
       key = 'D',
       mods = 'SUPER',
-      action = wezterm.action.SplitVertical { domain = 'CurrentPaneDomain' },
+      action = wt_act.SplitVertical { domain = 'CurrentPaneDomain' },
     },
     {
       key = 'd',
       mods = 'SUPER',
-      action = wezterm.action.SplitHorizontal { domain = 'CurrentPaneDomain' },
+      action = wt_act.SplitHorizontal { domain = 'CurrentPaneDomain' },
+    },
+    -- Rebind OPT-Left, OPT-Right as ALT-b, ALT-f respectively to match Terminal.app behavior
+    -- https://wezfurlong.org/wezterm/config/lua/keyassignment/SendKey.html
+    {
+      key = 'LeftArrow',
+      mods = 'OPT',
+      action = wt_act.SendKey { key = 'b', mods = 'ALT' },
+    },
+    {
+      key = 'RightArrow',
+      mods = 'OPT',
+      action = wt_act.SendKey { key = 'f', mods = 'ALT' },
     }
    },
 
