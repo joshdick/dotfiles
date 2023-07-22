@@ -12,6 +12,10 @@ if [ $? -eq 1 ]; then # The environment ls isn't GNU ls; we're not on Linux
   fi
 fi
 
+if hash bat &> /dev/null; then
+  alias cat='bat'
+fi
+
 # Some of these aliases were found at <https://github.com/zan5hin/dotfiles/blob/master/.zsh/aliases>
 
 alias colors='msgcat --color=test'
