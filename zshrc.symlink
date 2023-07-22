@@ -153,17 +153,12 @@ PS1="
 
 # *** HOMEBREW ***
 
-# If we're on OS X and using Homebrew package manager, do some Homebrew-specific environmental tweaks
+# Homebrew is initialized in .zshenv as appropriate
 if command_exists brew; then
   HOMEBREW_PREFIX="$(brew --prefix)"
-else
-  # M1 install
-  HOMEBREW_PREFIX="/opt/homebrew"
 fi
 
 if [ -d $HOMEBREW_PREFIX ]; then
-  export PATH="$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$PATH"
-
   # Assume Git was installed via Homebrew, and that the Git configuration below
   # should use Homebrew-provided locations instead of the defaults below
   GIT_BASH_COMPLETION_SOURCE="$HOMEBREW_PREFIX/etc/bash_completion.d/git-completion.bash"
