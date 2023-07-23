@@ -153,8 +153,8 @@ PS1="
 
 # *** HOMEBREW ***
 
-# Homebrew is initialized in .zshenv as appropriate
-if command_exists brew; then
+if [ -f /opt/homebrew/bin/brew ]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
   HOMEBREW_PREFIX="$(brew --prefix)"
 fi
 
