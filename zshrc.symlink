@@ -196,7 +196,7 @@ fi
 test -e ~/.localrc && . ~/.localrc
 
 # Editor - See if vim lives around these parts, otherwise fall back to nano
-if command_exists nvim; then
+if command_exists nvim && [[ ! $(nvim --version | grep "NVIM v") =~ "0.7" ]]; then
   export EDITOR=nvim
   export VISUAL=nvim
 elif command_exists vim; then
