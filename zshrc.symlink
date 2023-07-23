@@ -144,7 +144,7 @@ if [ -f /opt/homebrew/bin/brew ]; then
   HOMEBREW_PREFIX="$(brew --prefix)"
 fi
 
-if [ -d $HOMEBREW_PREFIX ]; then
+if command_exists brew; then
   # Assume Git was installed via Homebrew, and that the Git configuration below
   # should use Homebrew-provided locations instead of the defaults below
   GIT_BASH_COMPLETION_SOURCE="$HOMEBREW_PREFIX/etc/bash_completion.d/git-completion.bash"
@@ -154,8 +154,11 @@ else
   # Locations of the Git completion files for Arch Linux as of Git 1.8.1
   GIT_BASH_COMPLETION_SOURCE=/usr/share/git/completion/git-completion.bash
   GIT_ZSH_COMPLETION_SOURCE=/usr/share/git/completion/git-completion.zsh
-  GIT_DIFF_HIGHLIGHT_PATH=~/.bin/diff-highlight
+  GIT_DIFF_HIGHLIGHT_PATH=~/.bin/diff-highlight-script
 fi
+
+# Set up diff-highlight
+export PATH="$GIT_DIFF_HIGHLIGHT_PATH:$PATH"
 
 # *** ZSH PLUGINS ***
 
@@ -229,9 +232,6 @@ fi
 # LSCOLORS - Default except for normal directories (first character) to replace hard-to-read blue
 # For details, see manpage for ls
 export LSCOLORS=Gxfxcxdxbxegedabagacad
-
-# Set up diff-highlight
-export PATH=$GIT_DIFF_HIGHLIGHT_PATH:$PATH
 
 # Attempt to set up Git completion for zsh as documented inside git-completion.zsh
 if [ -r "$GIT_BASH_COMPLETION_SOURCE" ] && [ -r "$GIT_ZSH_COMPLETION_SOURCE" ]; then
