@@ -84,7 +84,10 @@ function dispatch () {
   if [ "$(uname)" = "Darwin" ]; then
     local gateway=$(route -n get default &> /dev/null | grep gateway | tr -d ' ' | cut -f 2 -d ':')
   else
-    local gateway=$(route -n | grep UG | awk '{print $2}' | tr -d ' ')
+    # Will implicitly default to Internet if we can't determine the gateway
+    if command_exists route; then
+      local gateway=$(route -n | grep UG | awk '{print $2}' | tr -d ' ')
+    fi
   fi
   if [ "$gateway" = "192.168.7.1" ]; then
     echo "Dispatching files via the local network (LAN)..."
@@ -183,17 +186,17 @@ function md() {
 # Calculate a hash of all files in the current directory.
 # Adapted from code found at <http://stackoverflow.com/a/1658554/278810>
 function md5dir() {
-	if command_exists gmd5sum; then
-		md5Command='gmd5sum' # Mac (coreutils via Homebrew)
-	elif command_exists md5; then
-		md5Command='md5 -q' # Mac (native)
-	elif command_exists md5sum; then
-		md5Command='md5sum' # Linux
-	else
-		echo "Error: No md5 program available!"
-		return 1
-	fi
-	eval "find . -type f -exec $md5Command {} + | cut -d ' ' -f 1 | sort | $md5Command | cut -d ' ' -f 1"
+  if command_exists gmd5sum; then
+    md5Command='gmd5sum' # Mac (coreutils via Homebrew)
+  elif command_exists md5; then
+    md5Command='md5 -q' # Mac (native)
+  elif command_exists md5sum; then
+    md5Command='md5sum' # Linux
+  else
+    echo "Error: No md5 program available!"
+    return 1
+  fi
+  eval "find . -type f -exec $md5Command {} + | cut -d ' ' -f 1 | sort | $md5Command | cut -d ' ' -f 1"
 }
 
 function mirror() {
