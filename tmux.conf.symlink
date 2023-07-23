@@ -1,13 +1,11 @@
-# Note: Colors assume use of the 16-color palette from < https://github.com/joshdick/onedark.vim >.
-
 # Per:
-# < https://github.com/tmux/tmux/commit/7382ba82c5b366be84ca55c7842426bcf3d1f521 >
-# and
-# < https://github.com/tmux/tmux/issues/696#issuecomment-360697557 >
-set -g default-terminal "tmux"
-# Per < https://github.com/tmux/tmux/issues/696#issuecomment-360629057 >
-# Appropriate when the terminal emulator's `$TERM` *outside* tmux is `xterm-256color`, but actually supports true 24-bit color.
+# < https://github.com/vim/vim/issues/3608#issuecomment-849074042 >
+set -g default-terminal "xterm-256color"
 set -ga terminal-overrides ",xterm-256color:Tc"
+# Historical references:
+# * < https://github.com/tmux/tmux/commit/7382ba82c5b366be84ca55c7842426bcf3d1f521 >
+# * < https://github.com/tmux/tmux/issues/696#issuecomment-360697557 >
+# * < https://github.com/tmux/tmux/issues/696#issuecomment-360629057 >
 
 # Change prefix key to ^a
 unbind C-b
