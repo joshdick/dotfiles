@@ -1,5 +1,4 @@
-config.symlink
-vim.symlink/init.vim
-vim.symlink/.netrwhist
-vim.symlink/session
-zsh.symlink/completion
+.DS_Store
+.tern-port
+.chkbit
+.null-ls_*
