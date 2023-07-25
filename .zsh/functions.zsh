@@ -358,13 +358,10 @@ function update() {
     brew update && brew upgrade && brew cleanup
   fi
 
-  # If the dotfiles location isn't the home directory,
-  # assume it's a Git repository and update it and all submodules.
-  local DOTFILES_LOCATION="${$(readlink ~/.zshrc)%/*.*}"
-  if [ ! -z "$DOTFILES_LOCATION" ] && [ "$DOTFILES_LOCATION" != "$HOME" ] && command_exists git; then
-    heading "[git] Updating dotfiles..."
+  if command_exists yadm; then
+    heading "[yadm] Updating dotfiles..."
     # Run in a subshell so the user's working directory doesn't change
-    (cd "$DOTFILES_LOCATION" && git pull && git submodule update --recursive --checkout --remote --init)
+    (yadm pull && yadm submodule update --recursive --checkout --remote --init)
   fi
 
   # Perform vim-related updates since corresponding Git submodules
