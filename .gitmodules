@@ -2,129 +2,132 @@
 	path = zsh.symlink/git-prompt
 	url = https://gist.github.com/4415470.git
 [submodule "zsh.symlink/zsh-history-substring-search"]
-	path = zsh.symlink/zsh-history-substring-search
+	path = .zsh/zsh-history-substring-search
 	url = https://github.com/zsh-users/zsh-history-substring-search
 [submodule "zsh.symlink/zsh-syntax-highlighting"]
-	path = zsh.symlink/zsh-syntax-highlighting
+	path = .zsh/zsh-syntax-highlighting
 	url = https://github.com/zsh-users/zsh-syntax-highlighting
 [submodule "bin.symlink/repos/hr"]
-	path = bin.symlink/repos/hr
+	path = .bin/repos/hr
 	url = https://github.com/LuRsT/hr.git
 [submodule "bin.symlink/repos/spot"]
-	path = bin.symlink/repos/spot
+	path = .bin/repos/spot
 	url = https://github.com/guille/spot
 [submodule "bin.symlink/repos/tmuxomatic"]
-	path = bin.symlink/repos/tmuxomatic
+	path = .bin/repos/tmuxomatic
 	url = https://github.com/joshdick/tmuxomatic.git
 [submodule "bin.symlink/repos/git-dude"]
-	path = bin.symlink/repos/git-dude
+	path = .bin/repos/git-dude
 	url = https://github.com/sickill/git-dude
 [submodule "bin.symlink/repos/fzf"]
-	path = bin.symlink/repos/fzf
+	path = .bin/repos/fzf
 	url = https://github.com/junegunn/fzf
 [submodule "bin.symlink/repos/git-cr"]
-	path = bin.symlink/repos/git-cr
+	path = .bin/repos/git-cr
 	url = https://github.com/joshdick/git-cr
 [submodule "bin.symlink/repos/formd"]
-	path = bin.symlink/repos/formd
+	path = .bin/repos/formd
 	url = https://github.com/drbunsen/formd
 [submodule "bin.symlink/repos/fmj"]
-	path = bin.symlink/repos/fmj
+	path = .bin/repos/fmj
 	url = https://github.com/ecmendenhall/fmj.git
 [submodule "bin.symlink/repos/tmux-scroll-copy-mode"]
-	path = bin.symlink/repos/tmux-scroll-copy-mode
+	path = .bin/repos/tmux-scroll-copy-mode
 	url = https://github.com/nhdaly/tmux-scroll-copy-mode
 [submodule "vim.symlink/pack/plugins/start/lightline.vim"]
-	path = vim.symlink/pack/plugins/opt/lightline.vim
+	path = .vim/pack/plugins/opt/lightline.vim
 	url = https://github.com/itchyny/lightline.vim
 [submodule "vim.symlink/pack/plugins/start/vim-gitgutter"]
-	path = vim.symlink/pack/plugins/start/vim-gitgutter
+	path = .vim/pack/plugins/start/vim-gitgutter
 	url = https://github.com/airblade/vim-gitgutter
 [submodule "vim.symlink/pack/plugins/opt/onedark.vim"]
-	path = vim.symlink/pack/plugins/opt/onedark.vim
+	path = .vim/pack/plugins/opt/onedark.vim
 	url = https://github.com/joshdick/onedark.vim.git
 	branch = main
 [submodule "vim.symlink/pack/plugins/start/dash.vim"]
-	path = vim.symlink/pack/plugins/start/dash.vim
+	path = .vim/pack/plugins/start/dash.vim
 	url = https://github.com/rizzatti/dash.vim
 [submodule "vim.symlink/pack/plugins/start/vim-polyglot"]
-	path = vim.symlink/pack/plugins/start/vim-polyglot
+	path = .vim/pack/plugins/start/vim-polyglot
 	url = https://github.com/sheerun/vim-polyglot
 [submodule "vim.symlink/pack/plugins/start/lightline-ale"]
 	path = vim.symlink/pack/plugins/start/lightline-ale
 	url = https://github.com/maximbaz/lightline-ale
 [submodule "vim.symlink/pack/plugins/start/vim-sleuth"]
-	path = vim.symlink/pack/plugins/start/vim-sleuth
+	path = .vim/pack/plugins/start/vim-sleuth
 	url = https://github.com/tpope/vim-sleuth
 [submodule "vim.symlink/pack/plugins/start/vim-fugitive"]
-	path = vim.symlink/pack/plugins/start/vim-fugitive
+	path = .vim/pack/plugins/start/vim-fugitive
 	url = https://github.com/tpope/vim-fugitive
 [submodule "vim.symlink/pack/plugins/start/gv.vim"]
-	path = vim.symlink/pack/plugins/start/gv.vim
+	path = .vim/pack/plugins/start/gv.vim
 	url = https://github.com/junegunn/gv.vim
 [submodule "vim.symlink/pack/plugins/start/nerdcommenter"]
-	path = vim.symlink/pack/plugins/start/nerdcommenter
+	path = .vim/pack/plugins/start/nerdcommenter
 	url = https://github.com/scrooloose/nerdcommenter
 [submodule "vim.symlink/pack/plugins/start/vim-test"]
-	path = vim.symlink/pack/plugins/start/vim-test
+	path = .vim/pack/plugins/start/vim-test
 	url = https://github.com/janko-m/vim-test
 [submodule "vim.symlink/pack/plugins/start/vim-tmux-navigator"]
-	path = vim.symlink/pack/plugins/start/vim-tmux-navigator
+	path = .vim/pack/plugins/start/vim-tmux-navigator
 	url = https://github.com/christoomey/vim-tmux-navigator
 [submodule "vim.symlink/pack/plugins/start/fzf.vim"]
-	path = vim.symlink/pack/plugins/start/fzf.vim
+	path = .vim/pack/plugins/start/fzf.vim
 	url = https://github.com/junegunn/fzf.vim
 [submodule "vim.symlink/pack/plugins/start/undotree"]
-	path = vim.symlink/pack/plugins/start/undotree
+	path = .vim/pack/plugins/start/undotree
 	url = https://github.com/mbbill/undotree
 [submodule "bin.symlink/repos/dntw"]
-	path = bin.symlink/repos/dntw
+	path = .bin/repos/dntw
 	url = https://github.com/joshdick/dntw.git
 [submodule "bin.symlink/repos/d33ef5b6e6da4a3e4aa9b07b093d3c23"]
-	path = bin.symlink/repos/d33ef5b6e6da4a3e4aa9b07b093d3c23
+	path = .bin/repos/d33ef5b6e6da4a3e4aa9b07b093d3c23
 	url = https://gist.github.com/d33ef5b6e6da4a3e4aa9b07b093d3c23.git
 [submodule "vim.symlink/pack/plugins/start/vim-github-url"]
-	path = vim.symlink/pack/plugins/start/vim-github-url
+	path = .vim/pack/plugins/start/vim-github-url
 	url = https://github.com/pgr0ss/vim-github-url.git
 [submodule "vim.symlink/pack/plugins/opt/nvim-lspconfig"]
-	path = vim.symlink/pack/plugins/opt/nvim-lspconfig
+	path = .vim/pack/plugins/opt/nvim-lspconfig
 	url = https://github.com/neovim/nvim-lspconfig.git
 [submodule "vim.symlink/pack/plugins/opt/tokyonight.nvim"]
-	path = vim.symlink/pack/plugins/opt/tokyonight.nvim
+	path = .vim/pack/plugins/opt/tokyonight.nvim
 	url = https://github.com/folke/tokyonight.nvim.git
 [submodule "vim.symlink/pack/plugins/opt/plenary.nvim"]
-	path = vim.symlink/pack/plugins/opt/plenary.nvim
+	path = .vim/pack/plugins/opt/plenary.nvim
 	url = https://github.com/nvim-lua/plenary.nvim
 [submodule "vim.symlink/pack/plugins/opt/telescope.nvim"]
-	path = vim.symlink/pack/plugins/opt/telescope.nvim
+	path = .vim/pack/plugins/opt/telescope.nvim
 	url = https://github.com/nvim-telescope/telescope.nvim
 [submodule "vim.symlink/pack/plugins/opt/nvim-treesitter"]
-	path = vim.symlink/pack/plugins/opt/nvim-treesitter
+	path = .vim/pack/plugins/opt/nvim-treesitter
 	url = https://github.com/nvim-treesitter/nvim-treesitter
 [submodule "vim.symlink/pack/plugins/opt/lualine.nvim"]
-	path = vim.symlink/pack/plugins/opt/lualine.nvim
+	path = .vim/pack/plugins/opt/lualine.nvim
 	url = https://github.com/hoob3rt/lualine.nvim.git
 [submodule "vim.symlink/pack/plugins/opt/poet-v"]
-	path = vim.symlink/pack/plugins/opt/poet-v
+	path = .vim/pack/plugins/opt/poet-v
 	url = https://github.com/petobens/poet-v.git
 [submodule "vim.symlink/pack/plugins/opt/null-ls.nvim"]
-	path = vim.symlink/pack/plugins/opt/null-ls.nvim
+	path = .vim/pack/plugins/opt/null-ls.nvim
 	url = https://github.com/jose-elias-alvarez/null-ls.nvim
 [submodule "vim.symlink/pack/plugins/opt/trouble.nvim"]
-	path = vim.symlink/pack/plugins/opt/trouble.nvim
+	path = .vim/pack/plugins/opt/trouble.nvim
 	url = https://github.com/folke/trouble.nvim
 [submodule "bin.symlink/repos/z"]
-	path = bin.symlink/repos/z
+	path = .bin/repos/z
 	url = https://github.com/rupa/z.git
 [submodule "vim.symlink/pack/plugins/opt/catppuccin"]
-	path = vim.symlink/pack/plugins/opt/catppuccin_nvim
+	path = .vim/pack/plugins/opt/catppuccin_nvim
 	url = https://github.com/catppuccin/nvim.git
 [submodule "vim.symlink/pack/plugins/start/vim-dirdiff"]
-	path = vim.symlink/pack/plugins/start/vim-dirdiff
+	path = .vim/pack/plugins/start/vim-dirdiff
 	url = https://github.com/will133/vim-dirdiff
 [submodule "vim.symlink/pack/plugins/start/fzf"]
-	path = vim.symlink/pack/plugins/start/fzf
+	path = .vim/pack/plugins/start/fzf
 	url = https://github.com/junegunn/fzf
 [submodule "vim.symlink/pack/plugins/opt/catppuccin_vim"]
-	path = vim.symlink/pack/plugins/opt/catppuccin_vim
+	path = .vim/pack/plugins/opt/catppuccin_vim
 	url = https://github.com/catppuccin/vim.git
+[submodule ".bin/repos/yadm"]
+	path = .bin/repos/yadm
+	url = https://github.com/TheLocehiliosan/yadm
