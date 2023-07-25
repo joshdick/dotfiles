@@ -6,27 +6,23 @@ These are my dotfiles. There are many like them, but these are mine.
 
 Dotfiles are used to personalize a *NIX system. I use these dotfiles on Linux and Mac OS X systems.
 
+Both the install script (see below) and the repository layout are tailored for management with [yadm](https://yadm.io).
+
 I use the excellent `zsh` for my shell, but most of the aliases, shell functions, etc in `.zshrc` and elsewhere should work just fine in `bash`.
 
 There are comments throughout my dotfiles attributing all known original sources.
 
 ## install
 
-### fancypants single-line install
+You are **strongly encouraged to [inspect the install script for yourself](https://raw.githubusercontent.com/joshdick/dotfiles/main/.dotfiles_utils/install.sh)** before running it like this:
 
-`$ bash <(curl -fsSL https://raw.githubusercontent.com/joshdick/dotfiles/main/bootstrap)`
-
-### plainpants several-line install
-
-```
-$ git clone git://github.com/joshdick/dotfiles.git ~/.dotfiles
-$ cd ~/.dotfiles
-$ ./install.sh
+```sh
+$ zsh <(curl -fsSL https://raw.githubusercontent.com/joshdick/dotfiles/main/.dotfiles_utils/install.sh)
 ```
 
-The install script looks for all files and directories in the root of the repository ending in the .symlink extension. It then symlinks those files and directories into your home directory with a dot prepended and the .symlink extension removed.
+The install script assumes that you are using `zsh` as your shell and requires `curl` and `git` to be installed as prerequisites.
 
-Your existing dotfiles will be safe since the script will not symlink over any existing files or symlinks with the same name; you will see a warning that the file has been skipped. Seeing any of these warnings means that only some of the dotfiles will have been symlinked in, so [re]move the conflicting files and re-run the script to ensure that all dotfiles are symlinked in correctly.
+It will not overwrite any of your existing dotfiles.
 
 I take no responsibility for any havoc the install script may wreak on your system...it works for me!
 

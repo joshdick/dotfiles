@@ -1,0 +1,18 @@
+#!/bin/zsh
+set -ue
+
+# [yadm bootstrap script](https://yadm.io/docs/bootstrap)
+# for [Josh Dick's dotfiles](https://github.com/joshdick/dotfiles)
+
+# This script assumes that the `$HOME/.dotfiles_utils/install.sh` script
+# has previously been run.
+
+function heading() { echo -e "\e[1m\e[34m==>\e[39m $1\e[0m" }
+
+if hash nvim &> /dev/null; then
+  heading "[nvim] Updating Neovim treesitter parsers..."
+  nvim -c 'TSUpdate | q'
+fi
+
+heading "[terminfo] Installing terminfo definitons..."
+$HOME/.dotfiles_utils/terminfo-script/terminfo_install.sh

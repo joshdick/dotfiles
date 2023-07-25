@@ -128,3 +128,6 @@
 [submodule "vim.symlink/pack/plugins/opt/catppuccin_vim"]
 	path = .vim/pack/plugins/opt/catppuccin_vim
 	url = https://github.com/catppuccin/vim.git
+[submodule ".bin/repos/yadm"]
+	path = .bin/repos/yadm
+	url = https://github.com/TheLocehiliosan/yadm
