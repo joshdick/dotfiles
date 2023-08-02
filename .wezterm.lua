@@ -20,7 +20,7 @@ return {
     weight = 'Light',
     harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' },
   },
-  font_size = 15.75,
+  font_size = 15,
   -- cell_width = .9,
 
   window_frame = {
