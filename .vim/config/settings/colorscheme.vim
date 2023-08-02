@@ -1,17 +1,24 @@
 if has('nvim') && empty($VIM_USE_ONEDARK)
 
-  " packadd! tokyonight.nvim
-  " let g:tokyonight_style="night"
-  " let g:tokyonight_italic_keywords="false"
-  " let g:tokyonight_colors = { "gitSigns": { "add": "#A8CD76", "change": "#D8B172", "delete": "#E77D8F" } }
-  " colorscheme tokyonight
+"   packadd! tokyonight.nvim
+
+" lua << EOF
+  " require("tokyonight").setup({
+    " style = "night",
+    " styles = {
+      " keywords = { italic = false }
+    " },
+    " on_colors = function(colors)
+      " colors.gitSigns = { add = "#A8CD76", change = "#D8B172", delete = "#E77D8F" } 
+    " end
+  " })
+  " vim.cmd[[colorscheme tokyonight]]
+" EOF
 
   packadd! catppuccin_nvim
 
 lua << EOF
-  local catppuccin = require("catppuccin")
-
-  catppuccin.setup({
+  require("catppuccin").setup({
     integrations = {
       treesitter = true,
       native_lsp = {
