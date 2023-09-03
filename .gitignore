@@ -1,4 +1,5 @@
-.DS_Store
-.tern-port
 .chkbit
+.DS_Store
+.nova
 .null-ls_*
+.tern-port
