@@ -62,6 +62,8 @@ return {
    },
 
   colors = {
+    -- 15% darker than stock ( https://mdigi.tools/darken-color/#1E1E2E )
+    background = '#191927',
 
     cursor_bg = '#C1CCF1',
     cursor_border = '#C1CCF1',
@@ -70,18 +72,18 @@ return {
       inactive_tab_edge = '#575757',
 
       active_tab = {
-        bg_color = '#1E1E2E',
-        fg_color = '#c0c0c0',
+        bg_color = '#191927',
+        fg_color = '#C0C0C0',
       },
 
       inactive_tab = {
-        bg_color = '#111120',
+        bg_color = '#0E0E1B',
         fg_color = '#808080',
       },
 
       inactive_tab_hover = {
-        fg_color = '#909090',
-        bg_color = '#2B2B3A',
+        bg_color = '#292938',
+        fg_color = '#7A7A7A',
       }
 
     },

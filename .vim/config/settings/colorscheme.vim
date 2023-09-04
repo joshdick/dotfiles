@@ -19,6 +19,7 @@ if has('nvim') && empty($VIM_USE_ONEDARK)
 
 lua << EOF
   require("catppuccin").setup({
+    transparent_background = true,
     integrations = {
       treesitter = true,
       native_lsp = {
