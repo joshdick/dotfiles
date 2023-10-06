@@ -49,6 +49,11 @@ elseif empty($VIM_USE_ONEDARK)
   packadd! catppuccin_vim
   colorscheme catppuccin_mocha
 
+  hi Normal guibg=NONE ctermbg=NONE
+  hi GitGutterAdd guifg=#a6e3a1
+  hi GitGutterDelete guifg=#f38ba8
+  hi GitGutterChange guifg=#f9e2af
+
 else
 
   packadd! onedark.vim
