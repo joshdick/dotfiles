@@ -364,6 +364,9 @@ function update() {
     (yadm pull && yadm submodule update --recursive --checkout --remote --init)
   fi
 
+  heading "[fzf] Updating fzf binary..."
+  $HOME/.bin/repos/fzf/install --bin
+
   # Perform vim-related updates since corresponding Git submodules
   # (Vim packages) may have been updated.
   heading "[vim] Updating Vim helptags..."

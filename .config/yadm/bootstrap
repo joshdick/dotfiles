@@ -14,5 +14,8 @@ if hash nvim &> /dev/null; then
   nvim -c 'TSUpdate | q'
 fi
 
-heading "[terminfo] Installing terminfo definitons..."
+heading "[fzf] Installing fzf binary..."
+$HOME/.bin/repos/fzf/install --bin
+
+heading "[terminfo] Installing terminfo definitions..."
 $HOME/.dotfiles_utils/terminfo-script/terminfo_install.sh

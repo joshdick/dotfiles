@@ -6,21 +6,11 @@ endif
 " in the following location when using <https://github.com/joshdick/dotfiles>:
 if isdirectory($HOME . "/.bin/repos/fzf")
   set rtp+=~/.bin/repos/fzf
+else
+  finish
 endif
 
-" Modified from example from `:h fzf-vim-example-advanced-ripgrep-integration`
-function! RipgrepFzf(query, fullscreen)
-  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case -- %s || true'
-  " Silghtly modified from example; don't do an initial Ripgrep search
-  " if the query is empty (:RG is invoked with no arguments.)
-  " Mimics Telescope's live_grep.
-  let initial_command = len(a:query) == 0 ? 'true' : printf(command_fmt, shellescape(a:query))
-  let reload_command = printf(command_fmt, '{q}')
-  let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
-  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
-endfunction
-
-command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
+packadd! fzf.vim
 
 nnoremap <leader>g :RG<CR>
 nnoremap <leader>cg :exe ':RG ' . expand('<cword>')<CR>
@@ -32,3 +22,8 @@ let g:fzf_action = {
   \ 'ctrl-x': 'split',
   \ 'ctrl-v': 'vsplit' }
 
+if exists('$TMUX')
+  let g:fzf_layout = { 'tmux': '-p90%,60%' }
+else
+  let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
+endif
