@@ -36,6 +36,8 @@ alias wipe='echo -en "\033c\033[3J"'
 alias f="open -a Finder ./"
 alias lsappstore="mdfind kMDItemAppStoreHasReceipt=1"
 alias flushdns="sudo killall -HUP mDNSResponder"
+# Imports Safari tab group contents into Anybox. Accepts clipboard contents of right-clicking on a tab group -> "Copy Links"
+alias tabs2anybox="pbpaste | grep '^https*:\/\/' | xargs -I % open 'anybox://save?text=%'"
 # For when ocspd is being dumb - https://majid.info/blog/ocspd-crashes/
 alias ugh="sudo -s 'kill -9 $(pgrep ocspd); rm -rf /private/var/db/crls/*; rm -rf /private/var/db/crls/.fl*'"
 
