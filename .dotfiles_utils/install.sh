@@ -1,6 +1,10 @@
 #!/bin/sh
 set -ue
 
+heading() {
+  printf "\e[1m\e[34m==>\e[39m %s\e[0m\n" "$1"
+}
+
 fatal() {
   echo 1>&2;
   echo "============" 1>&2;
@@ -9,11 +13,11 @@ fatal() {
 }
 
 if ! hash git > /dev/null 2>&1; then
-  fatal "This script requires git! Please install git, then try running this script again."
+  fatal "This script requires \`git\`! Please install \`git\`, then try running this script again."
 fi
 
 if ! hash curl > /dev/null 2>&1; then
-  fatal "This script requires curl! Please install curl, then try running this script again."
+  fatal "This script requires \`curl\`! Please install \`curl\`, then try running this script again."
 fi
 
 # Sanity check for previous versions of the dotfiles installation;
@@ -35,7 +39,7 @@ echo
 echo "Press [ENTER] to proceed, or [CTRL+C] to cancel installation."
 read -r
 
-echo "Downloading a temporary copy of \`yadm\`..."
+heading "Downloading a temporary copy of \`yadm\`..."
 
 export YADM=/tmp/yadm
 
@@ -45,7 +49,7 @@ fi
 
 chmod +x $YADM
 
-echo "\`yadm clone\`ing dotfiles..."
+heading "\`yadm clone\`ing dotfiles..."
 
 if ! $YADM clone --no-bootstrap https://github.com/joshdick/dotfiles.git; then
   fatal "There was a problem \`yadm clone\`ing the dotfiles repository!"
@@ -57,16 +61,16 @@ if expr "$USE_SSH_REMOTE" : "^[yY]$" > /dev/null; then
   $YADM remote set-url origin git@github.com:joshdick/dotfiles.git
 fi
 
-echo "Initializing Git submodules via \`yadm\`..."
+heading "Initializing Git submodules via \`yadm\`..."
 $YADM submodule update --recursive --checkout --remote --init
 
-echo "Running \`yadm bootstrap\`..."
+heading "Running \`yadm bootstrap\`..."
 
-if ! $YADM boostrap; then
+if ! $YADM bootstrap; then
   fatal "There was a problem running \`yadm bootstrap\`!"
 fi
 
-echo 'Cleaning up...'
+heading 'Cleaning up...'
 rm $YADM
 
 echo

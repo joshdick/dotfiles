@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/sh
 set -ue
 
 # [yadm bootstrap script](https://yadm.io/docs/bootstrap)
@@ -7,15 +7,21 @@ set -ue
 # This script assumes that the `$HOME/.dotfiles_utils/install.sh` script
 # has previously been run.
 
-function heading() { echo -e "\e[1m\e[34m==>\e[39m $1\e[0m" }
+heading() {
+  printf "\e[1m\e[34m==>\e[39m %s\e[0m\n" "$1"
+}
 
-if hash nvim &> /dev/null; then
+if hash nvim > /dev/null 2>&1; then
   heading "[nvim] Updating Neovim treesitter parsers..."
   nvim -c 'TSUpdate | q'
 fi
 
-heading "[fzf] Installing fzf binary..."
-$HOME/.bin/repos/fzf/install --bin
+heading "[fzf] Installing \`fzf\` binary..."
+"$HOME"/.bin/repos/fzf/install --bin
 
-heading "[terminfo] Installing terminfo definitions..."
-$HOME/.dotfiles_utils/terminfo-script/terminfo_install.sh
+if hash bash > /dev/null 2>&1; then
+  heading "[terminfo] Installing terminfo definitions..."
+  "$HOME"/.dotfiles_utils/terminfo-script/terminfo_install.sh
+else
+  echo "\`bash\` not found, will not attempt to install terminfo definitions."
+fi
