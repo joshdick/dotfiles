@@ -107,9 +107,6 @@
 [submodule "vim.symlink/pack/plugins/opt/poet-v"]
 	path = .vim/pack/plugins/opt/poet-v
 	url = https://github.com/petobens/poet-v.git
-[submodule "vim.symlink/pack/plugins/opt/null-ls.nvim"]
-	path = .vim/pack/plugins/opt/null-ls.nvim
-	url = https://github.com/jose-elias-alvarez/null-ls.nvim
 [submodule "vim.symlink/pack/plugins/opt/trouble.nvim"]
 	path = .vim/pack/plugins/opt/trouble.nvim
 	url = https://github.com/folke/trouble.nvim
@@ -128,3 +125,9 @@
 [submodule ".bin/repos/yadm"]
 	path = .bin/repos/yadm
 	url = https://github.com/TheLocehiliosan/yadm
+[submodule ".vim/pack/plugins/opt/ale"]
+	path = .vim/pack/plugins/opt/ale
+	url = https://github.com/dense-analysis/ale
+[submodule ".vim/pack/plugins/opt/none-ls.nvim"]
+	path = .vim/pack/plugins/opt/none-ls.nvim
+	url = https://github.com/nvimtools/none-ls.nvim
