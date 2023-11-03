@@ -2,31 +2,31 @@
 # Adapted from http://stackoverflow.com/questions/592620/check-if-a-program-exists-from-a-bash-script/3931779#3931779
 # NOTE: This function is duplicated in .zshrc so that it doesn't have to depend on this file,
 # but this shouldn't cause any issues
-function command_exists() {
+command_exists() {
   hash "$1" &> /dev/null
 }
 
 # On Mac OS X, cd to the path of the front Finder window
 # Found at <http://brettterpstra.com/2013/02/09/quick-tip-jumping-to-the-finder-location-in-terminal>
-function cdf() {
-  target=`osascript -e 'tell application "Finder" to if (count of Finder windows) > 0 then get POSIX path of (target of front Finder window as text)'`
+cdf() {
+  target=$(osascript -e 'tell application "Finder" to if (count of Finder windows) > 0 then get POSIX path of (target of front Finder window as text)')
   if [ "$target" != "" ]; then
-    cd "$target"; pwd
+    cd "$target" || return; pwd
   else
     echo 'No Finder window found' >&2
   fi
 }
 
 # Show a cheatsheet from https://cht.sh
-function cheat() {
+cheat() {
   curl "https://cht.sh/$1"
 }
 
 # On Mac OS X, copies the contents of a text file to the clipboard
 # Found at <http://brettterpstra.com/2013/01/15/clip-text-file-a-handy-dumb-service>
-function clip() {
-  type=`file "$1"|grep -c text`
-  if [ $type -gt 0 ]; then
+clip() {
+  type=$(file "$1" | grep -c text)
+  if [ "$type" -gt 0 ]; then
     cat "$@" | pbcopy
     echo "Contents of $1 are in the clipboard."
   else
@@ -35,18 +35,18 @@ function clip() {
 }
 
 # Found at <http://www.askapache.com/linux/zen-terminal-escape-codes.html#3rd_Dimension_Broken_Bash>
-function colortest() {
-  x=`tput op` y=`printf %$((${COLUMNS}-6))s`
+colortest() {
+  x=$(tput op) y=$(printf %$((COLUMNS-6))s)
   for i in {0..256}
   do
     o=00$i
-    echo -e ${o:${#o}-3:3} `tput setaf $i;tput setab $i`${y// /=}$x
+    echo -e "${o:${#o}-3:3}" "$(tput setaf "$i";tput setab "$i")""${y// /=}""$x"
   done
 }
 
 # Packs $2-$n into $1 depending on $1's extension
 # Found at <http://pastebin.com/CTra4QTF>
-function compress() {
+compress() {
   if [[ $# -lt 2 ]]; then
     echo -e "\n$0() usage:"
     echo -e "\t$0 archive_file_name file1 file2 ... fileN"
@@ -55,9 +55,9 @@ function compress() {
     DEST=$1
     shift
     case $DEST in
-      *.tar.bz2) tar -cvjf $DEST "$@" ;;
-      *.tar.gz)  tar -cvzf $DEST "$@" ;;
-      *.zip)     zip -r $DEST "$@" ;;
+      *.tar.bz2) tar -cvjf "$DEST" "$@" ;;
+      *.tar.gz)  tar -cvzf "$DEST" "$@" ;;
+      *.zip)     zip -r "$DEST" "$@" ;;
       *)         echo "Unknown file type - $DEST" ;;
     esac
   fi
@@ -65,7 +65,7 @@ function compress() {
 
 # Retrieve dictionary definitions of words.
 # Adapted from code found at <http://onethingwell.org/post/25644890287/a-shell-function-to-define-words>
-function define() {
+define() {
   if [[ $# -ge 2 ]]; then
     echo "$0: too many arguments" >&2
     return 1
@@ -76,25 +76,26 @@ function define() {
 
 # Transfer files to a specific machine depending on the currenlty-active network
 # by choosing the corresponding host in SSH configuration.
-function dispatch () {
+dispatch () {
+  local _gateway
   if [[ -z "$1" ]]; then
     echo "No file(s) given to dispatch!"
     return 1
   fi
   if [ "$(uname)" = "Darwin" ]; then
-    local gateway=$(route -n get default &> /dev/null | grep gateway | tr -d ' ' | cut -f 2 -d ':')
+    _gateway=$(route -n get default &> /dev/null | grep gateway | tr -d ' ' | cut -f 2 -d ':')
   else
     # Will implicitly default to Internet if we can't determine the gateway
     if command_exists route; then
-      local gateway=$(route -n | grep UG | awk '{print $2}' | tr -d ' ')
+      _gateway=$(route -n | grep UG | awk '{print $2}' | tr -d ' ')
     fi
   fi
-  if [ "$gateway" = "192.168.7.1" ]; then
+  if [ "$_gateway" = "192.168.7.1" ]; then
     echo "Dispatching files via the local network (LAN)..."
     rsync -avz --partial --progress -e "ssh josh@192.168.7.4" "$@" ":~/Desktop/"
   else
     if [[ -z "$DISPATCH_SSH_PROXY_COMMAND" ]]; then
-      echo '$DISPATCH_SSH_PROXY_COMMAND is not set, not taking any action!'
+      echo "\$DISPATCH_SSH_PROXY_COMMAND is not set, not taking any action!"
       return 2
     fi
     echo "Dispatching files via the Internet..."
@@ -105,7 +106,7 @@ function dispatch () {
 
 # Extracts archives
 # Found at <http://pastebin.com/CTra4QTF>
-function extract() {
+extract() {
   case $@ in
     *.tar.bz2) tar -xvjf "$@"  ;;
     *.tar.gz)  tar -xvzf "$@"  ;;
@@ -126,7 +127,7 @@ function extract() {
 }
 
 # Visual Studio Code-enabled replacement for `gdt` alias.
-function gdt() {
+gdt() {
   # If running inside Visual Stuido Code, use it if diffing a single file (it doesn't support directory diffs.)
   if [[ $# -eq 1 ]] && [ -f "$1" ] && [[ "$TERM_PROGRAM" == "vscode" ]]; then
     git difftool --tool vscode "$@"
@@ -136,7 +137,7 @@ function gdt() {
 }
 
 # "Smart show" for Git. Show what I most likely want to see at any given time.
-function gss() {
+gss() {
   git status &> /dev/null
   inside_git_repo=$?
   if [[ $inside_git_repo -eq 0 ]]; then
@@ -164,12 +165,12 @@ function gss() {
 }
 
 # Search shell history
-function hgrep() {
-  history 1 | grep $1
+hgrep() {
+  history 1 | grep "$1"
 }
 
 # Convert a web page to Markdown.
-function md() {
+md() {
   if ! command_exists html2text; then
     echo "Error: html2text must be installed (via \"pip install html2text\") in order to use $0."
     return 1
@@ -179,13 +180,13 @@ function md() {
     echo -e "\t$0 [URL]"
     return 1
   fi
-  echo "[Source]($1)\n"
+  printf "[Source](%s)\n" "$1"
   wget -qO - "$1" | iconv -t utf-8 | html2text -b 0
 }
 
 # Calculate a hash of all files in the current directory.
 # Adapted from code found at <http://stackoverflow.com/a/1658554/278810>
-function md5dir() {
+md5dir() {
   if command_exists gmd5sum; then
     md5Command='gmd5sum' # Mac (coreutils via Homebrew)
   elif command_exists md5; then
@@ -199,18 +200,18 @@ function md5dir() {
   eval "find . -type f -exec $md5Command {} + | cut -d ' ' -f 1 | sort | $md5Command | cut -d ' ' -f 1"
 }
 
-function mirror() {
-  wget -H -r --level=1 -k -p $1
+mirror() {
+  wget -H -r --level=1 -k -p "$1"
 }
 
 # Poor-man's pgrep, for use on OS X where pgrep isn't available
-function poorpgrep() {
+poorpgrep() {
   echo "Warning: using poor-man's pgrep. Consider installing the \"proctools\" package via Homebrew."
   ps ax | awk "/(^|[^)])$1/ { print \$1 }"
 }
 
 # Poor man's tree, for use on OS X where tree isn't available
-function poortree() {
+poortree() {
   echo "Warning: using poor-man's tree. Consider installing the \"tree\" package via Homebrew."
   ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'
 }
@@ -218,13 +219,13 @@ function poortree() {
 # Shows how long processes have been up.
 # No arguments shows all processes, one argument greps for a particular process.
 # Found at <http://hints.macworld.com/article.php?story=20121127064752309>
-function psup() {
+psup() {
   ps acxo etime,command | grep -- "$1"
 }
 
 # Pushes local SSH public key to another box
 # Adapted from code found at <https://github.com/rtomayko/dotfiles/blob/rtomayko/.bashrc>
-function push_ssh_cert() {
+push_ssh_cert() {
   if [[ $# -eq 0 || $# -gt 3 ]]; then
     echo "Usage: push_ssh_cert host [port] [username]"
     return
@@ -240,29 +241,29 @@ function push_ssh_cert() {
   fi
   test -f ~/.ssh/id_*sa.pub || ssh-keygen -t rsa
   echo "Pushing public key to $_user@$_host:$_port..."
-  ssh -p $_port $_user@$_host 'mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys' < ~/.ssh/id_*sa.pub
+  ssh -p "$_port" "$_user"@"$_host" 'mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys' < ~/.ssh/id_*sa.pub
 }
 
 # Find and replace a string in all files recursively, starting from the current directory.
 # Adapted from code found at <http://forums.devshed.com/unix-help-35/unix-find-and-replace-text-within-all-files-within-a-146179.html>
-function replacein() {
-  find . -type f | xargs perl -pi -e "s/$1/$2/g"
+replacein() {
+  find . -type f -print0 | xargs perl -pi -e "s/$1/$2/g"
 }
 
 # Search for files by name
 # Case-insensitive and allows partial search
 # If on Mac OS X, will prompt to open the file if there is a single result
-function search() {
-  results=`find . -iname "*$1*"`
-  echo $results
+search() {
+  results=$(find . -iname "*$1*")
+  echo "$results"
   if command_exists open; then
-    resultLength=`echo $results | wc -l | sed -e "s/^[ \t]*//"`
-    if [ $resultLength -eq 1 ]; then
+    resultLength=$(echo "$results" | wc -l | sed -e "s/^[ \t]*//")
+    if [ "$resultLength" -eq 1 ]; then
       while true; do
         echo "One result found! Open it? (y/n)?"
-        read yn
+        read -r yn
         case $yn in
-          [Yy]* ) open $results; break;;
+          [Yy]* ) open "$results"; break;;
           [Nn]* ) break;;
           * ) echo "Please answer (Y/y)es or (N/n)o.";;
         esac
@@ -277,7 +278,7 @@ function search() {
 #
 # To search for a given string inside every file inside the current directory, recursively:
 #   $ searchin pattern
-function searchin() {
+searchin() {
   if [ -n "$2" ]; then
     find . -name "$1" -type f -exec grep -l "$2" {} \;
   else
@@ -287,39 +288,42 @@ function searchin() {
 
 # Serves the current directory over HTTP, on an optionally-specified port
 # If on Mac OS X, opens in the default browser
-function serve() {
+serve() {
   port=$1
   if [ $# -ne  1 ]; then
     port=8000
   fi
   if command_exists open; then
-    open http://localhost:$port/
+    open http://localhost:"$port"/
   fi
-  python3 -m http.server $port
+  python3 -m http.server "$port"
 }
 
 # On Mac OS X, SSH to another Mac by hostname via Back To My Mac (iCloud)
 # The client and target machines must both have Back To My Mac enabled
 # Adapted from code found at <http://onethingwell.org/post/27835796928/remote-ssh-bact-to-my-mac>
-function sshicloud() {
+sshicloud() {
+  local _icloud_addr
+  local _username
   if [[ $# -eq 0 || $# -gt 2 ]]; then
     echo "Usage: $0 hostname [username]"
   elif ! command_exists scutil; then
     echo "$0 only works on Mac OS X! Aborting."
   else
-    local _icloud_addr=`echo show Setup:/Network/BackToMyMac | scutil | sed -n 's/.* : *\(.*\).$/\1/p'`
-    local _username=`whoami`
+    _icloud_addr=$(echo show Setup:/Network/BackToMyMac | scutil | sed -n 's/.* : *\(.*\).$/\1/p')
+    _username=$(whoami)
     if [[ $# -eq 2 ]]; then
       _username=$2
     fi
-    ssh $_username@$1.$_icloud_addr
+    ssh "$_username"@"$1"."$_icloud_addr"
   fi
 }
 
 # Copy dotfiles to one or more remote machines.
-function sync_home() {
-  local DOTFILES_LOCATION="${$(readlink ~/.zshrc)%/*.*}"
-  if [ -z "$DOTFILES_LOCATION" ] || [ "$DOTFILES_LOCATION" = "$HOME" ]; then
+sync_home() {
+  local _dotfiles_location
+  _dotfiles_location="${$(readlink ~/.zshrc)%/*.*}"
+  if [ -z "$_dotfiles_location" ] || [ "$_dotfiles_location" = "$HOME" ]; then
     echo "$0 can only operate from inside a self-contained dotfiles repository."
     echo "It's likely that $0 was used to sync dotfiles to this machine."
     echo "Exiting."
@@ -333,8 +337,8 @@ function sync_home() {
 
   for host in "$@"; do
     echo "Now syncing: $host"
-    # Find all files/directories at the root level of $HOME that are symlinked into $DOTFILES_LOCATION
-    sync_list=(`find "$HOME" -maxdepth 1 -type l -lname "$DOTFILES_LOCATION*"`)
+    # Find all files/directories at the root level of $HOME that are symlinked into $_dotfiles_location
+    sync_list=($(find "$HOME" -maxdepth 1 -type l -lname "$_dotfiles_location*"))
     rsync -avzL "${sync_list[@]}" "${host}:"
   done
 }
@@ -344,8 +348,11 @@ function sync_home() {
 # * Updates all dotfiles Git submodules (including Vim packages)
 # * Updates Homebrew packages on OS X
 # * Updates pip/gem/npm
-function update() {
-  heading() { echo -e "\e[1m\e[34m==>\e[39m $1\e[0m" }
+update() {
+
+  heading() {
+     printf "\e[1m\e[34m==>\e[39m %s\e[0m\n" "$1"
+  }
 
   # Implicitly prevents usage of unrelated macOS `apt`
   if uname | grep -qi darwin; then
@@ -373,7 +380,7 @@ function update() {
   fi
 
   heading "[fzf] Updating fzf binary..."
-  $HOME/.bin/repos/fzf/install --bin
+  "$HOME"/.bin/repos/fzf/install --bin
 
   # Perform vim-related updates since corresponding Git submodules
   # (Vim packages) may have been updated.
