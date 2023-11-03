@@ -347,15 +347,23 @@ function sync_home() {
 function update() {
   heading() { echo -e "\e[1m\e[34m==>\e[39m $1\e[0m" }
 
-  if (! uname | grep -qi darwin) && (command_exists apt); then
-    heading "[apt] Updating system packages..."
-    sudo bash -c "apt update && apt upgrade && apt clean && apt autoremove"
-  elif command_exists pacman; then
-    heading "[pacman] Updating system packages..."
-    sudo bash -c "pacman -Syu && pacman -Scc"
-  elif command_exists brew; then
-    heading "[homebrew] Updating system packages..."
-    brew update && brew upgrade && brew cleanup
+  # Implicitly prevents usage of unrelated macOS `apt`
+  if uname | grep -qi darwin; then
+    if command_exists brew; then
+      heading "[homebrew] Updating packages..."
+      brew update && brew upgrade && brew cleanup
+    fi
+  else
+    if command_exists apk; then
+      heading "[apk] Updating system packages..."
+      sudo sh -c "apk update && apk upgrade"
+    elif command_exists apt; then
+      heading "[apt] Updating system packages..."
+      sudo sh -c "apt update && apt upgrade && apt clean && apt autoremove"
+    elif command_exists pacman; then
+      heading "[pacman] Updating system packages..."
+      sudo sh -c "pacman -Syu && pacman -Scc"
+    fi
   fi
 
   if command_exists yadm; then
