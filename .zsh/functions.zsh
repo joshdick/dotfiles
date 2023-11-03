@@ -299,50 +299,6 @@ serve() {
   python3 -m http.server "$port"
 }
 
-# On Mac OS X, SSH to another Mac by hostname via Back To My Mac (iCloud)
-# The client and target machines must both have Back To My Mac enabled
-# Adapted from code found at <http://onethingwell.org/post/27835796928/remote-ssh-bact-to-my-mac>
-sshicloud() {
-  local _icloud_addr
-  local _username
-  if [[ $# -eq 0 || $# -gt 2 ]]; then
-    echo "Usage: $0 hostname [username]"
-  elif ! command_exists scutil; then
-    echo "$0 only works on Mac OS X! Aborting."
-  else
-    _icloud_addr=$(echo show Setup:/Network/BackToMyMac | scutil | sed -n 's/.* : *\(.*\).$/\1/p')
-    _username=$(whoami)
-    if [[ $# -eq 2 ]]; then
-      _username=$2
-    fi
-    ssh "$_username"@"$1"."$_icloud_addr"
-  fi
-}
-
-# Copy dotfiles to one or more remote machines.
-sync_home() {
-  local _dotfiles_location
-  _dotfiles_location="${$(readlink ~/.zshrc)%/*.*}"
-  if [ -z "$_dotfiles_location" ] || [ "$_dotfiles_location" = "$HOME" ]; then
-    echo "$0 can only operate from inside a self-contained dotfiles repository."
-    echo "It's likely that $0 was used to sync dotfiles to this machine."
-    echo "Exiting."
-    return 1
-  fi
-
-  test -z "$1" || echo "$@" | grep -q -- '--help' && {
-    echo "Usage: $0 [user@]host ..."
-    return 1
-  }
-
-  for host in "$@"; do
-    echo "Now syncing: $host"
-    # Find all files/directories at the root level of $HOME that are symlinked into $_dotfiles_location
-    sync_list=($(find "$HOME" -maxdepth 1 -type l -lname "$_dotfiles_location*"))
-    rsync -avzL "${sync_list[@]}" "${host}:"
-  done
-}
-
 # Updates stuff!
 # * Performs a system update on Debian-based and Arch Linux systems
 # * Updates all dotfiles Git submodules (including Vim packages)
