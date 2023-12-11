@@ -8,7 +8,7 @@ if [ $? -eq 1 ]; then # The environment ls isn't GNU ls; we're not on Linux
   if hash gls &> /dev/null; then
     alias ls="gls $GLS_ARGS"
   else
-    alias ls='ls -G' # If not, fall back to BSD ls
+    unalias ls
   fi
 fi
 
