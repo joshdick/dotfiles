@@ -319,7 +319,7 @@ update() {
   else
     if command_exists apk; then
       heading "[apk] Updating system packages..."
-      sudo sh -c "apk update && apk upgrade"
+      sudo sh -c "apk -U upgrade"
     elif command_exists apt; then
       heading "[apt] Updating system packages..."
       sudo sh -c "apt update && apt upgrade && apt clean && apt autoremove"
