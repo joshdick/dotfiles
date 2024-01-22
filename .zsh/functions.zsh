@@ -357,15 +357,8 @@ update() {
     # Only attempt to update `pip` packages if uisng a non-system `pip`.
     if test "${pip_location#*/home/}" != "$pip_location"; then
       heading "[pip] Updating global packages..."
-      # Inline Python script to update packages. Found at <http://stackoverflow.com/a/5839291/278810>
-      # Assume we have pip >= 10.0.1.
-python << END
-import pkg_resources
-from subprocess import call
-
-packages = [dist.project_name for dist in pkg_resources.working_set]
-call("pip install --upgrade " + ' '.join(packages), shell=True)
-END
+      # Found at <https://stackoverflow.com/a/3452888>; assumes pip >= 22.3.
+      pip --disable-pip-version-check list --outdated --format=json | python -c "import json, sys; print('\n'.join([x['name'] for x in json.load(sys.stdin)]))" | xargs -n1 pip install -U
     fi
   fi
 
