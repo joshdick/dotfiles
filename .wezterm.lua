@@ -33,6 +33,7 @@ return {
     inactive_titlebar_bg = '#111120',
   },
 
+  use_resize_increments = true,
   pane_focus_follows_mouse = true,
   enable_scroll_bar = true,
 
