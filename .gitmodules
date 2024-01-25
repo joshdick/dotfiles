@@ -131,3 +131,6 @@
 [submodule ".vim/pack/plugins/opt/none-ls.nvim"]
 	path = .vim/pack/plugins/opt/none-ls.nvim
 	url = https://github.com/nvimtools/none-ls.nvim
+[submodule ".vim/pack/plugins/opt/venv-lsp.nvim"]
+	path = .vim/pack/plugins/opt/venv-lsp.nvim
+	url = https://github.com/jglasovic/venv-lsp.nvim

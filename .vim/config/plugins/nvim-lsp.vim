@@ -4,6 +4,7 @@ endif
 
 packadd! nvim-lspconfig
 packadd! none-ls.nvim
+packadd! venv-lsp.nvim
 
 " Based on example at
 " < https://github.com/neovim/nvim-lspconfig#keybindings-and-completion >
@@ -57,45 +58,6 @@ lua << EOF
     vim.keymap.set('n', '<leader>f', vim.lsp.buf.format, bufopts)
   end
 
-  local null_ls = require('null-ls')
-  local nls_utils = require('null-ls.utils')
-  local nls_helpers = require('null-ls.helpers')
-
-  local cache_key = 'cache_poetry_virtualenv_path'
-  if not vim.g[cache_key] then
-    vim.api.nvim_set_var(cache_key, vim.empty_dict())
-  end
-
-  local get_poetry_virtual_env_bin_path = function(dir)
-    if not vim.g[cache_key][dir] then
-      local virtual_env_path = vim.fn.trim(vim.fn.system('poetry -C ' .. dir .. ' env info -p'))
-      local cache = vim.g[cache_key]
-      cache[dir] = virtual_env_path
-      vim.api.nvim_set_var(cache_key, cache)
-    end
-    local bin_path = vim.g[cache_key][dir] .. '/bin'
-    return bin_path
-  end
-
-  local get_poetry_bin_cmd_path = function(cmd)
-    return function(opts)
-      local buf_workspace_dir = nls_helpers.cache.by_bufnr(function(params)
-        return nls_utils.root_pattern(
-          "pyproject.toml"
-        )(params.bufname)
-      end)(opts)
-
-      local virtual_env_path = get_poetry_virtual_env_bin_path(buf_workspace_dir)
-      return virtual_env_path .. '/' .. cmd
-    end
-  end
-
-  local on_new_config = function(new_config, new_root_dir)
-    local poetry_virutalenv_bin = get_poetry_virtual_env_bin_path(new_root_dir)
-    local pythonPath = poetry_virutalenv_bin .. '/python'
-    new_config.settings.python.pythonPath = pythonPath
-  end
-
   -- Requires: `npm i -g typescript typescript-language-server`
   lspconfig.tsserver.setup {
     -- root_dir = nvim_lsp.util.root_pattern("yarn.lock", "lerna.json", ".git"),
@@ -114,7 +76,6 @@ lua << EOF
   lspconfig.pyright.setup {
     cmd = { "pyright-langserver", "--stdio" },
     filetypes = { "python" },
-    on_new_config = on_new_config,
     -- root_dir = function(startpath)
     --  return M.search_ancestors(startpath, matcher)
     -- end,
@@ -141,12 +102,15 @@ lua << EOF
     on_attach = on_attach
   }
 
+  local null_ls = require('null-ls')
+  local nls_utils = require('null-ls.utils')
+  local nls_helpers = require('null-ls.helpers')
+
   null_ls.setup({
     sources = {
       null_ls.builtins.formatting.prettier,
       null_ls.builtins.formatting.eslint_d, -- requires `npm i -g eslint_d`
       null_ls.builtins.formatting.black.with({
-        dynamic_command = get_poetry_bin_cmd_path('black')
         -- cwd = nls_helpers.cache.by_bufnr(
           -- function(params)
             -- return nls_utils.root_pattern("pyproject.toml")(params.bufname)
@@ -154,9 +118,9 @@ lua << EOF
           -- )
         -- extra_args = { "--skip-string-normalization" },
       }),
-      null_ls.builtins.formatting.ruff.with({ dynamic_command = get_poetry_bin_cmd_path('ruff') }),
-      null_ls.builtins.diagnostics.ruff.with({ dynamic_command = get_poetry_bin_cmd_path('ruff') }),
-      null_ls.builtins.diagnostics.mypy.with({ dynamic_command = get_poetry_bin_cmd_path('mypy') })
+      null_ls.builtins.formatting.ruff,
+      null_ls.builtins.diagnostics.ruff,
+      null_ls.builtins.diagnostics.mypy
       -- null_ls.builtins.formatting.isort,
       -- null_ls.builtins.diagnostics.pylint
     },
