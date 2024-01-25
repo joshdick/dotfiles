@@ -74,6 +74,9 @@ nnoremap <leader>w :w<CR>
 "Found at <https://stackoverflow.com/questions/1444322/how-can-i-close-a-buffer-without-closing-the-window#comment16482171_5179609>
 nnoremap <silent> <leader>x :ene<CR>:bd #<CR>
 
+"Mapping to delete all buffers except the current one
+nnoremap <silent> <leader>o :BufOnly<CR>
+
 "Mapping to strip trailing whitespace
 nnoremap <silent> <leader>$ :call Preserve("%s/\\s\\+$//e")<CR>
 
