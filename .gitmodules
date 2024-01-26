@@ -134,3 +134,6 @@
 [submodule ".vim/pack/plugins/opt/venv-lsp.nvim"]
 	path = .vim/pack/plugins/opt/venv-lsp.nvim
 	url = https://github.com/jglasovic/venv-lsp.nvim
+[submodule ".vim/pack/plugins/opt/copilot.vim"]
+	path = .vim/pack/plugins/opt/copilot.vim
+	url = https://github.com/github/copilot.vim
