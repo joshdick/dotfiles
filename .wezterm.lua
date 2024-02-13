@@ -48,6 +48,17 @@ return {
       mods = 'SUPER',
       action = wt_act.SplitHorizontal { domain = 'CurrentPaneDomain' },
     },
+    -- Clears the scrollback and viewport, and then sends CTRL-L to ask the
+    -- shell to redraw its prompt
+    -- https://wezfurlong.org/wezterm/config/lua/keyassignment/ClearScrollback.html
+    {
+      key = 'k',
+      mods = 'SUPER',
+      action = wt_act.Multiple {
+        wt_act.ClearScrollback 'ScrollbackAndViewport',
+        wt_act.SendKey { key = 'L', mods = 'CTRL' },
+      },
+    },
     -- Rebind OPT-Left, OPT-Right as ALT-b, ALT-f respectively to match Terminal.app behavior
     -- https://wezfurlong.org/wezterm/config/lua/keyassignment/SendKey.html
     {
