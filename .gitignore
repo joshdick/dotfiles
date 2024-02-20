@@ -3,3 +3,4 @@
 .nova
 .null-ls_*
 .tern-port
+.rgignore
