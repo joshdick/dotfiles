@@ -1,14 +1,11 @@
 [user]
 	name = Josh Dick
 	email = josh@joshdick.net
-[color]
-	ui = auto
+[includeIf "gitdir:~/Code/"]
+	path = "~/Code/.gitconfig"
 [diff]
 	tool = bcomp
 	algorithm = histogram
-	indentHeuristic = true
-[difftool]
-	prompt = false
 [difftool "bcomp"]
 	trustExitCode = true
 	cmd = bcomp \"$LOCAL\" \"$REMOTE\"
@@ -17,8 +14,6 @@
 [difftool "vscode"]
 	trustExitCode = false
 	cmd = code --reuse-window --wait --diff \"$LOCAL\" \"$REMOTE\"
-[mergetool]
-	prompt = false
 [mergetool "bcomp"]
 	trustExitCode = true
 	cmd = bcomp \"$LOCAL\" \"$REMOTE\" \"$BASE\" \"$MERGED\"
@@ -31,7 +26,7 @@
 	format = web
 	autocorrect = 1
 [push]
-	default = upstream
+	default = current
 	autoSetupRemote = true
 [core]
 	excludesfile = ~/.gitignore
@@ -64,7 +59,14 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
-[pull]
-	rebase = false
 [init]
 	defaultBranch = main
+[merge]
+	conflictstyle = zdiff3
+[fetch]
+	prune = true
+	pruneTags = true
+[log]
+	date = iso
+[branch]
+	sort = -committerdate
