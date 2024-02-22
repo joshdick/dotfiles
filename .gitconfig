@@ -14,11 +14,12 @@
 	defaultBranch = main
 [fetch]
 	prune = true
-	pruneTags = true
 [log]
 	date = iso
 [branch]
 	sort = -committerdate
+[pull]
+	rebase = true
 [push]
 	default = current
 	autoSetupRemote = true
