@@ -3,6 +3,38 @@
 	email = josh@joshdick.net
 [includeIf "gitdir:~/Code/"]
 	path = "~/Code/.gitconfig"
+[core]
+	excludesfile = ~/.gitignore
+	pager = fmj | less -rX
+[pager]
+	diff = fmj | diff-highlight | less -R
+	show = fmj | diff-highlight | less -R
+	log = fmj | diff-highlight | less -R
+[init]
+	defaultBranch = main
+[fetch]
+	prune = true
+	pruneTags = true
+[log]
+	date = iso
+[branch]
+	sort = -committerdate
+[push]
+	default = current
+	autoSetupRemote = true
+[rerere]
+	enabled = 1
+[help]
+	format = web
+	autocorrect = 1
+[alias]
+	recent = !git log --stat --since='1 Day Ago' --graph --pretty=oneline --abbrev-commit --date=relative
+	myrecent = !git log --stat --since='1 Day Ago' --graph --pretty=oneline --abbrev-commit --date=relative --author='Josh Dick'
+	showtool = "!st() { commit=$1; if [ -z $commit ]; then commit=HEAD; fi; git difftool -d $commit^ $commit; }; st"
+	scores = !git shortlog -ns
+	log-hist = !git log-pretty --graph
+	log-pretty = "log --pretty=format:'%Cred%h%Creset%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'"
+	tags = "tag -l -n1"
 [diff]
 	tool = bcomp
 	algorithm = histogram
@@ -14,6 +46,8 @@
 [difftool "vscode"]
 	trustExitCode = false
 	cmd = code --reuse-window --wait --diff \"$LOCAL\" \"$REMOTE\"
+[merge]
+	conflictstyle = zdiff3
 [mergetool "bcomp"]
 	trustExitCode = true
 	cmd = bcomp \"$LOCAL\" \"$REMOTE\" \"$BASE\" \"$MERGED\"
@@ -22,33 +56,10 @@
 	trustexitcode = true
 [mergetool "vimdiff"]
 	cmd = nvim -d \"$BASE\" \"$LOCAL\" \"$REMOTE\" \"$MERGED\" -c '$wincmd w' -c 'wincmd J'
-[help]
-	format = web
-	autocorrect = 1
-[push]
-	default = current
-	autoSetupRemote = true
-[core]
-	excludesfile = ~/.gitignore
-	pager = fmj | less -rX
-[rerere]
-	enabled = 1
-[alias]
-	recent = !git log --stat --since='1 Day Ago' --graph --pretty=oneline --abbrev-commit --date=relative
-	myrecent = !git log --stat --since='1 Day Ago' --graph --pretty=oneline --abbrev-commit --date=relative --author='Josh Dick'
-	showtool = "!st() { commit=$1; if [ -z $commit ]; then commit=HEAD; fi; git difftool -d $commit^ $commit; }; st"
-	scores = !git shortlog -ns
-	log-hist = !git log-pretty --graph
-	log-pretty = "log --pretty=format:'%Cred%h%Creset%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'"
-	tags = "tag -l -n1"
 [dude]
 	interval = 0
 	notify-command = osascript -e \"display notification \\\"$DESCRIPTION\\\" with title \\\"$TITLE\\\"\"
 	screensaver-command = false # Workaround until https://github.com/sickill/git-dude/pull/44 is merged
-[pager]
-	diff = fmj | diff-highlight | less -R
-	show = fmj | diff-highlight | less -R
-	log = fmj | diff-highlight | less -R
 [color "diff-highlight"]
 	oldNormal = red bold
 	oldHighlight = red bold 52
@@ -59,14 +70,3 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
-[init]
-	defaultBranch = main
-[merge]
-	conflictstyle = zdiff3
-[fetch]
-	prune = true
-	pruneTags = true
-[log]
-	date = iso
-[branch]
-	sort = -committerdate
