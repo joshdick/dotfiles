@@ -184,6 +184,23 @@ md() {
   wget -qO - "$1" | iconv -t utf-8 | html2text -b 0
 }
 
+# Get real disk usage statistics on MacOS.
+# Based on < https://gist.github.com/chockenberry/f278781a36ce217c82a0d280765c3622 >.
+mdf() {
+  if [ "$(uname)" != "Darwin" ]; then
+    echo "Error: $0() only works on MacOS, use /bin/df" >&2
+    return 1
+  elif [ ! -z "$*" ]; then
+    echo "Error: This is $0(), use /bin/df" >&2
+    return 1
+  fi
+
+  protect=`mount | grep -v "read-only" | grep "protect" | cut -f 3 -w`
+  nosuid=`mount | grep -v "read-only" | grep "nosuid" | cut -f 3 -w`
+
+  /bin/df -PH $protect $nosuid | cut -f 2- -w
+}
+
 # Calculate a hash of all files in the current directory.
 # Adapted from code found at <http://stackoverflow.com/a/1658554/278810>
 md5dir() {
@@ -248,6 +265,11 @@ push_ssh_cert() {
 # Adapted from code found at <http://forums.devshed.com/unix-help-35/unix-find-and-replace-text-within-all-files-within-a-146179.html>
 replacein() {
   find . -type f -print0 | xargs perl -pi -e "s/$1/$2/g"
+}
+
+# `ripgrep` with output formatted by `delta`
+rgd() {
+  rg --json $* | delta
 }
 
 # Search for files by name
