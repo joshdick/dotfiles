@@ -1,5 +1,5 @@
 " Using <https://github.com/nvimtools/none-ls.nvim> in Neovim.
-if has('neovim')
+if has('nvim')
   finish
 endif
 

@@ -1,7 +1,7 @@
 " Using <https://github.com/nvimtools/none-ls.nvim> in Neovim.
 " In Vim, only enable poet-v if https://python-poetry.org `poetry` binary
 " is available on $PATH
-if has('neovim') || !executable('poetry')
+if has('nvim') || !executable('poetry')
   finish
 endif
 

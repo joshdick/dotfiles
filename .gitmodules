@@ -137,3 +137,6 @@
 [submodule ".vim/pack/plugins/opt/copilot.vim"]
 	path = .vim/pack/plugins/opt/copilot.vim
 	url = https://github.com/github/copilot.vim
+[submodule ".vim/pack/plugins/opt/none-ls-extras.nvim"]
+	path = .vim/pack/plugins/opt/none-ls-extras.nvim
+	url = https://github.com/nvimtools/none-ls-extras.nvim
