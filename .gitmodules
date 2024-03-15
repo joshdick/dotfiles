@@ -48,7 +48,7 @@
 	path = .vim/pack/plugins/start/dash.vim
 	url = https://github.com/rizzatti/dash.vim
 [submodule "vim.symlink/pack/plugins/start/vim-polyglot"]
-	path = .vim/pack/plugins/start/vim-polyglot
+	path = .vim/pack/plugins/opt/vim-polyglot
 	url = https://github.com/sheerun/vim-polyglot
 [submodule "vim.symlink/pack/plugins/start/lightline-ale"]
 	path = vim.symlink/pack/plugins/start/lightline-ale
