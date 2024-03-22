@@ -4,6 +4,7 @@ endif
 
 packadd! nvim-lspconfig
 packadd! none-ls.nvim
+packadd! none-ls-extras.nvim
 packadd! venv-lsp.nvim
 
 " Based on example at
@@ -74,8 +75,6 @@ lua << EOF
 
   -- Requires `npm i -g pyright`
   lspconfig.pyright.setup {
-    cmd = { "pyright-langserver", "--stdio" },
-    filetypes = { "python" },
     -- root_dir = function(startpath)
     --  return M.search_ancestors(startpath, matcher)
     -- end,
@@ -93,23 +92,69 @@ lua << EOF
           diagnosticMode = "workspace",
           useLibraryCodeForTypes = true
         },
-        organizeImports = {
-          provider = "isort"
-        }
+      },
+      pyright = {
+        -- Use ruff for organizing imports
+        disableOrganizeImports = true
       }
     },
     single_file_support = true,
     on_attach = on_attach
   }
 
+  -- Requires `pipx install ruff-lsp`
+  -- lspconfig.ruff_lsp.setup {
+  --   -- Assume the language server will be provided by the active global pyenv
+  --   -- cmd = { vim.env.HOME .. "/.local/bin/ruff-lsp" },
+  --   -- args = { "--config=./pyproject.toml" },
+  --   init_options = {
+  --     settings = {
+  --       format = {
+  --         -- Only use ruff for import formatting; prefer black for all other formatting
+  --         -- args = { "--select", "'I'" },
+  --         args = { "--config", "format.quote-style='preserve'" }
+  --       }
+  --     },
+  --   },
+  --   on_attach = function(client, bufnr)
+  --       -- Ensure that ruff is not used for hover (prefer pyright)
+  --       -- https://github.com/astral-sh/ruff-lsp?tab=readme-ov-file#example-neovim
+  --       client.server_capabilities.hoverProvider = false
+
+  --       on_attach(client, bufnr)
+
+  --       -- Manually add a `RuffOrganizeImports` command
+  --       -- https://github.com/astral-sh/ruff-lsp/issues/295#issuecomment-1783257787
+  --       local ruff_lsp_client = require("lspconfig.util").get_active_client_by_name(bufnr, "ruff_lsp")
+
+  --       local request = function(method, params)
+  --         ruff_lsp_client.request(method, params, nil, bufnr)
+  --       end
+
+  --       local organize_imports = function()
+  --         request("workspace/executeCommand", {
+  --           command = "ruff.applyOrganizeImports",
+  --           arguments = {
+  --             { uri = vim.uri_from_bufnr(bufnr) },
+  --           },
+  --         })
+  --       end
+
+  --       vim.api.nvim_create_user_command(
+  --         "RuffOrganizeImports",
+  --         organize_imports,
+  --         { desc = "Ruff: Organize Imports" }
+  --       )
+  --     end
+  --  }
+
   local null_ls = require('null-ls')
-  local nls_utils = require('null-ls.utils')
-  local nls_helpers = require('null-ls.helpers')
+  -- local nls_utils = require('null-ls.utils')
+  -- local nls_helpers = require('null-ls.helpers')
 
   null_ls.setup({
     sources = {
       null_ls.builtins.formatting.prettier,
-      null_ls.builtins.formatting.eslint_d, -- requires `npm i -g eslint_d`
       null_ls.builtins.formatting.black.with({
         -- cwd = nls_helpers.cache.by_bufnr(
           -- function(params)
@@ -118,20 +163,30 @@ lua << EOF
           -- )
         -- extra_args = { "--skip-string-normalization" },
       }),
-      null_ls.builtins.formatting.ruff,
-      null_ls.builtins.diagnostics.ruff,
-      null_ls.builtins.diagnostics.mypy
       -- null_ls.builtins.formatting.isort,
-      -- null_ls.builtins.diagnostics.pylint
+      require('none-ls.formatting.eslint_d'), -- requires `npm i -g eslint_d`
+      require('none-ls.formatting.ruff'),
+      null_ls.builtins.diagnostics.mypy,
+      -- null_ls.builtins.diagnostics.pylint,
+      require('none-ls.diagnostics.ruff'),
+      require('none-ls.diagnostics.eslint_d') -- requires `npm i -g eslint_d`
     },
     on_attach = on_attach
   })
 EOF
+
+" function! PythonFormat()
+  " if exists(':RuffOrganizeImports')
+  "   silent! execute ':RuffOrganizeImports'
+  " endif
+  " lua vim.lsp.buf.format()
+" endfunction
 
 augroup format_on_save
   autocmd BufWritePre *.js lua vim.lsp.buf.format()
   autocmd BufWritePre *.jsx lua vim.lsp.buf.format()
   autocmd BufWritePre *.tsx lua vim.lsp.buf.format()
   autocmd BufWritePre *.ts lua vim.lsp.buf.format()
+  " autocmd BufWritePre *.py call PythonFormat()
   autocmd BufWritePre *.py lua vim.lsp.buf.format()
 augroup END
