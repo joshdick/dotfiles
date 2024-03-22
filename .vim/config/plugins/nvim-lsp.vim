@@ -10,6 +10,8 @@ packadd! venv-lsp.nvim
 " Based on example at
 " < https://github.com/neovim/nvim-lspconfig#keybindings-and-completion >
 lua << EOF
+  local venv_lsp = require 'venv-lsp'
+  venv_lsp.init()
   local lspconfig = require('lspconfig')
 
   local signs = { Error = "🅴", Warn = "🆆", Hint = "🅷", Info = "🅸" }
