@@ -172,6 +172,11 @@ export PATH="$GIT_DIFF_HIGHLIGHT_PATH:$PATH"
 [[ -n "$key[Up]" ]] && bindkey -- "$key[Up]" history-substring-search-up
 [[ -n "$key[Down]" ]] && bindkey -- "$key[Down]" history-substring-search-down
 
+# <https://github.com/atuinsh/atuin>
+if command_exists atuin; then
+  eval "$(atuin init zsh --disable-up-arrow)"
+fi
+
 # <https://github.com/junegunn/fzf>
 . ~/.fzf.zsh
 # Configure fzf to use `rg` or `ag` if available instead of `find`,
