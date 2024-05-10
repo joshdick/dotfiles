@@ -95,9 +95,6 @@
 [submodule "vim.symlink/pack/plugins/opt/plenary.nvim"]
 	path = .vim/pack/plugins/opt/plenary.nvim
 	url = https://github.com/nvim-lua/plenary.nvim
-[submodule "vim.symlink/pack/plugins/opt/telescope.nvim"]
-	path = .vim/pack/plugins/opt/telescope.nvim
-	url = https://github.com/nvim-telescope/telescope.nvim
 [submodule "vim.symlink/pack/plugins/opt/nvim-treesitter"]
 	path = .vim/pack/plugins/opt/nvim-treesitter
 	url = https://github.com/nvim-treesitter/nvim-treesitter
@@ -140,3 +137,6 @@
 [submodule ".vim/pack/plugins/opt/none-ls-extras.nvim"]
 	path = .vim/pack/plugins/opt/none-ls-extras.nvim
 	url = https://github.com/nvimtools/none-ls-extras.nvim
+[submodule ".vim/pack/plugins/opt/fzf-lua"]
+	path = .vim/pack/plugins/opt/fzf-lua
+	url = https://github.com/ibhagwan/fzf-lua
