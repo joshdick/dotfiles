@@ -7,6 +7,9 @@ packadd! telescope.nvim
 
 lua << EOF
   require("telescope").setup {
+    defaults = {
+      path_display = { "truncate" },
+    },
     pickers = {
       buffers = {
         show_all_buffers = true,
