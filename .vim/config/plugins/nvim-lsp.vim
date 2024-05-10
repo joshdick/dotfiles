@@ -3,6 +3,7 @@ if !has('nvim')
 endif
 
 packadd! nvim-lspconfig
+packadd! plenary.nvim " required by none-ls.nvim
 packadd! none-ls.nvim
 packadd! none-ls-extras.nvim
 packadd! venv-lsp.nvim
