@@ -169,6 +169,12 @@ hgrep() {
   history 1 | grep "$1"
 }
 
+# On macOS, shows which applications are using which ports.
+# https://x.com/seldo/status/1823126087423099192
+macportbinds() {
+  sudo lsof -iTCP -sTCP:LISTEN -n -P | awk 'NR>1 {print $9, $1, $2}' | sed 's/.*://' | while read port process pid; do echo "Port $port: $(ps -p $pid -o command= | sed 's/^-//') (PID: $pid)"; done | sort -n
+}
+
 # Convert a web page to Markdown.
 md() {
   if ! command_exists html2text; then
