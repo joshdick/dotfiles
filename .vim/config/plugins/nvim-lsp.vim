@@ -57,16 +57,17 @@ lua << EOF
     end, bufopts)
     vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, bufopts)
     vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
+    vim.keymap.set('n', '<F2>', vim.lsp.buf.rename, bufopts)
     vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
     vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
     vim.keymap.set('n', '<leader>f', vim.lsp.buf.format, bufopts)
   end
 
   -- Requires: `npm i -g typescript typescript-language-server`
-  lspconfig.tsserver.setup {
+  lspconfig.ts_ls.setup {
     -- root_dir = nvim_lsp.util.root_pattern("yarn.lock", "lerna.json", ".git"),
     on_attach = function(client, bufnr)
-      -- Ensure that tsserver is not used for formatting (prefer prettier)
+      -- Ensure that ts_ls is not used for formatting (prefer prettier)
       client.resolved_capabilities.document_formatting = false
 
       -- TODO: Research https://github.com/tomaskallup/dotfiles/blob/master/nvim/lua/plugins/lsp-ts-utils.lua
