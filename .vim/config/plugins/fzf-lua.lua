@@ -18,5 +18,5 @@ vim.keymap.set("n", "<C-p>",
 
 --noremap <C-b> <cmd>Telescope buffers<CR>
 vim.keymap.set("n", "<C-b>",
-  "<cmd>lua require('fzf-lua').buffers()<CR>", { silent = true })
+  "<cmd>lua require('fzf-lua').buffers({ fzf_opts = { ['--keep-right'] = '' } })<CR>", { silent = true })
 
