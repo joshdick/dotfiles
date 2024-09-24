@@ -47,7 +47,7 @@ alias g='git'
 alias ga='git add'
 alias gb='git branch'
 alias gc='git commit'
-alias gclean='find . -name ".git" -type d -exec echo "Cleaning {}..." \; -exec git --git-dir="{}" gc --aggressive --quiet \;'
+alias gclean='find . -name ".git" -type d -exec echo "Cleaning {}..." \; -exec sh -c "git --git-dir=\"{}\" fetch || true" \; -exec git --git-dir="{}" gc --aggressive --quiet \;'
 alias grclean="git branch -r --merged | grep origin | grep -v '>' | grep -v master | xargs -L1 | awk '{sub(/origin\//,\"\");print}' | xargs git push origin --delete"
 alias gcm='git commit -m'
 alias gco='git checkout'
