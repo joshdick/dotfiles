@@ -4,6 +4,7 @@
 font-family = "CommitMono"
 font-family = "MonoLisa Josh"
 font-family = "InputMonoNarrow"
+font-size = 16.5
 
 # https://github.com/catppuccin/ghostty
 theme = catppuccin-mocha
