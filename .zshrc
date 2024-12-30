@@ -231,12 +231,12 @@ if command_exists gpgconf; then
   fi
 fi
 
-# Emulate pgrep if we're on OS X
+# Emulate pgrep if missing (likely running macOS)
 if ! command_exists pgrep; then
   alias pgrep=poorgrep
 fi
 
-# Emulate tree if we're on OS X
+# Emulate tree if missing (likely running macOS)
 if ! command_exists tree; then
   alias tree=poortree
 fi
