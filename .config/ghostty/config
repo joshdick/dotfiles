@@ -1,6 +1,8 @@
 # Configuration for Ghostty terminal emulator
 # https://ghostty.org/docs/config/reference
 
+# shell-integration-features = no-cursor
+
 font-family = "CommitMono"
 font-family = "MonoLisa Josh"
 font-family = "InputMonoNarrow"
@@ -10,6 +12,7 @@ font-size = 16.5
 theme = catppuccin-mocha
 # 15% darker than stock ( https://mdigi.tools/darken-color/#1E1E2E )
 background = 191927
+cursor-color = C1CCF1
 # Overrides with alternate colors from the official Catppuccin Mocha PNG palette:
 # https://github.com/catppuccin/palette/blob/main/png/catppuccin-mocha.png
 palette = 1=#E590A8
