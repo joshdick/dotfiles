@@ -15,3 +15,5 @@ background = 191927
 palette = 1=#E590A8
 palette = 5=#C5A7F2
 palette = 6=#88CFE8
+
+config-file = ?host_specific_config
