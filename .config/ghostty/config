@@ -3,20 +3,26 @@
 
 # shell-integration-features = no-cursor
 
+# Font
 font-family = "CommitMono"
 font-family = "MonoLisa Josh"
 font-family = "InputMonoNarrow"
 font-size = 16.5
 
+# Theme/Colors
 # https://github.com/catppuccin/ghostty
 theme = catppuccin-mocha
 # 15% darker than stock ( https://mdigi.tools/darken-color/#1E1E2E )
 background = 191927
+unfocused-split-fill = 262634
 cursor-color = C1CCF1
 # Overrides with alternate colors from the official Catppuccin Mocha PNG palette:
 # https://github.com/catppuccin/palette/blob/main/png/catppuccin-mocha.png
 palette = 1=#E590A8
 palette = 5=#C5A7F2
 palette = 6=#88CFE8
+
+# Misc
+focus-follows-mouse = true
 
 config-file = ?host_specific_config
