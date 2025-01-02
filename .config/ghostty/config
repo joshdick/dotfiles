@@ -24,5 +24,6 @@ palette = 6=#88CFE8
 
 # Misc
 focus-follows-mouse = true
+keybind = global:option+grave_accent=toggle_quick_terminal
 
 config-file = ?host_specific_config
