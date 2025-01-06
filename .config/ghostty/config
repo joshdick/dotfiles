@@ -14,7 +14,9 @@ font-size = 16.5
 theme = catppuccin-mocha
 # 15% darker than stock ( https://mdigi.tools/darken-color/#1E1E2E )
 background = 191927
-unfocused-split-fill = 262634
+# 15% lighter than stock ( https://mdigi.tools/lighten-color/#1E1E2E )
+unfocused-split-fill = 383855
+unfocused-split-opacity = 0.8
 cursor-color = C1CCF1
 # Overrides with alternate colors from the official Catppuccin Mocha PNG palette:
 # https://github.com/catppuccin/palette/blob/main/png/catppuccin-mocha.png
