@@ -81,27 +81,12 @@ dispatch () {
   if [[ -z "$1" ]]; then
     echo "No file(s) given to dispatch!"
     return 1
+  elif [[ -z "$DISPATCH_SSH_PROXY_COMMAND" ]]; then
+    echo "\$DISPATCH_SSH_PROXY_COMMAND is not set, not taking any action!"
+    return 2
   fi
-  if [ "$(uname)" = "Darwin" ]; then
-    _gateway=$(route -n get default &> /dev/null | grep gateway | tr -d ' ' | cut -f 2 -d ':')
-  else
-    # Will implicitly default to Internet if we can't determine the gateway
-    if command_exists route; then
-      _gateway=$(route -n | grep UG | awk '{print $2}' | tr -d ' ')
-    fi
-  fi
-  if [ "$_gateway" = "192.168.7.1" ]; then
-    echo "Dispatching files via the local network (LAN)..."
-    rsync -avz --partial --progress -e "ssh josh@192.168.7.4" "$@" ":~/Desktop/"
-  else
-    if [[ -z "$DISPATCH_SSH_PROXY_COMMAND" ]]; then
-      echo "\$DISPATCH_SSH_PROXY_COMMAND is not set, not taking any action!"
-      return 2
-    fi
-    echo "Dispatching files via the Internet..."
-    # https://stackoverflow.com/a/16144454/278810
-    scp -r -o "ProxyCommand $DISPATCH_SSH_PROXY_COMMAND nc %h %p" "$@" josh@hermes:~/Desktop/
-  fi
+  # https://stackoverflow.com/a/16144454/278810
+  scp -r -o "ProxyCommand $DISPATCH_SSH_PROXY_COMMAND nc %h %p" "$@" josh@hermes:~/Desktop/
 }
 
 # Extracts archives
