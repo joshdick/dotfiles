@@ -3,7 +3,7 @@
 # NOTE: This function is duplicated in .zshrc so that it doesn't have to depend on this file,
 # but this shouldn't cause any issues
 command_exists() {
-  hash "$1" &> /dev/null
+  command -v "$1" &> /dev/null
 }
 
 # On Mac OS X, cd to the path of the front Finder window
