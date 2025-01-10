@@ -21,7 +21,7 @@ setopt autocd beep nomatch prompt_subst correct inc_append_history interactiveco
 unsetopt notify
 zstyle :compinstall filename "$HOME/.zshrc"
 autoload -Uz compinit && compinit
-autoload -U colors && colors # Enable colors in prompt
+autoload -U colors && \colors # Enable colors in prompt, ensuring `colors` alias is not used
 
 # *** ZSH KEYBOARD SETTINGS ***
 
