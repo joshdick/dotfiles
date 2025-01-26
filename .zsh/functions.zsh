@@ -89,6 +89,18 @@ dispatch () {
   scp -r -o "ProxyCommand $DISPATCH_SSH_PROXY_COMMAND nc %h %p" "$@" josh@hermes:~/Desktop/
 }
 
+# Move each file with the given extension into
+# its own correspondingly-named folder.
+# Useful for feeding individual tracks within sibling folders to `rgbpm`.
+enfold() {
+  if [[ -z "$1" ]]; then
+    echo "Usage: $0 [extension]"
+    return 1
+  fi
+  # https://stackoverflow.com/a/11962189/278810
+  find . -name "*.$1" -exec sh -c 'mkdir "${1%.*}" ; mv "$1" "${1%.*}" ' _ {} \;
+}
+
 # Extracts archives
 # Found at <http://pastebin.com/CTra4QTF>
 extract() {
