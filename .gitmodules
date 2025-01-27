@@ -140,3 +140,6 @@
 [submodule ".vim/pack/plugins/opt/fzf-lua"]
 	path = .vim/pack/plugins/opt/fzf-lua
 	url = https://github.com/ibhagwan/fzf-lua
+[submodule "/Users/josh/.bin/repos/cb"]
+	path = /Users/josh/.bin/repos/cb
+	url = https://github.com/niedzielski/cb
