@@ -7,31 +7,31 @@
 [submodule "zsh.symlink/zsh-syntax-highlighting"]
 	path = .zsh/zsh-syntax-highlighting
 	url = https://github.com/zsh-users/zsh-syntax-highlighting
-[submodule "bin.symlink/repos/hr"]
+[submodule ".bin/repos/hr"]
 	path = .bin/repos/hr
 	url = https://github.com/LuRsT/hr.git
-[submodule "bin.symlink/repos/spot"]
+[submodule ".bin/repos/spot"]
 	path = .bin/repos/spot
 	url = https://github.com/guille/spot
-[submodule "bin.symlink/repos/tmuxomatic"]
+[submodule ".bin/repos/tmuxomatic"]
 	path = .bin/repos/tmuxomatic
 	url = https://github.com/joshdick/tmuxomatic.git
-[submodule "bin.symlink/repos/git-dude"]
+[submodule ".bin/repos/git-dude"]
 	path = .bin/repos/git-dude
 	url = https://github.com/sickill/git-dude
-[submodule "bin.symlink/repos/fzf"]
+[submodule ".bin/repos/fzf"]
 	path = .bin/repos/fzf
 	url = https://github.com/junegunn/fzf
-[submodule "bin.symlink/repos/git-cr"]
+[submodule ".bin/repos/git-cr"]
 	path = .bin/repos/git-cr
 	url = https://github.com/joshdick/git-cr
-[submodule "bin.symlink/repos/formd"]
+[submodule ".bin/repos/formd"]
 	path = .bin/repos/formd
 	url = https://github.com/drbunsen/formd
-[submodule "bin.symlink/repos/fmj"]
+[submodule ".bin/repos/fmj"]
 	path = .bin/repos/fmj
 	url = https://github.com/ecmendenhall/fmj.git
-[submodule "bin.symlink/repos/tmux-scroll-copy-mode"]
+[submodule ".bin/repos/tmux-scroll-copy-mode"]
 	path = .bin/repos/tmux-scroll-copy-mode
 	url = https://github.com/nhdaly/tmux-scroll-copy-mode
 [submodule "vim.symlink/pack/plugins/start/lightline.vim"]
@@ -77,10 +77,10 @@
 [submodule "vim.symlink/pack/plugins/start/undotree"]
 	path = .vim/pack/plugins/start/undotree
 	url = https://github.com/mbbill/undotree
-[submodule "bin.symlink/repos/dntw"]
+[submodule ".bin/repos/dntw"]
 	path = .bin/repos/dntw
 	url = https://github.com/joshdick/dntw.git
-[submodule "bin.symlink/repos/d33ef5b6e6da4a3e4aa9b07b093d3c23"]
+[submodule ".bin/repos/d33ef5b6e6da4a3e4aa9b07b093d3c23"]
 	path = .bin/repos/d33ef5b6e6da4a3e4aa9b07b093d3c23
 	url = https://gist.github.com/d33ef5b6e6da4a3e4aa9b07b093d3c23.git
 [submodule "vim.symlink/pack/plugins/start/vim-github-url"]
@@ -107,7 +107,7 @@
 [submodule "vim.symlink/pack/plugins/opt/trouble.nvim"]
 	path = .vim/pack/plugins/opt/trouble.nvim
 	url = https://github.com/folke/trouble.nvim
-[submodule "bin.symlink/repos/z"]
+[submodule ".bin/repos/z"]
 	path = .bin/repos/z
 	url = https://github.com/rupa/z.git
 [submodule "vim.symlink/pack/plugins/opt/catppuccin"]
@@ -140,6 +140,6 @@
 [submodule ".vim/pack/plugins/opt/fzf-lua"]
 	path = .vim/pack/plugins/opt/fzf-lua
 	url = https://github.com/ibhagwan/fzf-lua
-[submodule "/Users/josh/.bin/repos/cb"]
-	path = /Users/josh/.bin/repos/cb
+[submodule ".bin/repos/cb"]
+	path = .bin/repos/cb
 	url = https://github.com/niedzielski/cb
