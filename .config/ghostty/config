@@ -7,7 +7,7 @@
 font-family = "CommitMono"
 font-family = "MonoLisa Josh"
 font-family = "InputMonoNarrow"
-font-size = 16.5
+font-size = 17
 
 # Theme/Colors
 # https://github.com/catppuccin/ghostty
@@ -27,6 +27,7 @@ palette = 6=#88CFE8
 # Misc
 focus-follows-mouse = true
 keybind = global:alt+grave_accent=toggle_quick_terminal
+keybind = global:ctrl+shift+r=reload_config
 keybind = alt+equal=equalize_splits
 
 config-file = ?host_specific_config
