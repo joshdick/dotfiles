@@ -59,11 +59,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
       })
     end
 
-    -- manually handle [my]sql autocomplete
-    if not vim.tbl_contains({ 'sql', 'mysql' }, vim.bo.filetype) then
-      vim.bo[buffer].omnifunc = 'v:lua.MiniCompletion.completefunc_lsp'
-    end
-
     -- https://github.com/jglasovic/dotfiles/blob/6132876/.vim/rcplugins/lsp-setup.lua
 
     -- local opts = { buffer = buffer }
@@ -81,6 +76,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
     --   vim.lsp.buf.format({ timeout_ms = format_timeout_ms, async = true })
     -- end
     -- , opts)
+    -- -- manually handle [my]sql autocomplete with https://github.com/echasnovski/mini.completion
+    -- if not vim.tbl_contains({ 'sql', 'mysql' }, vim.bo.filetype) then
+    --   vim.bo[buffer].omnifunc = 'v:lua.MiniCompletion.completefunc_lsp'
+    -- end
 
     -- Enable completion triggered by <c-x><c-o>
     vim.api.nvim_buf_set_option(buffer, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
