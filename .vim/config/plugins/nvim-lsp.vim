@@ -11,29 +11,33 @@ packadd! venv-lsp.nvim
 " Based on example at
 " < https://github.com/neovim/nvim-lspconfig#keybindings-and-completion >
 lua << EOF
-  local venv_lsp = require 'venv-lsp'
-  venv_lsp.init()
-  local lspconfig = require('lspconfig')
-
-  local signs = { Error = "🅴", Warn = "🆆", Hint = "🅷", Info = "🅸" }
-  for type, icon in pairs(signs) do
-    local hl = "DiagnosticSign" .. type
-    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-  end
+  -- vim.lsp.set_log_level('DEBUG')
+  require('lspconfig')
+  require('venv-lsp').setup()
 
   -- https://www.reddit.com/r/neovim/comments/ru871v/comment/hqxquvl/?utm_source=share&utm_medium=web2x&context=3
   vim.diagnostic.config({
     virtual_text = false,
-    signs = true,
+    signs = {
+      text = {
+        [vim.diagnostic.severity.ERROR] = "🅴",
+        [vim.diagnostic.severity.WARN] = "🆆",
+        [vim.diagnostic.severity.HINT] = "🅷",
+        [vim.diagnostic.severity.INFO] = "🅸",
+      },
+    },
     float = { border = "single" },
   })
+
+  -- As of neovim 0.10
+  vim.lsp.inlay_hint.enable()
 
   -- Mappings.
   -- See `:help vim.diagnostic.*` for documentation on any of the below functions
   local opts = { noremap=true, silent=true }
-  vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, opts)
-  vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
-  vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
+  -- vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, opts) -- C-W>d (and <C-W><C-D>) are now default as of neovim 0.10
+  -- vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts) -- is now default as of neovim 0.10
+  -- vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts) -- is now default as of neovim 0.10
   vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, opts)
 
   -- Use an on_attach function to only map the following keys
@@ -47,7 +51,7 @@ lua << EOF
     local bufopts = { noremap=true, silent=true, buffer=bufnr }
     vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
-    vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
+    -- vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts) -- is now default as of neovim 0.10
     vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
     vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
     vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, bufopts)
@@ -64,21 +68,24 @@ lua << EOF
   end
 
   -- Requires: `npm i -g typescript typescript-language-server`
-  lspconfig.ts_ls.setup {
+  vim.lsp.enable('ts_ls')
+  vim.lsp.config('ts_ls', {
     -- root_dir = nvim_lsp.util.root_pattern("yarn.lock", "lerna.json", ".git"),
     on_attach = function(client, bufnr)
       -- Ensure that ts_ls is not used for formatting (prefer prettier)
-      client.resolved_capabilities.document_formatting = false
+      -- https://github.com/neovim/nvim-lspconfig/issues/1891
+      client.server_capabilities.documentFormattingProvider = false
 
       -- TODO: Research https://github.com/tomaskallup/dotfiles/blob/master/nvim/lua/plugins/lsp-ts-utils.lua
       --ts_utils_attach(client)
       on_attach(client, bufnr)
     end,
     settings = { documentFormatting = false }
-  }
+  })
 
   -- Requires `npm i -g pyright`
-  lspconfig.pyright.setup {
+  vim.lsp.enable('pyright')
+  vim.lsp.config('pyright', {
     -- root_dir = function(startpath)
     --  return M.search_ancestors(startpath, matcher)
     -- end,
@@ -104,8 +111,16 @@ lua << EOF
     },
     single_file_support = true,
     on_attach = on_attach
-  }
+  })
 
+  vim.lsp.enable('regal')
+  vim.lsp.config('regal', {
+    root_dir = function(fname)
+      -- return nvim_lsp.util.find_git_ancestor(fname)
+      return vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
+    end,
+    on_attach = on_attach
+  })
 
   local null_ls = require('null-ls')
 
