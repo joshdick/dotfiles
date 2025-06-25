@@ -123,6 +123,19 @@ extract() {
   esac
 }
 
+# "Git commit review" for use with `fzf`.
+# Adapted from < https://jvns.ca/til/fzf-preview-git-commits/ >
+gcr() {
+  commit=${1:-HEAD}
+  git show --stat=120 --format="" "$commit" | \
+  grep '|' | \
+  fzf --ansi \
+    --disabled \
+    --bind 'j:down,k:up,q:abort' \
+    --preview="echo {} | sed 's/^ \(.*\) *|.*/\1/' | xargs -I% git diff --color=always $commit~ -- %" \
+    --preview-window=right:60%
+}
+
 # Visual Studio Code-enabled replacement for `gdt` alias.
 gdt() {
   # If running inside Visual Stuido Code, use it if diffing a single file (it doesn't support directory diffs.)
