@@ -5,13 +5,13 @@
 	path = "~/Code/.gitconfig"
 [core]
 	excludesfile = ~/.gitignore
-	pager = fmj | less -rX
-[pager]
-	diff = fmj | diff-highlight | less -R
-	show = fmj | diff-highlight | less -R
-	log = fmj | diff-highlight | less -R
+	pager = fmj | diffr --colors refine-added:background:22 --colors refine-added:foreground:green --colors refine-removed:background:52 --colors refine-removed:foreground:red | less
+	;pager = fmj | diff-highlight | less -rX
+	;pager = delta
 [init]
 	defaultBranch = main
+; [interactive]
+	; diffFilter = delta --color-only
 [fetch]
 	prune = true
 [log]
@@ -39,24 +39,34 @@
 [diff]
 	tool = bcomp
 	algorithm = histogram
+	colorMoved = dimmed-zebra
 [difftool "bcomp"]
-	trustExitCode = true
 	cmd = bcomp \"$LOCAL\" \"$REMOTE\"
+	trustExitCode = true
 [difftool "Kaleidoscope"]
 	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+	prompt = false
+	trustExitCode = true
 [difftool "vscode"]
 	trustExitCode = false
 	cmd = code --reuse-window --wait --diff \"$LOCAL\" \"$REMOTE\"
 [merge]
 	conflictstyle = zdiff3
+	tool = bcomp
 [mergetool "bcomp"]
 	trustExitCode = true
 	cmd = bcomp \"$LOCAL\" \"$REMOTE\" \"$BASE\" \"$MERGED\"
 [mergetool "Kaleidoscope"]
 	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
-	trustexitcode = true
+	prompt = false
+	trustExitCode = true
 [mergetool "vimdiff"]
 	cmd = nvim -d \"$BASE\" \"$LOCAL\" \"$REMOTE\" \"$MERGED\" -c '$wincmd w' -c 'wincmd J'
+[delta]
+	navigate = true    # use n and N to move between diff sections
+	light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
+	# side-by-side = true
+	syntax-theme = ansi
 [dude]
 	interval = 0
 	notify-command = osascript -e \"display notification \\\"$DESCRIPTION\\\" with title \\\"$TITLE\\\"\"
