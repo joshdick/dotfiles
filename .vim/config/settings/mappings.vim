@@ -45,9 +45,6 @@ nnoremap <leader>P "+P
 xnoremap <leader>p "+p
 xnoremap <leader>P "+P
 
-"Mapping for Dash search
-nmap <silent> <leader>d <Plug>DashSearch
-
 "Mapping to convert mixed line endings to LF-only (Unix)
 nnoremap <leader>% :call ForceLF()<CR>
 
@@ -59,9 +56,6 @@ nnoremap <leader>n :set number! number?<CR>
 
 "Mapping to close a window
 nnoremap <leader>q :close<CR>
-
-"Mapping to toggle undotree
-nnoremap <leader>u :UndotreeToggle<CR>
 
 "Mapping to toggle auto-indenting for code paste
 "Don't bother with pastetoggle, since it doesn't cooperate with vim-airline: <https://github.com/bling/vim-airline/issues/219>
@@ -95,3 +89,12 @@ nnoremap <leader>jl a console.log('');<ESC>hhi
 map <F10> :echo "hi<". synIDattr(synID(line('.'),col('.'),1),"name") . '> trans<'
   \ . synIDattr(synID(line('.'),col('.'),0),"name") . "> lo<"
   \ . synIDattr(synIDtrans(synID(line('.'),col('.'),1)),"name") . ">"<CR>
+
+
+" --- Plugin Mappings ---
+
+"Mapping for Dash search
+nmap <silent> <leader>d <Plug>DashSearch
+
+"Mapping to toggle undotree
+nnoremap <silent> <leader>u :UndotreeToggle<CR>
