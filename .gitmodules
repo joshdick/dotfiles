@@ -143,9 +143,9 @@
 [submodule ".bin/repos/cb"]
 	path = .bin/repos/cb
 	url = https://github.com/niedzielski/cb
-[submodule "/Users/joshdick/.vim/pack/plugins/opt/vim-dadbod"]
-	path = /Users/joshdick/.vim/pack/plugins/opt/vim-dadbod
+[submodule ".vim/pack/plugins/opt/vim-dadbod"]
+	path = .vim/pack/plugins/opt/vim-dadbod
 	url = https://github.com/tpope/vim-dadbod
-[submodule "/Users/joshdick/.vim/pack/plugins/opt/vim-dadbod-ui"]
-	path = /Users/joshdick/.vim/pack/plugins/opt/vim-dadbod-ui
+[submodule ".vim/pack/plugins/opt/vim-dadbod-ui"]
+	path = .vim/pack/plugins/opt/vim-dadbod-ui
 	url = https://github.com/kristijanhusak/vim-dadbod-ui
