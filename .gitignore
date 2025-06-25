@@ -1,6 +1,4 @@
-.chkbit
 .DS_Store
-.nova
+.chkbit
 .null-ls_*
-.tern-port
 .rgignore
