@@ -36,6 +36,7 @@
 	log-hist = !git log-pretty --graph
 	log-pretty = "log --pretty=format:'%Cred%h%Creset%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'"
 	tags = "tag -l -n1"
+	branch-prune = "!git fetch -p && for b in $(git for-each-ref --format='%(if:equals=[gone])%(upstream:track)%(then)%(refname:short)%(end)' refs/heads); do git branch -D $b; done"
 [diff]
 	tool = bcomp
 	algorithm = histogram
