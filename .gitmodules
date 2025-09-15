@@ -149,3 +149,6 @@
 [submodule ".vim/pack/plugins/opt/vim-dadbod-ui"]
 	path = .vim/pack/plugins/opt/vim-dadbod-ui
 	url = https://github.com/kristijanhusak/vim-dadbod-ui
+[submodule ".bin/repos/pyautoenv"]
+	path = .bin/repos/pyautoenv
+	url = https://github.com/hsaunders1904/pyautoenv.git
