@@ -4,6 +4,7 @@
 # shell-integration-features = no-cursor
 
 # Font
+font-family = "Victor Mono"
 font-family = "CommitMono"
 font-family = "MonoLisa Josh"
 font-family = "InputMonoNarrow"
@@ -11,7 +12,7 @@ font-size = 17
 
 # Theme/Colors
 # https://github.com/catppuccin/ghostty
-theme = catppuccin-mocha
+theme = "Catppuccin Mocha"
 # 15% darker than stock ( https://mdigi.tools/darken-color/#1E1E2E )
 background = 191927
 # 15% lighter than stock ( https://mdigi.tools/lighten-color/#1E1E2E )
