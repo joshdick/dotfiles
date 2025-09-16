@@ -255,6 +255,14 @@ if [ -r "$GIT_BASH_COMPLETION_SOURCE" ] && [ -r "$GIT_ZSH_COMPLETION_SOURCE" ]; 
   fpath=(~/.zsh/completion $fpath)
 fi
 
+# <https://github.com/pyenv/pyenv>
+# Initialize pyenv if it's installed (it may be installed via Homebrew)
+PYENV_BIN_DIR="$HOME/.pyenv/bin"
+test -d "$PYENV_BIN_DIR" && export PATH="$PYENV_BIN_DIR:$PATH"
+if command_exists pyenv; then
+  eval "$(pyenv init - zsh)"
+fi
+
 # <https://github.com/nodenv/nodenv>
 # Initialize nodenv if it's installed (it may be installed via Homebrew)
 NODENV_BIN_DIR="$HOME/.nodenv/bin"
