@@ -1,5 +1,5 @@
 .DS_Store
 .chkbit
-.claude
+**/.claude/settings.local.json
 .null-ls_*
 .rgignore
