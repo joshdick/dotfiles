@@ -146,6 +146,19 @@ gdt() {
   fi
 }
 
+# "Git stash in place": Saves snapshot of Git working tree into the stash without modifying the working tree.
+# Found at <https://stackoverflow.com/a/6318570/278810>
+gsip() {
+  # Based on `git stash store "$(git stash create)"`.
+  if [ -n "$1" ]; then
+    git stash store -m "$1" "$(git stash create "$1")"
+  else
+    HASH=$(git stash create)
+    MESSAGE=$(git log --no-walk --pretty="tformat:%-s" "$HASH")
+    git stash store -m "$MESSAGE" "$HASH"
+  fi
+}
+
 # "Smart show" for Git. Show what I most likely want to see at any given time.
 gss() {
   git status &> /dev/null
