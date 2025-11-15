@@ -363,7 +363,7 @@ update() {
       sudo sh -c "apt update && apt upgrade && apt clean && apt autoremove"
     elif command_exists pacman; then
       heading "[pacman] Updating system packages..."
-      sudo sh -c "pacman -Syu && pacman -Scc"
+      sudo sh -c "pacman -Syu && pacman --noconfirm -Scc"
     fi
   fi
 
