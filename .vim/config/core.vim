@@ -36,6 +36,10 @@ set wildmenu
 set wildignore=*.o,*~
 set wildignorecase
 
+if has('nvim-0.11')
+  set winborder=rounded
+endif
+
 " TODO:
 " https://github.com/thoughtbot/dotfiles/issues/655#issuecomment-605019271
 " https://www.micahsmith.com/blog/2019/11/fixing-vim-invalid-argument-diffopt-iwhite/
