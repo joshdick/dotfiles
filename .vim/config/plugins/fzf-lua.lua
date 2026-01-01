@@ -1,9 +1,18 @@
 vim.cmd [[packadd fzf-lua]]
 
-require("fzf-lua").setup {
-  "fzf-native"
-  -- hls = { border = "FloatBorder" }
-}
+require("fzf-lua").setup ({
+  winopts = function()
+    return {
+      -- smaller width if neovim win has over 80 columns
+      -- width = vim.o.columns>80 and 0.65 or 0.85
+      preview = {
+        default = "bat",
+        layout = "flex", -- used in conjunction with 'flip_columns' below
+        flip_columns = 120,
+      }
+    }
+  end,
+})
 
 --nnoremap <leader>g <cmd>Telescope live_grep<CR>
 vim.keymap.set("n", "<leader>g",
