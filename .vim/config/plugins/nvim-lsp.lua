@@ -10,7 +10,9 @@ require('venv-lsp').setup()
 
 -- https://www.reddit.com/r/neovim/comments/ru871v/comment/hqxquvl/?utm_source=share&utm_medium=web2x&context=3
 vim.diagnostic.config({
-  virtual_text = false,
+  -- https://gpanders.com/blog/whats-new-in-neovim-0-11/#diagnostics
+  virtual_text = { current_line = true },
+  -- virtual_lines = { current_line = true },
   severity_sort = true,
   signs = {
     text = {
@@ -44,9 +46,14 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, opts)
 
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('UserLspConfig', { clear = true }),
-  callback = function(args)
-    local buffer = args.buf
-    local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
+  callback = function(ev)
+    local buffer = ev.buf
+    local client = assert(vim.lsp.get_client_by_id(ev.data.client_id))
+
+    -- https://gpanders.com/blog/whats-new-in-neovim-0-11/#builtin-auto-completion
+    if client:supports_method('textDocument/completion') then
+      vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
+    end
 
     if not client:supports_method('textDocument/willSaveWaitUntil')
         and client:supports_method('textDocument/formatting') then
@@ -177,7 +184,7 @@ null_ls.setup({
     -- null_ls.builtins.formatting.isort,
     require('none-ls.formatting.eslint_d'), -- requires `npm i -g eslint_d`
     require('none-ls.formatting.ruff'),
-    null_ls.builtins.diagnostics.mypy,
+    -- null_ls.builtins.diagnostics.mypy,
     -- null_ls.builtins.diagnostics.pylint,
     require('none-ls.diagnostics.ruff'),
     require('none-ls.diagnostics.eslint_d') -- requires `npm i -g eslint_d`
