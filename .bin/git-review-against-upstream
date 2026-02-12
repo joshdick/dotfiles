@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+branch="$1"
+if [[ -z "$branch" ]]; then
+  branch=$(git branch --show-current)
+fi
+# https://stackoverflow.com/a/44750379/278810
+upstream=$(git symbolic-ref refs/remotes/origin/HEAD --short)
+# https://stackoverflow.com/q/53569/278810
+git difftool -d "$upstream...$branch"
