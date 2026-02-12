@@ -165,16 +165,16 @@ export PATH="$GIT_DIFF_HIGHLIGHT_PATH:$PATH"
 # <https://github.com/zsh-users/zsh-syntax-highlighting>
 . ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-# <https://github.com/zsh-users/zsh-history-substring-search>
-. ~/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh
-
-# Bind up and down keys for zsh-history-substring-search
-[[ -n "$key[Up]" ]] && bindkey -- "$key[Up]" history-substring-search-up
-[[ -n "$key[Down]" ]] && bindkey -- "$key[Down]" history-substring-search-down
-
-# <https://github.com/atuinsh/atuin>
 if command_exists atuin; then
-  eval "$(atuin init zsh --disable-up-arrow)"
+  # <https://github.com/atuinsh/atuin>
+  eval "$(atuin init zsh)"
+else
+  # <https://github.com/zsh-users/zsh-history-substring-search>
+  . ~/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh
+
+  # Bind up and down keys for zsh-history-substring-search
+  [[ -n "$key[Up]" ]] && bindkey -- "$key[Up]" history-substring-search-up
+  [[ -n "$key[Down]" ]] && bindkey -- "$key[Down]" history-substring-search-down
 fi
 
 # <https://github.com/junegunn/fzf>
