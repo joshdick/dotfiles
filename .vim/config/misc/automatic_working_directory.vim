@@ -3,12 +3,17 @@
 " If in a Git repo, sets the working directory to its root,
 " or if not, to the directory of the current file.
 function! SetWorkingDirectory()
+  " Skip URI-scheme buffers (e.g., fugitive://, zipfile://, scp://)
+  if expand('%') =~# '^\w\+://'
+    return
+  endif
+
   " Default to the current file's directory (resolving symlinks.)
   let current_file = expand('%:p')
   if getftype(current_file) == 'link'
     let current_file = resolve(current_file)
   endif
-  exe ':lcd' . fnamemodify(current_file, ':h')
+  exe 'lcd' . fnamemodify(current_file, ':h')
 
   " Get the path to `.git` if we're inside a Git repo.
   " Works both when inside a worktree, or inside an internal `.git` folder.
@@ -18,7 +23,7 @@ function! SetWorkingDirectory()
   " If we're inside a Git repo, change the working directory to its root.
   if empty(is_not_git_dir)
     " Expand path -> Remove trailing slash -> Remove trailing `.git`.
-    exe ':lcd' . fnamemodify(git_dir, ':p:h:h')
+    exe 'lcd' . fnamemodify(git_dir, ':p:h:h')
   endif
 endfunction
 
