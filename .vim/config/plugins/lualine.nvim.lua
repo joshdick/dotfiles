@@ -1,6 +1,6 @@
 vim.cmd [[packadd lualine.nvim]]
 
-local theme = vim.env.VIM_USE_ONEDARK == nil and 'catppuccin' or 'onedark'
+local theme = vim.env.VIM_USE_ONEDARK == nil and 'catppuccin-nvim' or 'onedark'
 
 require('lualine').setup({
     options = {
