@@ -25,6 +25,9 @@ autoload -U colors && \colors # Enable colors in prompt, ensuring `colors` alias
 
 # *** ZSH KEYBOARD SETTINGS ***
 
+# Use emacs (Mac-style) keybindings -- list with `bindkey`
+bindkey -e
+
 # Adapted from <http://zshwiki.org/home/zle/bindkeys#reading_terminfo<Paste>>
 
 # create a zkbd compatible hash;
