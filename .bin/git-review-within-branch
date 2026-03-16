@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+start_commit="$1"
+end_commit="$2"
+
+# set the working directory to the root of the git repository
+# so that `git difftool` can properly resolve file paths
+cd "$(git rev-parse --show-superproject-working-tree --show-toplevel | head -n1)"
+
+git log --pretty=format: --no-merges --first-parent --name-only $start_commit...$end_commit | grep -v '^$' | sort | uniq | xargs git difftool -d $start_commit...$end_commit --

@@ -4,6 +4,7 @@
 # shell-integration-features = no-cursor
 
 # Font
+font-family = "Maple Mono ExtraLight"
 font-family = "CommitMono"
 font-family = "MonoLisa Josh"
 font-family = "InputMonoNarrow"

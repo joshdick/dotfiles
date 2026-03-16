@@ -52,6 +52,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
     -- https://gpanders.com/blog/whats-new-in-neovim-0-11/#builtin-auto-completion
     if client:supports_method('textDocument/completion') then
+      vim.opt.completeopt = { "menuone", "noselect", "popup" }
       vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
     end
 
