@@ -122,10 +122,6 @@ vim.lsp.config('ts_ls', {
     -- Ensure that ts_ls is not used for formatting (prefer prettier)
     -- https://github.com/neovim/nvim-lspconfig/issues/1891
     client.server_capabilities.documentFormattingProvider = false
-
-    -- TODO: Research https://github.com/tomaskallup/dotfiles/blob/master/nvim/lua/plugins/lsp-ts-utils.lua
-    --ts_utils_attach(client)
-    on_attach(client, bufnr)
   end,
   settings = { documentFormatting = false }
 })
@@ -157,7 +153,6 @@ vim.lsp.config('pyright', {
     }
   },
   single_file_support = true,
-  on_attach = on_attach
 })
 
 vim.lsp.enable('regal')
@@ -166,7 +161,6 @@ vim.lsp.config('regal', {
     -- return nvim_lsp.util.find_git_ancestor(fname)
     return vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
   end,
-  on_attach = on_attach
 })
 
 local null_ls = require('null-ls')
@@ -190,5 +184,4 @@ null_ls.setup({
     require('none-ls.diagnostics.ruff'),
     require('none-ls.diagnostics.eslint_d') -- requires `npm i -g eslint_d`
   },
-  on_attach = on_attach
 })
