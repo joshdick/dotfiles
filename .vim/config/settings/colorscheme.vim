@@ -19,6 +19,7 @@ packadd! catppuccin_nvim
 
 lua << EOF
   require("catppuccin").setup({
+    flavour = "mocha", -- latte, frappe, macchiato, mocha
     transparent_background = true,
     integrations = {
       treesitter = true,
@@ -39,8 +40,7 @@ lua << EOF
       end,
     }
   })
-  vim.g.catppuccin_flavour = "mocha" -- latte, frappe, macchiato, mocha
-  vim.cmd[[colorscheme catppuccin]]
+  vim.cmd.colorscheme "catppuccin-nvim"
 EOF
 
 elseif empty($VIM_USE_ONEDARK)
