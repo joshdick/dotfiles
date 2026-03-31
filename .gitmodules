@@ -45,7 +45,7 @@
 	url = https://github.com/joshdick/onedark.vim.git
 	branch = main
 [submodule "vim.symlink/pack/plugins/start/dash.vim"]
-	path = .vim/pack/plugins/start/dash.vim
+	path = .vim/pack/plugins/opt/dash.vim
 	url = https://github.com/rizzatti/dash.vim
 [submodule "vim.symlink/pack/plugins/start/vim-polyglot"]
 	path = .vim/pack/plugins/opt/vim-polyglot
@@ -152,3 +152,6 @@
 [submodule ".bin/repos/pyautoenv"]
 	path = .bin/repos/pyautoenv
 	url = https://github.com/hsaunders1904/pyautoenv.git
+[submodule ".vim/pack/plugins/opt/diffview.nvim"]
+	path = .vim/pack/plugins/opt/diffview.nvim
+	url = https://github.com/sindrets/diffview.nvim.git

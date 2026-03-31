@@ -38,11 +38,17 @@ nnoremap <c-l> :tabnext<CR>
 
 "Mappings for interacting with the system clipboard
 "Found at <http://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity/>
+"Visual mode: yank (copy) selection to system clipboard
 xnoremap <leader>y "+y
+"Visual mode: delete (cut) selection to system clipboard
 xnoremap <leader>d "+d
+"Normal mode: paste from system clipboard after cursor
 nnoremap <leader>p "+p
+"Normal mode: paste from system clipboard before cursor
 nnoremap <leader>P "+P
+"Visual mode: paste from system clipboard after cursor (replacing selection)
 xnoremap <leader>p "+p
+"Visual mode: paste from system clipboard before cursor
 xnoremap <leader>P "+P
 
 "Mapping to convert mixed line endings to LF-only (Unix)
@@ -92,9 +98,6 @@ map <F10> :echo "hi<". synIDattr(synID(line('.'),col('.'),1),"name") . '> trans<
 
 
 " --- Plugin Mappings ---
-
-"Mapping for Dash search
-nmap <silent> <leader>d <Plug>DashSearch
 
 "Mapping to toggle undotree
 nnoremap <silent> <leader>u :UndotreeToggle<CR>
