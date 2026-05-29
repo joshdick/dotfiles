@@ -156,5 +156,5 @@
 	path = .vim/pack/plugins/opt/diffview.nvim
 	url = https://github.com/sindrets/diffview.nvim.git
 [submodule "/Users/josh/.bin/repos/e"]
-	path = /Users/josh/.bin/repos/e
+	path = .bin/repos/e
 	url = https://github.com/kilobyte/e
