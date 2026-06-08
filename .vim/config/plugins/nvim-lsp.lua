@@ -99,17 +99,17 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
     -- vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts) -- is now default as of neovim 0.10
     vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
+    vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+    vim.keymap.set('n', 'gt', vim.lsp.buf.type_definition, bufopts)
     vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
     vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, bufopts)
     vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
     vim.keymap.set('n', '<leader>wl', function()
       print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
     end, bufopts)
-    vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, bufopts)
     vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
     vim.keymap.set('n', '<F2>', vim.lsp.buf.rename, bufopts)
     vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
-    vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
     vim.keymap.set('n', '<leader>f', vim.lsp.buf.format, bufopts)
   end,
 })
@@ -122,10 +122,6 @@ vim.lsp.config('ts_ls', {
     -- Ensure that ts_ls is not used for formatting (prefer prettier)
     -- https://github.com/neovim/nvim-lspconfig/issues/1891
     client.server_capabilities.documentFormattingProvider = false
-
-    -- TODO: Research https://github.com/tomaskallup/dotfiles/blob/master/nvim/lua/plugins/lsp-ts-utils.lua
-    --ts_utils_attach(client)
-    on_attach(client, bufnr)
   end,
   settings = { documentFormatting = false }
 })
@@ -157,7 +153,6 @@ vim.lsp.config('pyright', {
     }
   },
   single_file_support = true,
-  on_attach = on_attach
 })
 
 vim.lsp.enable('regal')
@@ -166,7 +161,6 @@ vim.lsp.config('regal', {
     -- return nvim_lsp.util.find_git_ancestor(fname)
     return vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
   end,
-  on_attach = on_attach
 })
 
 local null_ls = require('null-ls')
@@ -190,5 +184,4 @@ null_ls.setup({
     require('none-ls.diagnostics.ruff'),
     require('none-ls.diagnostics.eslint_d') -- requires `npm i -g eslint_d`
   },
-  on_attach = on_attach
 })
