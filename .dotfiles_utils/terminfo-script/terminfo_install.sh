@@ -30,3 +30,4 @@ tic -x -e tmux-256color "$TERMINFO/terminfo.src"
 tic -x -e xterm-256color "$TERMINFO/terminfo.src"
 
 tic -x "$SELF_PATH/terminfo/iterm2.terminfo"
+tic -x "$SELF_PATH/terminfo/xterm-ghostty.terminfo"
