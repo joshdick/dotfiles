@@ -138,7 +138,7 @@ gcr() {
 
 # Visual Studio Code-enabled replacement for `gdt` alias.
 gdt() {
-  # If running inside Visual Stuido Code, use it if diffing a single file (it doesn't support directory diffs.)
+  # If running inside Visual Studio Code, use it if diffing a single file (it doesn't support directory diffs.)
   if [[ $# -eq 1 ]] && [ -f "$1" ] && [[ "$TERM_PROGRAM" == "vscode" ]]; then
     git difftool --tool vscode "$@"
   else
