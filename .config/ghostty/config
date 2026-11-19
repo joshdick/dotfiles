@@ -4,11 +4,18 @@
 # shell-integration-features = no-cursor
 
 # Font
-font-family = "Maple Mono ExtraLight"
+font-family = "Maple Mono"
 font-family = "CommitMono"
-font-family = "MonoLisa Josh"
+font-family = "MonoLisaCode Josh"
 font-family = "InputMonoNarrow"
+font-family = "IoskeleyMonoTerm Nerd Font Mono"
 font-size = 17
+font-style = ExtraLight
+# For variable fonts, i.e. MonoLisa Code
+# font-variation = wght=200
+# font-variation-bold = wght=200
+# font-variation-italic = wght=200
+# font-variation-bold-italic = wght=200
 
 # Theme/Colors
 # https://github.com/catppuccin/ghostty
