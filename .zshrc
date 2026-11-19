@@ -2,9 +2,19 @@
 
 # *** MISC ***
 
-# Clear out and reset PATH in case .zshrc is sourced multiple times in one session (while making changes)
-# Do this before anything else so that this file can override any default settings that may be in /etc/profile
-export PATH=$(env -i bash --login --norc -c 'echo $PATH')
+# atuin re-execs an interactive shell under its pty proxy, which starts a fresh
+# login shell that reads this file again. Hand off before anything else runs,
+# so only the proxied shell does the real setup.
+if [[ -z $ATUIN_PTY_PROXY_ACTIVE ]] && command -v atuin &> /dev/null; then
+  eval "$(atuin init zsh)"
+  ATUIN_INIT_DONE=1
+fi
+
+# Deduplicate entries in PATH, in case this file is sourced multiple times in one session
+typeset -U path PATH
+
+# Required for `uv` and `claude`
+test -d ~/.local/bin && export PATH="$PATH:$HOME/.local/bin"
 
 # Test whether a given command exists
 # Adapted from <http://stackoverflow.com/questions/592620/check-if-a-program-exists-from-a-bash-script/3931779#3931779>
@@ -109,7 +119,7 @@ git_info() {
   fi
 
   local GIT_DIR="$(git rev-parse --git-dir 2> /dev/null)"
-  if [ -n $GIT_DIR ] && test -r $GIT_DIR/MERGE_HEAD; then
+  if [ -n "$GIT_DIR" ] && test -r "$GIT_DIR"/MERGE_HEAD; then
     FLAGS+=( "$MERGING" )
   fi
 
@@ -170,7 +180,7 @@ export PATH="$GIT_DIFF_HIGHLIGHT_PATH:$PATH"
 
 if command_exists atuin; then
   # <https://github.com/atuinsh/atuin>
-  eval "$(atuin init zsh)"
+  [[ -n $ATUIN_INIT_DONE ]] || eval "$(atuin init zsh)"
 else
   # <https://github.com/zsh-users/zsh-history-substring-search>
   . ~/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh
@@ -210,17 +220,17 @@ export FZF_DEFAULT_OPTS=" \
 # Include any machine-specific configuration if it exists
 test -e ~/.localrc && . ~/.localrc
 
-# Editor - See if vim lives around these parts, otherwise fall back to nano
+# Set EDITOR/VISUAL if not already set, depending on which editor(s) are available on this system
 if command_exists nvim && [[ ! $(nvim --version | grep "NVIM v") =~ "0.7" ]]; then
-  export EDITOR=nvim
-  export VISUAL=nvim
+  FALLBACK_EDITOR=nvim
 elif command_exists vim; then
-  export EDITOR=vim
-  export VISUAL=vim
+  FALLBACK_EDITOR=vim
 else
-  export EDITOR=nano
-  export VISUAL=nano
+  FALLBACK_EDITOR=nano
 fi
+
+[[ -z "$EDITOR" ]] && export EDITOR="$FALLBACK_EDITOR"
+[[ -z "$VISUAL" ]] && export VISUAL="$FALLBACK_EDITOR"
 
 export GIT_EDITOR="$HOME/.bin/git_editor"
 export PAGER=less
@@ -246,16 +256,17 @@ fi
 
 # LSCOLORS - Default except for normal directories (first character) to replace hard-to-read blue
 # For details, see manpage for ls
+export CLICOLOR=1 # macOS
 export LSCOLORS=Gxfxcxdxbxegedabagacad
 
 # Attempt to set up Git completion for zsh as documented inside git-completion.zsh
 if [ -r "$GIT_BASH_COMPLETION_SOURCE" ] && [ -r "$GIT_ZSH_COMPLETION_SOURCE" ]; then
-  zstyle ':completion:*:*:git:*' script $GIT_BASH_COMPLETION_SOURCE
+  zstyle ':completion:*:*:git:*' script "$GIT_BASH_COMPLETION_SOURCE"
   # If it doesn't already exist, create a symlink to the zsh completion file as ~/.zsh/completion/_git.
   # If the file was copied via sync_home and isn't actually a symlink, it will be replaced with a symlink.
-  [ ! -h ~/.zsh/completion/_git ] && mkdir -p ~/.zsh/completion && rm -f ~/.zsh/completion/_git && ln -s $GIT_ZSH_COMPLETION_SOURCE ~/.zsh/completion/_git
+  [ ! -h ~/.zsh/completion/_git ] && mkdir -p ~/.zsh/completion && rm -f ~/.zsh/completion/_git && ln -s "$GIT_ZSH_COMPLETION_SOURCE" ~/.zsh/completion/_git
   # Add the ~/.zsh/completion directory to fpath so zsh can find it.
-  fpath=(~/.zsh/completion $fpath)
+  fpath=(~/.zsh/completion "$fpath")
 fi
 
 # <https://github.com/pyenv/pyenv>
@@ -293,11 +304,9 @@ fi
 
 # When connecting via ssh, always [re]attach to a terminal manager
 # Adapted from code found at <http://involution.com/2004/11/17/1-32/> (now offline)
-if command_exists tmux && [ -z $TMUX ]; then
+if command_exists tmux && [ -z "$TMUX" ]; then
   if [ "$SSH_TTY" != "" -a "$TERM" -a "$TERM" != "screen" -a "$TERM" != "dumb" ]; then
-    pgrep tmux
-    # $? is the exit code of pgrep; 0 means there was a result (tmux is already running)
-    if [ $? -eq 0 ]; then
+    if pgrep tmux; then
       tmux -u attach -d
     else
       tmux -u
