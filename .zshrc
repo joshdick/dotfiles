@@ -266,7 +266,8 @@ if [ -r "$GIT_BASH_COMPLETION_SOURCE" ] && [ -r "$GIT_ZSH_COMPLETION_SOURCE" ]; 
   # If the file was copied via sync_home and isn't actually a symlink, it will be replaced with a symlink.
   [ ! -h ~/.zsh/completion/_git ] && mkdir -p ~/.zsh/completion && rm -f ~/.zsh/completion/_git && ln -s "$GIT_ZSH_COMPLETION_SOURCE" ~/.zsh/completion/_git
   # Add the ~/.zsh/completion directory to fpath so zsh can find it.
-  fpath=(~/.zsh/completion "$fpath")
+  fpath=(~/.zsh/completion $fpath)
+  typeset -U fpath
 fi
 
 # <https://github.com/pyenv/pyenv>
